@@ -1,0 +1,83 @@
+// Typography
+
+	h1, h2, h3, h4, h5, h6 {
+		color: $gun;
+		font-family: $sans-serif-font-family;
+		line-height: $headings-line-height;
+		font-weight: $headings-font-weight; 
+		text-transform: uppercase;
+	}
+
+	h1, h2, h3 {
+		margin-top: ceil($line-height-computed);
+		margin-bottom: ceil($line-height-computed / 2);
+	}
+
+	h4, h5, h6 {
+		margin-top: ceil($line-height-computed / 2);
+		margin-bottom: ceil($line-height-computed / 2);
+	}
+
+	h1 { font-size: $h1-font-size; }
+	h2 { font-size: $h2-font-size; }
+	h3 { font-size: $h3-font-size; }
+	h4 { font-size: $h4-font-size; }
+	h5 { font-size: $h5-font-size; }
+	h6 { font-size: $h6-font-size; }
+	.subheader { color: $gray-light; }
+
+	p { margin: 0 0 ceil($line-height-computed / 2) 0; }
+	p img { margin: 0; }
+	p.lead { 
+		font-family: $sans-serif-font-family; 
+		font-size: ceil($base-font-size * 1.5238095); 
+		color: $gray-light;
+		font-weight: 400;
+	}
+
+	em { font-style: italic; }
+	strong { font-weight: bold; color: $gray-dark; }
+	small, .small { font-size: 80%; }
+
+
+//	Blockquotes
+
+	blockquote, blockquote p { 
+		font-size: ceil($base-font-size * 1.3125); 
+		line-height: $base-line-height; 
+		color: $gray-light; 
+		font-family: $serif-font-family;
+		font-style: italic; 
+	}
+
+	blockquote { 
+		padding: ($line-height-computed / 2) $line-height-computed 0 $line-height-computed; 
+		border-left: 1px solid $gray-light; 
+	}
+
+	blockquote cite { 
+		display: block; 
+		font-size: 80%; 
+		color: $gray-light; 
+	}
+
+	blockquote cite:before { content: "\2014 \0020"; }
+	blockquote cite a, blockquote cite a:visited, blockquote cite a:visited { color: $gray-light; }
+
+
+// Lists
+
+	ul, ol { margin: ceil($line-height-computed / 2) 0 ceil($line-height-computed / 2) 0; }
+	ul { list-style: none outside; }
+	ol { list-style: decimal; }
+	ol.list, ul.list, ul.square, ul.circle, ul.disc { margin-left: 30px; }
+	ul.square { list-style: square outside; }
+	ul.circle { list-style: circle outside; }
+	ul.disc { list-style: disc outside; }
+	ul.list ul, ul.list ol,
+	ol.list ol, ol.list ul { margin: 4px 0 5px 30px; font-size: 90%;  }
+	ul.list ul li, ul ol li,
+	ol.list ol li, ol.list ul li { margin-bottom: 6px; }
+	.list li { line-height: 1.5; margin-bottom: ($line-height-computed / 2); }
+	ul.large li { line-height: 21px; }
+	li p { line-height: 21px; }

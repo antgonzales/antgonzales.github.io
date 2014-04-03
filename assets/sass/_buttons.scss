@@ -1,0 +1,24 @@
+// Buttons
+.button {
+  display: inline-block;
+  padding: 20px 40px;
+  border: 3px solid $link-color;
+  border-radius: 6px;
+  cursor: pointer;
+  color: $link-color;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: $ease-in-out;
+  -moz-transition: $ease-in-out;
+  -o-transition: $ease-in-out;
+  transition: $ease-in-out; 
+  
+}
+.button:hover {
+  background-color: darken($link-color, 15%);
+  border: 3px solid darken($link-color, 15%);
+  color: white;
+}
