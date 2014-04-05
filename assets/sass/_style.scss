@@ -153,9 +153,32 @@ footer {
 	padding: 10px;
 	background-color: $cocoa;
 	color: #fff;
+	font-size: 18px;
+}
+
+.footer-inner {
+	padding-top: $line-height-computed-half;
+	padding-bottom: $line-height-computed-half;
+}
+
+.trademark, .hosting-logo {
+	display: inline-block;
+}
+
+.hosting-logo { 
+	float: right;
+	img:hover { 
+		opacity: .5;
+		-webkit-transition: $ease-in-out;
+		-moz-transition: $ease-in-out;
+		-o-transition: $ease-in-out;
+		transition: $ease-in-out;
+	}
+
 }
 
 .center { text-align: center; }
+
 
 @media (max-width: 577px ) {
 
@@ -168,14 +191,20 @@ footer {
 		margin-right: 10px;
 	}
 	.chart-legend li { 
-		left: 5%;
+		left: 28%;
 		width: 50%;
+		float: none;
 	}
 }
 
 @media (max-width: 767px) {
 	.social-icons { padding-top: $line-height-computed * 2; }
 	.top-scroll { padding-top: $line-height-computed-half; }
+	.hosting-logo { float: none; }
+	.trademark, .hosting-logo {
+		display: block;
+		text-align: center;
+	}
 }
 
 @media (max-width: 991px) {
