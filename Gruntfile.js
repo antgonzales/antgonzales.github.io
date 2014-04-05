@@ -2,7 +2,7 @@ module.exports = function(grunt){
 	require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
   grunt.initConfig({
-      pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON('package.json'),
 
       htmlhint: {
         build: {
@@ -21,6 +21,14 @@ module.exports = function(grunt){
         }
 			},
 
+      sass: {
+          build: {
+            files: {
+              'build/css/master.css': 'assets/sass/master.scss'
+            }
+          }
+      },
+
       cssc: {
         build: {
           options: {
@@ -32,70 +40,64 @@ module.exports = function(grunt){
               consolidateMediaQueries:    false
           },
           files: {
-              'build/css/master.css': 'build/css/master.css'
+            'build/css/master.css': 'build/css/master.css'
           }
         }
       },
 
       cssmin: {
-          build: {
-            src: 'build/css/master.css',
-            dest: 'build/css/master.css'
-        }
-      },
-
-      sass: {
-          build: {
-            files: {
-                'build/css/master.css': 'assets/sass/master.scss'
-            }
+        build: {
+          files: {
+            'build/css/master.min.css': 'build/css/master.css'
           }
-      },
-
-    jshint: {
-      files: ['Gruntfile.js', 'assets/js/main.js'],
-      options: {
-        // options here to override JSHint defaults
-        globals: {
-          jQuery: true,
-          console: true,
-          module: true,
-          document: true
         }
-      }
-    },
-
-    concat: {
-      options: {
-        separator: ';'
       },
-      dist: {
-        src: ['assets/js/waypoints.js', 'assets/js/Chart.min.js', 'assets/js/jquery.inview.min.js', 'assets/js/jquery.typer.js', 'assets/js/plugins.js', 'assets/js/main.js'],
-        dest: 'build/js/base.js'
-      }
-    },
 
-    uglify: {
-      build: {
-        src:'<%= concat.dist.dest %>',
-        dest:'build/js/base.min.js'
-      }
-    },
+      jshint: {
+        files: ['Gruntfile.js', 'assets/js/main.js'],
+        options: {
+          // options here to override JSHint defaults
+          globals: {
+            jQuery: true,
+            console: true,
+            module: true,
+            document: true
+          }
+        }
+      },
 
-		watch: {
-      html: {
-        files: 'index.html',
-        tasks: ['htmlhint']
+      concat: {
+        options: {
+          separator: ';'
+        },
+        dist: {
+          src: ['assets/js/waypoints.js', 'assets/js/Chart.min.js', 'assets/js/jquery.inview.min.js', 'assets/js/jquery.typer.js', 'assets/js/plugins.js', 'assets/js/main.js'],
+          dest: 'build/js/base.js'
+        }
       },
-      css: {
-        files: 'assets/sass/**/*.scss',
-        tasks: ['buildcss']
+
+      uglify: {
+        build: {
+          files: {
+            'build/js/base.min.js': '<%= concat.dist.dest %>'
+          }
+        }
       },
-      js: {
-        files: ['Gruntfile.js', 'assets/js/*.js'],
-        tasks: ['buildjs']
-      }
-		}
+
+  		watch: {
+        html: {
+          files: 'index.html',
+          tasks: ['htmlhint']
+        },
+        css: {
+          files: 'assets/sass/**/*.scss',
+          tasks: ['buildcss']
+        },
+        js: {
+          files: ['Gruntfile.js', 'assets/js/*.js'],
+          tasks: ['buildjs']
+        }
+  		}
   
   });
 
@@ -107,7 +109,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.task.registerTask('default',  []);
-  grunt.task.registerTask('buildcss',  ['sass', 'cssc']);
+  grunt.task.registerTask('buildcss',  ['sass', 'cssc', 'cssmin']);
   grunt.task.registerTask('buildjs',  ['concat', 'uglify']);
 
 };

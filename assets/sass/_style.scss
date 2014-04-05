@@ -1,20 +1,32 @@
 // Styles 
 
-.hero {
-	background-color: $turquoise;
+nav {
+	display: block;
+	float: right;
 }
 
-.nav-bar {
-	width: 100%;
+.hero { background-color: $turquoise; }
+
+.nav-logo {
+	padding-top: 10px;
+	display: block;
+	float: left;
+		
+		a {
+			font-family: "Pacifico", cursive;
+			font-size: 28px;
+			text-decoration: none;
+			color: $gun;
+
+			&:hover, &:focus { color: darken($link-color, 15%); }
+		}
 }
 
-#fixed-nav {
-	background-color: $turquoise;
-}
+.nav-bar { width: 100%; }
 
-#sticky-nav {
-	background-color: lighten($gray-light, 8%);
-}
+#fixed-nav { background-color: $turquoise; }
+
+#sticky-nav { background-color: lighten($gray-light, 8%); }
 
 .sticky {  
   position: fixed;   
@@ -24,41 +36,20 @@
   border-top: 0;
 }  
 
-.nav-logo {
-	padding-top: 10px;
-	display: block;
-	float: left;
-}
-
-.nav-logo a {
-	font-family: "Pacifico", cursive;
-	font-size: 28px;
-	text-decoration: none;
-	color: $gun;
-}
-
-.nav-logo a:hover, .nav-logo a:focus {
-	color: darken($link-color, 15%);
-}
-
-nav {
-	display: block;
-	float: right;
-}
-
-.main-nav{
+.main-nav {
 	padding: 0;
-}
 
-.main-nav li {
-	display: inline;
-	margin-left: $line-height-computed-half;
-	margin-right: $line-height-computed-half;
-}
+	li {
+		display: inline;
+		margin-left: $line-height-computed-half;
+		margin-right: $line-height-computed-half;
+	}
+		
+	a:hover {
+		padding-bottom: $line-height-computed-half / 2;
+		border-bottom: 3px solid $yellow;
+	}
 
-.main-nav li a:hover {
-	padding-bottom: $line-height-computed-half / 2;
-	border-bottom: 3px solid $yellow;
 }
 
 .hero-lead-in {
@@ -71,11 +62,6 @@ nav {
 	padding-bottom: 50px;
 }
 
-footer {
-	padding: 10px;
-	background-color: $cocoa;
-	color: #fff;
-}
 
 .section-title {
 	padding-bottom: $line-height-computed;
@@ -97,15 +83,12 @@ background: $yellow;
 .social-icons ul {
 	padding: 0;
 	margin: 0;
-}
-.social-icons li {
-	display: inline-block;
-	padding-right: $line-height-computed-half;
-	padding-left: $line-height-computed-half;
-}
-
-.social-icons li a {
-	color: $gray;
+		li {
+			display: inline-block;
+			padding-right: $line-height-computed-half;
+			padding-left: $line-height-computed-half;
+				a { color: $gray; }
+		}
 }
 
 .fa-twitter-square:hover {
@@ -124,14 +107,10 @@ background: $yellow;
 	transition: $ease-in-out; 
 }
 
-.center {
-	text-align: center;
-}
-
 .skills-list { margin: 0; padding-left: 2.142857142857143em * 2; }
 
-.skills-list > li { position: relative; 
-}
+.skills-list > li { position: relative; }
+
 .skills-list li { margin-bottom: 40px; }
 
 .skills-list li i { top: 15px; color: $yellow; }
@@ -148,18 +127,17 @@ background: $yellow;
 	margin: 30px auto 0; 
 	display: block; 
 	position:relative; 
-	left: 12%;
-}
-
-.chart-legend li {
-	text-indent:16px;
-	line-height:24px;
-	position:relative;
-	font-weight:200;
-	display:block;
-	float:left;
-	width:50%;
-	font-size:.8em;
+		li {
+			text-indent:16px;
+			line-height:$base-line-height;
+			position:relative;
+			font-weight:200;
+			display:block;
+			float:left;
+			width:30%;
+			font-size:.8em;
+			left: 10%;
+		}
 }
 
 .HTML i{color:#424651;}
@@ -171,12 +149,28 @@ background: $yellow;
 
 #contact { background-color: #eee;}
 
+footer {
+	padding: 10px;
+	background-color: $cocoa;
+	color: #fff;
+}
+
+.center { text-align: center; }
+
 @media (max-width: 577px ) {
 
 	header { text-align: center;}
 	nav { float: none; }
 	.nav-logo { float: none; }
 	#sticky-nav { display: none;}
+	.main-nav li {
+		margin-left: 0;
+		margin-right: 10px;
+	}
+	.chart-legend li { 
+		left: 5%;
+		width: 50%;
+	}
 }
 
 @media (max-width: 767px) {
@@ -186,11 +180,12 @@ background: $yellow;
 
 @media (max-width: 991px) {
 	.hero { text-align: center; }
+
+	.img-list { 
+		margin: 0; padding: 0;
+		li { padding-bottom: 15px; }
+	}
 	
-	.img-list li { padding-bottom: 15px; }
-
-	.img-list { margin: 0; padding: 0;}
-
 	.client-screenshot-container { margin-bottom: 15px; }
 
 	.section-title { text-align: center;}
