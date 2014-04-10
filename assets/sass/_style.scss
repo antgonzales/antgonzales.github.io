@@ -3,9 +3,10 @@
 nav {
 	display: block;
 	float: right;
+	font-size: 21px;
 }
 
-.hero { background-color: $turquoise; }
+.hero { background-color: $turquoise; padding-top: 25px; }
 
 .nav-logo {
 	padding-top: 10px;
@@ -22,11 +23,9 @@ nav {
 		}
 }
 
-.nav-bar { width: 100%; }
-
 #fixed-nav { background-color: $turquoise; }
 
-#sticky-nav { background-color: lighten($gray-light, 8%); }
+#sticky-nav { background-color: lighten($gray-light, 8%); width: 100%; }
 
 .sticky {  
   position: fixed;   
@@ -58,8 +57,8 @@ nav {
 }
 
 .buffer {
-	padding-top: 50px;
-	padding-bottom: 50px;
+	padding-top: $line-height-computed * 2;
+	padding-bottom: $line-height-computed * 2;
 }
 
 
@@ -190,10 +189,15 @@ footer {
 		margin-left: 0;
 		margin-right: 10px;
 	}
+	.hero-lead-in { padding: $line-height-computed-half 0 0 0;}
 	.chart-legend li { 
 		left: 28%;
 		width: 50%;
 		float: none;
+	}
+	.buffer {
+	padding-top: $line-height-computed;
+	padding-bottom: $line-height-computed;
 	}
 }
 
@@ -207,7 +211,7 @@ footer {
 	}
 }
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
 	.hero { text-align: center; }
 
 	.img-list { 
@@ -221,8 +225,10 @@ footer {
 
 }
 
-@media (max-width: 1132px) {
-	.hero-lead-in { padding: 25px 0 0 0;}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+	#aat-screenshot { padding-top: 50px;}
+
 }
 
 

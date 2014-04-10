@@ -26,6 +26,10 @@
 		-webkit-text-size-adjust: 100%;
  	}
 
+ 	::selection { background: $gun; color: #fff; }
+
+ 	::-moz-selection { background: $gun; color: #fff; }
+
 	// Images
 
 		img {
