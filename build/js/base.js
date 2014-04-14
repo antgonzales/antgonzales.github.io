@@ -107,8 +107,9 @@ $(function () {
 // Intro loading screen
   $(window).load(function() {
     // Animate loader off screen
-    $('.loading-spinner').fadeOut(800);
-    $('.loading-screen').fadeOut(800);
+    $("#loading-spinner").fadeOut();
+    $('#loading-screen').delay(350).fadeOut('slow'); 
+    $('body').delay(350).css({'overflow':'visible'}); 
   });
 
 // Smoothe scroll 

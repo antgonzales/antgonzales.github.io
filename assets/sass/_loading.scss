@@ -1,9 +1,9 @@
 // Loading screen animation and fallback
 
-.no-js .loading-screen,
-.no-js .loading-spinner { display: none;  }
+.no-js #loading-screen,
+.no-js #loading-spinner { display: none;  }
 
-.js .loading-screen { 
+.js #loading-screen { 
 	background: #fff;
 	position: fixed;
 	top: 0;
@@ -13,7 +13,7 @@
 	z-index: 999;
 }
 
-.js .loading-spinner { 
+.js #loading-spinner { 
 	display: block; 
 	position: absolute; 
 	margin: 0 auto; 
@@ -23,12 +23,12 @@
 	right: 0; 
 }
 
-.cssanimations .loading-fallback { display: none; }
+.cssanimations #loading-fallback { display: none; }
 
-.no-cssanimations .loading-spinner { background-color: none; }
+.no-cssanimations #loading-spinner { background-color: none; }
 
-.js .loading-spinner,
-.cssanimations .loading-spinner {
+.js #loading-spinner,
+.cssanimations #loading-spinner {
   width: 100px;
   height: 100px;
   background-color: $turquoise;
