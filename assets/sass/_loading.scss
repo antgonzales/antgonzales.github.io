@@ -3,13 +3,17 @@
 .no-js #loading-screen,
 .no-js #loading-spinner { display: none;  }
 
-.js #loading-screen { 
-	background: #fff;
+#loading-fallback { display: none; }
+
+#loading-screen { 
+	background: $turquoise;
 	position: fixed;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
+  height: 100%;
+  width: 100%;
 	z-index: 999;
 }
 
@@ -21,17 +25,16 @@
 	left: 0;
 	bottom: 0;
 	right: 0; 
+  width: 100px;
+  height: 100px;
 }
 
-.cssanimations #loading-fallback { display: none; }
+.no-cssanimations #loading-fallback { display: block; }
 
 .no-cssanimations #loading-spinner { background-color: none; }
 
-.js #loading-spinner,
 .cssanimations #loading-spinner {
-  width: 100px;
-  height: 100px;
-  background-color: $turquoise;
+  background-color: #fff;
   -webkit-animation: rotateplane 1.2s infinite ease-in-out;
   animation: rotateplane 1.2s infinite ease-in-out;
 }
