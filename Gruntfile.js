@@ -71,7 +71,7 @@ module.exports = function(grunt){
           separator: ';'
         },
         dist: {
-          src: ['assets/js/waypoints.js', 'assets/js/Chart.min.js', 'assets/js/jquery.inview.min.js', 'assets/js/jquery.typer.js', 'assets/js/plugins.js', 'assets/js/main.js'],
+          src: 'assets/js/*.js',
           dest: 'build/js/base.js'
         }
       },
