@@ -17,8 +17,16 @@
   transition: $ease-in-out; 
   
 }
+
 .button:hover {
   background-color: darken($link-color, 15%);
   border: 3px solid darken($link-color, 15%);
   color: white;
+}
+
+@media (max-width: 577px ) {
+  .button, input[type="submit"]   {
+    padding: 20px 10px;
+    width: 100%;
+  }
 }
