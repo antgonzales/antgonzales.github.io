@@ -4,3 +4,5 @@ node_modules/*
 .sass-cache/*
 .DS_Store
 /*/.DS_Store
+_site
+_site/**/*

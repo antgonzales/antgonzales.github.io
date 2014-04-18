@@ -193,6 +193,9 @@ $(function () {
 
 
 // Sticky Nav
+
+if(top.location.pathname == "/") {
+
   var stickyNav = function () {
     width = $(window).width();
     var top = $(".hero").height();
@@ -211,6 +214,7 @@ $(function () {
   $(window).scroll(function () {
     stickyNav();
   });
+}
 
 // Form Validation and Simple Form Submission
   $(".ajax-form").validate({
