@@ -77,9 +77,9 @@ $(function () {
 // Waypoint transitions
   var graphInitDelay = 300;
 
+
   $('#recent-work').waypoint(function (direction) {
-    $("#aat-screenshot").removeClass("invisible");
-    $("#aat-screenshot").addClass("animated fadeInLeft");
+    $("#aat-screenshot").removeClass("invisible").addClass("animated fadeInLeft");
   }, {
     triggerOnce: true,
     offset: "60%"
@@ -88,6 +88,22 @@ $(function () {
   $('#skills').waypoint(function (direction) {
     $("#skills-chart-container").removeClass("invisible");
     $(".chart-legend").addClass("animated fadeInUp");
+  setTimeout(showSkillsChart, graphInitDelay);
+  }, {
+    triggerOnce: true,
+    offset: "60%"
+  });
+
+  $('#about').waypoint(function (direction) {
+    $(".img-list").removeClass("invisible").addClass("animated fadeInRight");
+  setTimeout(showSkillsChart, graphInitDelay);
+  }, {
+    triggerOnce: true,
+    offset: "60%"
+  });
+
+  $('#contact').waypoint(function (direction) {
+    $(".contact-inner").removeClass("invisible").addClass("animated fadeInUp");
   setTimeout(showSkillsChart, graphInitDelay);
   }, {
     triggerOnce: true,
