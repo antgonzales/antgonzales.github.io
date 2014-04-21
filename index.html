@@ -1,227 +1,130 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]--> 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>The professional portfolio of web developer Anthony Gonzales</title>
-    <meta name="description" content="I'm a web developer from California, specializing in front-end dev. Take a look at my skills, get to know me, drop me a line.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+--- 
+layout: home-page 
+title: A site about a web developer 
+tagline: Supporting tagline 
+---
 
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="build/css/master.min.css">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 8]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-    <body id="top">
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <!--[if lt IE 8]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    <div id="loading-screen">
-      <div id="loading-spinner"><img src="assets/img/pre-loader-fallback.gif" id="loading-fallback" /></div>
+<section id="recent-work" class="buffer container-fluid max-width">
+  <h2 class="section-title">Recent Work</h2>
+    <div class="row ">
+      <div class="col-md-7">
+        <a href="http://bit.ly/1pMxmyd" target="_blank"><img id="aat-screenshot" class="invisible" src="assets/img/aat-showcase-flat-presentation.png" alt="Mockup photos of the Apartment Advisory Team website on a laptop, tablet, and mobile phone." /></a>
+      </div>   
+      <div class="col-md-5">
+        <h3><a href="http://bit.ly/1pMxmyd" target="_blank">Apartment Advisory Team</a></h3>
+        <ul class="fa-ul">
+          <li><i class="fa-li fa fa-check-square"></i>Simple, clean design</li>
+          <li><i class="fa-li fa fa-check-square"></i>Custom Wordpress template</li>
+          <li><i class="fa-li fa fa-check-square"></i>Responsive capabilities</li>
+          <li><i class="fa-li fa fa-check-square"></i>Simple interface to input information</li>
+        </ul>
+          <p>Apartment Advisory Team is a local Sacramento commercial real estate firm. Their team needed a website to showcase properties with an image gallery, detailed information, and dynamic Google maps. I created a custom Wordpress interface to allow their marketing team to easily input information from the admin.</p>
+      </div>   
     </div>
-    <div class="hero">
-      <header>
-        <div id="fixed-nav">
-          <div class="container-fluid max-width">
-            <div class="nav-logo">
-              <a href="#">A.Gonzales</a>
-            </div>
-            <nav role="navigation">
-              <ul class="main-nav">
-                <li><a href="#recent-work">Work</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <div id="sticky-nav">
-          <div class="container-fluid max-width">
-            <div class="nav-logo">
-              <a href="#">A.Gonzales</a>
-            </div>
-            <nav role="navigation">
-              <ul class="main-nav">
-                <li><a href="#recent-work">Work</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+</section>
 
-      <section id="home">
-        <div class="hero-lead-in">
-          <h1 id="hero-title">Hello, I'm Anthony.</h1>
-          <p id="hero-tagline">I'm a web developer focused on creating clean and engaging user experiences.</p>
-        </div>
-      </section>
+<section id="skills" class="buffer container-fluid max-width">
+  <h2 class="section-title">Skills</h2>
+  <div class="row buffer">
+    <ul class="skills-list col-md-6">
+      <li><i class="fa-li fa fa-heart-o fa-2x"></i>I love learning about new technologies and techniques. I take pride in my work and enjoy discovering solutions.</li>
+      <li><i class="fa-li fa fa-search fa-2x"></i>I'm curious by nature and a researcher at heart. I take the time to follow best practices and keep my work tidy.</li> 
+      <li><i class="fa-li fa fa-clock-o fa-2x"></i>Time is valuable; I'll create a tangible timeline that meets your business needs and deadlines.</li>
+      <li><i class="fa-li fa fa-comments-o fa-2x"></i>Collaboration is important. We're in this together, so let's learn and have fun creating together.</li>
+    </ul>
+    <div id="skills-chart-container" class="col-md-6 invisible">
+      <div class="canvas-container">
+          <canvas id="skills-chart" width="300" height="300"></canvas>
+      </div>
+      <ul class="chart-legend">
+        <li class="HTML"><i class="fa-li fa fa-square"></i>HTML</li>
+        <li class="CSS"><i class="fa-li fa fa-square"></i>CSS</li>
+        <li class="Javascript"><i class="fa-li fa fa-square"></i>Javascript</li>
+        <li class="jQuery"><i class="fa-li fa fa-square"></i>jQuery</li>
+        <li class="Rails"><i class="fa-li fa fa-square"></i>Ruby on Rails</li>
+        <li class="Wordpress"><i class="fa-li fa fa-square"></i>Wordpress</li>
+      </ul>
     </div>
+  </div>
+</section>
 
-      <section id="recent-work" class="buffer container-fluid max-width">
-        <h2 class="section-title">Recent Work</h2>
-          <div class="row ">
-            <div class="col-md-7">
-              <a href="http://bit.ly/1pMxmyd" target="_blank"><img id="aat-screenshot" class="invisible" src="assets/img/aat-showcase-flat-presentation.png" alt="Mockup photos of the Apartment Advisory Team website on a laptop, tablet, and mobile phone." /></a>
-            </div>   
-            <div class="col-md-5">
-              <h3><a href="http://bit.ly/1pMxmyd" target="_blank">Apartment Advisory Team</a></h3>
-              <ul class="fa-ul">
-                <li><i class="fa-li fa fa-check-square"></i>Simple, clean design</li>
-                <li><i class="fa-li fa fa-check-square"></i>Custom Wordpress template</li>
-                <li><i class="fa-li fa fa-check-square"></i>Responsive capabilities</li>
-                <li><i class="fa-li fa fa-check-square"></i>Simple interface to input information</li>
-              </ul>
-                <p>Apartment Advisory Team is a local Sacramento commercial real estate firm. Their team needed a website to showcase properties with an image gallery, detailed information, and dynamic Google maps. I created a custom Wordpress interface to allow their marketing team to easily input information from the admin.</p>
-            </div>   
-          </div>
-      </section>
+<section id="about" class="buffer container-fluid max-width">
+  <h2 class="section-title">About Me</h2>
+  <div class="row buffer">
+    <div class="col-md-5">
 
-      <section id="skills" class="buffer container-fluid max-width">
-        <h2 class="section-title">Skills</h2>
-        <div class="row buffer">
-          <ul class="skills-list col-md-6">
-            <li><i class="fa-li fa fa-heart-o fa-2x"></i>I love learning about new technologies and techniques. I take pride in my work and enjoy discovering solutions.</li>
-            <li><i class="fa-li fa fa-search fa-2x"></i>I'm curious by nature and a researcher at heart. I take the time to follow best practices and keep my work tidy.</li> 
-            <li><i class="fa-li fa fa-clock-o fa-2x"></i>Time is valuable; I'll create a tangible timeline that meets your business needs and deadlines.</li>
-            <li><i class="fa-li fa fa-comments-o fa-2x"></i>Collaboration is important. We're in this together, so let's learn and have fun creating together.</li>
-          </ul>
-          <div id="skills-chart-container" class="col-md-6 invisible">
-            <div class="canvas-container">
-                <canvas id="skills-chart" width="300" height="300"></canvas>
+      <p>My name is Anthony Gonzales and I live in Sacramento, California. I have a passion for creating beautiful, simple websites that are easily understood by users and even easier for owners to manage.</p> 
+
+      <p>I've primarily created Wordpress websites for clients but I'm a regular attendee of the <a href="http://sacruby.info">Sacramento Ruby Users Group</a>. I'm always learning about new technologies and tinkering with the latest open-source products.</p> 
+
+      <p> If you feel I'm the right guy for your project, or just want to have a chat, feel free to contact me.</p> 
+
+    </div>
+    <div class="col-md-7">
+      <div class="img-list invisible">
+        <ul class="row">
+          <li class="col-md-4 col-sm-4">
+            <img src="assets/img/anthony-gonzales-lauren-folden-river-cats-game.jpg" alt="Anthony Gonzales and Lauren Folden at a River Cats baseball game." />
+          </li>
+          <li class="col-md-4 col-sm-4">
+            <img src="assets/img/cat-paws-under-bed-sheets.jpg" alt="Small cat paws stick out from under bedsheets." />
+          </li>                     
+          <li class="col-md-4 col-sm-4">
+            <img src="assets/img/conservatory-of-flowers-kiss.jpg" alt="Anthony Gonzales and Lauren Folden kissing at the Conservatory of Flowers in San Francisco." />
+          </li>
+        </ul>
+        <ul class="row">                            
+          <li class="col-md-4 col-sm-4">
+            <img src="assets/img/san-francisco-conservatory-of-flowers-inside.jpg" alt="Inside of the dome at the Conservatory of Flowers in San Francisco." />
+          </li>
+          <li class="col-md-4 col-sm-4">
+            <img src="assets/img/anthony-gonzales-overlooking-san-francisco.jpg" alt="Anthony Gonzales with San Francisco city-scape behind." />
+          </li>
+          <li class="col-md-4 col-sm-4">
+            <img src="assets/img/emmy-standing-for-treats.jpg" alt="A Dachshund sitting on her hind legs, begging for treats." />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>   
+
+<section id="contact">
+  <div class="container-fluid max-width buffer">
+    <h2 class="section-title">Get in touch</h2>
+      <div class="row buffer-top contact-inner invisible">
+        <div class="col-md-6 col-sm-6">
+          <form action="#" class="ajax-form">
+            <input type="text" class="name" name="name" placeholder="Your name">
+            <input type="text" class="email" name="email" placeholder="Your email address">
+            <textarea name="message" class="message" placeholder="Enter your message"></textarea>
+            <div class="form-btn">
+                <input type="submit" class="submit" value="Submit">
             </div>
-            <ul class="chart-legend">
-              <li class="HTML"><i class="fa-li fa fa-square"></i>HTML</li>
-              <li class="CSS"><i class="fa-li fa fa-square"></i>CSS</li>
-              <li class="Javascript"><i class="fa-li fa fa-square"></i>Javascript</li>
-              <li class="jQuery"><i class="fa-li fa fa-square"></i>jQuery</li>
-              <li class="Rails"><i class="fa-li fa fa-square"></i>Ruby on Rails</li>
-              <li class="Wordpress"><i class="fa-li fa fa-square"></i>Wordpress</li>
+          </form>
+          <div class="form-thank-you">
+            <h3>Thank you for contacting me!</h3>
+            <p>I'll be in touch with you shortly</p>
+          </div>   
+        </div>
+        <div class="col-md-6 col-sm-6 center">
+          <div class="contact-buttons">
+            <a class="button" href="mailto:antgonzales@icloud.com" target="_blank">antgonzales@icloud.com</a>
+          <div class="social-icons-container row">
+            <ul class="social-icons">
+              <li><a href="//plus.google.com/+AnthonyGonzaleswow"><i class="fa fa-google-plus-square fa-3x"></i></a></li>
+              <li><a href="//twitter.com/amgnz"><i class="fa fa-twitter-square fa-3x"></i></a></li>
+              <li><a href="//www.facebook.com/amgnz"><i class="fa fa-facebook-square fa-3x"></i></a></li>
+              <li><a href="//www.linkedin.com/in/anthonymgonzales/"><i class="fa fa-linkedin-square fa-3x"></i></a></li>
             </ul>
           </div>
-        </div>
-      </section>
-
-      <section id="about" class="buffer container-fluid max-width">
-        <h2 class="section-title">About Me</h2>
-        <div class="row buffer">
-          <div class="col-md-5">
-      
-            <p>My name is Anthony Gonzales and I live in Sacramento, California. I have a passion for creating beautiful, simple websites that are easily understood by users and even easier for owners to manage.</p> 
-
-            <p>I've primarily created Wordpress websites for clients but I'm a regular attendee of the <a href="http://sacruby.info">Sacramento Ruby Users Group</a>. I'm always learning about new technologies and tinkering with the latest open-source products.</p> 
-
-            <p> If you feel I'm the right guy for your project, or just want to have a chat, feel free to contact me.</p> 
-
-          </div>
-          <div class="col-md-7">
-            <div class="img-list invisible">
-              <ul class="row">
-                <li class="col-md-4 col-sm-4">
-                  <img src="assets/img/anthony-gonzales-lauren-folden-river-cats-game.jpg" alt="Anthony Gonzales and Lauren Folden at a River Cats baseball game." />
-                </li>
-                <li class="col-md-4 col-sm-4">
-                  <img src="assets/img/cat-paws-under-bed-sheets.jpg" alt="Small cat paws stick out from under bedsheets." />
-                </li>                     
-                <li class="col-md-4 col-sm-4">
-                  <img src="assets/img/conservatory-of-flowers-kiss.jpg" alt="Anthony Gonzales and Lauren Folden kissing at the Conservatory of Flowers in San Francisco." />
-                </li>
-              </ul>
-              <ul class="row">                            
-                <li class="col-md-4 col-sm-4">
-                  <img src="assets/img/san-francisco-conservatory-of-flowers-inside.jpg" alt="Inside of the dome at the Conservatory of Flowers in San Francisco." />
-                </li>
-                <li class="col-md-4 col-sm-4">
-                  <img src="assets/img/anthony-gonzales-overlooking-san-francisco.jpg" alt="Anthony Gonzales with San Francisco city-scape behind." />
-                </li>
-                <li class="col-md-4 col-sm-4">
-                  <img src="assets/img/emmy-standing-for-treats.jpg" alt="A Dachshund sitting on her hind legs, begging for treats." />
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
-      </section>   
+      </div>
+  </div>
 
-      <section id="contact">
-        <div class="container-fluid max-width buffer">
-          <h2 class="section-title">Get in touch</h2>
-            <div class="row buffer-top contact-inner invisible">
-              <div class="col-md-6 col-sm-6">
-                <form action="#" class="ajax-form">
-                  <input type="text" class="name" name="name" placeholder="Your name">
-                  <input type="text" class="email" name="email" placeholder="Your email address">
-                  <textarea name="message" class="message" placeholder="Enter your message"></textarea>
-                  <div class="form-btn">
-                      <input type="submit" class="submit" value="Submit">
-                  </div>
-                </form>
-                <div class="form-thank-you">
-                  <h3>Thank you for contacting me!</h3>
-                  <p>I'll be in touch with you shortly</p>
-                </div>   
-              </div>
-              <div class="col-md-6 col-sm-6 center">
-                <div class="contact-buttons">
-                  <a class="button" href="mailto:antgonzales@icloud.com" target="_blank">antgonzales@icloud.com</a>
-                  <ul class="social-icons">
-                      <li><a href="//plus.google.com/+AnthonyGonzaleswow"><i class="fa fa-google-plus-square fa-3x"></i></a></li>
-                      <li><a href="//twitter.com/amgnz"><i class="fa fa-twitter-square fa-3x"></i></a></li>
-                      <li><a href="//www.facebook.com/amgnz"><i class="fa fa-facebook-square fa-3x"></i></a></li>
-                      <li><a href="//www.linkedin.com/in/anthonymgonzales/"><i class="fa fa-linkedin-square fa-3x"></i></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-        </div>
+  <div class="top-scroll center">
+    <a href="#top" ><i class="fa fa-chevron-up fa-3x"></i></a>
+  </div>
 
-        <div class="top-scroll center">
-          <a href="#top" ><i class="fa fa-chevron-up fa-3x"></i></a>
-        </div>
-
-      </section>
-
-      <footer>
-        <div class="footer-inner container-fluid max-width">
-          <span class="trademark">&copy; Anthony Gonzales 2014</span>
-          <span class="hosting-logo">This site is proudly hosted on <a href="https://github.com/antgonzales/antgonzales.github.io"><img src="assets/img/GitHub_Logo.png" width="75" height="50"/></a></span>
-        </div>
-      </footer>
-        
-      <script src="build/js/vendor/modernizr-2.7.1.min.js"></script>
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-      <script>window.jQuery || document.write('<script src="build/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>    
-
-      <script src="build/js/base.min.js"></script>
-      <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-49637905-1', 'anthonygonzales.me');
-      ga('send', 'pageview');
-      </script>
-
-    </body>
-</html>
+</section>

@@ -1,19 +1,23 @@
 ---
 layout: default
 ---
-<div class="buffer container-fluid max-width">
-  <h1>{{ page.title }}</h1>
-    
-    <div class="meta-post">
-      <p class="meta"><i class="fa fa-calendar"></i> {{ page.date | date_to_string }}</p>
-      <p class="meta"><i class="fa fa-tags"></i> {{ page.categories }}</p>
-    </div>
-    
-    <div class="blog-content">
+<div class="buffer-top container-fluid max-width">
+  <div class="col-md-8">
+    <h1>{{ page.title }}</h1>
+      
+      <div class="meta-post">
+        <p class="meta"><i class="fa fa-calendar"></i> {{ page.date | date_to_string }}</p>
+        <p class="meta"><i class="fa fa-tags"></i> {{ page.categories }}</p>
+      </div>
+      
+      <div class="blog-content">
 
-      {{ content }}
+        {{ content }}
 
-    </div>
+      </div>
+  </div>
+
+    {% include sidebar.html %}
 
     </div>
 </div>
