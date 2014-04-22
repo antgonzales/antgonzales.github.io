@@ -10,7 +10,10 @@ tags: [Contact Form, jQuery, Ajax]
 If you’re like me, you like your contact forms to be easy to understand for users. Today we will create a contact form using jQuery Validate for your static website that doesn’t refresh the page, animates a small “Thank You” note, and sends messages to your Simple Form inbox. 
 
 Simple Form is great if you can’t use a server side language like PHP, for instance on Github pages. I’m hosting my website on Github Pages, so this kind of service makes sense for me. There’s a plethora of tutorials covering server side contact forms so feel free to read more elsewhere. 
-Getting Your Simple Form Access Tokens
+
+<!--break-->
+
+##Getting Your Simple Form Access Tokens
 In order to start, you need to create an account through Simple Form. Be sure to save any emails they send you, there is no way to login except by your private api token. You will be issued two separate tokens, one to use on your website and one to view your messages. 
 
 **Form API Code**

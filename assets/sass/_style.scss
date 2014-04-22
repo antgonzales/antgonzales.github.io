@@ -220,10 +220,9 @@ footer {
 
 .sidebar-social-icons {
 	padding: 0;
-	margin-right: $line-height-computed-half;
 	li {
 		display: inline-block;
-		padding-right: $line-height-computed-half;
+		padding-right: 8px;
 		padding-left: 0;
 	}
 	a { color: $gray; }
@@ -235,9 +234,9 @@ footer {
 	}
 }
 
-.sidebar-list { list-style: square outside; }
+.sidebar-list { list-style: none outside; }
 
-.sidebar-list li { margin-bottom: $line-height-computed; margin-left: -15px;}
+.sidebar-list li { margin-bottom: $line-height-computed; margin-left: -40px;}
 
 
 @media (max-width: 577px ) {
@@ -263,8 +262,16 @@ footer {
 		width: 50%;
 		float: none;
 	}
-	.sidebar-profile-img { float: none !important; }
+	.sidebar-profile-img { margin-left: 0; float: none; }
 	.social-icons li { padding-right: 10px; padding-left: 10px;}
+}
+
+@media (min-width: 577px) {
+		.sidebar-profile-img { 
+		width: 250px; 
+		float: right;
+		margin-left: $line-height-computed;
+	}
 }
 
 @media (max-width: 767px) {
@@ -276,6 +283,7 @@ footer {
 		display: block;
 		text-align: center;
 	} 
+	.sidebar { text-align: center; }
 }
 
 @media (max-width: 992px) {
@@ -290,12 +298,6 @@ footer {
 	.client-screenshot-container { margin-bottom: 15px; }
 
 	.section-title { text-align: center;}
-
-	.sidebar-profile-img { 
-		width: 250px; 
-		float: right;
-		margin-left: $line-height-computed;
-	}
 
 	.sidebar-about-me { 
 		margin-top: $line-height-computed; 
