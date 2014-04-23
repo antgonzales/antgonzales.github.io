@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Create an AJAX Form for Static Websites Using Simple Forms"
+title:  "Create a Responsive Form for Static Websites"
+description: "Learn how to create an responsive form for static websites using Simple Forms, jQuery, AJAX"
 date:   2014-04-20 21:25:29
 categories: Tutorial
 tags: [Contact Form, jQuery, Ajax]
@@ -276,3 +277,7 @@ We want to hide the contact form and fade in the “Thank You”. I’ve created
 
 ##You Finished!
 Easy right? Maybe not, maybe you got snagged somewhere along the way. That’s okay, check out a working demo of the form so you can reference your work against mine. Thank you for following along and leave comments below if you have any questions.
+
+<div class="center">
+  <a href="http://bit.ly/QDX9wa" class="button button-space">See the Demo</a>
+</div>
