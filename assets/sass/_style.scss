@@ -81,6 +81,10 @@ nav {
 	padding-bottom: $line-height-computed * 2;
 }
 
+.buffer-sidebar {
+  padding-top: $line-height-computed * 2;
+}
+
 .buffer-top { padding-top: $line-height-computed * 2; }
 
 
@@ -92,7 +96,7 @@ nav {
 .section-title:after {
 	display: block;
 	position: relative;
-	bottom: -10px;
+	bottom: -15px;
 	left: 50%;
 	margin-left: -50px;
 	content: ' ';
@@ -208,14 +212,14 @@ footer {
 
 .center { text-align: center; }
 
-.sidebar { background: #eee; }
+.sidebar { background: #eee; border: 3px solid #ddd;}
 
-.sidebar-inner { padding: 20px; }
+.sidebar-inner { padding: 30px 15px 0px 15px; }
 
 .sidebar-profile-img {
 	background: $turquoise;
-	border-radius: 50%;
-	margin-bottom: $line-height-computed-half;
+	border-radius: 6px;
+	margin-bottom: $line-height-computed;
 }
 
 .sidebar-social-icons {
@@ -272,6 +276,12 @@ footer {
 		float: right;
 		margin-left: $line-height-computed;
 	}
+}
+
+@media (max-width: 577px) {
+		.buffer-sidebar {
+    padding-bottom: 0;
+  }
 }
 
 @media (max-width: 767px) {
