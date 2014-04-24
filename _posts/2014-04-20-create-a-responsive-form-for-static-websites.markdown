@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Create a Responsive Form for Static Websites | Anthony Gonzales
+title:  Create a Responsive Form for Static Websites
 description: Learn how to create an responsive form for static websites using Simple Forms, jQuery, AJAX
 date:   2014-04-20 21:25:29
 categories: 
