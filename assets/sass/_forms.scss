@@ -27,9 +27,9 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-	background-color: darken($link-color, 15%);
-  border: 3px solid darken($link-color, 15%);
-  color: white;
+	background-color: darken($yellow, 15%);
+  border: 3px solid darken($yellow, 15%);
+  color: #fff;
 }
 
 .name, .email { width: 48%; }

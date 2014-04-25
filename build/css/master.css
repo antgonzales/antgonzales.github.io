@@ -907,7 +907,7 @@ form{width:100%;}
 input,textarea{padding:20px;border:3px solid #ccc;border-radius:6px;margin:0 0 27px 0;background:#eee;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out;outline:0;}
 input:focus,textarea:focus{border:3px solid #f4d569;color:#424651;}
 input[type="submit"]{border:3px solid #f4d569;color:#424651;}
-input[type="submit"]:hover{background-color:#202227;border:3px solid #202227;color:white;}
+input[type="submit"]:hover{background-color:#efbf22;border:3px solid #efbf22;color:#fff;}
 .name,.email{width:48%;}
 .name{float:left;}
 .email{float:right;}
