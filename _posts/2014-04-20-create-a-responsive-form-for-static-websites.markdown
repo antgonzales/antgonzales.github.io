@@ -35,7 +35,9 @@ Don’t give this URL to anyone! It’s your private token to send messages to y
 http://getsimpleform.com/messages?api_token=<api_token>
 {% endhighlight %}
 
-Bookmark this URL! You will not be able to see your messages if you don’t keep this URL. Simple Form does not currently have a login option.
+<div class="callout warning-callout">
+  <p>Bookmark this URL! You will not be able to see your messages if you don’t keep this URL. Simple Form does not currently have a login option.</p>
+</div>
 
 ##Creating the HTML5 Form
 Let’s start by creating our form using HTML. Nothing new here, but let’s refresh:
