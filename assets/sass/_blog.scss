@@ -2,7 +2,7 @@
 
 .page-title {
   width: 80%;
-  margin: 0 auto $line-height-computed auto;
+  margin: ($line-height-computed * 2) auto $line-height-computed auto;
 }
 
 .blog-content {

@@ -25,18 +25,26 @@ nav {
 		}
 }
 
-#sticky-nav { 
-	background-color: lighten($gray-light, 8%); 
-	width: 100%; 
-	display: none;
-}
-
-.sticky {  
-  position: fixed;   
+.sticky-nav { 
+	position: fixed;   
   left: 0;  
   top: 0;  
-  z-index: 100;  
-}  
+  z-index: 100; 
+	width: 100%;
+  background-color: lighten($gray-light, 8%);
+  display: none;
+}
+
+.sticky {
+  display: block;
+}
+
+.fixed-nav { 
+  position: absolute; 
+  left: 0;  
+  top: 0;
+  width: 100%;
+}
 
 .main-nav {
 	padding: 0;
@@ -63,6 +71,10 @@ nav {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.no-backgroundsize .hero {
+  height: 800px;
 }
 
 .hero-lead-in {
@@ -292,11 +304,11 @@ footer {
 }
 
 @media (min-width: 577px) {
-		.sidebar-profile-img { 
-		width: 250px; 
-		float: right;
-		margin-left: $line-height-computed;
-	}
+  .sidebar-profile-img { 
+    width: 250px; 
+    float: right;
+    margin-left: $line-height-computed;
+  }
 }
 
 @media (max-width: 577px) {
