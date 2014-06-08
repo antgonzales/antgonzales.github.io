@@ -27,11 +27,11 @@ $(function () {
   $(window).load(function() {
     // Animate loader off screen
     $("#loading-spinner").fadeOut();
-    $('#loading-screen').delay(350).fadeOut('slow'); 
-    $('body').delay(350).css({'overflow':'visible'}); 
+    $('#loading-screen').delay(350).fadeOut('slow');
+    $('body').delay(350).css({'overflow':'visible'});
   });
 
-// Smoothe scroll 
+// Smoothe scroll
   $('a[href*=#]:not([href=#])').click(function () {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
       var target = $(this.hash);
@@ -154,7 +154,7 @@ if(top.location.pathname == "/") {
     $.ajax({
       dataType: "jsonp",
       url: "http://getsimpleform.com/messages/ajax?form_api_token=f3424adaa86654f85e3c0931cbffc00f",
-      data: $(".ajax-form").serialize() 
+      data: $(".ajax-form").serialize()
     }).done(function() {
       //callback which can be used to show a thank you message
       //and reset the form
@@ -166,9 +166,3 @@ if(top.location.pathname == "/") {
   });
 
 });
-
-
-
-
-
-

@@ -4,7 +4,7 @@
 		color: $gun;
 		font-family: $sans-serif-font-family;
 		line-height: $headings-line-height;
-		font-weight: $headings-font-weight; 
+		font-weight: $headings-font-weight;
 		text-transform: uppercase;
 	}
 
@@ -28,9 +28,9 @@
 
 	p { margin: 0 0 $line-height-computed 0; }
 	p img { margin: 0; }
-	p.lead { 
-		font-family: $sans-serif-font-family; 
-		font-size: ceil($base-font-size * 1.5238095); 
+	p.lead {
+		font-family: $sans-serif-font-family;
+		font-size: ceil($base-font-size * 1.5238095);
 		color: $gray-light;
 		font-weight: 400;
 	}
@@ -43,29 +43,29 @@
 
 //	Blockquotes
 
-	blockquote, blockquote p { 
-		font-size: ceil($base-font-size * 1.3125); 
-		line-height: $base-line-height; 
-		color: $gray-light; 
+	blockquote, blockquote p {
+		font-size: ceil($base-font-size * 1.3125);
+		line-height: $base-line-height;
+		color: $gray-light;
 		font-family: $serif-font-family;
-		font-style: italic; 
+		font-style: italic;
 	}
 
-	blockquote { 
-		padding: $line-height-computed-half $line-height-computed 0 $line-height-computed; 
-		border-left: 1px solid $gray-light; 
+	blockquote {
+		padding: $line-height-computed-half $line-height-computed 0 $line-height-computed;
+		border-left: 1px solid $gray-light;
 	}
 
-	blockquote cite { 
-		display: block; 
-		font-size: 80%; 
-		color: $gray-light; 
+	blockquote cite {
+		display: block;
+		font-size: 80%;
+		color: $gray-light;
 	}
 
 	blockquote cite:before { content: "\2014 \0020"; }
 	blockquote cite a, blockquote cite a:visited, blockquote cite a:visited { color: $gray-light; }
 
-// Code 
+// Code
   code, kbd, pre, samp { font-size: 16px; }
 
 // Lists

@@ -1,21 +1,21 @@
 // Forms
 form { width: 100%; }
 
-input, 
+input,
 textarea {
 	padding: 20px;
- 	border: 3px solid #ccc;
- 	border-radius: 6px;
+  border: 3px solid #ccc;
+  border-radius: 6px;
+	background: none;
 	margin: 0 0 $line-height-computed 0;
-	background: #eee;
 	-webkit-transition: $ease-in-out;
   -moz-transition: $ease-in-out;
   -o-transition: $ease-in-out;
-  transition: $ease-in-out; 
+  transition: $ease-in-out;
   outline: none;
 }
 
-input:focus, 
+input:focus,
 textarea:focus {
 	border: 3px solid $yellow;
 	color: $gun;
@@ -24,6 +24,14 @@ textarea:focus {
 input[type="submit"] {
 	border: 3px solid $yellow;
 	color: $link-color;
+	background: none;
+}
+
+input[type="submit"][disabled],
+input[type="submit"][disabled]:hover {
+	background-color: $gray;
+  border: 3px solid $gray;
+	color: $gray-light;
 }
 
 input[type="submit"]:hover {
@@ -42,7 +50,7 @@ input[type="submit"]:hover {
 .form-btn { text-align: center; }
 
 .error { border: 3px solid $cherry !important; }
- 
+
 .form-thank-you {
 	display: none;
 	width: 100%;
@@ -55,14 +63,10 @@ input[type="submit"]:hover {
 }
 
 @media (max-width: 577px) {
-  .name, .email { 
-  	width: 100%; 
+  .name, .email {
+  	width: 100%;
   	float: none;
   }
 
   .form-thank-you { height: 388px; }
 }
-
-
-
-
