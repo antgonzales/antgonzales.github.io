@@ -14,9 +14,11 @@ I haven’t written a blog post recently because I recently relocated to Boston!
 
 <!--break-->
 
-At Third and Grove, I get to continue playing with front-end technlogies like Grunt, SASS, Compass, Javascript, and some Javascript frameworks like Angular. I've been able to implement some best practices, improve front-end workflow and processes, as well introduce some fresh perspectives to projects. I've been able to bring [Mobile First](http://www.abookapart.com/products/mobile-first) and [Style Tiles](http://styletil.es/) to the projects which required responsive design and have already turned out some great results. I look forward to new projects and new oppotunities to learn about my craft.
+## Hello, Third and Grove
 
-I love doing what I do, I love learning, and I can honestly say that I'm working with some talented, even intimidating, full-stack engineers. Vagrant boxes with custom bash scripts to spin up local dev environments? No problem. Git best practices and deployment processes? Easy as pie. Write a little custom JS to even out the user experience? Done and done. I'm learning a lot about the backend not necessarily by digging in, but by working with people who make it seem magically easy. 
+At Third and Grove, I get to continue playing with front-end technlogies like Grunt, SASS, Compass, Javascript, and some Javascript frameworks like Angular. I've been able to implement some best practices, improve front-end workflow and processes, as well introduce some fresh perspectives to projects. We're now using a [Mobile First](http://www.abookapart.com/products/mobile-first) approach and [Style Tiles](http://styletil.es/) on projects which required responsive design with some great results. I look forward to new projects and new oppotunities to learn about my craft.
+
+I love doing what I do, I love learning, and I can honestly say that I'm working with some talented and intimidating, full-stack engineers. Vagrant boxes with custom bash scripts to spin up local dev environments? No problem. Git best practices and deployment processes? Easy as pie. Write a little custom JS to even out the user experience? Done and done. I'm learning a lot about the backend not necessarily by digging in, but by working with people who make it seem magically easy. 
 
 ## Funny things I’ve noticed about New England
 
@@ -31,5 +33,14 @@ I love doing what I do, I love learning, and I can honestly say that I'm working
 </div>
 
 I’m excited most of all to be in Boston because of the proximity to great front-end developers and open-source enthusiasts. Major players like Amazon, Google, and Microsoft are here, along with smaller shops like Bocoup. I look forward to more amazing things and traveling along the East Coast to see the beautiful, major American cities. Follow me on [Instagram](http://instagram.com/antgnz) to see my photos.
+
+I even made it to the front page of the [Boston Business Journal](http://www.bizjournals.com/boston/blog/techflash/2014/08/bbj-preview-civic-tech-is-growing-up-in-boston.html) while I was at Code for Boston!
+
+<blockquote class="twitter-tweet" align="center" lang="en"><p>Civic tech is growing up in Boston. wow. such famous. much code. | Boston Business Journal <a href="http://t.co/LA92HL6CUB">http://t.co/LA92HL6CUB</a> <a href="http://t.co/zdVrHphOFf">pic.twitter.com/zdVrHphOFf</a></p>&mdash; anthony gonzales (@amgnz) <a href="https://twitter.com/amgnz/statuses/498802525148295168">August 11, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<div class="callout warning-callout">
+  <p>Warning: Getting onto the Boston Business Journal without having made a civic app doesn't make you a dope coder, it makes you an expert at timing.</p>
+</div>
 
 I’ll be writing more often now that I’m settled. Cheers to new adventures!
