@@ -14,7 +14,7 @@ I haven’t written a blog post recently because I recently relocated to Boston!
 
 <!--break-->
 
-## Hello, Third and Grove
+## Wicked smaht people at Third and Grove
 
 At Third and Grove, I get to continue playing with front-end technlogies like Grunt, SASS, Compass, Javascript, and some Javascript frameworks like Angular. I've been able to implement some best practices, improve front-end workflow and processes, as well introduce some fresh perspectives to projects. We're now using a [Mobile First](http://www.abookapart.com/products/mobile-first) approach and [Style Tiles](http://styletil.es/) on projects which required responsive design with some great results. I look forward to new projects and new oppotunities to learn about my craft.
 
