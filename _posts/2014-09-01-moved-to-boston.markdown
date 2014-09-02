@@ -26,6 +26,10 @@ I love doing what I do, I love learning, and I can honestly say that I'm working
   4. California is seen as a magical, amazing place.
   5. Winter is coming, always.
 
+<div class="callout warning-callout">
+  <p>Warning: Winter is a looming monster on the horizon that eats people's souls in Boston. Don't ever bring up winter unless you want to hear about how bad the last one was or about that one time your co-worker's dad got cabin fever and almost pulled a Jack Nicholson a la The Shining. </p>
+</div>
+
 I’m excited most of all to be in Boston because of the proximity to great front-end developers and open-source enthusiasts. Major players like Amazon, Google, and Microsoft are here, along with smaller shops like Bocoup. I look forward to more amazing things and traveling along the East Coast to see the beautiful, major American cities. Follow me on [Instagram](http://instagram.com/antgnz) to see my photos.
 
 I’ll be writing more often now that I’m settled. Cheers to new adventures!
