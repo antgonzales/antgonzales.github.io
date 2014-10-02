@@ -11,7 +11,7 @@ tags:
 - The Inception Rule
 ---
 
-As a front-end developer, my job is not only to create usable and beautiful websites, but also to design mantainable and reusable code. If you've ever worked with SASS or a team that uses a pre-compiler, you've probably come across nesting in all of it's beautiful, ugly glory. It's a way to quickly scope for page specific styles or grab selectors that may not have classes assigned. 
+As a front-end developer, my job is not only to create usable and beautiful websites, but also to design mantainable and reusable code. If you've ever worked with SASS or a team that uses a preprocessor, you've probably come across nesting in all of it's beautiful, ugly glory. It's a way to quickly scope for page specific styles or grab selectors that may not have classes assigned. 
 
 To help maintain nesting, the [Inception Rule](http://thesassway.com/beginner/the-inception-rule) has been the de facto answer to the problem. In this post, we'll look at how the rule is broken and how we can fix it. 
 
@@ -142,7 +142,7 @@ Here is some real code I found on a recent project with the class names altered.
 
 ### Communication breakdown
 
-There's several problems with the code listed above. Let's start with the amount of nesting taking place within the .cat-product object. For all but one or two instances, this bit of code follows the Inception Rule by going no more than four levels deep. The rule doesn't protect us from runaway code and doesn't provide a framework for legibility or maintainablity. Instead, we get large blocks of code we'll later have to untangle or explain to teammates. 
+There's several problems with the code listed above. Let's start with the amount of nesting taking place within the .cat-product object. For all but one or two instances, this bit of code follows the Inception Rule by going no more than four levels deep. The rule doesn't protect us from runaway code and doesn't provide a framework for legibility or maintainability. Instead, we get large blocks of code we'll later have to untangle or explain to teammates. 
 
 ### Tie me up, untie me
 
@@ -188,11 +188,11 @@ Let's take our example and clean up some of the rules with new classes and some 
 }
 {% endhighlight %}
 
-We've now made it far more clear what exactly is going on with our menu using vanilla CSS and some BEM. It's a menu about cats, with list item styles and classes to toggle states. I have to now spend 0 hours explaining the code to my teammates. Meeting adjourned!
+We've now made it far more clear what exactly is going on with our menu using vanilla CSS and some BEM. It's a menu about cats, with list item styles and classes to toggle states. I have to now spent 0 hours explaining the code to my teammates. Meeting adjourned!
 
 ## Mix it, mix it real good
 
-SASS offers so much more than just nesting, yet most people decide to use the nesting feature exclusively. SASS's mixins and variables allow you to create excellent re-usable snippets of code. 
+SASS offers so much more than just nesting, yet most people decide to use the nesting feature exclusively. SASS's mixins and variables allow you to create excellent reusable snippets of code. 
 
 In my `_mixins.scss` file, I'll use [8 Sass mixins you must have in your toolbox](http://zerosixthree.se/8-sass-mixins-you-must-have-in-your-toolbox/) and the [better OSX font rendering mixin](http://maximilianhoffmann.com/posts/better-font-rendering-on-osx) to handle some issues like:
 
@@ -204,7 +204,7 @@ In my `_mixins.scss` file, I'll use [8 Sass mixins you must have in your toolbox
 - Hiding elements visually
 - Font smoothing
 
-I use these mixins across all projects in addition to the ones provided by Compass. However, mixins have their limits. Don't use mixins in an attempt to re-use code or create auto-magic CSS. Mixins should be used to rewrite small snippets, like a clearfix or vendor prefixes, not entire styles. 
+I use these mixins across all projects in addition to the ones provided by Compass. However, mixins have their limits. Don't use mixins in an attempt to reuse code or create auto-magic CSS. Mixins should be used to rewrite small snippets, like a clearfix or vendor prefixes, not entire styles. 
 
 **How not to use a mixin**
 
@@ -232,7 +232,7 @@ I use these mixins across all projects in addition to the ones provided by Compa
 {% endhighlight %}
 
 <div class="callout danger-callout">
-  <p>Danger: If you create abomonations like the code I found above, you will be cursed with The Keyboard Cat playing on loop. Forever.</p>
+  <p>Danger: If you create abominations like the code I found above, you will be cursed with The Keyboard Cat playing on loop. Forever.</p>
 </div>
 
 ## Variables
