@@ -3,4 +3,4 @@ highlighter: pygments
 markdown: kramdown
 gems:
   - jekyll-sitemap
-permalink:  /:title.html
+permalink:  /:title
