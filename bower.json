@@ -1,0 +1,21 @@
+{
+  "name": "antgonzales.github.io",
+  "version": "2.0.0",
+  "homepage": "www.anthonygonzales.io",
+  "authors": [
+    "Anthony Gonzales <anthony@thirdandgrove.com>"
+  ],
+  "description": "The portfolio of front-end developer Anthony M. Gonzales.",
+  "main": "gulpfile.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize.css": "~3.0.3"
+  }
+}
