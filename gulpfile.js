@@ -16,6 +16,9 @@ var dirs = pkg['gbp-configs'].directories;
 
 gulp.task('styles', function() {
   return sass(dirs.lib + '/scss/', { style: 'expanded' })
+    .on('error', function (err) {
+        console.error('Error', err.message);
+     })
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(gulp.dest(dirs.dist + '/css'))
     .pipe(rename({suffix: '.min'}))
@@ -34,8 +37,8 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest(dirs.dist + '/js'))
 });
 
-gulp.task('clean', function(cb) {
-  del([dirs.dist], cb)
+gulp.task('clean', function(callback) {
+  del([dirs.dist], callback)
 });
 
 gulp.task('default', ['clean'], function(callback) {
