@@ -1,4 +1,4 @@
 # robots.txt
 User-agent: *
-Disallow: 
-Sitemap: http://www.anthonygonzales.me/sitemap.xml
+Disallow:
+Sitemap: http://www.anthonygonzales.io/sitemap.xml
