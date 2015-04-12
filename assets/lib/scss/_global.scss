@@ -13,3 +13,36 @@ html {
 *:after {
   box-sizing: inherit;
 }
+
+body {
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  font-weight: $base-font-weight;
+  font-family: $font-family-sans-serif;
+  color: $black;
+}
+
+a {
+  color: $black;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: lighten($black, 15%);
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+figure {
+  margin: 0;
+}
+
+img {
+  vertical-align: middle;
+}
