@@ -8,12 +8,12 @@ $black: #000;
 
 
 // Font families
-$font-family-sans-serif: Arial, Helvetica, sans-serif;
-$font-family-serif: Georgia, TimesNewRoman, "Times New Roman", Times, serif;
+$font-family-sans-serif: "Lato", serif;
+$font-family-serif: "Playfair Display", TimesNewRoman, "Times New Roman", Times, serif;
 
 // Font sizes
 $base-font-size: 16px;
-$base-font-weight: 300;
+$base-font-weight: 400;
 $base-line-height: 20/14;
 $line-height-computed: floor($base-font-size * $base-line-height);
 $line-height-computed-half: ceil($line-height-computed / 2);
@@ -27,7 +27,7 @@ $h5-font-size: $base-font-size;
 $h6-font-size: ceil($base-font-size * .707);
 
 $headings-line-height: 1.1;
-$headings-font-weight: 500;
+$headings-font-weight: 700;
 
 // Z-indexes
 $z-index-1: -100;

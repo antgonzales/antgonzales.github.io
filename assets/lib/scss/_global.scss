@@ -46,3 +46,8 @@ figure {
 img {
   vertical-align: middle;
 }
+
+// Hide everything while the website is loading.
+.wf-loading * {
+  opacity: 0;
+}

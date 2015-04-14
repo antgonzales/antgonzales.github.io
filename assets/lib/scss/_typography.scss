@@ -55,21 +55,3 @@ ol ol {
 li {
   list-style: none;
 }
-
-// Fonts
-
-// Example
-/*
-@include font-face(
-  "Gotham",
-  font-files(
-    "gothamhtf-book-webfont.woff",
-    "gothamhtf-book-webfont.woff2",
-    "gothamhtf-book-webfont.ttf",
-    "gothamhtf-book-webfont.svg"
-  ),
-  "gothamhtf-book-webfont.eot",
-  300,
-  normal
-);
-*/
