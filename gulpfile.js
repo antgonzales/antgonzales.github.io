@@ -8,6 +8,7 @@ var gulp = require('gulp'),
   concat = require('gulp-concat'),
   cache = require('gulp-cache'),
   del = require('del'),
+  imagemin = require('gulp-imagemin'),
   runSequence = require('run-sequence');
 
 // Grabs the directory paths inside the package.json file
@@ -37,6 +38,14 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest(dirs.dist + '/js'))
 });
 
+gulp.task('img', function() {
+  return gulp.src(dirs.lib + '/img/*')
+    .pipe(imagemin({
+      progressive: true,
+      optimizationLevel: 3 }))
+    .pipe(gulp.dest(dirs.dist + '/img'));
+});
+
 gulp.task('clean', function(callback) {
   del([dirs.dist], callback)
 });
@@ -44,6 +53,7 @@ gulp.task('clean', function(callback) {
 gulp.task('default', ['clean'], function(callback) {
   runSequence('styles',
               'scripts',
+              'img',
               callback);
 });
 
@@ -54,5 +64,8 @@ gulp.task('watch', function() {
 
   // Watch .js files
   gulp.watch(dirs.lib + '/js/**/*.js', ['scripts']);
+
+  // Watch img files
+  gulp.watch(dirs.lib + '/img/**/*.{png,jpg,jpeg,gif}', ['img']);
 
 });
