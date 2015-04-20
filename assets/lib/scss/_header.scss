@@ -1,1 +1,28 @@
 // Header
+
+.header-main {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+}
+
+.nav-logo {
+  float: left;
+}
+
+.nav-main ul {
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-main li {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-main a {
+  display: block;
+  padding: 6px 8px;
+}

@@ -1,0 +1,132 @@
+// Home page styles.
+
+.bg-hero {
+  @include breakpoint(sm) {
+    height: 100%;
+  }
+  padding-top: 50px; // Matches px value of .header-main
+}
+
+.hero-home {
+  @include breakpoint(sm) {
+    position: relative;
+    height: 100%;
+  }
+}
+
+.hero-lead-in {
+  text-align: center;
+  @include breakpoint(sm) {
+    position: absolute;
+    top: 30%;
+    height: 100%;
+    width: 50%;
+    float: left;
+    text-align: left;
+  }
+}
+
+.section-title {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.section-title:after {
+  position: absolute;
+  display: block;
+  height: 2px;
+  width: 46px;
+  bottom: -18px;
+  left: 0;
+  background: $blue-bright;
+  content: "";
+}
+
+.portfolio-tile {
+  position: relative;
+  display: block;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: right top;
+  outline: 1px solid $blue-bright;
+}
+
+.portfolio-tile:before {
+  display: block;
+  content: "";
+}
+
+.portfolio-tile-lg:before {
+  padding-top: 66.6666667%; // 380/570 = .666666667
+}
+
+.portfolio-tile-md:before {
+  padding-top: 49.122807%; // 280/570 = .49122807
+}
+
+.portfolio-tile-sm:before {
+  padding-top: 98.245614%; // 280/285 = .98245614
+}
+
+.portfolio-tile img {
+  max-width: 100%;
+  height: auto;
+}
+
+.tile-content-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.tile-meta-title {
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  color: $white;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.portfolio-tile:hover .tile-overlay {
+  @include breakpoint(md) {
+    opacity: .8;
+  }
+}
+
+.portfolio-tile:hover .tile-overlay-content {
+  @include breakpoint(md) {
+    opacity: 1;
+  }
+}
+
+.tile-overlay {
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.35s;
+  background-color: $blue-bright;
+}
+
+.tile-overlay-content {
+  padding: 15px;
+  color: $white;
+}
+
+.tile-overlay-content .hr {
+  height: 1px;
+  width: 42px;
+  background: $white;
+  border: none;
+}
+
+.tile-overlay-link {
+  color: $white;
+}
+

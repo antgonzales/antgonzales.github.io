@@ -14,23 +14,31 @@ html {
   box-sizing: inherit;
 }
 
+html {
+  height: 100%;
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 body {
+  height: 100%;
+  margin: 0;
   font-size: $base-font-size;
   line-height: $base-line-height;
   font-weight: $base-font-weight;
   font-family: $font-family-sans-serif;
-  color: $black;
+  color: $gray-blue;
 }
 
 a {
-  color: $black;
+  color: $link-color;
   text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  color: lighten($black, 15%);
-  text-decoration: underline;
+  color: darken($link-color, 15%);
+  text-decoration: none;
 }
 
 a:focus {
@@ -47,7 +55,26 @@ img {
   vertical-align: middle;
 }
 
+.hr {
+  display: block;
+  height: 1px;
+  margin: 1em 0;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 // Hide everything while the website is loading.
 .wf-loading * {
   opacity: 0;
+}
+
+.loading-screen {
+  display: none;
 }
