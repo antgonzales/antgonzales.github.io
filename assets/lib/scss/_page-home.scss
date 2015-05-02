@@ -18,17 +18,33 @@
   text-align: center;
   @include breakpoint(sm) {
     position: absolute;
-    top: 30%;
-    height: 100%;
-    width: 50%;
-    float: left;
+    top: 0;
+    bottom: 0;
+    height: 50%;
+    width: 100%;
+    margin: auto;
     text-align: left;
+  }
+  @include breakpoint(md) {
+    width: 50%;
+  }
+}
+
+.hero-title {
+  @include breakpoint(sm) {
+    font-size: 52px;
+  }
+}
+
+.hero-tagline {
+  @include breakpoint(sm) {
+    font-size: 19px;
   }
 }
 
 .section-title {
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 45px;
 }
 
 .section-title:after {
@@ -66,6 +82,10 @@
 
 .portfolio-tile-sm:before {
   padding-top: 98.245614%; // 280/285 = .98245614
+}
+
+.tile-square {
+  padding-top: 100%; // 1/1 = .1;
 }
 
 .portfolio-tile img {
@@ -114,8 +134,45 @@
   background-color: $blue-bright;
 }
 
+.tile-overlay:before,
+.tile-overlay:after {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  content: '';
+  opacity: 0;
+  z-index: 1;
+  -webkit-transition: opacity 0.35s ease, -webkit-transform 0.35s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.tile-overlay:before {
+  border-top: 1px solid $white;
+  border-bottom: 1px solid $white;
+  -webkit-transform: scale(0, 1);
+  transform: scale(0, 1);
+}
+
+.tile-overlay:after {
+  border-right: 1px solid $white;
+  border-left: 1px solid $white;
+  -webkit-transform: scale(1, 0);
+  transform: scale(1, 0);
+}
+
+.portfolio-tile:hover .tile-overlay:before,
+.portfolio-tile:hover .tile-overlay:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: opacity 0.4s ease, -webkit-transform 0.4s ease .2s;
+  transition: opacity 0.4s ease, transform 0.45s ease .2s;
+}
+
 .tile-overlay-content {
-  padding: 15px;
+  padding: 40px;
   color: $white;
 }
 
@@ -128,5 +185,46 @@
 
 .tile-overlay-link {
   color: $white;
+}
+
+.section-about {
+  color: $white;
+  background-color: $blue-bright;
+  text-align: center;
+}
+
+.section-about-subtitle {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+.section-about-title {
+  margin-bottom: 50px;
+}
+
+.section-about-callout-title {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.section-about-callout-title:after {
+  display: block;
+  content: "";
+  height: 1px;
+  background: darken($blue-bright, 15%);
+  position: absolute;
+  left: 50px;
+  right: 50px;
+  bottom: -18px;
+}
+
+.section-about-icon {
+  max-width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+  @include breakpoint(md) {
+    max-width: initial;
+  }
 }
 
