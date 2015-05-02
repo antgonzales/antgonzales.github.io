@@ -20,7 +20,7 @@ h4, .h4, h5, .h5, h6, .h6 {
 h1, .h1 {
   font-size: 34px;
 }
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   h1, .h1 {
     font-size: 51px;
   }
@@ -29,7 +29,7 @@ h1, .h1 {
 h2, .h2 {
   font-size: 26px;
 }
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   h2, .h2 {
     font-size: 38px;
   }
@@ -38,7 +38,7 @@ h2, .h2 {
 h3, .h3 {
   font-size: 20px;
 }
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   h3, .h3 {
     font-size: 29px;
   }
@@ -167,7 +167,39 @@ img {
 }
 
 .loading-screen {
-  display: none;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  -webkit-transform: scale(1.2);
+      -ms-transform: scale(1.2);
+          transform: scale(1.2);
+  overflow: hidden;
+}
+
+.loading-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100px;
+  width: 100px;
+  margin: auto;
+}
+
+.section-buffer {
+  padding-top: 45px;
+  padding-bottom: 65px;
+}
+
+.section-buffer-bottom {
+  padding-bottom: 65px;
 }
 
 .container {
@@ -1177,9 +1209,8 @@ fieldset[disabled] .btn {
 }
 
 .header-main {
-  position: absolute;
-  top: 50px;
   width: 100%;
+  margin-bottom: 15px;
 }
 
 .nav-logo {
@@ -1225,17 +1256,35 @@ fieldset[disabled] .btn {
 @media (min-width: 768px) {
   .hero-lead-in {
     position: absolute;
-    top: 30%;
-    height: 100%;
-    width: 50%;
-    float: left;
+    top: 0;
+    bottom: 0;
+    height: 50%;
+    width: 100%;
+    margin: auto;
     text-align: left;
+  }
+}
+@media (min-width: 992px) {
+  .hero-lead-in {
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 52px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-tagline {
+    font-size: 19px;
   }
 }
 
 .section-title {
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 45px;
 }
 
 .section-title:after {
@@ -1273,6 +1322,10 @@ fieldset[disabled] .btn {
 
 .portfolio-tile-sm:before {
   padding-top: 98.245614%;
+}
+
+.tile-square {
+  padding-top: 100%;
 }
 
 .portfolio-tile img {
@@ -1322,8 +1375,48 @@ fieldset[disabled] .btn {
   background-color: #1b94de;
 }
 
+.tile-overlay:before,
+.tile-overlay:after {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  content: '';
+  opacity: 0;
+  z-index: 1;
+  -webkit-transition: opacity 0.35s ease, -webkit-transform 0.35s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.tile-overlay:before {
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  -webkit-transform: scale(0, 1);
+  -ms-transform: scale(0, 1);
+      transform: scale(0, 1);
+}
+
+.tile-overlay:after {
+  border-right: 1px solid #fff;
+  border-left: 1px solid #fff;
+  -webkit-transform: scale(1, 0);
+  -ms-transform: scale(1, 0);
+      transform: scale(1, 0);
+}
+
+.portfolio-tile:hover .tile-overlay:before,
+.portfolio-tile:hover .tile-overlay:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+      transform: scale(1);
+  -webkit-transition: opacity 0.4s ease, -webkit-transform 0.4s ease .2s;
+  transition: opacity 0.4s ease, transform 0.45s ease .2s;
+}
+
 .tile-overlay-content {
-  padding: 15px;
+  padding: 40px;
   color: #fff;
 }
 
@@ -1336,4 +1429,51 @@ fieldset[disabled] .btn {
 
 .tile-overlay-link {
   color: #fff;
+}
+
+.section-about {
+  color: #fff;
+  background-color: #1b94de;
+  text-align: center;
+}
+
+.section-about-subtitle {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+.section-about-title {
+  margin-bottom: 50px;
+}
+
+.section-about-callout-title {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.section-about-callout-title:after {
+  display: block;
+  content: "";
+  height: 1px;
+  background: #13679a;
+  position: absolute;
+  left: 50px;
+  right: 50px;
+  bottom: -18px;
+}
+
+.section-about-icon {
+  max-width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 992px) {
+  .section-about-icon {
+    max-width: initial;
+  }
+}
+
+.text-break {
+  display: block;
 }
