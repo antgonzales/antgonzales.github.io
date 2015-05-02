@@ -76,5 +76,35 @@ img {
 }
 
 .loading-screen {
-  display: none;
+  z-index: $z-index1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: $white;
+  transform: scale(1.2);
+  overflow: hidden;
+}
+
+.loading-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100px;
+  width: 100px;
+  margin: auto;
+}
+
+.section-buffer {
+  padding-top: 45px;
+  padding-bottom: 65px;
+}
+
+.section-buffer-bottom {
+  padding-bottom: 65px;
 }
