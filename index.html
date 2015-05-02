@@ -5,20 +5,22 @@ description: I'm a web developer from California, specializing in front-end dev.
 
 {% include head.html %}
 
-{% include header.html %}
-
 <section class="bg-hero">
+  {% include header.html %}
   <div class="hero-home container">
     <div class="hero-lead-in">
       <h1 class="hero-title">Anthony Gonzales</h1>
       <p class="hero-tagline">I'm a technical front-end developer and I create engaging web experiences. Let's build something <em>together</em>.</p>
+      <div class="cta-hero-action">
+        <a href="#" class="btn">Get in touch</a>
+        <a href="#" class="btn">View my work</a>
     </div>
   </div>
 </section>
 
-<section id="recent-work" class="container">
+<section id="recent-work" class="container section-buffer-bottom">
   <h2 class="section-title">Recent Work</h2>
-    <div class="row no-gutters">
+    <div class="row no-gutters portfolio-tiles">
       <div class="col-sm-6">
         <figure class="portfolio-tile portfolio-tile-lg" style="background-image: url('http://placehold.it/570x380');">
           <a href="#" class="tile-content-wrapper">
@@ -92,44 +94,83 @@ description: I'm a web developer from California, specializing in front-end dev.
     </div>
 </section>
 
-<section id="skills" class="container">
-  <h2 class="section-title">Skills</h2>
-  <div class="row buffer">
-    <ul class="skills-list col-md-6">
-      <li><i class="fa-li fa fa-heart-o fa-2x"></i>I love learning about new technologies and techniques. I take pride in my work and enjoy discovering solutions.</li>
-      <li><i class="fa-li fa fa-search fa-2x"></i>I'm curious by nature and a researcher at heart. I take the time to follow best practices and keep my work tidy.</li>
-      <li><i class="fa-li fa fa-clock-o fa-2x"></i>Time is valuable; I'll create a tangible timeline that meets your business needs and deadlines.</li>
-      <li><i class="fa-li fa fa-comments-o fa-2x"></i>Collaboration is important. We're in this together, so let's learn and have fun creating together.</li>
-    </ul>
-    <div id="skills-chart-container" class="col-md-6 invisible">
-      <div class="canvas-container">
-          <canvas id="skills-chart" width="300" height="300"></canvas>
+<section id="about" class="section-about section-buffer">
+  <div class="container">
+    <span class="section-about-subtitle">About me</span>
+    <h2 class="section-about-title">Things to know about yours truly</h2>
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <figure class="section-about-icon">
+          <img class="img-responsive" src="http://placehold.it/350x350" />
+        </figure>
+        <h3 class="section-about-callout-title">Keytar keffiyeh stumptown</h3>
+        <p>Single-origin coffee Blue Bottle PBR&B, cornhole pug fanny pack lomo tofu. McSweeney's tote bag Vice shabby chic, listicle yr slow-carb Helvetica four loko tilde fanny pack migas PBR&B.</p>
       </div>
-      <ul class="chart-legend">
-        <li class="HTML"><i class="fa-li fa fa-square"></i>HTML</li>
-        <li class="CSS"><i class="fa-li fa fa-square"></i>CSS</li>
-        <li class="Javascript"><i class="fa-li fa fa-square"></i>Javascript</li>
-        <li class="jQuery"><i class="fa-li fa fa-square"></i>jQuery</li>
-        <li class="Rails"><i class="fa-li fa fa-square"></i>Ruby on Rails</li>
-        <li class="Wordpress"><i class="fa-li fa fa-square"></i>Wordpress</li>
-      </ul>
+      <div class="col-sm-6 col-md-3">
+        <figure class="section-about-icon">
+          <img class="img-responsive" src="http://placehold.it/350x350" />
+        </figure>
+        <h3 class="section-about-callout-title">Keytar keffiyeh stumptown</h3>
+        <p>Single-origin coffee Blue Bottle PBR&B, cornhole pug fanny pack lomo tofu. McSweeney's tote bag Vice shabby chic, listicle yr slow-carb Helvetica four loko tilde fanny pack migas PBR&B.</p>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <figure class="section-about-icon">
+          <img class="img-responsive" src="http://placehold.it/350x350" />
+        </figure>
+        <h3 class="section-about-callout-title">Keytar keffiyeh stumptown</h3>
+        <p>Single-origin coffee Blue Bottle PBR&B, cornhole pug fanny pack lomo tofu. McSweeney's tote bag Vice shabby chic, listicle yr slow-carb Helvetica four loko tilde fanny pack migas PBR&B.</p>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <figure class="section-about-icon">
+          <img class="img-responsive" src="http://placehold.it/350x350" />
+        </figure>
+        <h3 class="section-about-callout-title">Keytar keffiyeh stumptown</h3>
+        <p>Single-origin coffee Blue Bottle PBR&B, cornhole pug fanny pack lomo tofu. McSweeney's tote bag Vice shabby chic, listicle yr slow-carb Helvetica four loko tilde fanny pack migas PBR&B.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="about" class="container">
-  <h2 class="section-title">About Me</h2>
-  <div class="row buffer">
-    <div class="col-md-5">
-
-      <p>My name is Anthony Gonzales and I'm a California transplant living in Boston. I have a passion for creating beautiful, simple websites that are easily understood by users and even easier for owners to manage.</p>
-
-      <p>I've created styles, themes, and user experiences primarily using Drupal and Wordpress. I'm always learning about new technologies and tinkering with the latest open-source products.</p>
-
-      <p> If you feel I'm the right guy for your project, or just want to have a chat, feel free to contact me.</p>
-
+<section id="skills" class="container">
+  <h2 class="section-title">Skills</h2>
+  <div class="row no-gutters buffer">
+    <div class="col-md-4">
+      <div class="portfolio-tile tile-square">
+        <h3>A Purpose</h3>
+      </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-4">
+      <div class="portfolio-tile tile-square">
+        <h3>A Voice</h3>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="portfolio-tile tile-square">
+        <h3>A Dream</h3>
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutters buffer">
+    <div class="col-md-4">
+      <div class="portfolio-tile tile-square">
+        <div class="tile-content">
+          <h3>Everyday</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="portfolio-tile tile-square">
+        <div class="tile-content">
+          <h3>is Exactly</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="portfolio-tile tile-square">
+        <div class="tile-content">
+          <h3>the Same</h3>
+        </div>
+      </div>
     </div>
   </div>
 </section>
