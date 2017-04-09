@@ -1,7 +1,7 @@
 // Buttons
 .button, .button-blog {
   display: inline-block;
-  border: 3px solid $yellow;
+  border: 3px solid $red;
   border-radius: 6px;
   cursor: pointer;
   color: $link-color;
@@ -10,10 +10,7 @@
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  -webkit-transition: $ease-in-out;
-  -moz-transition: $ease-in-out;
-  -o-transition: $ease-in-out;
-  transition: $ease-in-out; 
+  transition: $ease-in-out;
 }
 
 .button {
@@ -24,9 +21,10 @@
   padding: 10px 20px;
 }
 
-.button:hover, .button-blog:hover {
-  background-color: darken($yellow, 15%);
-  border: 3px solid darken($yellow, 15%);
+.button:hover,
+.button-blog:hover {
+  background-color: darken($red, 15%);
+  border: 3px solid darken($red, 15%);
   color: #fff;
 }
 

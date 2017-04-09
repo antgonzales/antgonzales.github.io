@@ -16,17 +16,31 @@
   padding-bottom: $line-height-computed;
 }
 
-.blog-post-content ul { list-style: square outside; }
+.blog-post-content ul {
+  list-style: square outside;
+}
 
-.header-meta-info .meta-content { display: block; }
+.header-meta-info .meta-content {
+  display: block;
+}
 
-.meta-name { margin-bottom: $line-height-computed-half; }
+.meta-name {
+  margin-bottom: $line-height-computed-half;
+}
 
-.footer-meta-info { margin-top: $line-height-computed; }
+.footer-meta-info {
+  margin-top: $line-height-computed;
+}
 
-.meta-content { display: inline-block; margin-right: $line-height-computed; color: $gray; }
+.meta-content {
+  display: inline-block;
+  margin-right: $line-height-computed;
+  color: $gray;
+}
 
-.meta-content i { margin-right: 5px; }
+.meta-content i {
+  margin-right: 5px;
+}
 
 @media (max-width: 577px) {
   .page-title {
