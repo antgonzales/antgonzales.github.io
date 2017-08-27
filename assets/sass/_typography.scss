@@ -1,8 +1,7 @@
 // Typography
 
 h1, h2, h3, h4, h5, h6 {
-	color: $red;
-	font-family: $sans-serif-font-family;
+	color: $gun;
 	line-height: $headings-line-height;
 	font-weight: $headings-font-weight;
 	text-transform: uppercase;
@@ -29,12 +28,10 @@ h6 { font-size: $h6-font-size; }
 p { margin: 0 0 $line-height-computed 0; }
 p img { margin: 0; }
 p.lead {
-	font-family: $sans-serif-font-family;
 	font-size: ceil($base-font-size * 1.5238095);
 	color: $gray-light;
 	font-weight: 400;
 }
-p:last-child { margin-bottom: 0; }
 
 em { font-style: italic; }
 strong { font-weight: bold; color: $gray-dark; }

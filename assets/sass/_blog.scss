@@ -2,8 +2,11 @@
 
 .page-title {
   @extend .section-title;
-  width: 80%;
   margin: ($line-height-computed * 2) auto $line-height-computed auto;
+}
+
+.blog-post {
+  padding-top: 25px;
 }
 
 .blog-content {
@@ -40,12 +43,6 @@
 
 .meta-content i {
   margin-right: 5px;
-}
-
-@media (max-width: 577px) {
-  .page-title {
-    width: 100%;
-  }
 }
 
 @media (max-width: 992px) {

@@ -1,16 +1,53 @@
 // Styles
 
 .max-width {
-  max-width: 960px;
+  max-width: 640px;
+}
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+.portfolio-tile {
+  position: relative;
+  margin-bottom: 15px;
+  border: 3px solid $black;
+}
+
+.portfolio-tile:hover .portfolio-project-logo-cover,
+.portfolio-tile:hover .portfolio-project-logo {
+  opacity: 0;
+  transition: opacity .15s ease-out;
+}
+
+.portfolio-project-logo-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  margin: auto;
+  background-color: #000;
+  transition: opacity .15s ease-in;
+}
+
+.portfolio-project-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 50%;
+  height: auto;
+  transition: opacity .15s ease-in;
 }
 
 html,
 body {
   height: 100%;
-}
-
-body {
-  overflow: hidden;
 }
 
 nav {
@@ -29,12 +66,12 @@ nav {
   font-family: $mono-font-family;
   font-size: 28px;
   text-decoration: none;
-  color: $red;
+  color: $blue;
 }
 
 .nav-logo a:hover,
 .nav-logo a:focus {
-  color: darken($red, 15%);
+  color: darken($blue, 15%);
 }
 
 .sticky-nav {
@@ -69,12 +106,7 @@ nav {
 }
 
 .main-nav a {
-  color: $red;
-}
-
-.main-nav a:hover {
-  padding-bottom: $line-height-computed-half / 2;
-  border-bottom: 3px solid $red;
+  color: $blue;
 }
 
 .hero {
@@ -91,15 +123,17 @@ nav {
 	top: 30%;
   right: 0;
 	left: 0;
-	max-width: 960px;
 	margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
 }
 
-#hero-title,
+#hero-title {
+  color: $blue;
+}
+
 #hero-tagline {
-  color: $red;
+  color: $gun
 }
 
 .buffer {
@@ -115,46 +149,20 @@ nav {
   padding-top: $line-height-computed * 2;
 }
 
-
 .section-title {
 	padding-bottom: $line-height-computed;
-	text-align: center;
+  margin-bottom: 0
 }
 
 .section-title:after {
 	display: block;
 	position: relative;
-	bottom: -15px;
-	left: 50%;
-	margin-left: -50px;
+	bottom: -6px;
+	left: 0;
 	content: ' ';
 	width: 100px;
-	height: 8px;
-	background: $red;
-}
-
-.social-icons-container {
-	padding: $line-height-computed 0 0 0;
-	margin: $line-height-computed 0 0 0;
-}
-
-.social-icons {
-	margin: 0;
-	padding: 0;
-}
-
-.social-icons li {
-  display: inline-block;
-  padding-right: $line-height-computed-half;
-  padding-left: $line-height-computed-half;
-}
-
-.social-icons a {
-  color: $gray;
-}
-
-.social-icons  i:hover {
-  transition: $ease-in-out;
+	height: 3px;
+	background: $blue;
 }
 
 .contact-buttons {
@@ -199,15 +207,11 @@ nav {
 }
 
 .skills-list li i {
-  top: 15px; color: $red;
+  top: 15px; color: $blue;
 }
-
-#contact { background-color: #eee;}
 
 footer {
 	padding: 10px;
-	background-color: $cocoa;
-	color: #fff;
 	font-size: 18px;
 }
 
@@ -284,12 +288,12 @@ footer {
 }
 
 .warning-callout {
-  border-color: $red;
+  border-color: $blue;
 
 }
 
 .warning-callout p {
-  color: darken($red, 15%);
+  color: darken($blue, 15%);
 }
 
 .danger-callout {
@@ -306,6 +310,23 @@ footer {
 
 .info-callout p {
   color: darken($turquoise, 15%);
+}
+
+.headline {
+  margin-bottom: 8px
+}
+
+.read-more-arrow {
+  margin-left: 5px
+}
+
+.highlight {
+  margin: 0;
+}
+
+.highlight pre {
+  padding: 15px;
+  overflow: scroll;
 }
 
 
@@ -404,9 +425,6 @@ footer {
 }
 
 @media (max-width: 992px) {
-	.hero {
-    text-align: center;
-  }
 
 	.img-list {
 		margin-top: $line-height-computed;
@@ -416,10 +434,6 @@ footer {
 
 	.client-screenshot-container {
     margin-bottom: 15px;
-  }
-
-	.section-title {
-    text-align: center;
   }
 
 	.sidebar-about-me {
