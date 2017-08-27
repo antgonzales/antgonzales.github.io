@@ -23,14 +23,6 @@
 
 $(function () {
 
-// Intro loading screen
-  $(window).load(function() {
-    // Animate loader off screen
-    $("#loading-spinner").fadeOut();
-    $('#loading-screen').delay(350).fadeOut('slow');
-    $('body').delay(350).css({'overflow':'visible'});
-  });
-
 // Smoothe scroll
   $('a[href*=#]:not([href=#])').click(function () {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -45,69 +37,8 @@ $(function () {
     }
   });
 
-  $("#hero-title").fitText(1.2, { minFontSize: '40px', maxFontSize: '108px'});
+  $("#hero-title").fitText(1.2, { minFontSize: '60px', maxFontSize: '108px'});
   $("#hero-tagline").fitText(2.5, { minFontSize: '21px', maxFontSize: '54px'});
-
-// Chart data and
-  var skillsChartData = [{
-    value: 25,
-    color: "#424651"
-  }, {
-    value: 25,
-    color: "#85BAB0"
-  }, {
-    value: 20,
-    color: "#F4D569"
-  }, {
-    value: 10,
-    color: "#ED1941"
-  }, {
-    value: 10,
-    color: "#575151"
-  }, {
-    value: 10,
-    color: "#92CDED"
-  }];
-
-  function showSkillsChart() {
-    var ctx = document.getElementById("skills-chart").getContext("2d");
-    new Chart(ctx).Pie(skillsChartData);
-  }
-
-// Waypoint transitions
-  var graphInitDelay = 300;
-
-
-  $('#recent-work').waypoint(function (direction) {
-    $("#aat-screenshot").removeClass("invisible").addClass("animated fadeInLeft");
-  }, {
-    triggerOnce: true,
-    offset: "60%"
-  });
-
-  $('#skills').waypoint(function (direction) {
-    $("#skills-chart-container").removeClass("invisible");
-    $(".chart-legend").addClass("animated fadeInUp");
-  setTimeout(showSkillsChart, graphInitDelay);
-  }, {
-    triggerOnce: true,
-    offset: "60%"
-  });
-
-  $('#about').waypoint(function (direction) {
-    $(".img-list").removeClass("invisible").addClass("animated fadeInRight");
-  }, {
-    triggerOnce: true,
-    offset: "60%"
-  });
-
-  $('#contact').waypoint(function (direction) {
-    $(".contact-inner").removeClass("invisible").addClass("animated fadeInUp");
-  }, {
-    triggerOnce: true,
-    offset: "60%"
-  });
-
 
 // Sticky Nav
 

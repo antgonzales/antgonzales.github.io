@@ -1,8 +1,8 @@
 // Buttons
 .button, .button-blog {
   display: inline-block;
-  border: 3px solid $yellow;
-  border-radius: 6px;
+  border: 3px solid $blue;
+  border-radius: 0;
   cursor: pointer;
   color: $link-color;
   font-size: 18px;
@@ -10,10 +10,7 @@
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  -webkit-transition: $ease-in-out;
-  -moz-transition: $ease-in-out;
-  -o-transition: $ease-in-out;
-  transition: $ease-in-out; 
+  transition: $ease-in-out;
 }
 
 .button {
@@ -24,10 +21,11 @@
   padding: 10px 20px;
 }
 
-.button:hover, .button-blog:hover {
-  background-color: darken($yellow, 15%);
-  border: 3px solid darken($yellow, 15%);
-  color: #fff;
+.button:hover,
+.button-blog:hover {
+  background-color: $blue;
+  border: 3px solid $blue;
+  color: $white;
 }
 
 .button-space {
