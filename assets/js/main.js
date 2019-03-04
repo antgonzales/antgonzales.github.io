@@ -37,9 +37,6 @@ $(function () {
     }
   });
 
-  $("#hero-title").fitText(1.2, { minFontSize: '60px', maxFontSize: '108px'});
-  $("#hero-tagline").fitText(2.5, { minFontSize: '21px', maxFontSize: '54px'});
-
 // Sticky Nav
 
 if(top.location.pathname == "/") {
@@ -62,38 +59,5 @@ if(top.location.pathname == "/") {
     stickyNav();
   });
 }
-
-// Form Validation and Simple Form Submission
-  $(".ajax-form").validate({
-    rules: {
-      name: {
-        required: true,
-        minlength: 2,
-      },
-      email: {
-        required: true,
-        email: true,
-      },
-      message: {
-        required: true,
-        minlength: 5,
-    },
-  },
-  errorPlacement: function(error, element) {
-  },
-  submitHandler: function(form) {
-    $.ajax({
-      dataType: "jsonp",
-      url: "http://getsimpleform.com/messages/ajax?form_api_token=f3424adaa86654f85e3c0931cbffc00f",
-      data: $(".ajax-form").serialize()
-    }).done(function() {
-      //callback which can be used to show a thank you message
-      //and reset the form
-      $(".ajax-form").hide();
-      $(".form-thank-you").fadeIn("400");
-    });
-      return false; //to stop the form from submitting
-    }
-  });
 
 });
