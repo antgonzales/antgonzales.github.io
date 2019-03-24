@@ -13,23 +13,7 @@ layout: default
 
     <div class="blog-post-content" itemprop="articleBody">
 
-      {{ content }}
+      {% include anchor_headings.html html=content %}
 
-      <div class="footer-meta-info">
-        <span class="meta-content"><i class="fa fa-archive"></i>
-          {% for category in page.categories %}
-             {{ category | capitalize }}
-             {% if forloop.last == false %}, {% endif %}
-          {% endfor %}
-        </span>
-        <span class="meta-content"><i class="fa fa-tags"></i>
-          {% for tag in page.tags %}
-            {{ tag }}
-            {% if forloop.last == false %}, {% endif %}
-          {% endfor %}
-        </span>
-      </div>
-
-    </div>
   </div>
 </div>

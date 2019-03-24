@@ -1,6 +1,7 @@
 name: AnthonyGonzales.me
 highlighter: rouge
 markdown: kramdown
+permalink: /blog/:title:output_ext
 plugins:
   - jekyll-sitemap
-permalink:  /:title
+excerpt_separator: <!--break-->
