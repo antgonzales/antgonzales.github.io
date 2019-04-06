@@ -1,35 +1,17 @@
 <header>
-  <div class="fixed-nav">
-    <div class="container-fluid max-width">
-      {% if page.url != '/' %}
-        <div class="nav-logo">
-          <a href="/">Anthony Gonzales, Web Developer</a>
-        </div>
-      {% endif %}
-      <nav role="navigation">
-        <ul class="main-nav">
-          <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Work');" href="/#recent-work">Work</a></li>
-          <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Skills');" href="/#skills">Skills</a></li>
-          <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'About');" href="/#about">About</a></li>
-          <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Blog');" href="/blog/">Blog</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="sticky-nav">
-    <div class="container-fluid max-width">
-      {% if page.url != '/' %}
-        <div class="nav-logo">
-          <a href="/">Anthony Gonzales, Web Developer</a>
-        </div>
-      {% endif %}
-      <nav role="navigation">
-        <ul class="main-nav">
-           <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Work');" href="/#recent-work">Work</a></li>
-          <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Skills');" href="/#skills">Skills</a></li>
-          <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'About');" href="/#about">About</a></li>
-          <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Blog');" href="/blog/">Blog</a></li>
-        </ul>
-      </nav>
+  <div class="container-fluid max-width">
+    {% if page.url != '/' %}
+      <div class="nav-logo">
+        <a href="/">Anthony Gonzales, Web Developer</a>
+      </div>
+    {% endif %}
+    <nav role="navigation">
+      <ul class="main-nav">
+        <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Work');" href="/#recent-work">Work</a></li>
+        <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Skills');" href="/#skills">Skills</a></li>
+        <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'About');" href="/#about">About</a></li>
+        <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Blog');" href="/blog/">Blog</a></li>
+      </ul>
+    </nav>
   </div>
 </header>
