@@ -2,26 +2,20 @@
 
 //Pallette
 $white: #fff;
-$blue: #0000ee;
-$banana: #ffc30d;
-$gun: #424651;
-$turquoise: #85BAB0;
-$cherry: #ED1941;
-$cocoa: #575151;
-$eggshell: #f1f1f1;
-
-$black: #000;
-$gray-dark: #444;
-$gray: #777;
-$gray-light: #DDD;
+$hotPink: #e84a5f;
+$outerSpace: #262626;
+$peach: #fecea8;
+$seaFoam: #99b898;
+$tangerine: #ff847c;
 
 $bg-color: $white;
-
-$link-color: $blue;
+$content-color: $outerSpace;
+$link-color: $tangerine;
 
 // Typography
 $mono-font-family: "Inconsolata", monospace;
-$sans-serif-font-family: Arial, sans-serif;
+$sans-serif-fontFamily: 'Nunito Sans', Helvetica, sans-serif;
+$serif-fontFamily: 'Lora', Georgia, serif;
 
 $base-font-size: 20px;
 $base-line-height: 1.5;

@@ -21,19 +21,9 @@ body {
   margin: 0;
 	background: $bg-color;
 	font-size: $base-font-size;
-	font-family: $sans-serif-font-family;
+	font-family: $sans-serif-fontFamily;
 	line-height: $base-line-height;
-	color: $gray-dark;
-}
-
-::selection {
-  background: $gun;
-  color: #fff;
-}
-
-::-moz-selection {
-  background: $gun;
-  color: #fff;
+	color: $content-color;
 }
 
 // Images
@@ -71,7 +61,7 @@ img {
 }
 
 hr {
-	border: solid $black;
+	border: solid $content-color;
 	border-width: 1px 0 0;
 	clear: both;
 	margin-top: $line-height-computed;
@@ -83,12 +73,12 @@ a,
 a:visited {
   color: $link-color;
   text-decoration: underline;
-  outline: 0;
+  outline: transparent;
 }
 
 a:hover,
 a:focus {
-	color: darken($blue, 15%);
+	color: darken($link-color, 15%);
 }
 
 p a,

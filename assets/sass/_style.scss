@@ -28,7 +28,7 @@
   bottom: 0;
   height: 100%;
   margin: auto;
-  background-color: $gun;
+  background-color: $content-color;
   transition: opacity .15s ease-in;
 }
 
@@ -96,10 +96,6 @@ nav {
   margin-right: $line-height-computed-half;
 }
 
-.main-nav a {
-  color: $blue;
-}
-
 .hero {
 	height: 100%;
 	width: 100%;
@@ -117,14 +113,6 @@ nav {
 	margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
-}
-
-#hero-title {
-  color: $blue;
-}
-
-#hero-tagline {
-  color: $gun
 }
 
 .buffer {
@@ -153,36 +141,12 @@ nav {
 	content: ' ';
 	width: 100px;
 	height: 3px;
-	background: $blue;
+	background: $link-color;
 }
 
 .contact-buttons {
 	margin-top: $line-height-computed * 2;
 	margin-bottom: $line-height-computed * 2;
-}
-
-.fa-ul {
-  margin-left: 1.55em;
-}
-
-.fa-twitter-square:hover {
-  color: #55ACEE;
-}
-
-.fa-instagram:hover {
-  color: $cocoa;
-}
-
-.fa-facebook-square:hover {
-  color: #3B5998;
-}
-
-.fa-google-plus-square:hover {
-  color: #DD4B39;
-}
-
-.fa-linkedin-square:hover {
-  color: #4875B4;
 }
 
 .skills-list {
@@ -198,7 +162,7 @@ nav {
 }
 
 .skills-list li i {
-  top: 15px; color: $blue;
+  top: 15px; color: $link-color;
 }
 
 footer {
@@ -239,19 +203,11 @@ footer {
   margin: 0;
 }
 
-.warning-callout {
-  border-color: $banana;
-  color: $banana;
-}
-
-.danger-callout {
-  border-color: $cherry;
-  color: $cherry;
-}
-
+.warning-callout,
+.danger-callout,
 .info-callout {
- border-color: $blue;
- color: $blue;
+  border-color: $link-color;
+  color: $link-color;
 }
 
 .headline {

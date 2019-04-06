@@ -1,9 +1,9 @@
 // Typography
 
 h1, h2, h3, h4, h5, h6 {
-	color: $gun;
 	line-height: $headings-line-height;
 	font-weight: $headings-font-weight;
+  font-family: $serif-fontFamily;
 }
 
 h1, h2, h3 {
@@ -22,18 +22,16 @@ h3 { font-size: $h3-font-size; }
 h4 { font-size: $h4-font-size; }
 h5 { font-size: $h5-font-size; }
 h6 { font-size: $h6-font-size; }
-.subheader { color: $gray-light; }
 
 p { margin: 0 0 $line-height-computed 0; }
 p img { margin: 0; }
 p.lead {
 	font-size: ceil($base-font-size * 1.5238095);
-	color: $gray-light;
 	font-weight: 400;
 }
 
 em { font-style: italic; }
-strong { font-weight: bold; color: $gray-dark; }
+strong { font-weight: bold; }
 small, .small { font-size: 80%; }
 
 
@@ -42,24 +40,21 @@ small, .small { font-size: 80%; }
 blockquote, blockquote p {
 	font-size: ceil($base-font-size * 1.3125);
 	line-height: $base-line-height;
-	color: $gray-light;
-	font-family: $mono-font-family;
+	font-family: $serif-fontFamily;
 	font-style: italic;
 }
 
 blockquote {
 	padding: $line-height-computed-half $line-height-computed 0 $line-height-computed;
-	border-left: 1px solid $gray-light;
+	border-left: 1px solid $link-color;
 }
 
 blockquote cite {
 	display: block;
 	font-size: 80%;
-	color: $gray-light;
 }
 
 blockquote cite:before { content: "\2014 \0020"; }
-blockquote cite a, blockquote cite a:visited, blockquote cite a:visited { color: $gray-light; }
 
 // Code
 code, kbd, pre, samp { font-size: 16px; }
