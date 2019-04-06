@@ -1,20 +1,22 @@
-  <footer class="footer">
-    <div class="footer-me">
-      <p>Anthony Gonzales</p>
-      <p>Built with ❤️  in NYC</p>
+<footer class="footer">
+    <div class="footer-inner container">
+      <div class="footer-me">
+        <p class="footer-logo">Anthony <span class="footer-logo-break">Gonzales</span></p>
+        <p>Built with ❤️  in NYC</p>
+      </div>
+      <div class="footer-contact">
+        <p class="footer-say-hello">Say Hello 👋</p>
+        <ul class="footer-contact-info">
+        {% for contact in site.data.contactInfo %}
+          <li>
+            <a href="{{ contact.href }}" target="_blank">
+              {{ contact.name }}
+            </a>
+          </li>
+        {% endfor %}
+        </ul>
+      <div>
     </div>
-    <div class="footer-contact">
-      <p>Say hello 👋</p>
-      <ul>
-      {% for contact in site.data.contactInfo %}
-        <li>
-          <a href="{{ contact.href }}" target="_blank">
-            {{ contact.name }}
-          </a>
-        </li>
-      {% endfor %}
-      </ul>
-    <div>
   </footer>
   </body>
 </html>

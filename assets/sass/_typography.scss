@@ -23,7 +23,9 @@ h4 { font-size: $h4-font-size; }
 h5 { font-size: $h5-font-size; }
 h6 { font-size: $h6-font-size; }
 
-p { margin: 0 0 $line-height-computed 0; }
+p {
+  margin-top: 0; 
+}
 p img { margin: 0; }
 p.lead {
 	font-size: ceil($base-font-size * 1.5238095);

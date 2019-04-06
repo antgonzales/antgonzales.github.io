@@ -1,0 +1,36 @@
+.footer {
+  color: $white;
+  background-color: $content-color;
+}
+
+.footer-me {
+  float: left;
+  margin-top: 10px;
+}
+
+.footer-contact {
+  float: right;
+}
+
+.footer-logo {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-family: $serif-fontFamily;
+  font-size: 22px;
+  font-weight: 700;
+  .footer-logo-break {
+    display: block;
+    padding-left: 30%;
+  }
+}
+
+.footer-say-hello {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.footer-contact-info {
+  padding-left: 0;
+  margin-top: 0;
+}

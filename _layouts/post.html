@@ -1,17 +1,17 @@
 ---
 layout: default
 ---
-<div class="buffer-sidebar container-fluid max-width" itemscope itemtype="http://schema.org/BlogPosting">
+<div class="buffer-sidebar container">
 
   <div class="blog-content">
-    <h1 class="page-title" itemprop="headline">{{ page.title }}</h1>
+    <h1 class="page-title">{{ page.title }}</h1>
 
     <div class="header-meta-info">
-      <span class="meta-content meta-name hidden" itemprop="author">by Anthony Gonzales</span>
-      <time itemprop="datePublished"> {{ page.date | date: "%B %d, %Y" }}</time></span>
+      <span class="meta-content meta-name hidden">by Anthony Gonzales</span>
+      <time> {{ page.date | date: "%B %d, %Y" }}</time></span>
     </div>
 
-    <div class="blog-post-content" itemprop="articleBody">
+    <div class="blog-post-content">
 
       {% include anchor_headings.html html=content
       anchorClass="blog-post-header-link" %}
