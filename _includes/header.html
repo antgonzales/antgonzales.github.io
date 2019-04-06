@@ -1,5 +1,5 @@
 <header>
-  <div class="container-fluid max-width">
+  <div class="container">
     {% if page.url != '/' %}
       <div class="nav-logo">
         <a href="/">Anthony Gonzales, Web Developer</a>
@@ -7,10 +7,13 @@
     {% endif %}
     <nav role="navigation">
       <ul class="main-nav">
-        <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Work');" href="/#recent-work">Work</a></li>
-        <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Skills');" href="/#skills">Skills</a></li>
-        <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'About');" href="/#about">About</a></li>
-        <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Blog');" href="/blog/">Blog</a></li>
+      {% for link in site.data.nav %}
+        <li>
+          <a href="{{ link.href }}">
+            {{ link.title }}
+          </a>
+        </li>
+      {% endfor %}
       </ul>
     </nav>
   </div>
