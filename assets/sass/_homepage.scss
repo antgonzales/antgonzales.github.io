@@ -1,0 +1,21 @@
+
+
+.intro-title {
+  font-size: 60px;
+}
+
+.intro-subheader {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.skills-title:after {
+  display: block;
+  position: relative;
+  bottom: -6px;
+  left: 0;
+  content: ' ';
+  width: 100px;
+  height: 3px;
+  background: $link-color;
+}

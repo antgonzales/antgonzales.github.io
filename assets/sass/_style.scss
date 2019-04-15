@@ -1,4 +1,17 @@
 // Styles
+.logo {
+  display: inline-block;
+  font-family: $serif-fontFamily;
+  font-weight: 700;
+  .logo-break {
+    display: block;
+    padding-left: 30%;
+  }
+}
+
+
+
+// Old
 
 .max-width {
   max-width: 680px;
@@ -47,53 +60,6 @@
 html,
 body {
   height: 100%;
-}
-
-nav {
-	display: block;
-	float: right;
-        font-size: 18px;
-}
-
-.nav-logo {
-  display: block;
-	float: left;
-	padding-top: 11px;
-}
-
-.nav-logo a {
-  font-size: 18px;
-}
-
-.sticky-nav {
-  display: none;
-  z-index: 100;
-	position: fixed;
-  left: 0;
-  top: 0;
-	width: 100%;
-  background-color: $white;
-}
-
-.sticky {
-  display: block;
-}
-
-.fixed-nav {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-}
-
-.main-nav {
-	padding: 0;
-}
-
-.main-nav li {
-  display: inline;
-  margin-left: $line-height-computed-half;
-  margin-right: $line-height-computed-half;
 }
 
 .hero {
@@ -225,61 +191,6 @@ footer {
 .highlight pre {
   padding: 15px;
   overflow: scroll;
-}
-
-@media (max-width: 577px ) {
-
-	header {
-    text-align: center;
-  }
-
-	nav {
-    float: none;
-  }
-
-	.nav-logo {
-    float: none;
-  }
-
-	.main-nav li {
-		margin-left: 0;
-		margin-right: 10px;
-	}
-
-	.hero {
-		height: 500px;
-	}
-
-	.hero-lead-in {
-		width: 100%;
-		top: 150px;
-		left: 0;
-  }
-
-	.buffer {
-    padding-top: $line-height-computed;
-    padding-bottom: $line-height-computed;
-  }
-
-	.buffer-top {
-    padding-top: $line-height-computed;
-  }
-
-	.chart-legend li {
-		left: 28%;
-		width: 50%;
-		float: none;
-	}
-
-	.sidebar-profile-img {
-    margin-left: 0;
-    float: none;
-  }
-
-	.social-icons li {
-    padding-right: 10px;
-    padding-left: 10px;
-  }
 }
 
 @media (min-width: 577px) {

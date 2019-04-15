@@ -61,11 +61,11 @@ img {
 }
 
 hr {
-	border: solid $content-color;
-	border-width: 1px 0 0;
-	clear: both;
-	margin-top: $line-height-computed;
-	margin-bottom: $line-height-computed;
+  border: solid $content-color;
+  border-width: 2.5px 0 0;
+  clear: both;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 // Links

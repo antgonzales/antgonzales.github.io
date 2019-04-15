@@ -1,0 +1,32 @@
+.nav {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.nav-logo {
+  display: block;
+  float: left;
+  padding-top: 11px;
+}
+
+.nav-logo a {
+  font-size: 22px;
+  color: $content-color;
+  text-decoration: none;
+}
+
+.main-nav {
+  float: right;
+  padding: 0;
+}
+
+.main-nav li {
+  display: inline;
+  margin-left: $line-height-computed-half;
+  margin-right: $line-height-computed-half;
+}
+
+.main-nav a {
+  color: $content-color;
+  text-decoration: none;
+}

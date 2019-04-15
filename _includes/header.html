@@ -1,12 +1,12 @@
-<header>
+<header class="nav">
   <div class="container">
     {% if page.url != '/' %}
       <div class="nav-logo">
-        <a href="/">Anthony Gonzales, Web Developer</a>
+        <a href="/" class="logo">Anthony <span class="logo-break">Gonzales</span></a>
       </div>
     {% endif %}
-    <nav role="navigation">
-      <ul class="main-nav">
+    <nav class="main-nav" role="navigation">
+      <ul>
       {% for link in site.data.nav %}
         <li>
           <a href="{{ link.href }}">
