@@ -14,6 +14,8 @@ of dependencies, `cat`ing a file to read the scripts can feel frustrating and
 overwhelming. Luckily, we can leverage nps to put scripts in their place and
 make package scripting maintainable.
 
+<!--break-->
+
 ## Getting started with nps
 
 Let's start by installing nps as a development dependency:
@@ -43,7 +45,7 @@ npm does not require the use of `run`. These include:
 
 nps allows you to take advantage of `npm start` by acting as a pass-through.
 
-```
+```javascript
 {
   "scripts": {
     "start": "nps"
@@ -60,7 +62,7 @@ If you are working on a node application, you will generally make use of the
 start script for running the server. In that case, you can create a default
 script in package-scripts.json to start your node application.
 
-```
+```javascript
 module.exports = {
   scripts: {
     default: 'node index.js', // My default node server
