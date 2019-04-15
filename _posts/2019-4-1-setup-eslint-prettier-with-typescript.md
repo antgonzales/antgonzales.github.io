@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Setup Prettier and ESLint for Typescript 🔧 💅"
+title:  "Setup Prettier and ESLint for Typescript"
 description: "Learn how to leverage ESLint, Prettier with Typescript to reduce
 bugs and nitpicky reviews. I'll walk you through setup, explain the differences"
 ---
