@@ -4,12 +4,12 @@ title: Web Developer | Anthony Gonzales
 description: I'm a front-end web developer. Take a look at my skills, get to know me, drop me a line.
 ---
 <section class="container buffer intro" id="intro">
-  <div class="row buffer">
-    <div class="col-sm-6">
+  <div class="row buffer align-center">
+    <div class="col">
       <h1 class="intro-title logo">Anthony <span
           class="logo-break">Gonzales</span></h1>
     </div>
-    <div class="col-sm-6">
+    <div class="col">
       <h3 class="intro-subheader">Web Developer</h3>
       <p>I specialize in front-end web technologies and application design. I take complex problems and turn them into simple solutions.</p>
     </div>
@@ -21,15 +21,15 @@ description: I'm a front-end web developer. Take a look at my skills, get to kno
 <section id="skills" class="buffer container">
   <h2>Skills</h2>
   <div class="row buffer">
-    <div class="col-sm-4">
+    <div class="col">
       <h3 class="skills-title">Progressive Design</h3>
       <p>I build websites with Mobile First in mind and create bespoke experiences across devices.</p>
     </div>
-    <div class="col-sm-4">
+    <div class="col">
       <h3 class="skills-title">Test Driven Development</h3>
       <p>I automate tests to make features reliable and easy to change when priorities shift. Nobody on the team should be afraid of code changes.</p>
     </div>
-    <div class="col-sm-4">
+    <div class="col">
       <h3 class="skills-title">Scalable Architecture</h3>
       <p>I follow best practices that leave the door open for scalability without overengineering. I write readable, accessible, and flexible code.</p>
     </div>
@@ -40,12 +40,12 @@ description: I'm a front-end web developer. Take a look at my skills, get to kno
 <hr/>
 
 <section id="blog" class="buffer container">
+  <h2>From the Blog</h2>
   <div class="row">
-    <div class="col-sm-6">
-      <h2>From the Blog</h2>
+    <div class="col">
       <a href="#">View All Posts →</a>
     </div>
-    <div class="col-sm-6">
+    <div class="col">
       {% for post in site.posts limit:1 %}
         <div class='blog-post'>
           <h3 class='headline'>{{ post.title }}</h3>
@@ -68,8 +68,8 @@ description: I'm a front-end web developer. Take a look at my skills, get to kno
 
 <section id="about" class="buffer container">
   <h2>About Me</h2>
-  <div class="row buffer">
-    <div class="col-md-6">
+  <div class="row buffer align-center">
+    <div class="col">
       <p>I write, think, and talk about front-end web development. I bring expertise in scalable systems, UI design, and test driven development.</p>
 
       <p>I current live in <strike>Santa Barbara,</strike>
@@ -77,7 +77,7 @@ description: I'm a front-end web developer. Take a look at my skills, get to kno
         work as a sr. software engineer at Compass. Previously, I worked as a front-end lead developer for Glossier.</p>
 
     </div>
-    <div class="col-md-6">
+    <div class="col">
       <img src="/assets/img/me.jpeg" />
     </div>
   </div>

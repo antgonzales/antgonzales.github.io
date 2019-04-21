@@ -1,20 +1,16 @@
 ---
 layout: default
 ---
-<div class="buffer-sidebar container">
+<div class="container blog-content">
+  <h1 class="page-title">{{ page.title }}</h1>
 
-  <div class="blog-content">
-    <h1 class="page-title">{{ page.title }}</h1>
+  <div class="header-meta-info">
+    <span class="meta-content meta-name sr-only">by Anthony Gonzales</span>
+    <time> {{ page.date | date: "%B %d, %Y" }}</time>  
+  </div>
 
-    <div class="header-meta-info">
-      <span class="meta-content meta-name hidden">by Anthony Gonzales</span>
-      <time> {{ page.date | date: "%B %d, %Y" }}</time></span>
-    </div>
-
-    <div class="blog-post-content">
-
-      {% include anchor_headings.html html=content
-      anchorClass="blog-post-header-link" %}
-
+  <div class="post-content">
+    {% include anchor_headings.html html=content
+    anchorClass="post-header-link" %}
   </div>
 </div>

@@ -5,13 +5,10 @@
   margin: $line-height-computed auto $line-height-computed auto;
 }
 
-.blog-post {
-  padding-top: 25px;
-}
-
 .blog-content {
   padding-top: $line-height-computed;
   padding-bottom: $line-height-computed;
+  max-width: 640px;
 }
 
 .blog-post-content {

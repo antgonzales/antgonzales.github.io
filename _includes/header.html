@@ -1,20 +1,18 @@
-<header class="nav">
-  <div class="container">
-    {% if page.url != '/' %}
-      <div class="nav-logo">
-        <a href="/" class="logo">Anthony <span class="logo-break">Gonzales</span></a>
-      </div>
-    {% endif %}
-    <nav class="main-nav" role="navigation">
-      <ul>
-      {% for link in site.data.nav %}
-        <li>
-          <a href="{{ link.href }}">
-            {{ link.title }}
-          </a>
-        </li>
-      {% endfor %}
-      </ul>
-    </nav>
-  </div>
+<header class="nav container">
+  {% if page.url != '/' %}
+    <div class="nav-logo">
+      <a href="/" class="logo">Anthony <span class="logo-break">Gonzales</span></a>
+    </div>
+  {% endif %}
+  <nav class="main-nav" role="navigation">
+    <ul>
+    {% for link in site.data.nav %}
+      <li>
+        <a href="{{ link.href }}">
+          {{ link.title }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+  </nav>
 </header>

@@ -3,13 +3,17 @@
   background-color: $content-color;
 }
 
+.footer-inner {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 .footer-me {
-  float: left;
+  flex: 1;
   margin-top: 10px;
 }
 
 .footer-contact {
-  float: right;
 }
 
 .footer-logo {

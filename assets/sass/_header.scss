@@ -1,11 +1,13 @@
 .nav {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
   padding-top: 30px;
   padding-bottom: 30px;
 }
 
 .nav-logo {
-  display: block;
-  float: left;
+  flex: 1;
   padding-top: 11px;
 }
 
@@ -16,7 +18,6 @@
 }
 
 .main-nav {
-  float: right;
   padding: 0;
 }
 
