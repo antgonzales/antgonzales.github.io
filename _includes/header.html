@@ -1,10 +1,5 @@
-<header class="nav container">
-  {% if page.url != '/' %}
-    <div class="nav-logo">
-      <a href="/" class="logo">Anthony <span class="logo-break">Gonzales</span></a>
-    </div>
-  {% endif %}
-  <nav class="main-nav" role="navigation">
+<header class="container">
+  <nav class="header-nav" role="navigation">
     <ul>
     {% for link in site.data.nav %}
       <li>

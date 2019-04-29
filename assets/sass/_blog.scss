@@ -1,8 +1,12 @@
 // Blog styles
 
 .page-title {
-  @extend .section-title;
-  margin: $line-height-computed auto $line-height-computed auto;
+  padding-bottom: $line-height-computed;
+  margin-bottom: 0
+}
+
+.post-title {
+  margin-bottom: 15px;
 }
 
 .blog-content {
@@ -12,7 +16,6 @@
 }
 
 .blog-post-content {
-  padding-top: $line-height-computed;
   padding-bottom: $line-height-computed;
 }
 
@@ -20,28 +23,15 @@
   list-style: square outside;
 }
 
+.post-meta-info .meta-content,
 .header-meta-info .meta-content {
   display: block;
+  margin-bottom: 30px;
+  color: $cyan;
 }
 
-.meta-name {
-  margin-bottom: $line-height-computed-half;
-}
 
-.footer-meta-info {
-  margin-top: $line-height-computed;
-}
-
-.meta-content {
-  display: inline-block;
-  margin-right: $line-height-computed;
-}
-
-.meta-content i {
-  margin-right: 5px;
-}
-
-.blog-post-content {
+.post-content {
   h1,
   h2,
   h3,
@@ -51,7 +41,7 @@
   }
 }
 
-.blog-post-header-link {
+.post-header-link {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -61,14 +51,14 @@
   left: 0;
 }
 
-.blog-post-header-link:before {
+.post-header-link:before {
   position: absolute;
   left: -30px;
   content: '#';
-  color: $link-color;
+  color: $gray3;
 }
 
-.blog-post-header-link:hover:before {
+.post-header-link:hover:before {
   color: $link-color;
 }
 

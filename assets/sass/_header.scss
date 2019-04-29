@@ -1,33 +1,25 @@
-.nav {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  padding-top: 30px;
-  padding-bottom: 30px;
+.header-nav {
+  display: none;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-top: 15px;
+  padding-bottom: 45px;
+  @media (min-width: 660px) {
+    display: flex;
+  }
 }
 
-.nav-logo {
-  flex: 1;
-  padding-top: 11px;
+.header-nav ul {
+  padding-left: 0;
 }
 
-.nav-logo a {
-  font-size: 22px;
-  color: $content-color;
-  text-decoration: none;
-}
-
-.main-nav {
-  padding: 0;
-}
-
-.main-nav li {
+.header-nav li {
   display: inline;
   margin-left: $line-height-computed-half;
   margin-right: $line-height-computed-half;
 }
 
-.main-nav a {
-  color: $content-color;
+.header-nav a {
+  font-size: 18px;
   text-decoration: none;
 }

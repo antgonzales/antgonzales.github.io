@@ -1,22 +1,13 @@
 <footer class="footer">
-    <div class="footer-inner container">
-      <div class="footer-me">
-        <p class="logo footer-logo">Anthony <span class="logo-break">Gonzales</span></p>
-        <p>Built with ❤️  in NYC</p>
-      </div>
-      <div class="footer-contact">
-        <p class="footer-say-hello">Say Hello 👋</p>
-        <ul class="footer-contact-info">
-        {% for contact in site.data.contactInfo %}
-          <li>
-            <a href="{{ contact.href }}" target="_blank">
-              {{ contact.name }}
-            </a>
-          </li>
-        {% endfor %}
-        </ul>
-      <div>
-    </div>
+    <nav class="footer-nav container" role="navigation">
+      <ul class="row">
+      {% for link in site.data.nav %}
+        <li>
+          <a href="{{ link.href }}">{{ link.title | strip}}</a>
+        </li>
+      {% endfor %}
+      </ul>
+    </nav>
   </footer>
   </body>
 </html>

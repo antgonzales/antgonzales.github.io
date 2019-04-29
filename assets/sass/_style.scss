@@ -1,20 +1,24 @@
 // Styles
-.logo {
-  display: inline-block;
-  font-family: $serif-fontFamily;
-  font-weight: 700;
-  .logo-break {
-    display: block;
-    padding-left: 30%;
+//
+
+.body {
+  margin-bottom: 77px; // Size of the footer nav
+  padding-bottom: 40px;
+  @media (min-width: 660px) {
+    margin-bottom: initial;
+    padding-bottom: initial;
   }
 }
 
-
-
-// Old
-
 .max-width {
   max-width: 680px;
+}
+
+.contact {
+  position: relative;
+}
+
+.contact-inner {
 }
 
 .col-centered {
@@ -57,11 +61,6 @@
   transition: opacity .15s ease-in;
 }
 
-html,
-body {
-  height: 100%;
-}
-
 .hero {
 	height: 100%;
 	width: 100%;
@@ -94,21 +93,6 @@ body {
   padding-top: $line-height-computed * 2;
 }
 
-.section-title {
-	padding-bottom: $line-height-computed;
-  margin-bottom: 0
-}
-
-.section-title:after {
-	display: block;
-	position: relative;
-	bottom: -6px;
-	left: 0;
-	content: ' ';
-	width: 100px;
-	height: 3px;
-	background: $link-color;
-}
 
 .contact-buttons {
 	margin-top: $line-height-computed * 2;
@@ -129,16 +113,6 @@ body {
 
 .skills-list li i {
   top: 15px; color: $link-color;
-}
-
-footer {
-	padding: 10px;
-	font-size: 18px;
-}
-
-.footer-inner {
-	padding-top: $line-height-computed-half;
-	padding-bottom: $line-height-computed-half;
 }
 
 .trademark,
@@ -177,11 +151,11 @@ footer {
 }
 
 .headline {
-  margin-bottom: 8px
+  margin-bottom: 15px;
 }
 
 .read-more-arrow {
-  margin-left: 5px
+  margin-left: 5px;
 }
 
 .highlight {

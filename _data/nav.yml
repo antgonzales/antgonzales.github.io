@@ -1,5 +1,7 @@
+- href: '/'
+  title: 'About'
 - href: '/blog/'
   title: 'Blog'
+- href: '/contact/'
+  title: 'Contact'
 
-- href: '/#about'
-  title: 'About'

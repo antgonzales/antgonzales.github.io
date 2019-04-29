@@ -18,12 +18,13 @@ html {
 }
 
 body {
+  position: relative;
   margin: 0;
-	background: $bg-color;
-	font-size: $base-font-size;
-	font-family: $sans-serif-fontFamily;
-	line-height: $base-line-height;
-	color: $content-color;
+  background: $bg-color;
+  font-size: $base-font-size;
+  font-family: $mono-fontFamily;
+  line-height: $base-line-height;
+  color: $content-color;
 }
 
 // Images
@@ -89,4 +90,8 @@ p a:visited {
 // Utilities
 .center {
 	text-align: center;
+}
+
+.color-green {
+  color: $green;
 }

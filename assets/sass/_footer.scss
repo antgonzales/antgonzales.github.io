@@ -1,33 +1,27 @@
 .footer {
-  color: $white;
-  background-color: $content-color;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: $gray0;
+  font-size: 18px;
+  @media (min-width: 660px) {
+    display: none;
+  }
 }
 
-.footer-inner {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.footer-me {
-  flex: 1;
-  margin-top: 10px;
-}
-
-.footer-contact {
-}
-
-.footer-logo {
-  margin-bottom: 10px;
-  font-size: 22px;
-}
-
-.footer-say-hello {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.footer-contact-info {
+.footer-nav ul {
+  margin: 0;
   padding-left: 0;
-  margin-top: 0;
+}
+
+.footer-nav li {
+  flex: 1;
+  text-align: center;
+}
+
+.footer-nav a {
+  display: inline-block;
+  padding: 25px;
+  text-decoration: none;
+  font-size: 18px;
 }

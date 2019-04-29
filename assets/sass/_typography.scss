@@ -1,9 +1,21 @@
 // Typography
 
 h1, h2, h3, h4, h5, h6 {
-	line-height: $headings-line-height;
-	font-weight: $headings-font-weight;
-  font-family: $serif-fontFamily;
+  line-height: $headings-line-height;
+  font-weight: $headings-font-weight;
+  font-family: $mono-fontFamily;
+}
+
+h1 {
+  color: $headingTitle-color;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $heading-color;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -26,8 +38,8 @@ p.lead {
 	font-weight: 400;
 }
 
-em { font-style: italic; }
-strong { font-weight: bold; }
+em { font-style: italic; color: $emphasis-color}
+strong { font-weight: bold; color: $strong-color}
 small, .small { font-size: 80%; }
 
 

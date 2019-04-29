@@ -12,8 +12,8 @@
 .container {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 35px;
+  padding-right: 35px;
   @media (min-width: 1200px) {
     width: 1170px;
   }
@@ -30,7 +30,7 @@
 .col {
   padding-left: 15px;
   padding-right: 15px;
-  @media (min-width: 768px) {
+  @media (min-width: 660px) {
     flex: 1;
   }
 }

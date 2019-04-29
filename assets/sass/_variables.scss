@@ -8,12 +8,32 @@ $peach: #fecea8;
 $seaFoam: #99b898;
 $tangerine: #ff847c;
 
-$bg-color: $white;
-$content-color: $outerSpace;
-$link-color: $tangerine;
+$cyan: #7fc1ca;
+$blue: #83afe5;
+$purple: #9a93e1;
+$pink: #d18ec2;
+$red: #df8c8c;
+$orange: #f2c38f;
+$yellow: #dada93;
+$green:#a8ce93;
+$gray0: #1e272c;
+$gray1: #3c4c55;
+$gray2: #556873;
+$gray3: #6a7d89;
+$gray4: #899ba6;
+$gray5: #c5d4dd;
+$gray6: #e6eef3;
+
+$bg-color: $gray1;
+$content-color: $blue;
+$headingTitle-color: $red;
+$heading-color: $yellow;
+$emphasis-color: $green;
+$strong-color: $purple;
+$link-color: $orange;
 
 // Typography
-$mono-font-family: "Inconsolata", monospace;
+$mono-fontFamily: "Fira Mono", monospace;
 $sans-serif-fontFamily: 'Nunito Sans', Helvetica, sans-serif;
 $serif-fontFamily: 'Lora', Georgia, serif;
 
