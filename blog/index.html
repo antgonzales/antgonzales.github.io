@@ -4,23 +4,18 @@ title: Blog
 description: A front-end developer blog devoted to application development, user experience, design. See code examples, learn from tutorials, get tips and tricks
 ---
 
-<div class="container blog-content">
-  <h1 class="page-title">{{ page.title }}</h1>
-  {% for post in site.posts limit:5 %}
-    <article class='blog-post'>
-      <h3 class='headline'>{{ post.title }}</h3>
-
-      <div class="header-meta-info">
-        <span class="meta-content">{{ post.date | date: "%B %d, %Y" }}</span>
-      </div>
-
-      <div class="blog-post-content">
-        {{ post.excerpt }}
-
-        <a href="{{ post.url }}">Read more &#8594;</a>
-      </div>
-
-    </article>
-    <hr>
+<div class="container">
+  <h1>{{ page.title }}</h1>
+  {% assign postsByYear =
+      site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
+  {% for year in postsByYear %}
+    <ul>
+      {% for post in year.items %}
+        <li>
+          <span>{{ post.date | date: "%B %d, %Y" }}</span>
+          <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+        </li>
+      {% endfor %}
+    </ul>
   {% endfor %}
 </div>
