@@ -1,7 +1,14 @@
-{% include head.html %}
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.html %}
+  <body class="body">
+    <!--[if IE]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+      <![endif]-->
+    {% include header.html %}
 
-{% include header.html %}
+    {{ content }}
 
-{{ content }}
-
-{% include footer.html %}
+    {% include footer.html %}
+  </body>
+</html>
