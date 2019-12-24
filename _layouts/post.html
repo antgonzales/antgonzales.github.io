@@ -9,7 +9,13 @@ layout: default
     <h5>Thoughts on {{page.tags | array_to_sentence_string}}</h5>
   {% endif %}
 
+  <hr/>
+
   {{ page.excerpt }}
 
   {{ page.content | remove: page.excerpt }}
+
+  <hr>
+  <h4>Questions? Disagree?</h4>
+  <p>Reach out via webmention or send me a tweet.</p>
 </div>
