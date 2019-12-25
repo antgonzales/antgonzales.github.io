@@ -1,0 +1,19 @@
+html {
+  box-sizing: border-box;
+  // Set 1rem = 10px
+  font-size: 62.5%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  // Set body font size to 16px
+  font-size: 1.6rem;
+}
+
+.list-reset {
+  list-style: none;
+  padding-left: 0;
+}
