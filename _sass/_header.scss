@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.header-logo {
+  margin-right: .8rem;
+}
+
+.header-nav {
+  margin-left: auto;
+}
+
+.header-nav ul {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.header-nav-link {
+  padding: .8rem;
+}

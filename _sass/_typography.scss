@@ -1,0 +1,47 @@
+html {
+  // Set 1rem = 10px
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 2rem;
+  font-family: Georgia, Times, Times New Roman, serif;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 2.75rem 0 1rem;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.15;
+  letter-spacing: -0.115rem;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 5.653rem;
+}
+
+h2 {
+  font-size: 3.998rem;
+}
+
+h3 {
+  font-size: 2.827rem;
+}
+
+h4 {
+  font-size: 1.999rem;
+}
+
+h5 {
+  font-size: 1.414rem;
+}
+
+p {
+  margin-bottom: 1.25em;
+}

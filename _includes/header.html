@@ -1,10 +1,10 @@
-<header class="container" role="banner">
-  <a href="/">Anthony Gonzales, Developer</a>
+<header class="container header" role="banner">
+  <a class="header-logo" href="/">Anthony Gonzales, Developer</a>
   <nav class="header-nav" role="navigation">
-    <ul>
+    <ul class="list-reset">
     {% for link in site.data.nav %}
       <li>
-        <a href="{{ link.href }}">
+        <a class="header-nav-link" href="{{ link.href }}">
           {{ link.title }}
         </a>
       </li>
