@@ -1,12 +1,17 @@
-.post-heading {
-  margin-bottom: 5rem;
-}
-
-.post-title {
+.post-date {
+  font-size: 1.8rem;
+  display: block;
   margin-bottom: 1rem;
 }
 
-.post-date {
-  font-size: 2rem;
-  font-style: italic;
+.post-content a {
+  border-bottom: .2rem dotted;
+  line-height: 1.6;
+  text-decoration: none;
+  &:hover,
+  &:focus,
+  &:active {
+    border-bottom-style: solid;
+  }
 }
+

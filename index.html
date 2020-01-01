@@ -1,20 +1,18 @@
 ---
 layout: default
-title: Web Developer | Anthony Gonzales
+title: Anthony Gonzales, Developer
 description: I'm a web developer. Take a look at my skills, get to know me, drop me a line.
 ---
 
-<div class="container intro" id="intro">
-  <div class="row align-center">
-    <div class="col intro-text">
-      <h1>Hi there 👋</h1>
-      <p>My name is <strong class="color-green">Anthony Gonzales</strong>. I'm a thorough and creative web developer.</p>
-      <p>At <strong>Compass</strong>, I work on the search UI for real estate agents
-        using React. I previously lead front-end development at <strong>Glossier</strong>.</p>
-      <p>For more information, please see my <a href="#">resume</a>.</p>
-    </div>
-    <div class="col intro-img">
-      <img src="/assets/img/me.jpeg" />
-    </div>
-  </div>
+<div class="container home">
+  <ul class="list-reset blog-roll">
+    {% for post in site.posts %}
+      <li class="blog-roll-post">
+        <time class="blog-roll-post-meta italic" datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date_to_string }}</time>
+        <h2 class="blog-roll-post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+        <p class="blog-roll-excerpt">{{post.excerpt}}</p>
+      </li>
+    {% endfor %}
+  </ul>
 </div>
+

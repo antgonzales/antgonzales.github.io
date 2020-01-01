@@ -6,7 +6,7 @@ html {
 body {
   font-size: 2rem;
   font-family: Georgia, Times, Times New Roman, serif;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 h1,
@@ -44,4 +44,23 @@ h5 {
 
 p {
   margin-bottom: 1.25em;
+}
+
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+a {
+  &:hover,
+  &:focus,
+  &:active {
+    filter: brightness(0.85);
+    text-decoration: underline;
+  }
+}
+
+
+.italic {
+  font-style: italic;
 }

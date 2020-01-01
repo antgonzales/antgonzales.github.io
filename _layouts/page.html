@@ -1,4 +1,9 @@
 ---
 layout: default
 ---
-{{ content }}
+<div class="container page {{page.title | downcase}}">
+  <hgroup class="page-heading">
+    <h1 class="page-title">{{ page.title }}</h1>
+  </hgroup>
+  {{ content }}
+</div>

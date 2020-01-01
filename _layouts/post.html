@@ -3,18 +3,19 @@ layout: default
 ---
 <div class="container post">
   <hgroup class="post-heading">
+    <time class="post-date italic" datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date_to_string }}</time>
     <h1 class="post-title">{{ page.title }}</h1>
-    <time class="post-date" datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date_to_string }}</time>
     {% if page.tags.size > 0 %}
       <h5 class="post-tags">Thoughts on {{page.tags | array_to_sentence_string}}</h5>
     {% endif %}
   </hgroup>
+  <div class="post-content">
+    {{ page.excerpt }}
 
-  {{ page.excerpt }}
+    {{ page.content | remove: page.excerpt }}
 
-  {{ page.content | remove: page.excerpt }}
-
-  <hr>
-  <h4>Questions? Disagree?</h4>
-  <p>Reach out via webmention or send me a tweet.</p>
+    <hr class="post-break">
+    <h4>Questions? Disagree?</h4>
+    <p>Reach out via <a href="https://github.com/antgonzales">Github</a> or send me a <a href="https://twitter.com/animalgonzales">tweet</a>.</p>
+  </div>
 </div>
