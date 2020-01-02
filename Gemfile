@@ -1,5 +1,6 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'jekyll'
-gem 'jekyll-sitemap'
-gem 'github-pages'
+gem 'jekyll', '~> 3.8.5'
+gem 'jekyll-sitemap', '~> 1.4'
+gem 'github-pages', '~> 203'
+
