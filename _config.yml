@@ -5,3 +5,5 @@ permalink: /blog/:title:output_ext
 plugins:
   - jekyll-sitemap
 excerpt_separator: <!--break-->
+sass:
+    style: compressed
