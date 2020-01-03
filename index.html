@@ -3,99 +3,25 @@ layout: default
 title: Web Developer | Anthony Gonzales
 description: I'm a front-end web developer. Take a look at my skills, get to know me, drop me a line.
 ---
-<div class="hero">
-  <section id="home">
-    <div class="hero-lead-in max-width">
-      <h1 id="hero-title">Anthony Gonzales</h1>
-      <p id="hero-tagline">Web Developer
-        <p>Currently front-end @ <a href="//www.compass.com" rel="nofollow" target="_blank">Compass</a></p>
-      </p>
-    </div>
-  </section>
-</div>
 
-<section id="recent-work" class="buffer container-fluid max-width">
-  <h2 class="section-title">Past Projects</h2>
-    <div class="row buffer">
-      <div class="col-sm-6">
-        <div class="portfolio-tile">
-          <img class="portfolio-project-thumbnail" src="assets/img/benefit-cosmetics-screenshot.jpg" />
-          <div class="portfolio-project-logo-cover">
-            <img class="portfolio-project-logo" src="assets/img/BenefitLogo.png" />
-          </div>
-        </div>
+<div class="buffer container-fluid max-width">
+  {% for post in site.posts%}
+    <article class='blog-post'>
+      <h2 class='headline'>{{ post.title }}</h3>
+
+      <div class="meta-post">
+        <span class="meta-content">{{ post.date | date: "%B %d, %Y" }}</span>
       </div>
-      <div class="col-sm-6">
-        <div class="portfolio-tile">
-          <img class="portfolio-project-thumbnail" src="assets/img/intuit-mint-home-page.jpg" />
-          <div class="portfolio-project-logo-cover">
-            <img class="portfolio-project-logo" src="assets/img/mint-logo.png" />
-          </div>
-        </div>
+
+      <div class="blog-post-content">
+        {{ post.excerpt }}
+
+        <a href="{{ post.url }}">Read more &#8594;</a>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="portfolio-tile">
-          <img class="portfolio-project-thumbnail" src="assets/img/quicken-homepage.jpg" />
-          <div class="portfolio-project-logo-cover">
-            <img class="portfolio-project-logo" src="assets/img/quicken-logo.png" />
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="portfolio-tile">
-          <img class="portfolio-project-thumbnail" src="assets/img/dwell-home-page.jpg" />
-          <div class="portfolio-project-logo-cover">
-            <img class="portfolio-project-logo" src="assets/img/dwell-logo.png" />
-          </div>
-        </div>
-      </div>
-    </div>
-</section>
 
-<section id="skills" class="buffer container-fluid max-width">
-  <h2 class="section-title">Skills</h2>
-  <div class="buffer">
-    <h3>Progressive Design</h3>
-    <p>I build websites with Mobile First in mind and create bespoke experiences across devices.</p>
-    <h3>Test Driven Development</h3>
-    <p>I automate tests to make features reliable and easy to change when priorities shift. Nobody on the team should be afraid of code changes.</p>
-    <h3>Scalable Architecture</h3>
-    <p>I follow best practices that leave the door open for scalability without overengineering. I write readable, accessible, and flexible code.</p>
-    <h3>Team Player</h3>
-    <p>I'm at my best working with a team. I love finding solutions with talented people and bringing new ideas to the table.</p>
-  </div>
-</section>
-
-<section id="about" class="buffer container-fluid max-width">
-  <h2 class="section-title">About Me</h2>
-  <div class="row buffer">
-    <div class="col-md-6">
-      <p>I write, think, and talk about front-end web development. I bring
-        expertise in scalable systems, UI design, and test driven
-        development.</p>
-
-      <p>I current live in New York City and work as a tech lead at Compass. I work primarily on the Content Management System for Compass's real estate agents. Previously, I worked as a front-end lead developer for Glossier.</p>
-
-    </div>
-    <div class="col-md-6">
-      <img src="/assets/img/me.jpeg" />
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="container-fluid max-width buffer">
-    <h2 class="section-title">Get in touch</h2>
-    <ul class="list">
-      <li>Twitter: <a href="https://twitter.com/animalgonzales"
-                      target="_blank">@animalgonzales</a></li>
-      <li>Github: <a href="https://github.com/antgonzales"
-                     target="_blank">@antgonzales</a></li>
-      <li>LinkedIn: <a
-        href="https://www.linkedin.com/in/anthonymgonzales" target="_blank">anthonymgonzales</a></li>
-    </ul>
-  </div>
-
-</section>
+    </article>
+    {% if post != site.posts.last  %}
+    <hr>
+    {% endif %}
+  {% endfor %}
+<div>
