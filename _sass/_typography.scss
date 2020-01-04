@@ -1,6 +1,7 @@
 // Typography
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: $sans-serif-font-family;
 	color: $gun;
 	line-height: $headings-line-height;
 	font-weight: $headings-font-weight;
@@ -63,6 +64,14 @@ blockquote cite a, blockquote cite a:visited, blockquote cite a:visited { color:
 
 // Code
 code, kbd, pre, samp { font-size: 16px; }
+
+:not(pre) > code {
+  background: $gun;
+  color: $white;
+  padding: .5rem;
+  border-radius: .3rem;
+  line-height: 1.45;
+}
 
 // Lists
 

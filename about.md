@@ -1,11 +1,13 @@
 ---
 layout: page
-title: About Me
+title: About
 description: A front-end developer blog devoted to application development, user experience, design. See code examples, learn from tutorials, get tips and tricks
 ---
 
-I write, think, and talk about front-end web development. I bring expertise in
-scalable systems, UI design, and test driven development.
+Senior Software Engineer at Compass. Previously at Glossier.
+
+I write, think, and talk about web development. I bring expertise in
+front-end technology, UI design, and test driven development.
 
 I current live in New York City and work as a tech lead at Compass. I work
 primarily on the Content Management System for Compass's real estate agents.
