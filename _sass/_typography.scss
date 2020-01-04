@@ -1,10 +1,23 @@
 // Typography
 
+body {
+  background: $white;
+  font-size: $base-font-size;
+  font-family: $serif-font-family;
+  line-height: $base-line-height;
+  color: $ink;
+}
+
+::selection,
+::-moz-selection {
+  background: $ink;
+  color: $white;
+}
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: $sans-serif-font-family;
-	color: $gun;
-	line-height: $headings-line-height;
-	font-weight: $headings-font-weight;
+  font-family: $serif-font-family;
+  line-height: $headings-line-height;
+  font-weight: $headings-font-weight;
 }
 
 h1, h2, h3 {
@@ -92,3 +105,7 @@ ol.list ol li, ol.list ul li { margin-bottom: 6px; }
 .list li { line-height: 1.5; margin-bottom: $line-height-computed-half; }
 ul.large li { line-height: 21px; }
 li p { line-height: 21px; }
+
+.italic {
+  font-style: italic;
+}

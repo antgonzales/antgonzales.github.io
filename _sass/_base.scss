@@ -8,24 +8,6 @@ html {
   box-sizing: inherit;
 }
 
-body {
-  background: $bg-color;
-  font-size: $base-font-size;
-  font-family: $serif-font-family;
-  line-height: $base-line-height;
-  color: $gray-dark;
-}
-
-::selection {
-  background: $gun;
-  color: #fff;
-}
-
-::-moz-selection {
-  background: $gun;
-  color: #fff;
-}
-
 img {
   max-width: 100%;
   height: auto;
