@@ -28,7 +28,7 @@
   bottom: 0;
   height: 100%;
   margin: auto;
-  background-color: $gun;
+  background-color: $graphite;
   transition: opacity .15s ease-in;
 }
 
@@ -146,8 +146,9 @@ nav {
 }
 
 .highlight pre {
-  padding: 15px;
-  overflow: scroll;
+  padding: 2rem;
+  border-radius: .5rem;
+  overflow: auto;
 }
 
 @media (max-width: 577px ) {

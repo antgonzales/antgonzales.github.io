@@ -14,28 +14,22 @@ img {
   vertical-align: middle;
 }
 
-
 hr {
-  border: solid $black;
+  border: solid $graphite;
   border-width: 1px 0 0;
   clear: both;
   margin-top: $line-height-computed;
   margin-bottom: $line-height-computed;
 }
 
-a,
-a:visited {
-  color: $link-color;
-  text-decoration: underline;
-  outline: 0;
+a {
+  &:visited {
+    color: $link-color;
+    text-decoration: underline;
+  }
+  &:hover,
+  &:focus {
+    color: darken($link-color, 15%);
+  }
 }
 
-a:hover,
-a:focus {
-  color: darken($blue, 15%);
-}
-
-p a,
-p a:visited {
-  line-height: inherit;
-}

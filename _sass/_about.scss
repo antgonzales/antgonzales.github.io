@@ -1,0 +1,34 @@
+.portfolio-tile {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.portfolio-tile:hover .portfolio-project-logo-cover,
+.portfolio-tile:hover .portfolio-project-logo {
+  opacity: 0;
+  transition: opacity .15s ease-out;
+}
+
+.portfolio-project-logo-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  margin: auto;
+  background-color: $graphite;
+  transition: opacity .15s ease-in;
+}
+
+.portfolio-project-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 50%;
+  height: auto;
+  transition: opacity .15s ease-in;
+}
