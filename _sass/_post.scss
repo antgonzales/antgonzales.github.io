@@ -49,26 +49,6 @@
 
 .quick-about {
   margin-bottom: 6rem;
-  padding: 1.5rem;
-  @media (min-width: 680px ) {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-}
-
-.quick-about-photo {
-  max-width: 36rem;
-  height: auto;
-  margin: auto;
-  @media (min-width: 680px ) {
-    margin-right: 1.5rem;
-  }
-}
-
-.quick-about-photo img {
-  border-radius: 50%;
-  border: .1rem solid $graphite;
 }
 
 .quick-about-content {

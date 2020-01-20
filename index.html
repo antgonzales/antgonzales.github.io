@@ -4,7 +4,7 @@ title: Web Developer | Anthony Gonzales
 description: I'm a front-end web developer. Take a look at my skills, get to know me, drop me a line.
 ---
 
-<div class="container-fluid max-width home blog">
+<div class="container max-width home blog">
   {% for post in site.posts%}
     <article class="blog-post">
       <div class="post-meta">
@@ -16,6 +16,8 @@ description: I'm a front-end web developer. Take a look at my skills, get to kno
 
       <div class="blog-post-content">
         {{ post.excerpt }}
+
+        <a href="{{ post.url }}">Read more &#8594;</a>
       </div>
 
     </article>

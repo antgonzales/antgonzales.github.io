@@ -1,7 +1,26 @@
 // Styles
 
 .max-width {
-  max-width: 680px;
+  max-width: 68rem;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.container:before,
+.container:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after,
+.container:after,
+.container-fluid:after,
+.row:after {
+  clear: both;
 }
 
 .col-centered {
@@ -11,7 +30,7 @@
 
 .portfolio-tile {
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .portfolio-tile:hover .portfolio-project-logo-cover,
