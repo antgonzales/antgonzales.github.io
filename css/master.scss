@@ -1,11 +1,12 @@
-// Master List
+---
+# SASS Master List
+---
 @import "variables";
-@import "normalize";
 @import "base";
+@import "utilities";
 @import "typography";
 @import "syntax";
-@import "grid";
-@import "forms";
-@import "buttons";
 @import "blog";
+@import "post";
+@import "page";
 @import "style";

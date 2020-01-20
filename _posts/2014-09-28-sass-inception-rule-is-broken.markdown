@@ -18,7 +18,7 @@ To help maintain nesting, the [Inception Rule](http://thesassway.com/beginner/th
 <!--break-->
 
 <div class="center buffer">
-  <img src="/build/img/leo-strut.jpeg" alt="Leo after using the SASS Inception Rule" />
+  <img src="/assets/img/leo-strut.jpeg" alt="Leo after using the SASS Inception Rule" />
 </div>
 
 
@@ -149,7 +149,7 @@ There's several problems with the code listed above. Let's start with the amount
 Instead, we should have the "Inception-wasn't-that-clever-of-a-movie-rule". Anything more than a single level deep really just causes more pain and suffering, as in "My brain hurts from having Christopher Nolan explain half of his damn movie to me" pain. There's a kind of sadistic joy involved when you force your audience to pay attention to your character explain five or six, tangled stories and scenarios. Untangling deeply nested SASS is bit like untangling Inception, you need graphs, diagrams, a lengthy explanation to get through it.
 
 <div class="center buffer">
-  <img src="/build/img/inderption-poster.jpg" alt="Using the SASS Inception Rule will lead to Inderption" />
+  <img src="/assets/img/inderption-poster.jpg" alt="Using the SASS Inception Rule will lead to Inderption" />
 </div>
 
 <div class="callout warning-callout">

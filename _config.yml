@@ -1,7 +1,10 @@
-name: AnthonyGonzales.me
+name: AnthonyGonzales.dev
 highlighter: rouge
 markdown: kramdown
 permalink: /blog/:title:output_ext
 plugins:
   - jekyll-sitemap
 excerpt_separator: <!--break-->
+sass:
+    style: compressed
+url: 'https://www.anthonygonzales.dev'
