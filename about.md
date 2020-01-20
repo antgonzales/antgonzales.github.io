@@ -4,13 +4,14 @@ title: About
 description: A front-end developer blog devoted to application development, user experience, design. See code examples, learn from tutorials, get tips and tricks
 ---
 
-Senior Software Engineer at Compass. Previously at Glossier.
+Senior Software Engineer at [Compass](https://www.compass.com/){:target="_blank"}.
 
 I write, think, and talk about web development. I bring expertise in
 front-end technology, UI design, and test driven development.
 
 I current live in New York City and work as a tech lead at Compass. I work
-primarily on the Content Management System for Compass's real estate agents.
+primarily on Search for Compass's real estate agents.
+
 Previously, I worked as a front-end lead developer for Glossier.
 
 ![Anthony Gonzales](/assets/img/me.jpeg)

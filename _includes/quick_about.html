@@ -1,0 +1,16 @@
+<div class="quick-about">
+  <div class="quick-about-photo">
+    <img src="/assets/img/profile-photo.jpg" alt="Anthony Gonzales"/>
+  </div>
+  <div class="quick-about-content">
+    <h5>by Anthony Gonzales</h5>
+    <p>I write, think, and talk about the web. I bring years of expertise to front-end development, UI design, and test driven development.</p>
+    <ul class="quick-about-contact">
+      {% for contact in site.data.contacts %}
+        <li>
+          <a href="{{contact.link}}" target="_blank">{{contact.title}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

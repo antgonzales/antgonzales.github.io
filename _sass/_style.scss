@@ -70,10 +70,6 @@ nav {
   margin-right: $line-height-computed-half;
 }
 
-.main-nav a {
-  color: $blue;
-}
-
 .buffer {
 	padding-top: $line-height-computed * 2;
 	padding-bottom: $line-height-computed * 2;
@@ -97,11 +93,6 @@ nav {
 	width: 100px;
 	height: 3px;
   background: $blue;
-}
-
-.contact-buttons {
-	margin-top: $line-height-computed * 2;
-	margin-bottom: $line-height-computed * 2;
 }
 
 .center {
