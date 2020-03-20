@@ -81,21 +81,23 @@ I personally like creating folders for new files with an index to export
 contents. The folder gives us a space to create test files, helpers, or
 child subcomponent folders.
 
-```
-/**
- * src/TodoList/TodoList.test.tsx
- */
-import React from "react";
-import { render } from "@testing-library/react";
-
-import { TodoList } from ".";
-
-describe("TodoList", () => {
-  it("works", () => {
-    render(<TodoList />);
-  });
-});
-
+```diff
+diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+new file mode 100644
+index 0000000..1a6e53f
+--- /dev/null
++++ b/src/TodoList/TodoList.test.jsx
+@@ -0,0 +1,10 @@
++import React from "react";
++import { render } from "@testing-library/react";
++
++import { TodoList } from ".";
++
++describe("TodoList", () => {
++  it("works", () => {
++    render(<TodoList />);
++  });
++});
 ```
 
 That's it. That's how you start. Run the test suite. This initial test should
@@ -111,22 +113,25 @@ fail (red) and sets up a few expectations right out the gate.
 
 Now let's make the component and the index file.
 
-```
-/**
- * src/TodoList/index.ts
- */
-export * from "./TodoList";
-```
-
-```
-/**
- * src/TodoList/TodoList.tsx
- */
-import React from "react";
-
-export function TodoList() {
-  return <div />;
-}
+```diff
+diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+new file mode 100644
+index 0000000..ad0c714
+--- /dev/null
++++ b/src/TodoList/TodoList.jsx
+@@ -0,0 +1,5 @@
++import React from "react";
++
++export function TodoList() {
++  return <div />;
++}
+diff --git a/src/TodoList/index.js b/src/TodoList/index.js
+new file mode 100644
+index 0000000..f239f43
+--- /dev/null
++++ b/src/TodoList/index.js
+@@ -0,0 +1 @@
++export * from './TodoList';
 ```
 
 Again, that's it. We've now fixed the broken test (green). It's not much, but
@@ -135,48 +140,57 @@ could be a Node module, the pattern is the same.
 
 Now let's start adding meaningful tests by adding our first feature.
 
-```
-/**
- * src/TodoList/TodoList.test.tsx
- */
-import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+```diff
+diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 1a6e53f..9151a6e 100644
+--- a/src/TodoList/TodoList.test.jsx
++++ b/src/TodoList/TodoList.test.jsx
+@@ -1,10 +1,13 @@
+ import React from "react";
+-import { render } from "@testing-library/react";
++import { render, fireEvent } from "@testing-library/react";
 
-import { TodoList } from ".";
+ import { TodoList } from ".";
 
-describe("TodoList", () => {
-  it("receives user input", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    fireEvent.change(input, { target: { value: "Take the dinglebop" } });
-    expect(input.value).toBe("Take the dinglebop");
-  });
-});
+ describe("TodoList", () => {
+-  it("works", () => {
+-    render(<TodoList />);
++  it("receives user input", () => {
++    const { getByTestId } = render(<TodoList />);
++    const input = getByTestId("todo-input");
++    fireEvent.change(input, { target: { value: "Take the dinglebop" } });
++    expect(input.value).toBe("Take the dinglebop");
+   });
+ });
 ```
 
 In this initial pass, I'm attempting to add an input for the user to add todos.
 I want to be sure that the input takes values and show the values. I'll run the
 test suite to let it fail and begin fixing the code to make it pass.
 
-```
-/**
- * src/TodoList/TodoList.tsx
- */
-import React, { useState } from "react";
+```diff
+diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index ad0c714..e9c78bc 100644
+--- a/src/TodoList/TodoList.jsx
++++ b/src/TodoList/TodoList.jsx
+@@ -1,5 +1,15 @@
+-import React from "react";
++import React, { useState } from "react";
 
-export function TodoList() {
-  const [inputState, inputDispatch] = useState("");
-  return (
-    <input
-      data-testid="todo-input"
-      type="text"
-      value={inputState}
-      onChange={e => {
-        inputDispatch(e.target.value);
-      }}
-    />
-  );
-}
+ export function TodoList() {
+-  return <div />;
++  const [inputState, inputDispatch] = useState("");
++  return (
++    <input
++      data-testid="todo-input"
++      type="text"
++      value={inputState}
++      onChange={e => {
++        inputDispatch(e.target.value);
++      }}
++    />
++  );
+ }
 ```
 
 I've now created a simple input that takes user values, sets it to an internal
@@ -184,34 +198,26 @@ state, and renders it in the input. I'll run the test suite to make it pass (gre
 think this is simple enough that no further refactoring is needed, I'll move
 forward with another set of behavior assertions.
 
-```
-/**
- * src/TodoList/TodoList.test.tsx
- */
-import React from "react";
-import { render, fireEvent } from "@testing-library/react";
-
-import { TodoList } from ".";
-
-describe("TodoList", () => {
-  it("receives user input", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    fireEvent.change(input, { target: { value: "Take the dinglebop" } });
-    expect(input.value).toBe("Take the dinglebop");
-  });
-
-  it("adds a todo", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    const add = getByTestId("todo-add");
-    fireEvent.change(input, { target: { value: "Smooth it out with a bunch of
-    shleem" } });
-    fireEvent.click(add);
-    const todo = getByTestId("todo");
-    expect(todo.textContent).toBe("Smooth it out with a bunch of shleem");
-  });
-});
+```diff
+diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 9151a6e..d768b4a 100644
+--- a/src/TodoList/TodoList.test.jsx
++++ b/src/TodoList/TodoList.test.jsx
+@@ -10,4 +10,15 @@ describe("TodoList", () => {
+     fireEvent.change(input, { target: { value: "Take the dinglebop" } });
+     expect(input.value).toBe("Take the dinglebop");
+   });
++
++  it("adds a todo", () => {
++    const { getByTestId } = render(<TodoList />);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, { target: { value: "Smooth it out with a bunch of shleem" } });
++    fireEvent.click(add);
++    const todo = getByTestId("todo");
++    expect(todo.textContent).toBe("Smooth it out with a bunch of shleem");
++  });
+ });
 ```
 
 I'm now testing the entire user flow of adding text to the input, pressing a
@@ -223,39 +229,49 @@ you'll just continue adding things to the block and it will become unreadable
 for yourself and other devs over time. Run the test suite again to be
 sure the test fails.
 
-```
-/**
- * src/TodoList/TodoList.tsx
- */
-import React, { useState } from "react";
+```diff
+diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index e9c78bc..b75791b 100644
+--- a/src/TodoList/TodoList.jsx
++++ b/src/TodoList/TodoList.jsx
+@@ -1,15 +1,29 @@
+ import React, { useState } from "react";
 
-export function TodoList() {
-  const [todos, updateTodos] = useState([]);
-  const [inputState, inputDispatch] = useState("");
-  const addTodo = newTodo => updateTodos([...todos, newTodo]);
-  return (
-    <div>
-      <input
-        data-testid="todo-input"
-        type="text"
-        value={inputState}
-        onChange={e => {
-          inputDispatch(e.target.value);
-        }}
-      />
-      <button data-testid="todo-add" onClick={() => addTodo(inputState)}>
-        Add
-      </button>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index} data-testid="todo">
-            {todo}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+ export function TodoList() {
++  const [todos, updateTodos] = useState([]);
+   const [inputState, inputDispatch] = useState("");
++  const addTodo = newTodo => updateTodos([...todos, newTodo]);
+   return (
+-    <input
+-      data-testid="todo-input"
+-      type="text"
+-      value={inputState}
+-      onChange={e => {
+-        inputDispatch(e.target.value);
+-      }}
+-    />
++    <div>
++      <input
++        data-testid="todo-input"
++        type="text"
++        value={inputState}
++        onChange={e => {
++          inputDispatch(e.target.value);
++        }}
++      />
++      <button data-testid="todo-add" onClick={() => addTodo(inputState)}>
++        Add
++      </button>
++      <ul>
++        {todos.map((todo, index) => (
++          <li key={index} data-testid="todo">
++            {todo}
++          </li>
++        ))}
++      </ul>
++    </div>
+   );
+ }
 ```
 
 I've introduced a new piece of state, a button to add a todo directly from the
@@ -270,36 +286,35 @@ things I want to consider changing:
 
 Here's what it comes out refactored.
 
-```
-import React, { useState } from "react";
+```diff
+diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index b75791b..2483839 100644
+--- a/src/TodoList/TodoList.jsx
++++ b/src/TodoList/TodoList.jsx
+@@ -2,19 +2,19 @@ import React, { useState } from "react";
 
-export function TodoList() {
-  const [todos, updateTodos] = useState([]);
-  const [userInput, updateUserInput] = useState("");
-  const addTodo = newTodo => updateTodos([...todos, newTodo]);
-  return (
-    <div>
-      <input
-        data-testid="todo-input"
-        type="text"
-        value={userInput}
-        onChange={e => {
-          updateUserInput(e.target.value);
-        }}
-      />
-      <button data-testid="todo-add" onClick={() => addTodo(userInput)}>
-        Add
-      </button>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index} data-testid="todo">
-            {todo}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+ export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+-  const [inputState, inputDispatch] = useState("");
++  const [userInput, updateUserInput] = useState("");
+   const addTodo = newTodo => updateTodos([...todos, newTodo]);
+   return (
+     <div>
+       <input
+         data-testid="todo-input"
+         type="text"
+-        value={inputState}
++        value={userInput}
+         onChange={e => {
+-          inputDispatch(e.target.value);
++          updateUserInput(e.target.value);
+         }}
+       />
+-      <button data-testid="todo-add" onClick={() => addTodo(inputState)}>
++      <button data-testid="todo-add" onClick={() => addTodo(userInput)}>
+         Add
+       </button>
+       <ul>
 ```
 
 The changes are minimal but shows the process of how we can shape the code
@@ -307,233 +322,126 @@ safely. Let's move on to more behavior. Now that we're adding todos and
 rendering them for the user, we want to reset the user input so the user can
 continue adding more.
 
-```
-import React from "react";
-import { render, fireEvent } from "@testing-library/react";
-
-import { TodoList } from ".";
-
-describe("TodoList", () => {
-  it("receives user input", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    fireEvent.change(input, { target: { value: "Take the dinglebop" } });
-    expect(input.value).toBe("Take the dinglebop");
-  });
-
-  it("adds a todo", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    const add = getByTestId("todo-add");
-    fireEvent.change(input, {
-      target: { value: "Smooth it out with a bunch of shleem" }
-    });
-    fireEvent.click(add);
-    const todo = getByTestId("todo");
-    expect(todo.texContent).toBe("Smooth it out with a bunch of shleem");
-  });
-
-  it("clears the user input after a todo is added", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    const add = getByTestId("todo-add");
-    fireEvent.change(input, {
-      target: { value: "Re-purpose shleem for later batches" }
-    });
-    fireEvent.click(add);
-    expect(input.value).toBe("");
-  });
-});
+```diff
+diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index f939631..4908af4 100644
+--- a/src/TodoList/TodoList.test.jsx
++++ b/src/TodoList/TodoList.test.jsx
+@@ -20,4 +20,15 @@ describe("TodoList", () => {
+     const todo = getByTestId("todo");
+     expect(todo.textContent).toBe("Smooth it out with a bunch of shleem");
+   });
++
++  it("clears the user input after a todo is added", () => {
++    const { getByTestId } = render(<TodoList />);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, {
++      target: { value: "Re-purpose shleem for later batches" }
++    });
++    fireEvent.click(add);
++    expect(input.value).toBe("");
++  });
+ });
 ```
 
 I'll run the test suite to make it red.
 
-```
-import React, { useState } from "react";
-
-export function TodoList() {
-  const [todos, updateTodos] = useState([]);
-  const [userInput, updateUserInput] = useState("");
-  const addTodo = newTodo => updateTodos([...todos, newTodo]);
-  return (
-    <div>
-      <input
-        data-testid="todo-input"
-        type="text"
-        value={userInput}
-        onChange={e => {
-          updateUserInput(e.target.value);
-        }}
-      />
-      <button
-        data-testid="todo-add"
-        onClick={() => {
-          addTodo(userInput);
-          updateUserInput("");
-        }}
-      >
-        Add
-      </button>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index} data-testid="todo">
-            {todo}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+```diff
+diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index 2483839..4adf6d6 100644
+--- a/src/TodoList/TodoList.jsx
++++ b/src/TodoList/TodoList.jsx
+@@ -14,7 +14,13 @@ export function TodoList() {
+           updateUserInput(e.target.value);
+         }}
+       />
+-      <button data-testid="todo-add" onClick={() => addTodo(userInput)}>
++      <button
++        data-testid="todo-add"
++        onClick={() => {
++          addTodo(userInput);
++          updateUserInput("");
++        }}
++      >
+         Add
+       </button>
+       <ul>
 ```
 
 I've now added a function call for `updateUserInput("")` to the button click
 handler to clear the user input state. However, we still have the issue that users
 can add empty todos to the list. Let's fix that.
 
-```
-import React from "react";
-import { render, fireEvent } from "@testing-library/react";
-
-import { TodoList } from ".";
-
-describe("TodoList", () => {
-  it("receives user input", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    fireEvent.change(input, { target: { value: "Take the dinglebop" } });
-    expect(input.value).toBe("Take the dinglebop");
-  });
-
-  it("adds a todo", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    const add = getByTestId("todo-add");
-    fireEvent.change(input, {
-      target: { value: "Smooth it out with a bunch of shleem" }
-    });
-    fireEvent.click(add);
-    const todo = getByTestId("todo");
-    expect(todo.texContent).toBe("Smooth it out with a bunch of shleem");
-  });
-
-  it("clears the user input after a todo is added", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    const add = getByTestId("todo-add");
-    fireEvent.change(input, {
-      target: { value: "Re-purpose shleem for later batches" }
-    });
-    fireEvent.click(add);
-    expect(input.value).toBe("");
-  });
-
-  it('disables the "Add Todo" button when the user input is empty', () => {
-    const { getByTestId } = render(<TodoList />);
-    const add = getByTestId("todo-add");
-    expect(add.disabled).toBe(true);
-  });
-});
+```diff
+diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 4908af4..04c7a4c 100644
+--- a/src/TodoList/TodoList.test.jsx
++++ b/src/TodoList/TodoList.test.jsx
+@@ -31,4 +31,10 @@ describe("TodoList", () => {
+     fireEvent.click(add);
+     expect(input.value).toBe("");
+   });
++
++  it('disables the "Add Todo" button when the user input is empty', () => {
++    const { getByTestId } = render(<TodoList />);
++    const add = getByTestId("todo-add");
++    expect(add.disabled).toBe(true);
++  });
+ });
 ```
 
-```
-import React, { useState } from "react";
-
-export function TodoList() {
-  const [todos, updateTodos] = useState([]);
-  const [userInput, updateUserInput] = useState("");
-  const addTodo = newTodo => updateTodos([...todos, newTodo]);
-  return (
-    <div>
-      <input
-        data-testid="todo-input"
-        type="text"
-        value={userInput}
-        onChange={e => {
-          updateUserInput(e.target.value);
-        }}
-      />
-      <button
-        data-testid="todo-add"
-        disabled={userInput === "" ? true : false}
-        onClick={() => {
-          addTodo(userInput);
-          updateUserInput("");
-        }}
-      >
-        Add
-      </button>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index} data-testid="todo">
-           {todo}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+```diff
+diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index 4adf6d6..a643fee 100644
+--- a/src/TodoList/TodoList.jsx
++++ b/src/TodoList/TodoList.jsx
+@@ -16,6 +16,7 @@ export function TodoList() {
+       />
+       <button
+         data-testid="todo-add"
++        disabled={userInput === "" ? true : false}
+         onClick={() => {
+           addTodo(userInput);
+           updateUserInput("");
+@@ -26,7 +27,7 @@ export function TodoList() {
+       <ul>
+         {todos.map((todo, index) => (
+           <li key={index} data-testid="todo">
+-            {todo}
++           {todo}
+           </li>
+         ))}
+       </ul>
 ```
 
 We now have a comprehensive set of behaviors that we expect from our TodoList
 application. There's still a few crucial pieces that need to be addressed;
 editing and deleting. Let's fix that now.
 
-```
-import React from "react";
-import { render, fireEvent } from "@testing-library/react";
-
-import { TodoList } from ".";
-
-describe("TodoList", () => {
-  it("receives user input", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    fireEvent.change(input, { target: { value: "Take the dinglebop" } });
-    expect(input.value).toBe("Take the dinglebop");
-  });
-
-  it("adds a todo", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    const add = getByTestId("todo-add");
-    fireEvent.change(input, {
-      target: { value: "Smooth it out with a bunch of shleem" }
-    });
-    fireEvent.click(add);
-    const todo = getByTestId("todo");
-    expect(todo.textContent).toBe("Smooth it out with a bunch of shleem");
-  });
-
-  it("clears the user input after a todo is added", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    const add = getByTestId("todo-add");
-    fireEvent.change(input, {
-      target: { value: "Re-purpose shleem for later batches" }
-    });
-    fireEvent.click(add);
-    expect(input.value).toBe("");
-  });
-
-  it('disables the "Add Todo" button when the user input is empty', () => {
-    const { getByTestId } = render(<TodoList />);
-    const add = getByTestId("todo-add");
-    expect(add.disabled).toBe(true);
-  });
-
-  it("deletes todos", () => {
-    const { getByTestId, queryAllByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    const add = getByTestId("todo-add");
-    fireEvent.change(input, {
-      target: { value: "Take the dinglebop and push it through the grumbo" }
-    });
-    fireEvent.click(add);
-    const remove = getByTestId("todo-remove");
-    fireEvent.click(remove);
-    expect(queryAllByTestId("todo")).toHaveLength(0);
-  });
-});
+```diff
+diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 04c7a4c..20c35b8 100644
+--- a/src/TodoList/TodoList.test.jsx
++++ b/src/TodoList/TodoList.test.jsx
+@@ -37,4 +37,17 @@ describe("TodoList", () => {
+     const add = getByTestId("todo-add");
+     expect(add.disabled).toBe(true);
+   });
++
++  it("deletes todos", () => {
++    const { getByTestId, queryAllByTestId } = render(<TodoList />);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, {
++      target: { value: "Take the dinglebop and push it through the grumbo" }
++    });
++    fireEvent.click(add);
++    const remove = getByTestId("todo-remove");
++    fireEvent.click(remove);
++    expect(queryAllByTestId("todo")).toHaveLength(0);
++  });
+ });
 ```
 
 I'm now setting up a todo, attempting to remove it with a new button that I
@@ -542,48 +450,36 @@ has been removed. I'll run the test and it should fail because it won't find the
 `todo-remove` button. After fixing that, I'll run it again to be sure that the
 todos are rendering and failing the test as expected.
 
-```
-import React, { useState } from "react";
-
-export function TodoList() {
-  const [todos, updateTodos] = useState([]);
-  const [userInput, updateUserInput] = useState("");
-  const addTodo = newTodo => updateTodos([...todos, newTodo]);
-  const removeTodo = index =>
-    updateTodos(todos.filter((todo, i) => i !== index));
-  return (
-    <div>
-      <input
-        data-testid="todo-input"
-        type="text"
-        value={userInput}
-        onChange={e => {
-          updateUserInput(e.target.value);
-        }}
-      />
-      <button
-        data-testid="todo-add"
-        disabled={userInput === "" ? true : false}
-        onClick={() => {
-          addTodo(userInput);
-          updateUserInput("");
-        }}
-      >
-        Add
-      </button>
-      <ul>
-       {todos.map((todo, index) => (
-          <li key={index}>
-            <span data-testid="todo">{todo}</span>
-            <button data-testid="todo-remove" onClick={() => removeTodo(index)}>
-              x
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+```diff
+diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index a643fee..20d40f6 100644
+--- a/src/TodoList/TodoList.jsx
++++ b/src/TodoList/TodoList.jsx
+@@ -4,6 +4,8 @@ export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+   const [userInput, updateUserInput] = useState("");
+   const addTodo = newTodo => updateTodos([...todos, newTodo]);
++  const removeTodo = index =>
++    updateTodos(todos.filter((todo, i) => i !== index));
+   return (
+     <div>
+       <input
+@@ -25,9 +27,12 @@ export function TodoList() {
+         Add
+       </button>
+       <ul>
+-        {todos.map((todo, index) => (
+-          <li key={index} data-testid="todo">
+-           {todo}
++       {todos.map((todo, index) => (
++          <li key={index}>
++            <span data-testid="todo">{todo}</span>
++            <button data-testid="todo-remove" onClick={() => removeTodo(index)}>
++              x
++            </button>
+           </li>
+         ))}
+       </ul>
 ```
 
 We've now added a button that will remove the specific todo from state with a
@@ -601,140 +497,78 @@ Nothing is really jumping out at me, still seems to be pretty reasonable. Let's
 forward with maybe our most complicated feature so far; editing. Let's start
 with creating the inline editing experience.
 
-```
-import React from "react";
-import { render, fireEvent } from "@testing-library/react";
-
-import { TodoList } from ".";
-
-describe("TodoList", () => {
-  it("receives user input", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    fireEvent.change(input, { target: { value: "Take the dinglebop" } });
-    expect(input.value).toBe("Take the dinglebop");
-  });
-
-  it("adds a todo", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    const add = getByTestId("todo-add");
-    fireEvent.change(input, {
-      target: { value: "Smooth it out with a bunch of shleem" }
-    });
-    fireEvent.click(add);
-    const todo = getByTestId("todo");
-    expect(todo.textContent).toBe("Smooth it out with a bunch of shleem");
-  });
-
-  it("clears the user input after a todo is added", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    const add = getByTestId("todo-add");
-    fireEvent.change(input, {
-      target: { value: "Re-purpose shleem for later batches" }
-    });
-    fireEvent.click(add);
-    expect(input.value).toBe("");
-  });
-
-  it('disables the "Add Todo" button when the user input is empty', () => {
-    const { getByTestId } = render(<TodoList />);
-    const add = getByTestId("todo-add");
-    expect(add.disabled).toBe(true);
-  });
-
-  it("deletes todos", () => {
-    const { getByTestId, queryAllByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    const add = getByTestId("todo-add");
-    fireEvent.change(input, {
-      target: { value: "Take the dinglebop and push it through the grumbo" }
-    });
-    fireEvent.click(add);
-    const remove = getByTestId("todo-remove");
-    fireEvent.click(remove);
-    expect(queryAllByTestId("todo")).toHaveLength(0);
-  });
-
-  it("opens an editor to receive user input", () => {
-    const { getByTestId } = render(<TodoList />);
-    const input = getByTestId("todo-input");
-    const add = getByTestId("todo-add");
-    fireEvent.change(input, {
-      target: { value: "Take the dinglebop and push it through the grumbo" }
-    });
-    fireEvent.click(add);
-    const edit = getByTestId("todo-edit");
-    fireEvent.click(edit);
-    const editorInput = getByTestId("todo-editor");
-    expect(editorInput.value).toBe(
-      "Take the dinglebop and push it through the grumbo"
-    );
-  });
-});
+```diff
+diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 20c35b8..f6a2850 100644
+--- a/src/TodoList/TodoList.test.jsx
++++ b/src/TodoList/TodoList.test.jsx
+@@ -50,4 +50,20 @@ describe("TodoList", () => {
+     fireEvent.click(remove);
+     expect(queryAllByTestId("todo")).toHaveLength(0);
+   });
++
++  it("opens an editor to receive user input", () => {
++    const { getByTestId } = render(<TodoList />);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, {
++      target: { value: "Take the dinglebop and push it through the grumbo" }
++    });
++    fireEvent.click(add);
++    const edit = getByTestId("todo-edit");
++    fireEvent.click(edit);
++    const editorInput = getByTestId("todo-editor");
++    expect(editorInput.value).toBe(
++      "Take the dinglebop and push it through the grumbo"
++    );
++  });
+ });
 ```
 
 I've added a new button next to the button to remove the todo called 'Edit'.
 When I click on it, I expect to see a new input to change the todo with the
 original todo in the input.
 
-```
-import React, { useState } from "react";
-
-export function TodoList() {
-  const [todos, updateTodos] = useState([]);
-  const [userInput, updateUserInput] = useState("");
-  const [editTodoIndex, updateEditTodoIndex] = useState();
-  const addTodo = newTodo => updateTodos([...todos, newTodo]);
-  const removeTodo = index =>
-    updateTodos(todos.filter((todo, i) => i !== index));
-  return (
-    <div>
-      <input
-        data-testid="todo-input"
-        type="text"
-        value={userInput}
-        onChange={e => {
-          updateUserInput(e.target.value);
-        }}
-      />
-      <button
-        data-testid="todo-add"
-        disabled={userInput === "" ? true : false}
-        onClick={() => {
-          addTodo(userInput);
-          updateUserInput("");
-        }}
-      >
-        Add
-      </button>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
-            <span data-testid="todo">{todo}</span>
-            {index === editTodoIndex && (
-              <input
-                data-testid="todo-editor"
-                value={todo}
-                onChange={() => null}
-              />
-            )}
-            <button
-              data-testid="todo-edit"
-              onClick={() => updateEditTodoIndex(index)}
-            >
-              Edit
-            </button>
-            <button data-testid="todo-remove" onClick={() => removeTodo(index)}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+```diff
+diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index 20d40f6..b6b3440 100644
+--- a/src/TodoList/TodoList.jsx
++++ b/src/TodoList/TodoList.jsx
+@@ -3,6 +3,7 @@ import React, { useState } from "react";
+ export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+   const [userInput, updateUserInput] = useState("");
++  const [editTodoIndex, updateEditTodoIndex] = useState();
+   const addTodo = newTodo => updateTodos([...todos, newTodo]);
+   const removeTodo = index =>
+     updateTodos(todos.filter((todo, i) => i !== index));
+@@ -27,11 +28,24 @@ export function TodoList() {
+         Add
+       </button>
+       <ul>
+-       {todos.map((todo, index) => (
++        {todos.map((todo, index) => (
+           <li key={index}>
+             <span data-testid="todo">{todo}</span>
++            {index === editTodoIndex && (
++              <input
++                data-testid="todo-editor"
++                value={todo}
++                onChange={() => null}
++              />
++            )}
++            <button
++              data-testid="todo-edit"
++              onClick={() => updateEditTodoIndex(index)}
++            >
++              Edit
++            </button>
+             <button data-testid="todo-remove" onClick={() => removeTodo(index)}>
+-              x
++              Remove
+             </button>
+           </li>
+         ))}
 ```
 
 I now want to change the todo and explicitly save it after I make a change.
