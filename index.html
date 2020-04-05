@@ -9,6 +9,8 @@ description: I'm a front-end web developer. Take a look at my skills, get to kno
     <article class="blog-post card">
       <div class="post-meta">
         <time class="post-timestamp" itemprop="datePublished"> {{ post.date | date: "%B %d, %Y" }}</time>
+        &bull;
+        {% include read_time.html content=post.content %}
       </div>
       <h2 class="blog-post-title">{{ post.title }}</h2>
 
