@@ -84,9 +84,9 @@ Our .eslintrc.json file should now look like the following:
 {
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
     "prettier",
-    "prettier/@typescript-eslint",
+    "prettier/@typescript-eslint"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -125,9 +125,9 @@ with the Typescript compiler to also check for any type errors.
 {
   "scripts": {
     "lint": "npm run lint.eslint && npm run lint.prettier && npm run lint.types",
-    "lint.eslint: "eslint . --ext ts",
-    "lint.prettier": "prettier -c "src/**/*.ts",
-    "lint.types": "tsc --noEmit",
+    "lint.eslint": "eslint . --ext ts",
+    "lint.prettier": "prettier -c src/**/*.ts",
+    "lint.types": "tsc --noEmit"
   }
 }
 ```
@@ -177,9 +177,9 @@ off in favor of Prettier running independently.
 {
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
     "prettier",
-    "prettier/@typescript-eslint",
+    "prettier/@typescript-eslint"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
