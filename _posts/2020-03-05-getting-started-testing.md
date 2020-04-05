@@ -1,4 +1,9 @@
-# Getting started testing: culture and practice
+---
+layout: post
+title:  "Getting started testing: culture and practice"
+description: I moved to New York, I bought a HHKB Pro2, and I now do everything from the command line. I've picked up some new habits, but I want to take the time to reflect how I can refine my skills in 2018.
+date: 2020-03-05
+---
 
 Across all of my professional projects, I insist on testing and more
 specifically Test Driven Development. I always come away from the process with a
@@ -8,6 +13,8 @@ documentation in the future. Not all developers share my enthusiasm.  Some see
 testing is a chore or an afterthought. In this post, I want to provide some
 insight into why testing is largely a cultural issue and less of a skills issue
 and then give some practical application examples in React.
+
+<!--break-->
 
 Last fall, my wife took me to visit Philip Johnson's Glass House in New Caanan,
 CT. Beautiful and simple, the Glass House rests on a property filled with
