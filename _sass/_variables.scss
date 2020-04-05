@@ -2,24 +2,36 @@
 
 //Pallette
 $white: #fff;
-$blue: #0000ee;
+$blue: #3A5CC5;
 $banana: #ffc30d;
 $gun: #424651;
-$turquoise: #85BAB0;
 $cherry: #ED1941;
-$cocoa: #575151;
-$eggshell: #f1f1f1;
-$ink: #121212;
-$graphite: #333;
+
 
 $black: #000;
+$graphite: #333;
 $gray-dark: #444;
+$ink: #4C4D4A;
 $gray: #777;
 $gray-light: #DDD;
 
-$bg-color: $white;
 
-$link-color: $blue;
+// hhkb photo from profile
+$free-blue: #455AC8; // blue esc key
+$lavender: #E9E9F0; // bg color
+$link-water: #C5C9D9; // shift key
+$topaz: #7F7E81; // hhkb logo
+$fire-brick: #AA1F11; // ctrl key
+
+$bg-color: $lavender;
+$primary-text-color: $black;
+$secondary-text-color: $topaz;
+$link-color: $free-blue;
+$card-bg-color: $white;
+
+$btn-color: $link-water;
+$primary-btn-color: $free-blue;
+$secondary-btn-color: $fire-brick;
 
 // Typography
 $mono-font-family: "Lucida Console", Monaco, monospace;
@@ -38,4 +50,4 @@ $h4-font-size: 1.25 * $base-font-size;
 $h5-font-size: $base-font-size;
 $h6-font-size: .875 * $base-font-size;
 $headings-line-height: 1.2;
-$headings-font-weight: 700;
+$headings-font-weight: 400;

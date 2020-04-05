@@ -4,25 +4,19 @@ title: Web Developer | Anthony Gonzales
 description: I'm a front-end web developer. Take a look at my skills, get to know me, drop me a line.
 ---
 
-<div class="container max-width home blog">
+<div class="max-width home blog">
   {% for post in site.posts%}
-    <article class="blog-post">
+    <article class="blog-post card">
       <div class="post-meta">
         <time class="post-timestamp" itemprop="datePublished"> {{ post.date | date: "%B %d, %Y" }}</time>
       </div>
-      <h2 class="blog-post-title">
-        <a class="blog-post-link" href="{{ post.url }}">{{ post.title }}</a>
-      </h2>
+      <h2 class="blog-post-title">{{ post.title }}</h2>
 
       <div class="blog-post-content">
         {{ post.excerpt }}
-
-        <a href="{{ post.url }}">Read more &#8594;</a>
       </div>
 
+      <a class="btn" href="{{ post.url }}">Read more &#8594;</a>
     </article>
-    {% if post != site.posts.last  %}
-    <hr>
-    {% endif %}
   {% endfor %}
 <div>

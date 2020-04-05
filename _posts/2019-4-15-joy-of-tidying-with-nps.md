@@ -45,7 +45,7 @@ npm does not require the use of `run`. These include:
 
 nps allows you to take advantage of `npm start` by acting as a pass-through.
 
-```javascript
+```json
 {
   "scripts": {
     "start": "nps"

@@ -28,7 +28,7 @@ Here is some real code I found on a recent project with the class names altered.
 
 **Some crappy SCSS**
 
-{% highlight css %}
+{% highlight scss linenos %}
 .cat-product {
   .panel-col-first {
     .expanded {
@@ -89,7 +89,7 @@ Here is some real code I found on a recent project with the class names altered.
 
 **Evaluates to crappy CSS**
 
-{% highlight css %}
+{% highlight css linenos %}
 .cat-product .panel-col-first .expanded ul {
   display: none;
 }
@@ -166,7 +166,7 @@ The second issue is that the code uses almost no classes on the elements. Obviou
 
 Let's take our example and clean up some of the rules with new classes and some vanilla CSS. I'll start by creating a class name for the menu. Let's go with .cat-menu. Hipsters and grandmas give 10 out of 10 cat paws for my naming conventions.
 
-{% highlight css %}
+{% highlight scss linenos %}
 .active-trail .menu {
 	display: block;
 }
@@ -208,7 +208,7 @@ I use these mixins across all projects in addition to the ones provided by Compa
 
 **How not to use a mixin**
 
-{% highlight scss %}
+{% highlight scss linenos %}
 @mixin cat-form-mixin() {
   .form-item {
     margin-top: 0;
@@ -248,7 +248,7 @@ Variables provide an excellent way to reuse even more granular bits of code for 
 
 A lot of the ways I've structured my variables has been shamelessly stolen from Bootstrap and the Skeleton front-end frameworks, but I think they illustrate the kinds of things you can reuse throughout your style sheets.
 
-{% highlight scss %}
+{% highlight scss linenos %}
 //  Variables
 
 // Colors
