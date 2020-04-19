@@ -24,6 +24,7 @@
   padding: 1rem;
   color: $primary-text-color;
   background-color: $btn-color;
+  text-decoration: none;
   &:visited,
   &:hover,
   &:focus {
@@ -154,6 +155,7 @@
 .highlight pre {
   margin: 0;
   white-space: pre-wrap;
+  color: $white;
 }
 
 @media (max-width: 577px ) {

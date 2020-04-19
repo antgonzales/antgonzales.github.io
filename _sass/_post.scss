@@ -26,6 +26,15 @@
   margin-bottom: 4rem;
 }
 
+.post-img-credit {
+  margin: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
+
 .post-header-link {
   position: absolute;
   width: 100%;
@@ -35,13 +44,14 @@
   bottom: 0;
   left: 0;
   &:before {
+    display: none;
     position: absolute;
     left: -3rem;
     content: '#';
-    color: $gray-light;
+    color: $blue;
   }
   &:hover:before {
-    color: $blue;
+    display: block;
   }
 }
 
