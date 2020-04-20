@@ -27,15 +27,15 @@ management, and provides legibility for other developers to make changes.
 Photo by James Vaughan (CC BY-NC-SA 2.0)
 
 Last fall, my wife took me to visit Philip Johnson's Glass House in New Caanan,
-CT. Beautiful and simple, the Glass House rests on a property filled with
-several other experimental creations including a bunker that houses art by Andy
-Warhol and Jasper Johns. The house itself is four walls of glass with 360 degree
-views of the surrounding woods where coyotes howl at night. On the property,
-there's a perilously large staircase that extends to nowhere, a footbridge that
-intentionally bounces as you cross a dry creek, and a highly toxic cactus that
-rests on his desk. One of Mr. Johnson's guiding principles in architecture is
-the concept of "Safe Danger"; the idea that we are most engaged when we can take
-risks in a safe environment.
+CT. Beautiful and simple, the Glass House is an icon of modern architecture. It
+rests on a property filled with Johnson’s experimental creations-- including a
+bunker that houses art by Andy Warhol and Jasper Johns. The house itself is four
+walls of glass with 360 degree views of the surrounding woods where coyotes howl
+at night. On the property, there's a perilously large staircase that extends to
+nowhere, a footbridge that intentionally bounces as you cross a dry creek, and a
+highly toxic cactus that rests on his desk. One of Mr. Johnson's guiding
+principles in architecture is the concept of "Safe Danger"; the idea that we are
+most engaged when we can take risks in a safe environment.
 
 Testing provides an environment for developers to take risks safely to produce
 their best work. Each commit comes with a set of assertions that proves that the
