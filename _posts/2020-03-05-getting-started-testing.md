@@ -72,11 +72,16 @@ confident that they are moving fast without causing damage.
 
 ## Documentation for free
 
+TDD benefits developers by offering 
+
 One of the biggest challenges for software projects is documentation. Often
 times, projects are made quickly and documentation is made later. Developers
 have to comb through the code base to determine how the code works and what
 parts need to communicated. One of the bonuses of testing is that behavior is
-documented in the test suite. Assertions are described
+documented in the test suite. Assertions use plain English and describe the
+expected behavior of a specific piece of code. A well maintained test suite is
+not a substitute for documentation but it can make the process of writing
+documentation much faster.
 
 ## Red, Green, Refactor
 
@@ -99,18 +104,15 @@ past the initial learning curve it becomes second nature.
 
 ### A word on "refactoring"
 
-Developers love spending time refactoring. After a major project or a large
-push, developers will generally ask time to spend refactoring. When they join a
-project, they'll ask to spend time refactoring. What does refactoring mean?
-According to [Martin Fowler](https://refactoring.com/), "Refactoring is a
-disciplined technique for restructuring an existing body of code, altering its
-internal structure without changing its external behavior.". The key phrase in
-this definition is "without changing it's external behavior". Implicit in this
-definition is confidence and certainty. How can you be confident that your
-changes didn't change external behavior? I posit that the only way you can have
-certainty is through some form of checking, either manually or through automated
-tests. If you are changing code and have no meaningful feedback, you are
-rewriting code, not refactoring it.
+What does refactoring mean? According to [Martin
+Fowler](https://refactoring.com/), "Refactoring is a disciplined technique for
+restructuring an existing body of code, altering its internal structure without
+changing its external behavior.".  The key phrase in this definition is "without
+changing it's external behavior".  Implicit in this definition is confidence and
+certainty. How can you be confident that your changes didn't change external
+behavior? I posit that the only way you can have certainty is through some form
+of checking, either manually or through automated tests. Changing code without
+meaningful feedback is rewriting, not refactoring.
 
 ## Todo list example
 
