@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Getting started testing: culture and practice"
+title:  "Learn Test-Driven Development with React: culture and practice"
 description: "Test-Driven Development is a cultural hot button issue. Let's
-discuss the reasons why you should begin testing, how to get started with a
-practical example"
+discuss why you should start TDD, how to begin with a practical example in
+React"
 date: 2020-04-21
 ---
 
@@ -22,7 +22,7 @@ and provides legibility for other developers to make changes.
 
 <!--break-->
 
-## Safe Danger
+## Safe danger
 
 ![Philip Johnson's Glass House at night](/assets/img/glass-house-at-night-compressed.jpg)
 
@@ -37,7 +37,7 @@ walls of glass with 360-degree views of the surrounding woods where coyotes howl
 at night. On the property, there's a perilously large staircase that extends to
 nowhere, a footbridge that intentionally bounces as you cross a dry creek and a
 highly toxic cactus that rests on his desk. One of Mr. Johnson's guiding
-principles in architecture is the concept of "Safe Danger"; the idea that we are
+principles in architecture is the concept of "safe danger"; the idea that we are
 most engaged when we can take risks in a safe environment.
 
 Testing provides an environment for developers to take risks safely to produce
@@ -53,7 +53,7 @@ up for failure or responsible for the loss of revenue due to a production bug.
 With a testing library, we can build an environment that encourages people to
 not only take risks but have fun along the way.
 
-## Confidence and Trust
+## Confidence and trust
 
 At the heart of any team is the ability for members to trust one another to make
 choices. Teams with low levels of trust inevitably create systems to prevent
@@ -92,7 +92,7 @@ and describe the expected behavior of a specific piece of code. A
 well-maintained test suite is not a substitute for documentation, but it can
 make the process of writing documentation much faster.
 
-## Red, Green, Refactor
+## Red, green, refactor
 
 Test Driven Development is a recursive set of steps a software developer follows
 to create new features. You write tests first, then write enough code to satisfy
