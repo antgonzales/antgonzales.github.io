@@ -4,18 +4,21 @@ title:  "Getting started testing: culture and practice"
 description: "Test Driven Development is a cultural hot button issue for many
 software organizations. Let's discuss the reasons why you should begin testing
 and how to get started with a practical example"
-date: 2020-03-05
+date: 2020-04-21
 ---
 
 Across all of my professional software projects, I insist on Test Driven
-Development (TDD). Not all developers share my enthusiasm and see testing as an
-onerous and costly. There's so much to learn, you have to maintain a whole set
-of dependencies and libraries, you have to mock dependencies, it takes so long,
-and the list goes on.  These concerns are cultural and have less to do with
-proficiency.  TDD is another skill to learn and a powerful tool for the long
-term health of a software project.  Test Driven Development creates a safe
-environment for developers to take risks, builds trust between team members and
-management, and provides legibility for other developers to make changes.
+Development (TDD). Not all developers share my enthusiasm and some see testing
+as onerous and costly. There's so much to learn, you have to maintain a whole
+set of dependencies and libraries, you have to mock dependencies, it takes too
+long, and the list goes on. These concerns are cultural and have less to do with
+proficiency. TDD is another skill to learn and a powerful tool for the long term
+health of a software project. Test-Driven Development creates a safe environment
+for developers to take risks, builds trust between team members and management,
+and provides legibility for other developers to make changes.
+
+* Do not remove this line (it will not be displayed)
+{:toc}
 
 <!--break-->
 
@@ -28,11 +31,11 @@ Photo by James Vaughan (CC BY-NC-SA 2.0)
 
 Last fall, my wife took me to visit Philip Johnson's Glass House in New Caanan,
 CT. Beautiful and simple, the Glass House is an icon of modern architecture. It
-rests on a property filled with Johnson’s experimental creations-- including a
+rests on a property filled with Johnson’s experimental creations, including a
 bunker that houses art by Andy Warhol and Jasper Johns. The house itself is four
-walls of glass with 360 degree views of the surrounding woods where coyotes howl
+walls of glass with 360-degree views of the surrounding woods where coyotes howl
 at night. On the property, there's a perilously large staircase that extends to
-nowhere, a footbridge that intentionally bounces as you cross a dry creek, and a
+nowhere, a footbridge that intentionally bounces as you cross a dry creek and a
 highly toxic cactus that rests on his desk. One of Mr. Johnson's guiding
 principles in architecture is the concept of "Safe Danger"; the idea that we are
 most engaged when we can take risks in a safe environment.
@@ -40,57 +43,64 @@ most engaged when we can take risks in a safe environment.
 Testing provides an environment for developers to take risks safely to produce
 their best work. Each commit comes with a set of assertions that proves that the
 newly added code has been thoughtfully examined. It gives team members the
-ability to completely gut the contents of production code and not lose any sleep
-over it.  Anybody can re-arrange files, rename functions and variables, and
+ability to completely gut the contents of the production code and not lose any
+sleep over it. Anybody can rearrange files, rename functions and variables, and
 break large pieces down into new abstractions. I can add a new feature and not
-worry about a co-worker (or myself in most cases) not understanding the behavior
+worry about a coworker (or myself in most cases) not understanding the behavior
 at a later date. When a new person joins the company, they feel confident that
-they will get early feedback that they broke something. Nobody wants to feel
-setup for failure or responsible for loss of revenue due to a production bug.
-With a testing library, we are able to build an environment that encourages
-people to not only take risks, but have fun along the way.
+they will get early feedback that they broke something. Nobody wants to feel set
+up for failure or responsible for the loss of revenue due to a production bug.
+With a testing library, we can build an environment that encourages people to
+not only take risks but have fun along the way.
 
 ## Confidence and Trust
 
 At the heart of any team is the ability for members to trust one another to make
 choices. Teams with low levels of trust inevitably create systems to prevent
-people from making choices. Beauracy takes hold and the innovative spark is lost
-as team members begin to feel like they're cogs in a machine. In web development, we
-prize our ability to make choices and we thrive on learning. By taking away a
-developer's ability to think, you take away their ability to make an impact on a
-technology stack. Your junior developer today could become the person that
-creates something that fundamentally changes the business tomorrow but you need
-to give that person the room to make mistakes and learn.
+people from making choices. Bureaucracy takes hold and the innovative spark is
+lost as team members begin to feel like they're cogs in a machine. In web
+development, we prize our ability to make choices and we thrive on learning. By
+taking away a developer's ability to think, you take away their ability to make
+an impact on a technology stack. Your junior developer today could become the
+person that creates software that fundamentally changes the business tomorrow,
+but you need to give that person the room to make mistakes and learn.
 
-By building a culture that insists on testing as a priority, you build trust
-between team members and stakeholders. Bugs and unintended side effects are
-minimized. Silly mistakes are removed and handled before they reach a
-staging environment. Customers experience less downtime, management doesn't feel
-the need to create beauracratic systems, and developers get to try new things.
-Nobody loses sleep over a deploy, features are shipped, and the team feels
-confident that they are moving fast without causing damage.
+You build trust between team members and stakeholders by developing a culture
+that prioritizes testing. Bugs and unintended side effects are minimized. Silly
+mistakes are removed and handled before they reach a staging environment.
+Customers experience less downtime, management doesn't feel the need to create
+bureaucratic systems, and developers get to try new things.  Nobody loses sleep
+over a deploy, features are shipped, and the team feels confident that they are
+moving fast without causing damage.
 
 ## Documentation for free
 
-TDD benefits developers by offering 
+Legibility is a side-effect of encapsulating code into testable pieces with
+clear assertions. Legibility gives not only your team members a chance to read
+and understand your intent, but gives you a better understanding when you return
+to code at a later date. Well-written test assertions are a bit like having
+well-written annotations to a technical blueprint. You get the benefit of
+understanding the intent of the behavior, not just a visual understanding of the
+mechanics.
 
-One of the biggest challenges for software projects is documentation. Often
-times, projects are made quickly and documentation is made later. Developers
-have to comb through the code base to determine how the code works and what
-parts need to communicated. One of the bonuses of testing is that behavior is
-documented in the test suite. Assertions use plain English and describe the
-expected behavior of a specific piece of code. A well maintained test suite is
-not a substitute for documentation but it can make the process of writing
-documentation much faster.
+Writing clear documentation is another difficult challenge when working under
+strict deadlines. Oftentimes, projects are made quickly and documentation is
+made later. Developers have to comb through the codebase to determine how the
+code works and what parts need to be communicated. One of the bonuses of testing
+is that behavior is documented in the test suite. Assertions use plain English
+and describe the expected behavior of a specific piece of code. A
+well-maintained test suite is not a substitute for documentation, but it can
+make the process of writing documentation much faster.
 
 ## Red, Green, Refactor
 
 Test Driven Development is a recursive set of steps a software developer follows
-to create new features. Tests are written first, enough code is written to
-satisfy the test, the original code is refactored. Continue that process until
-you've completed your work. It's dead simple and effective.
+to create new features. You write tests first, then write enough code to satisfy
+the failing test, and lastly, refactor the code you just wrote. Continue that
+process until you've completed your work. It's dead simple and effective.
 
-I adhere to Uncle Bob's rules:
+I adhere to Uncle Bob's [Three Laws of
+TDD](http://www.butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd):
 
 1. You are not allowed to write any production code unless it is to make a
    failing unit test pass.
@@ -99,7 +109,7 @@ I adhere to Uncle Bob's rules:
 3. You are not allowed to write any more production code than is sufficient to
    pass the one failing unit test.
 
-People are usually overwhelmed by this but it's like riding a bike. Once you get
+People are usually overwhelmed by this, but it's like riding a bike. Once you get
 past the initial learning curve it becomes second nature.
 
 ### A word on "refactoring"
@@ -107,8 +117,8 @@ past the initial learning curve it becomes second nature.
 What does refactoring mean? According to [Martin
 Fowler](https://refactoring.com/), "Refactoring is a disciplined technique for
 restructuring an existing body of code, altering its internal structure without
-changing its external behavior.".  The key phrase in this definition is "without
-changing it's external behavior".  Implicit in this definition is confidence and
+changing its external behavior."  The key phrase in this definition is "without
+changing its external behavior."  Implicit in this definition is confidence and
 certainty. How can you be confident that your changes didn't change external
 behavior? I posit that the only way you can have certainty is through some form
 of checking, either manually or through automated tests. Changing code without
@@ -119,14 +129,17 @@ meaningful feedback is rewriting, not refactoring.
 For the remainder of this post, I will create a series of features for a Todo
 List Application in React, following Uncle Bob's rules, so you can see the
 changes over time. The intention is to show how the code changes, the way I
-think, what I write, and most importantly, what I leave out. The choice to not
-add or change the code is just as important as adding or changing code.
+think, what I write, and most importantly, what I leave out. I oftentimes see
+developers in interviews add more code than they need upfront to address all
+potential edgecases but those concerns aren't important until problems arise. We
+don't want to forecast problems, we want to solve the problems right in front of
+us.
 
-The full code base can be seen at on [CodeSandbox](http://bit.ly/2IW51qj).
+The full code base can be seen on [CodeSandbox](http://bit.ly/2IW51qj).
 
 ### Create the folder and test file
 
-There's different ways to organize your files and folders in a Javascript code
+There are different ways to organize your files and folders in a Javascript code
 base. I create folders for new files with an index to export contents in order
 to co-locate important pieces. The folder gives us a space to create
 test files, css, helpers, or child subcomponent folders.
@@ -208,7 +221,7 @@ Now let's start adding meaningful features.
 ### Giving the user an input
 
 In this initial pass, I'm going to attempt to add an input for the user to add
-todos.  I want to be sure that the input takes values and show the values. 
+todos.  I want to be sure that the input takes and shows the values.
 
 ```diff
 diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
@@ -264,7 +277,7 @@ index ad0c714..e9c78bc 100644
 ```
 
 After I've added my new code, I'll run the test suite to make it pass (Green). I
-think this is simple enough that no further refactoring is needed, I'll move
+think this is simple enough that no further refactoring is needed. I'll move
 forward with another set of behavior assertions.
 
 ### Saving a todo
@@ -294,7 +307,7 @@ index 9151a6e..d768b4a 100644
  });
 ```
 
-You'll notice that there is some repitition. That's okay, we want to be sure
+You'll notice that there is some repetition. That's okay, we want to be sure
 that we're completely isolating our tests to avoid weird side effects. Do not be
 tempted to stick a huge `beforeEach` setup because you want things to be DRY. If
 you start now, you'll just continue adding things to the block and it will
@@ -347,7 +360,7 @@ index e9c78bc..b75791b 100644
 ```
 
 I've introduced a new piece of state, a button to add a todo directly from the
-input state, and a list of todos. I'll run the test suite and see that it is
+input state, and a list of todos. I'll run the test suite and see that it
 passes (Green). Now that the tests are passing, let's consider refactoring.
 
 ### Refactoring after getting todo's saved
@@ -355,7 +368,7 @@ passes (Green). Now that the tests are passing, let's consider refactoring.
 Here's some things I want to consider changing:
 
 * I don't like the term "inputDispatch" and I actually like the way I named
-    "updateTodos". Feels more declarative and explicit.
+    "updateTodos". It feels more declarative and explicit.
 * I know that I could use a reducer but there really isn't a need at this moment
     to use one. I'll hold off for now.
 
@@ -390,7 +403,7 @@ index b75791b..2483839 100644
        <ul>
 ```
 
-The changes are minimal but shows the process of how we can make changes without
+The changes are minimal but show the process of how we can make changes without
 changing external behavior. Let's move on to more features.
 
 ### Reset the user input after adding a todo
@@ -494,7 +507,7 @@ index 4adf6d6..a643fee 100644
 ```
 
 We now have a comprehensive set of behaviors that we expect from our TodoList
-application. There's still a few crucial pieces that need to be addressed;
+application. There are still a few crucial pieces that need to be addressed --
 editing and deleting. Let's add those features now.
 
 ### Delete todos
@@ -573,8 +586,8 @@ I will again assess the code to see what I think, does it need to be refactored?
     simple enough to remain.
 * The render is getting larger but it's not unreadable.
 
-Nothing is really jumping out at me, still seems to be pretty reasonable. Let's
-forward with maybe our most complicated feature so far; editing.
+Nothing is really jumping out at me, it still seems to be pretty reasonable. Let's move
+forward with maybe our most complicated feature so far -- editing.
 
 ### Editing todo
 
@@ -611,7 +624,7 @@ index 20c35b8..f6a2850 100644
 ```
 
 In this test, I'm just checking the behavior of the input and not yet saving the
-text. Let's add the inline editor experience now to the code now that I have a
+text. Let's add the inline editor experience to the code now that I have a
 test failing the way I expect.
 
 ```diff
@@ -691,9 +704,9 @@ index f6a2850..efe93ba 100644
  });
 ```
 
-Things are now getting tricky. There are so many steps to set up our editing
-test assertions that I'm considering creating a test helper. I'm going to hold
-off temporarily in favor of getting the test assertions passed.
+At this point, things are now getting tricky. There are so many steps to set up
+our editing test assertions that I'm considering creating a test helper. I'm
+going to hold off temporarily in favor of getting the test assertions passed.
 
 ```diff
 diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
@@ -760,7 +773,7 @@ need to spend more time making the work clear. Let's do that now and wrap up.
 I'm going to focus on fixing the todo editor code. Our top level component knows
 too much about the internals of a todo. We can break that up but it's important
 we roll out changes in small incremental steps to be sure that we don't break
-the test suite. By having that quick feedback, we'll be able to mold into
+the test suite. By having that quick feedback, we'll be able to mold it into
 something more legible.
 
 I'll start with the render of the todo value in the loop.
@@ -793,7 +806,7 @@ index c68600f..8d8e672 100644
 ```
 
 That's maybe the smallest change I can make looking at the code and it's a great
-first step in moving the functionality of a todo into it's own concerns.
+first step in moving the functionality of a todo into its own concerns.
 
 ### Refactoring the Todo Editing Experience
 
@@ -931,7 +944,7 @@ the opportunity to practice.
 
 If you visit the Code Sandbox link, you can download the repo and begin testing
 using the Create React App scripts in the `package.json` file. You'll be able to
-pick up right where I left off and begin adding some new features. Here's a few
+pick up right where I left off and begin adding some new features. Here are a few
 things you could implement:
 
 * Hiding the 'Edit' and 'Remove' controls when the user opens the inline editing experience
@@ -940,6 +953,7 @@ things you could implement:
 
 I would focus on thinking through how you would set up a new test and making
 sure that you have the right failing test. TDD is a skill that you will
-continually need to practice, learn, and improve. I hope this long form post
-will serve as a reference for how to start improving the quality of your work as
-a software professional.
+continually need to practice, learn, and improve. I've benefited greatly in my
+professional development by having this tool available in my toolbox. I hope
+this long form post will serve as a reference for how to start your journey on
+testing.
