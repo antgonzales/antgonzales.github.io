@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "Getting started testing: culture and practice"
-description: "Test Driven Development is a cultural hot button issue for many
-software organizations. Let's discuss the reasons why you should begin testing
-and how to get started with a practical example"
+description: "Test-Driven Development is a cultural hot button issue. Let's
+discuss the reasons why you should begin testing, how to get started with a
+practical example"
 date: 2020-04-21
 ---
 
