@@ -100,7 +100,7 @@ the failing test, and lastly, refactor the code you just wrote. Continue that
 process until you've completed your work. It's dead simple and effective.
 
 I adhere to Uncle Bob's [Three Laws of
-TDD](http://www.butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd):
+TDD](http://www.butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd){:target="_blank"}:
 
 1. You are not allowed to write any production code unless it is to make a
    failing unit test pass.
@@ -115,7 +115,7 @@ past the initial learning curve it becomes second nature.
 ### A word on "refactoring"
 
 What does refactoring mean? According to [Martin
-Fowler](https://refactoring.com/), "Refactoring is a disciplined technique for
+Fowler](https://refactoring.com/){:target="_blank"}, "Refactoring is a disciplined technique for
 restructuring an existing body of code, altering its internal structure without
 changing its external behavior."  The key phrase in this definition is "without
 changing its external behavior."  Implicit in this definition is confidence and
@@ -135,7 +135,7 @@ potential edgecases but those concerns aren't important until problems arise. We
 don't want to forecast problems, we want to solve the problems right in front of
 us.
 
-The full code base can be seen on [CodeSandbox](http://bit.ly/2IW51qj).
+The full code base can be seen on [CodeSandbox](http://bit.ly/2IW51qj){:target="_blank"}.
 
 ### Create the folder and test file
 

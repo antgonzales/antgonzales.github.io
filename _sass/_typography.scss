@@ -61,7 +61,7 @@ blockquote cite a, blockquote cite a:visited, blockquote cite a:visited { color:
 code, kbd, pre, samp { font-size: 16px; }
 
 :not(pre) > code {
-  background: $graphite;
+  background-color: #002b36;
   color: $white;
   padding: .5rem;
   border-radius: .3rem;
