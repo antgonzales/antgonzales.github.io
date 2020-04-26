@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Why learn Test-Driven Development in React?"
-description: "Create a safe environment to take risks, build confidence, and write legible code. Learn how to start"
+title: "Why learn Test-Driven Development?"
+description: "Create a safe environment to take risks, build confidence, and write legible code. Learn how to start with Javascript, React"
 image: "glass-house-at-night-compressed.jpg"
 date: 2020-04-21
 ---
 
-Across all of my professional software projects, I insist on Test Driven
+Across all of my professional software projects, I insist on Test-Driven
 Development (TDD). Not all developers share my enthusiasm and some see testing
 as onerous and costly. There's so much to learn, you have to maintain a whole
 set of dependencies and libraries, you have to mock dependencies, it takes too
