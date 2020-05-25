@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Testing components that make API calls"
-description: "Create a safe environment to take risks, build confidence, and write legible code. Learn how to start"
-image: "glass-house-at-night-compressed.jpg"
-date: 2020-04-26
+description: "Don't get stuck with a single data fetching library. Write tests
+flexible enough for change"
+image: "post-boxes-on-brick-compressed.jpg"
+date: 2020-05-24
 ---
 
 Most examples that discuss [Test-Driven
@@ -14,10 +15,10 @@ includes jsdom, however, Jest does not describe a "batteries included" vision
 for server responses. Let's discuss the best way to test front-end components
 that make API calls.
 
-<!--break-->
-
 * Do not remove this line (it will not be displayed)
 {:toc}
+
+<!--break-->
 
 ## Mocks are a code smell
 
@@ -143,6 +144,14 @@ have made breaking changes to it's internals or it's API which will lead to
 false positives in our test suite.
 
 ## How to test components using a GraphQL server
+
+![Two red mail boxes against a brick wall in the
+UK](/assets/img/post-boxes-on-brick-compressed.jpg)
+
+{:.post-img-credit}
+Photo by [Kristina
+Tripkovic](https://unsplash.com/@tinamosquito?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+on [Unsplash](https://unsplash.com)
 
 With the rise of GraphQL, Apollo has made big strides in writing server and
 client-side libraries to make managing data easier. The trouble comes with their
