@@ -4,7 +4,7 @@ title: "Testing components that make API calls"
 description: "Don't get stuck with a single data fetching library. Write tests
 flexible enough for change"
 image: "post-boxes-on-brick-compressed.jpg"
-date: 2020-05-24
+date: 2020-05-25
 ---
 
 Most examples that discuss [Test-Driven
@@ -26,7 +26,7 @@ I often see examples advising that you mock an entire library. The examples mock
 axios, request, or fetch to test that a specific function is called. Here's an
 example provided by [Jest](https://jestjs.io/docs/en/tutorial-async) using React:
 
-```javascript
+```jsx
 // fetch/fetch.test.js
 import React from 'react'
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
@@ -62,10 +62,9 @@ case, our test suite is now bound to axios and the method `get()`. If your team
 wants to switch from axios to unfetch, the test example above will need to be
 re-written to account for unfetch's API.  Say you have a 4k tests on a large
 project? To properly refactor, you will need to re-write all tests that mock
-axios in addition to refactoring. You also lose your testing baseline which
-means you will need to follow Red, Green, Refactor across all of the tests you
-previously wrote. The process of changing your data fetching library will be
-tedious and prone to errors.
+axios. You will lose your testing baseline which means you will need to follow
+Red, Green, Refactor across all of the tests you previously wrote. The process
+of changing your data fetching library will be tedious and prone to errors.
 
 ## Stub the environment, not the implementation
 
@@ -86,7 +85,7 @@ responses.
 
 ## Which API stubbing library should I use?
 
-There's several but I recommend [nock](https://github.com/nock/nock) for several reasons:
+I recommend [nock](https://github.com/nock/nock) for several reasons:
 
 * Lightweight
 * Portable
@@ -100,14 +99,13 @@ project grows and ages.
 
 Let's look at nock using the previous example:
 
-```javascript
+```jsx
 // fetch/fetch.test.js
 import React from 'react'
 import nock from 'nock'
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import Fetch from '.'
-
 
 test('loads and displays greeting', async () => {
   const url = '/greeting'
@@ -143,7 +141,7 @@ dependency, we begin testing with faulty assumptions that the package will not
 have made breaking changes to it's internals or it's API which will lead to
 false positives in our test suite.
 
-## How to test components using a GraphQL server
+## How to test components using Apollo Client with GraphQL
 
 ![Two red mail boxes against a brick wall in the
 UK](/assets/img/post-boxes-on-brick-compressed.jpg)
@@ -255,6 +253,8 @@ However, I would argue that this minor detail is exactly what we need to know in
 order to have confidence in our tests and confidence that we can make changes.
 The GraphQL server expects us to perform a POST operation and if we decide to no
 longer use Apollo, we have some safety.
+
+## Swapping Apollo Client for Fetch
 
 Here's what it looks like if we no longer want to use Apollo Client and opt for
 a more close to the metal solution using
@@ -404,4 +404,18 @@ spec](https://graphql.org/learn/serving-over-http/#post-request) advises that
 you pass an object with two specific parameters; `query` and `variables`. In
 this particular case, we're sending just the query. With our request constraint
 added, we're now free to add additional responses.
+
+## Making a decision about tradeoffs
+
+The solutions I've proposed are ultimately about tradeoffs. As your software
+changes, no matter the scale, you have to make decisions about which parts you
+are comfortable living with. For some people, the notion of managing a server
+response library is more painful and tedious than just mocking libraries and
+responses. For me, the pain of not having confidence in my test suite far
+outweighs the trivial tedium of using nock.
+
+I've felt the pain of migrating a code base from one library to another,
+including libraries that fetch data. I hope this guide helps you make a decision
+about the tradeoffs in mocking dependencies versus stubbing environment
+responses.
 
