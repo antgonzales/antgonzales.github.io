@@ -73,7 +73,7 @@ front-end developers relied on Angular, Phantom, and Karma. The idea was, let's
 spin up Chrome (which every UI developer was using) and run tests with a *live*
 browser. Kicking off a live browser to run tests is just as problematic as
 mocking data fetching libraries. You get the behavior of a single browser, along
-with it's quirks, the cost of ensuring the browser can run on a CI pipeline, and
+with its quirks, the cost of ensuring the browser can run on a CI pipeline, and
 the cost of a browser turning on/off while you develop code. jsdom is the sweet
 spot between the two extremes. It's portable, follows web specs fairly well, and
 doesn't have as high of a cost as a real browser. jsdom stubs the browser environment.
@@ -92,10 +92,10 @@ There's several but I recommend [nock](https://github.com/nock/nock) for several
 * Well-documented
 
 Clocking in 170kb, it's perfect for usage in isolated unit and integration
-tests. There's no big installation and no major setup. It's a mature, well
-documented library which gives developers the ability to investigate and find
-answers to their problems easily. These aspects pay off in spades as a projects
-grows and ages.
+tests. There's no big installation and no major setup. It's a mature,
+well-documented library that gives developers the ability to investigate and
+find answers to their problems easily. These aspects pay off in spades as a
+project grows and ages.
 
 Let's look at nock using the previous example:
 
@@ -343,7 +343,7 @@ determined by the server.
 
 The goal of having a robust test suite is the ability to make changes
 confidently and receive feedback if we make changes that might cause problems.
-By removing mocks and instead stubbing the server, we're able to create a
+By removing mocks and stubbing the server, we're able to create a
 flexible test suite that ensures a server contract maintained.
 
 ## Testing with multiple requests
