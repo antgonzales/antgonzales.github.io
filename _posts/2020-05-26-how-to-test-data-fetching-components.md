@@ -5,13 +5,14 @@ description: "Don't get stuck with a single data fetching library. Write tests
 flexible enough for change"
 image: "post-boxes-on-brick-compressed.jpg"
 date: 2020-05-25
+last_modified_at: 2021-02-05
 ---
 
 Most examples that discuss [Test-Driven
 Development](https://www.anthonygonzales.dev/blog/why-learn-test-driven-development.html)
 don't include information about how to test components that fetch data. With
 Jest, we get an environment in Node.js that mimics the browser because it
-includes jsdom, however, Jest does not describe a "batteries included" vision
+provides jsdom. However, Jest does not describe a "batteries included" vision
 for server responses. Let's discuss the best way to test front-end components
 that make API calls.
 
@@ -20,7 +21,7 @@ that make API calls.
 
 <!--break-->
 
-## Mocks are a code smell
+## Mocks are risky assumptions
 
 I often see examples advising that you mock an entire library. The examples mock
 axios, request, or fetch to test that a specific function is called. Here's an
@@ -56,34 +57,44 @@ test('loads and displays greeting', async () => {
 ```
 
 This approach tests implementation details in addition to behavior. It binds our
-test suite to a library and assumes that the API for the library will not
-change. It also assumes that we're using the library method correctly.  In this
-case, our test suite is now bound to axios and the method `get()`. If your team
-wants to switch from axios to unfetch, the test example above will need to be
-re-written to account for unfetch's API.  Say you have a 4k tests on a large
-project? To properly refactor, you will need to re-write all tests that mock
-axios. You will lose your testing baseline which means you will need to follow
-Red, Green, Refactor across all of the tests you previously wrote. The process
-of changing your data fetching library will be tedious and prone to errors.
+test suite to a library and assumes that the library's API will not change. It
+also assumes that we're using the library method correctly. In this case, our
+test suite is now bound to axios, and the method `get()`. If your team wants to
+switch request libraries from axios to another option such as unfetch, the test
+example above will need to be re-written to account for unfetch's API. Say you
+have 4k tests on a large project? To properly refactor, you will need to
+re-write all tests that directly mock axios. You will lose your testing baseline
+which means you will need to follow Red, Green, Refactor across all of the tests
+you previously wrote. The process of changing your data fetching library will be
+tedious and prone to errors.
 
 ## Stub the environment, not the implementation
 
 jsdom is the backbone of UI testing in Jest. Before Jest and React, most
-front-end developers relied on Angular, Phantom, and Karma. The idea was, let's
-spin up Chrome (which every UI developer was using) and run tests with a *live*
-browser. Kicking off a live browser to run tests is just as problematic as
-mocking data fetching libraries. You get the behavior of a single browser, along
-with its quirks, the cost of ensuring the browser can run on a CI pipeline, and
-the cost of a browser turning on/off while you develop code. jsdom is the sweet
-spot between the two extremes. It's portable, follows web specs fairly well, and
-doesn't have as high of a cost as a real browser. jsdom stubs the browser environment.
+front-end developers relied on Angular, Phantom, and Karma. The idea was to spin
+up an instance of Chrome (which every UI developer was using) and run tests with
+a live browser. You get the behavior of a single browser, along with its quirks,
+the effort to ensure the browser can run on a CI pipeline, and the cost of a
+browser turning on/off while you develop code. jsdom is the sweet spot between
+running a live browser and mocking individual browser methods in node. It's
+portable, follows web specs reasonably well, and doesn't have as high a cost as
+a real browser. jsdom stubs the browser environment by implementing everything a
+browser has on node.
 
 What is the extreme opposite of mocking data fetching libraries and their
-methods? Running a live server. So what's the sweet spot in between? A library
-that follows the HTTP spec, reads incoming data, and allows you to stub
-responses.
+methods for each test suite? Running a live server. We don't want to run the
+live server while testing, so what's the sweet spot in between mocking our data
+fetching and running a server? Using a library that follows the HTTP spec, reads
+incoming data, and allows you to stub responses.
 
 ## Which API stubbing library should I use?
+
+There are several libraries available to stub server responses:
+
+* miragejs
+* msw
+* cypress
+* nock
 
 I recommend [nock](https://github.com/nock/nock) for several reasons:
 
@@ -93,9 +104,9 @@ I recommend [nock](https://github.com/nock/nock) for several reasons:
 
 Clocking in 170kb, it's perfect for usage in isolated unit and integration
 tests. There's no big installation and no major setup. It's a mature,
-well-documented library that gives developers the ability to investigate and
-find answers to their problems easily. These aspects pay off in spades as a
-project grows and ages.
+well-documented library that gives developers the ability to easily investigate
+and find answers to their problems. These aspects pay off in spades as a project
+grows and ages.
 
 Let's look at nock using the previous example:
 
@@ -133,13 +144,12 @@ In the new and immproved approach, we've done several things:
 2. Specified a response at a url and a route
 3. Removed unnecessary assertions about API calls
 
-Our test suite no longer has knowledge about the way our components fetch data.
-If you switch from axios, to fetch, or to unfetch, the test file will not
-require changes. More importantly, if you upgrade your data fetching library
-version, your test suite will give you meaningful feedback. When we mock a
-dependency, we begin testing with faulty assumptions that the package will not
-have made breaking changes to it's internals or it's API which will lead to
-false positives in our test suite.
+Our test suite no longer knows the way our components fetch data. If you switch
+from axios, fetch, or unfetch, the test file will not require changes. More
+importantly, if you upgrade your data fetching library version, your test suite
+will give you meaningful feedback. When we mock a dependency, we begin testing
+with faulty assumptions that the package will not have made breaking changes to
+its internals or its API, leading to false positives in our test suite.
 
 ## How to test components using Apollo Client with GraphQL
 
@@ -151,16 +161,16 @@ Photo by [Kristina
 Tripkovic](https://unsplash.com/@tinamosquito?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on [Unsplash](https://unsplash.com)
 
-With the rise of GraphQL, Apollo has made big strides in writing server and
-client-side libraries to make managing data easier. The trouble comes with their
-recommended approach to testing UI components that rely on Apollo.
+With the rise of GraphQL, Apollo has made significant strides in writing server
+and client-side libraries to make managing data easier. The trouble comes with
+their recommended approach to testing UI components that rely on Apollo.
 
 Apollo has created a `MockedProvider` [test
 component](https://www.apollographql.com/docs/react/development-testing/testing/)
-which allows you to test your UI components. They assert that using
-the real thing would be unpredictable as it runs against an actual backend. That
-may be true, but there's nothing stopping us from hijacking the means of
-communicating with the backend just like we did with the axios example.
+which allows you to test your UI components. They assert that using the live
+Provider would be unpredictable as it runs against an actual backend. That may
+be true, but nothing stops us from hijacking the means of communicating with the
+backend just like we did with the axios example.
 
 Here are the things I know about interfacing with Apollo and GraphQL:
 
@@ -247,12 +257,12 @@ index 8b13789..b586022 100644
 ```
 
 You may be thinking, "this looks like a lot of setup in comparison to using
-`MockProvider` as recommended". You're not wrong. We now know about some of the
+`MockedProvider` as recommended". You're not wrong. We now know about some of the
 implementation details of how Apollo fetches data from the server (POST).
-However, I would argue that this minor detail is exactly what we need to know in
-order to have confidence in our tests and confidence that we can make changes.
-The GraphQL server expects us to perform a POST operation and if we decide to no
-longer use Apollo, we have some safety.
+However, I would argue that this minor detail is what we need to know to have
+confidence in our tests and the confidence to make changes. The GraphQL server
+expects us to perform a POST operation, and if we decide to no longer use
+Apollo, we have some safety.
 
 ## Swapping Apollo Client for Fetch
 
@@ -347,19 +357,21 @@ index 0d66745..6fd98df 100644
 
 Notice that my test assertions didn't change. I've hollowed out the innards of
 the production code and was able to retain the test suite. The test suite does
-not care how I go about fetching data as long as I follow the contract
-determined by the server.
+not care about how my app fetches data as long as I follow the server's
+contract.
 
 The goal of having a robust test suite is the ability to make changes
 confidently and receive feedback if we make changes that might cause problems.
-By removing mocks and stubbing the server, we're able to create a
-flexible test suite that ensures a server contract maintained.
+By removing mocks and stubbing the server, we can create a flexible test suite
+that ensures a server contract is maintained.
 
 ## Testing with multiple requests
 
-Using GraphQL means we can't stub a single endpoint and respond with different data.
-We must control the flow of data by checking the query. Without checking the
-incoming data, we'll end up responding incorrectly to the different calls.
+Using GraphQL means we can't stub a single endpoint and respond with different
+data. With HTTP interceptors like nock, we assign one endpoint to one response.
+We must control the flow of data by checking the incoming query. Without
+checking the incoming data, we'll end up responding incorrectly to the different
+calls.
 
 ```diff
 diff --git a/src/App/App.js b/src/App/App.js
@@ -405,17 +417,17 @@ you pass an object with two specific parameters; `query` and `variables`. In
 this particular case, we're sending just the query. With our request constraint
 added, we're now free to add additional responses.
 
-## Making a decision about tradeoffs
+
+## Deciding tradeoffs
 
 The solutions I've proposed are ultimately about tradeoffs. As your software
-changes, no matter the scale, you have to make decisions about which parts you
-are comfortable living with. For some people, the notion of managing a server
-response library is more painful and tedious than just mocking libraries and
-responses. For me, the pain of not having confidence in my test suite far
-outweighs the trivial tedium of using nock.
+changes, you have to decide which parts you are comfortable living with, no
+matter the scale. For some people, the notion of managing a server response
+library is more painful and tedious than just mocking libraries and responses.
+For me, the pain of not having confidence in my test suite far outweighs the
+trivial tedium of using nock.
 
-I've felt the pain of migrating a code base from one library to another,
-including libraries that fetch data. I hope this guide helps you make a decision
-about the tradeoffs in mocking dependencies versus stubbing environment
-responses.
+I've felt the pain of migrating a codebase from one library to another,
+including libraries that fetch data. I hope this guide helps you evaluate the
+tradeoffs in mocking dependencies versus stubbing environment responses.
 
