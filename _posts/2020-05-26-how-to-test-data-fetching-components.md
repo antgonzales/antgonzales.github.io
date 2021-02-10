@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Testing components that make API calls"
-description: "Don't get stuck with a single data fetching library. Write tests
-flexible enough for change"
+description: "Learn how to test API calls in components with examples in React
+and Jest. Write tests flexible enough for change"
 image: "post-boxes-on-brick-compressed.jpg"
 date: 2020-05-25
 last_modified_at: 2021-02-05
