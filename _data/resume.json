@@ -1,0 +1,181 @@
+{
+  "basics":{
+    "name":"Anthony Gonzales",
+    "label":"Senior Software Engineer at Compass",
+    "picture":"http://0.gravatar.com/avatar/5fd4080e57721c6e9705b25e1bd48d63",
+    "email":"ozid6i16j@relay.firefox.com",
+    "phone":"",
+    "website":"https://www.anthonygonzales.dev/",
+    "summary":"Hands on developer with proven experience in building scalable and performant\nweb interfaces for some of the world’s most recognized brands. I work methodically,\ncraft innovative solutions, and participate in every part of the product life\ncycle.",
+    "location":{
+      "countryCode":"US",
+      "address":"Brooklyn, NY"
+    },
+    "profiles":[
+      {
+        "network":"LinkedIn",
+        "username":"ACoAABQJgwgBM1jwZqu5nKjxYiorSwrVYZ9stok",
+        "url":"https://www.linkedin.com/in/ACoAABQJgwgBM1jwZqu5nKjxYiorSwrVYZ9stok/"
+      },
+      {
+        "network":"Github",
+        "username":"antgonzales",
+        "url":"https://github.com/antgonzales"
+      },
+      {
+        "network":"Stack Overflow",
+        "username":"antgonzales",
+        "url":"https://stackoverflow.com/users/4500640/antgonzales"
+      }
+    ]
+  },
+  "work":[
+    {
+      "company":"Compass, Inc.",
+      "highlights":[
+        
+      ],
+      "position":"Senior Software Engineer II",
+      "startDate":"2020-03-01",
+      "summary":"Tech lead on an in house search project called Agent Search. I led standards\nand best practices on the front-end team that launched a redesign and development\neffort of search for Compass's real estate agents. This project made use of the\nprevious MLS Filters project and integrated with several other teams to create\nefficient workflows for customers.",
+      "website":"https://www.compass.com/app/agent-search"
+    },
+    {
+      "company":"Compass, Inc.",
+      "endDate":"2020-03-01",
+      "highlights":[
+        
+      ],
+      "position":"Senior Software Engineer I",
+      "startDate":"2019-09-01",
+      "summary":"Lead front-end development for Compass's MLS Filters project as Tech Lead.\nI worked with a team of developers to architect a dynamic React form system to\nperform MLS specific queries. I mentored junior developers and team members on\nTest Driven Development best practices and standards. Our team utilized Jest,\nReact Testing Library, and Cypress for testing to maintain code quality and reliability.",
+      "website":"https://www.compass.com/search"
+    },
+    {
+      "company":"Compass, Inc.",
+      "endDate":"2019-09-01",
+      "highlights":[
+        
+      ],
+      "position":"Software Engineer II",
+      "startDate":"2017-11-30",
+      "summary":"Lead front-end development for Compass's CRM application Contacts as Tech\nLead. I worked with a team of developers to architect a React application with\nRedux, Redux Sagas, and React Router. I mentored junior developers and team members\non Test Driven Development best practices and standards. Our team utilized Jest\nand Enzyme for unit testing and an in-house end-to-end test framework to maintain\ncode quality and reliability.",
+      "website":"https://www.compass.com/app/contacts"
+    },
+    {
+      "company":"Glossier",
+      "endDate":"2017-11-30",
+      "highlights":[
+        
+      ],
+      "position":"Sr. Front-end Engineer",
+      "startDate":"2016-02-28",
+      "summary":"Developed and lead front-end best practices for Glossier.com, an e-commerce\nbeauty website built on Solidus and Ruby on Rails. Added front-end unit testing\nas part of the development process. Lead migration from Angular monolith to React\ncomponents.",
+      "website":"https://www.glossier.com/"
+    },
+    {
+      "company":"Third and Grove",
+      "endDate":"2016-02-28",
+      "highlights":[
+        
+      ],
+      "position":"Front-end Architect",
+      "startDate":"2015-10-31",
+      "summary":"Managed a team of front-end engineers across all projects. I collaborated\ncross-functionally with project managers and stakeholders to project estimates\nand deadlines. I conducted front-end audits and created benchmarks to provide\ncustomer insights.",
+      "website":"https://www.thirdandgrove.com/"
+    },
+    {
+      "company":"Third and Grove",
+      "endDate":"2015-10-31",
+      "highlights":[
+        
+      ],
+      "position":"Front-end Engineer",
+      "startDate":"2014-07-31",
+      "summary":"Built reproducible best practices for templating, CSS styling, and JS interactions.\nLed code reviews on Github to ensure proper coding practices were followed.",
+      "website":"https://www.thirdandgrove.com/"
+    },
+    {
+      "company":"Blast Analytics & Marketing",
+      "endDate":"2014-07-31",
+      "highlights":[
+        
+      ],
+      "position":"Digital Marketing Assistant",
+      "startDate":"2013-01-31",
+      "summary":"",
+      "website":"https://www.blastanalytics.com/"
+    }
+  ],
+  "volunteer":[
+    
+  ],
+  "education":[
+    {
+      "institution":"Westmont College",
+      "area":"English",
+      "studyType":"Bachelor of Arts",
+      "startDate": "2006-08-01",
+      "endDate": "2010-05-01",
+      "courses":[
+        
+      ]
+    }
+  ],
+  "awards":[
+    {
+      "title":"Site of the Year Award 2015: Mint.com",
+      "date":"2015-11-30",
+      "awarder":"Acquia",
+      "summary":"Acquia’s digital agency partners submitted client sites for consideration\nacross various categories. A small committee selected 16 winning projects from\n48 finalists, evaluating each site’s visual design, functionality, integration\nand overall customer experience to identify the winners in each category. Third\nand Grove was selected for an award in the Financial Services category for Mint.com,\nof which I was a front-end architect and engineer."
+    }
+  ],
+  "publications":[
+    
+  ],
+  "skills":[
+    {
+      "name":"Programming languages",
+      "level":"Master",
+      "keywords":[
+        "Javascript",
+        "Typescript"
+      ]
+    },
+    {
+      "name":"Web development",
+      "level":"Master",
+      "keywords":[
+        "HTML",
+        "CSS",
+        "React",
+        "Redux and Redux Toolkit",
+        "Node.js",
+        "Git"
+      ]
+    },
+    {
+      "name":"Testing",
+      "level":"Master",
+      "keywords":[
+        "TDD",
+        "Jest",
+        "Cypress",
+        "Nock",
+        "Sinon"
+      ]
+    }
+  ],
+  "languages":[
+    {
+      "language":"en",
+      "fluency":"Native Speaker"
+    }
+  ],
+  "interests":[
+    
+  ],
+  "references":[
+    
+  ]
+}

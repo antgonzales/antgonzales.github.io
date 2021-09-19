@@ -1,0 +1,43 @@
+---
+layout: default
+title: Resume
+description: Resume of Anthony Gonzales, Software Developer.
+---
+{% assign basics = site.data.resume.basics %}
+{% assign work = site.data.resume.work %}
+{% assign education = site.data.resume.education %}
+{% assign skills = site.data.resume.skills %}
+<div class="max-width resume page card infinite">
+  <h1>{{ basics.name }}</h1>
+  <p>{{ basics.label}}</p>
+  <p>{{ basics.location.address }}</p>
+  <p>{{ basics.email }}</p>
+  <p>{{ basics.website }}</p>
+  {% for profile in basics.profiles %}
+    <a href={{profile.url}} target="_blank" rel="nofollow noopener">{{profile.network}}</a>
+  {% endfor %}
+
+  <h2>Profile</h2>
+  <p>{{ basics.summary }}</p>
+
+  <h2>Experience</h2>
+  {% for job in work %}
+    <h3>{{job.position}}, {{job.company}} &mdash; {{job.startDate | date: "%Y"}} &ndash; {{job.endDate | date: "%Y"}}</h3>
+    <p>{{ job.summary}}</p>
+  {% endfor %}
+
+  <h2>Education</h2>
+  {% for edu in education %}
+    <p>{{edu.institution}} &mdash; {{edu.studyType}}, {{edu.endDate | date: "%Y"}}</p>
+  {% endfor %}
+
+  <h2>Skills</h2>
+  {% for skill in skills %}
+    <h3>{{ skill.name }}</h3>
+    <ul>
+      {% for keyword in skill.keywords %}
+        <li>{{keyword}}</li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+<div>
