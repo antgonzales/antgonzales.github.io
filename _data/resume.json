@@ -38,7 +38,7 @@
       "position":"Senior Software Engineer II",
       "startDate":"2020-03-01",
       "summary":"Tech lead on an in house search project called Agent Search. I led standards\nand best practices on the front-end team that launched a redesign and development\neffort of search for Compass's real estate agents. This project made use of the\nprevious MLS Filters project and integrated with several other teams to create\nefficient workflows for customers.",
-      "website":"https://www.compass.com/app/agent-search"
+      "website":"https://www.compass.com"
     },
     {
       "company":"Compass, Inc.",
@@ -49,7 +49,7 @@
       "position":"Senior Software Engineer I",
       "startDate":"2019-09-01",
       "summary":"Lead front-end development for Compass's MLS Filters project as Tech Lead.\nI worked with a team of developers to architect a dynamic React form system to\nperform MLS specific queries. I mentored junior developers and team members on\nTest Driven Development best practices and standards. Our team utilized Jest,\nReact Testing Library, and Cypress for testing to maintain code quality and reliability.",
-      "website":"https://www.compass.com/search"
+      "website":"https://www.compass.com"
     },
     {
       "company":"Compass, Inc.",
@@ -60,7 +60,7 @@
       "position":"Software Engineer II",
       "startDate":"2017-11-30",
       "summary":"Lead front-end development for Compass's CRM application Contacts as Tech\nLead. I worked with a team of developers to architect a React application with\nRedux, Redux Sagas, and React Router. I mentored junior developers and team members\non Test Driven Development best practices and standards. Our team utilized Jest\nand Enzyme for unit testing and an in-house end-to-end test framework to maintain\ncode quality and reliability.",
-      "website":"https://www.compass.com/app/contacts"
+      "website":"https://www.compass.com"
     },
     {
       "company":"Glossier",
@@ -71,7 +71,7 @@
       "position":"Sr. Front-end Engineer",
       "startDate":"2016-02-28",
       "summary":"Developed and lead front-end best practices for Glossier.com, an e-commerce\nbeauty website built on Solidus and Ruby on Rails. Added front-end unit testing\nas part of the development process. Lead migration from Angular monolith to React\ncomponents.",
-      "website":"https://www.glossier.com/"
+      "website":"https://www.glossier.com"
     },
     {
       "company":"Third and Grove",
@@ -82,7 +82,7 @@
       "position":"Front-end Architect",
       "startDate":"2015-10-31",
       "summary":"Managed a team of front-end engineers across all projects. I collaborated\ncross-functionally with project managers and stakeholders to project estimates\nand deadlines. I conducted front-end audits and created benchmarks to provide\ncustomer insights.",
-      "website":"https://www.thirdandgrove.com/"
+      "website":"https://www.thirdandgrove.com"
     },
     {
       "company":"Third and Grove",
@@ -93,7 +93,7 @@
       "position":"Front-end Engineer",
       "startDate":"2014-07-31",
       "summary":"Built reproducible best practices for templating, CSS styling, and JS interactions.\nLed code reviews on Github to ensure proper coding practices were followed.",
-      "website":"https://www.thirdandgrove.com/"
+      "website":"https://www.thirdandgrove.com"
     },
     {
       "company":"Blast Analytics & Marketing",
@@ -104,7 +104,7 @@
       "position":"Digital Marketing Assistant",
       "startDate":"2013-01-31",
       "summary":"",
-      "website":"https://www.blastanalytics.com/"
+      "website":"https://www.blastanalytics.com"
     }
   ],
   "volunteer":[
@@ -119,7 +119,8 @@
       "endDate": "2010-05-01",
       "courses":[
         
-      ]
+      ],
+      "url": "https://www.westmont.edu"
     }
   ],
   "awards":[

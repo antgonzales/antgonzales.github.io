@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Resume
+title: Anthony Gonzales Resume
 description: Resume of Anthony Gonzales, Software Developer.
 ---
 {% assign basics = site.data.resume.basics %}
@@ -30,13 +30,13 @@ description: Resume of Anthony Gonzales, Software Developer.
 
   <h2>Experience</h2>
   {% for job in work %}
-    <h3 class="job-title">{{job.position}}, {{job.company}} &mdash; {{job.startDate | date: "%Y"}} &ndash; {{job.endDate | date: "%Y"}}</h3>
+  <h3 class="job-title">{{job.position}}, <a href={{job.website}} target="_blank" rel="nofollow noopener">{{job.company}}</a> &mdash; {{job.startDate | date: "%Y"}} &ndash; {{job.endDate | date: "%Y"}}</h3>
     <p>{{ job.summary}}</p>
   {% endfor %}
 
   <h2>Education</h2>
   {% for edu in education %}
-    <p>{{edu.institution}} &mdash; {{edu.studyType}}, {{edu.endDate | date: "%Y"}}</p>
+  <p><a href={{edu.url}} target="_blank" rel="nofollow noopener">{{edu.institution}}</a> &mdash; {{edu.studyType}}, {{edu.endDate | date: "%Y"}}</p>
   {% endfor %}
 
   <h2>Skills</h2>
