@@ -1,5 +1,9 @@
+.resume {
+  font-size: 1.6rem;
+}
 
 .resume h2, h3, h4, h5, h6 {
+  margin-top: 0;
   font-size: 2rem;
 }
 
@@ -8,6 +12,36 @@
 }
 
 .resume p {
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.resume .header {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.resume .header-title,
+.resume .header-contact-info {
+  flex: 0 0 auto;
+}
+
+.resume .header-title {
+  width: 70%;
+}
+
+.resume .header-contact-info {
+  width: 30%;
+  font-size: 1.6rem;
+}
+
+.resume .header-contact-info p {
+  margin-bottom: 0;
+}
+
+.resume .social-profiles {
+  padding-left: 0;
+  list-style-type: none;
   margin-top: 0;
 }
 
@@ -19,6 +53,12 @@
 
 .resume .skills {
   display: block;
+}
+
+.resume .skills-name,
+.resume .skills-list {
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .resume .skills-name {

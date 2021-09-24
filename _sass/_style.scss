@@ -172,4 +172,10 @@
   }
 }
 
-
+// NOTE: Remove print page title, date, etc.
+@media print { 
+  @page {
+    size: auto;
+    margin: 5mm;
+  }
+}
