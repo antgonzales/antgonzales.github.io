@@ -32,11 +32,13 @@ far:
 
 * Downloaded my media from social media accounts
 * Deleted Twitter, Instagram, and Facebook
-* Removed all details from Linkedin to use it as a roledex
-* Wrote my resume as printable page
+* Removed all details from my
+    [Linkedin profile](https://www.linkedin.com/in/anthonymgonzales/) to use it as a roledex
+* Wrote my [resume as printable webpage](/resume.html)
 * Switched to Firefox with ad blockers
 * Stopped using Alexa in the home
 
 There's more to do. I still use Big Tech&copy; for daily computing work, file
 storage, running this blog, analytics, taking photos, emailing, calendars, etc.
-I don't imagine 
+I don't imagine I'll be completely off the grid soon but I'm pleased to be more
+control of my information.
