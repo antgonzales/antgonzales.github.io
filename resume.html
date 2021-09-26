@@ -7,6 +7,7 @@ description: Resume of Anthony Gonzales, Software Developer.
 {% assign work = site.data.resume.work %}
 {% assign education = site.data.resume.education %}
 {% assign skills = site.data.resume.skills %}
+{
 <div class="max-width page card infinite">
   <div class="header">
     <div class="header-title">
@@ -29,9 +30,16 @@ description: Resume of Anthony Gonzales, Software Developer.
   <p>{{ basics.summary }}</p>
 
   <h2>Experience</h2>
+  {% assign company = '' %}
   {% for job in work %}
-  <h3 class="job-title">{{job.position}}, <a href={{job.website}} target="_blank" rel="nofollow noopener">{{job.company}}</a> &mdash; {{job.startDate | date: "%Y"}} &ndash; {% if job.endDate != nil %} {{job.endDate | date: "%Y"}} {% else %} Current {% endif %}</h3>
-    <p>{{ job.summary}}</p>
+    {% if company != job.company %}
+      {% assign company = job.company %}
+      <h3><a href={{job.website}} target="_blank" rel="nofollow noopener">{{job.company}}</a></h3>
+    {% endif %}
+    <div class="position">
+      <h4 class="job-title">{{job.position}}, {{job.startDate | date: "%Y"}} &ndash; {% if job.endDate != nil %} {{job.endDate | date: "%Y"}} {% else %} Current {% endif %}</h4>
+      <p>{{ job.summary}}</p>
+    </div>
   {% endfor %}
 
   <h2>Education</h2>
