@@ -43,7 +43,7 @@ description: Resume of Anthony Gonzales, Software Developer.
 
   <h2>Education</h2>
   {% for edu in education %}
-  <p><a href={{edu.url}} target="_blank" rel="nofollow noopener">{{edu.institution}}</a> &mdash; {{edu.studyType}}, {{edu.endDate | date: "%Y"}}</p>
+  <p><a href={{edu.url}} target="_blank" rel="nofollow noopener">{{edu.institution}}</a> &mdash; {{edu.studyType}} in {{edu.area}}, {{edu.endDate | date: "%Y"}}</p>
   {% endfor %}
 
   <h2>Skills</h2>
