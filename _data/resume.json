@@ -2,7 +2,7 @@
 
   "basics":{
     "name":"Anthony Gonzales",
-    "label":"Senior Software Engineer at Compass",
+    "label":"Software Engineer",
     "picture":"http://0.gravatar.com/avatar/5fd4080e57721c6e9705b25e1bd48d63",
     "email":"ozid6i16j@relay.firefox.com",
     "phone":"",
@@ -16,7 +16,7 @@
       {
         "network":"LinkedIn",
         "username":"anthonymgonzales",
-        "url":"https://www.linkedin.com/in/anthonymgonzales/"
+        "url":"https://www.linkedin.com/in/anthonymgonzales"
       },
       {
         "network":"Github",
