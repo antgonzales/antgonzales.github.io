@@ -2,6 +2,10 @@
   font-size: 1.6rem;
 }
 
+.resume-section {
+  margin-bottom: 3.2rem;
+}
+
 .resume h2, h3, h4, h5, h6 {
   margin-top: 0;
   font-size: 2rem;
@@ -9,6 +13,11 @@
 
 .resume h2 {
   text-transform: uppercase;
+  color: $gray;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-size: 1.2rem;
 }
 
 
@@ -28,7 +37,6 @@
 
 .resume .header-contact-info {
   width: 30%;
-  font-size: 1.6rem;
 }
 
 .resume .header-title,
@@ -41,16 +49,12 @@
 
 .resume .job-title {
   margin-bottom: 1rem;
+  font-size: 1.6rem;
+  color: $gray;
 }
 
 .resume .header-contact-info p {
   margin-bottom: 0;
-}
-
-.resume .social-profiles {
-  padding-left: 0;
-  list-style-type: none;
-  margin-top: 0;
 }
 
 .resume .title {
