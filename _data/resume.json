@@ -7,7 +7,7 @@
     "email":"hello@anthonygonzales.dev",
     "phone":"",
     "website":"https://www.anthonygonzales.dev",
-    "summary":"Hands on developer with proven experience in building scalable and performant\nweb interfaces for some of the world’s most recognized brands. I work methodically,\ncraft innovative solutions, and participate in every part of the product life\ncycle.",
+    "summary":"I'm a hands-on developer with proven experience building scalable and performant web interfaces for some of the world's most recognized brands. I work methodically, craft innovative solutions, and participate in every part of the product life cycle.",
     "location":{
       "countryCode":"US",
       "address":"Brooklyn, NY"
@@ -38,7 +38,7 @@
       ],
       "position":"Senior Software Engineer II",
       "startDate":"2020-03-01",
-      "summary":"Tech lead on an in house search project called Agent Search. I led standards\nand best practices on the front-end team that launched a redesign and development\neffort of search for Compass's real estate agents. This project made use of the\nprevious MLS Filters project and integrated with several other teams to create\nefficient workflows for customers.",
+      "summary":"I performed as tech lead on an in-house search project called Agent Search. I currently lead standards and best practices on the front-end team that launched a redesign and development effort of Search for Compass's real estate agents. This project used a previous development effort I led called the MLS Filters project and integrated with several other teams to create efficient customer workflows.\n\nMore recently, I've reduced the number of crawlers on our analytics tools by 1.2M per month resulting in better data quality and a reduction in cost across Segment and Datadog.",
       "website":"https://www.compass.com"
     },
     {
@@ -49,7 +49,7 @@
       ],
       "position":"Senior Software Engineer I",
       "startDate":"2019-09-01",
-      "summary":"Lead front-end development for Compass's MLS Filters project as Tech Lead.\nI worked with a team of developers to architect a dynamic React form system to\nperform MLS specific queries. I mentored junior developers and team members on\nTest Driven Development best practices and standards. Our team utilized Jest,\nReact Testing Library, and Cypress for testing to maintain code quality and reliability.",
+      "summary":"I led front-end development for Compass's MLS Filters project. I worked with a team of developers to architect a dynamic React form system to perform MLS-specific queries. I mentored junior developers and team members on test-driven development best practices and standards. Our team utilized Jest, React Testing Library, and Cypress for testing to maintain code quality and reliability.",
       "website":"https://www.compass.com"
     },
     {
@@ -60,7 +60,7 @@
       ],
       "position":"Software Engineer II",
       "startDate":"2017-11-30",
-      "summary":"Lead front-end development for Compass's CRM application Contacts as Tech\nLead. I worked with a team of developers to architect a React application with\nRedux, Redux Sagas, and React Router. I mentored junior developers and team members\non Test Driven Development best practices and standards. Our team utilized Jest\nand Enzyme for unit testing and an in-house end-to-end test framework to maintain\ncode quality and reliability.",
+      "summary":"Lead front-end development for Compass's CRM application Contacts as a tech lead. I worked with a team of developers to architect a React application with Redux, Redux Sagas, and React Router. I also mentored junior developers and team members on best practices and test-driven development. Our team utilized Jest and Enzyme for unit testing and an in-house end-to-end test framework to maintain code quality and reliability.",
       "website":"https://www.compass.com"
     },
     {
@@ -71,7 +71,7 @@
       ],
       "position":"Senior Front-end Engineer",
       "startDate":"2016-02-28",
-      "summary":"Developed and lead front-end best practices for Glossier.com, an e-commerce\nbeauty website built on Solidus and Ruby on Rails. Added front-end unit testing\nas part of the development process. Lead migration from Angular monolith to React\ncomponents.",
+      "summary":"Developed and led front-end best practices for Glossier.com, an e-commerce beauty website built on Solidus and Ruby on Rails. Added front-end unit testing as part of the development process. I led the migration from Angular monolith to React components.",
       "website":"https://www.glossier.com"
     },
     {
@@ -82,7 +82,7 @@
       ],
       "position":"Front-end Architect",
       "startDate":"2015-10-31",
-      "summary":"Managed a team of front-end engineers across all projects. I collaborated\ncross-functionally with project managers and stakeholders to project estimates\nand deadlines. I conducted front-end audits and created benchmarks to provide\ncustomer insights.",
+      "summary":"I managed a team of front-end engineers across all projects. I collaborated cross-functionally with project managers and stakeholders to project estimates and deadlines. I conducted front-end audits and created benchmarks to provide customer insights.",
       "website":"https://www.thirdandgrove.com"
     },
     {
@@ -93,7 +93,7 @@
       ],
       "position":"Front-end Engineer",
       "startDate":"2014-07-31",
-      "summary":"Built reproducible best practices for templating, CSS styling, and JS interactions.\nLed code reviews on Github to ensure proper coding practices were followed.",
+      "summary":"I built reproducible best practices for templating, CSS styling, and JS interactions. I led code reviews on Github to ensure developers followed best practices.",
       "website":"https://www.thirdandgrove.com"
     },
     {
@@ -129,7 +129,7 @@
       "title":"Site of the Year Award 2015: Mint.com",
       "date":"2015-11-30",
       "awarder":"Acquia",
-      "summary":"Acquia’s digital agency partners submitted client sites for consideration\nacross various categories. A small committee selected 16 winning projects from\n48 finalists, evaluating each site’s visual design, functionality, integration\nand overall customer experience to identify the winners in each category. Third\nand Grove was selected for an award in the Financial Services category for Mint.com,\nof which I was a front-end architect and engineer."
+      "summary":"Acquia’s digital agency partners submitted client sites for consideration across various categories. A small committee selected 16 winning projects from 48 finalists, evaluating each site’s visual design, functionality, integration, and overall customer experience to identify the winners in each category. Acquia selected Third and Grove for an award in the Financial Services category for Mint.com, of which I was a front-end architect and engineer."
     }
   ],
   "publications":[
@@ -164,7 +164,9 @@
         "Jest",
         "Cypress",
         "Nock",
-        "Sinon"
+        "Sinon",
+	"MSW",
+	"React Query"
       ]
     }
   ],
