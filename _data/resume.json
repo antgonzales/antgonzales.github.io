@@ -79,7 +79,7 @@
       "highlights":[
         "Migrated the website from an Angular monolith to React components.",
         "Introduced testing best practices and code quality standards.",
-        "Mentored 3 remote engineers to learn React and Javascript fundamentals.",
+        "Mentored three remote engineers to learn React and Javascript fundamentals.",
         "Beta tested and implemented Stripe payments in checkout.",
         "Collaborated with PMs and Business Intelligence to follow Segment's <a href='https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/'>Object Action Framework</a> for analytics."
       ],
