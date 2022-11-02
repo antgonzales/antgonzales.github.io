@@ -5,7 +5,7 @@ description: "Learn how to test API calls in components with examples in React
 and Jest. Write tests flexible enough for change"
 image: "post-boxes-on-brick-compressed.jpg"
 date: 2020-05-25
-last_modified_at: 2021-02-05
+last_modified_at: 2022-11-02
 ---
 
 Most examples that discuss [Test-Driven
@@ -309,17 +309,26 @@ index e9f0350..25a0b4f 100644
 
 -  if (loading) return <div>Loading...</div>;
 +  useEffect(() => {
++    const controller = new AbortController();
 +    async function fetchPokemon() {
-+      const result = await fetch('https://graphql-pokemon.now.sh', {
-+        method: 'POST',
-+        headers: {'Content-Type': 'application/json'},
-+        body: JSON.stringify({query: ALL_POKEMONS}),
-+      });
-+      const json = await result.json();
-+      setData(json.data);
++      try {
++        const result = await fetch('https://graphql-pokemon.now.sh', {
++          method: 'POST',
++          headers: {'Content-Type': 'application/json'},
++          body: JSON.stringify({query: ALL_POKEMONS}),
++          signal: controller.signal,
++        });
++        const json = await result.json();
++        setData(json.data);
++      } catch(e) {
++        console.error(e);
++      }
 +    }
 +    fetchPokemon();
 +    setIsLoading(false);
++    return () => {
++      controller.abort();
++    }
 +  }, []);
 +
 +  if (isLoading) return <div>Loading...</div>;
