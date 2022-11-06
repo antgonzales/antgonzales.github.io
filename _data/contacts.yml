@@ -1,11 +1,15 @@
 - link: 'https://www.linkedin.com/in/anthonymgonzales/'
   username: 'anthonymgonzales'
   title: 'LinkedIn'
-  
+
 - link: 'https://github.com/antgonzales'
   username: 'antgonzales'
   title: 'Github'
 
-- link: 'https://stackoverflow.com/users/4500640/antgonzales'
-  username: 'antgonzales'
+- link: 'https://stackoverflow.com/users/4500640'
+  username: 'tony g'
   title: 'Stack Overflow'
+
+- link: 'https://mastodon.online/@dietmtnview'
+  username: 'dietmtnview'
+  title: 'Mastodon'
