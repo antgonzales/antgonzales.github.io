@@ -5,7 +5,7 @@ description: "Learn how to test API calls in components with examples in React
 and Jest. Write tests flexible enough for change"
 image: "post-boxes-on-brick-compressed.jpg"
 date: 2020-05-25
-last_modified_at: 2022-11-02
+last_modified_at: 2022-11-06
 ---
 
 Most examples that discuss [Test-Driven
@@ -25,7 +25,7 @@ that make API calls.
 
 I often see examples advising that you mock an entire library. The examples mock
 axios, request, or fetch to test that a specific function is called. Here's an
-example provided by [Jest](https://jestjs.io/docs/en/tutorial-async) using React:
+example provided by [Testing Library](https://web.archive.org/web/20200512192923/https://testing-library.com/docs/react-testing-library/example-intro/){: rel="nofollow noopener" target="_blank"} using React:
 
 ```jsx
 // fetch/fetch.test.js
@@ -55,6 +55,10 @@ test('loads and displays greeting', async () => {
   expect(screen.getByRole('button')).toHaveAttribute('disabled')
 })
 ```
+
+<div class="callout warning-callout">
+Update: Testing Library recommends <a href="https://mswjs.io" re="noopener nofollow" target="_blank">Mock Service Worker</a> and no longer maintains the example above.
+</div>
 
 This approach tests implementation details in addition to behavior. It binds our
 test suite to a library and assumes that the library's API will not change. It
@@ -96,7 +100,7 @@ There are several libraries available to stub server responses:
 * cypress
 * nock
 
-I recommend [nock](https://github.com/nock/nock) for several reasons:
+I recommend [nock](https://github.com/nock/nock){: rel="nofollow noopener" target="_blank"} for several reasons:
 
 * Lightweight
 * Portable
@@ -158,15 +162,16 @@ UK](/assets/img/post-boxes-on-brick-compressed.jpg)
 
 {:.post-img-credit}
 Photo by [Kristina
-Tripkovic](https://unsplash.com/@tinamosquito?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-on [Unsplash](https://unsplash.com)
+Tripkovic](https://unsplash.com/@tinamosquito?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText){:
+rel="nofollow noopener" target="_blank"} on [Unsplash](https://unsplash.com){: rel="nofollow
+noopener" target="_blank"}
 
 With the rise of GraphQL, Apollo has made significant strides in writing server
 and client-side libraries to make managing data easier. The trouble comes with
 their recommended approach to testing UI components that rely on Apollo.
 
 Apollo has created a `MockedProvider` [test
-component](https://www.apollographql.com/docs/react/development-testing/testing/)
+component](https://www.apollographql.com/docs/react/development-testing/testing/){: rel="nofollow noopener" target="_blank"}
 which allows you to test your UI components. They assert that using the live
 Provider would be unpredictable as it runs against an actual backend. That may
 be true, but nothing stops us from hijacking the means of communicating with the
@@ -188,7 +193,7 @@ I now know about a few details in setting up a proper test:
 3. We're going to respond to a post request with the stub data
 
 For this example, I will use the free [Pokemon
-list](https://graphql-pokemon.now.sh) server, grab some fake data, and query
+list](https://graphql-pokemon.now.sh){: rel="nofollow noopener" target="_blank"} server, grab some fake data, and query
 against it.
 
 ```diff
@@ -212,7 +217,7 @@ index e69de29..0d66745 100644
 +      .post("/")
 +      .reply(200, {
 +        data: {
-+          pokemons: [
++          pokemon: [
 +            {
 +              id: "UG9rZW1vbjowMDE=",
 +              name: "Bulbasaur",
@@ -268,7 +273,7 @@ Apollo, we have some safety.
 
 Here's what it looks like if we no longer want to use Apollo Client and opt for
 a more close to the metal solution using
-[isomorphic-unfetch](https://github.com/developit/unfetch#readme):
+[isomorphic-unfetch](https://github.com/developit/unfetch#readme){: rel="nofollow noopener" target="_blank"}:
 
 ```diff
 diff --git a/package.json b/package.json
@@ -294,16 +299,16 @@ index e9f0350..25a0b4f 100644
 +import React, { useEffect, useState } from "react";
 +import fetch from 'isomorphic-unfetch';
 
--const ALL_POKEMONS = gql`
-+const ALL_POKEMONS = `
+-const ALL_POKEMON = gql`
++const ALL_POKEMON = `
    {
-     pokemons(first: 3) {
+     pokemon(first: 3) {
        id
 @@ -16,9 +15,24 @@ function List({ items = []}) {
  }
 
  export function App() {
--  const { data, loading } = useQuery(ALL_POKEMONS);
+-  const { data, loading } = useQuery(ALL_POKEMON);
 +  const [isLoading, setIsLoading] = useState(true);
 +  const [data, setData] = useState(undefined);
 
@@ -315,7 +320,7 @@ index e9f0350..25a0b4f 100644
 +        const result = await fetch('https://graphql-pokemon.now.sh', {
 +          method: 'POST',
 +          headers: {'Content-Type': 'application/json'},
-+          body: JSON.stringify({query: ALL_POKEMONS}),
++          body: JSON.stringify({query: ALL_POKEMON}),
 +          signal: controller.signal,
 +        });
 +        const json = await result.json();
@@ -391,10 +396,10 @@ index 25a0b4f..691c47a 100644
  import React, { useEffect, useState } from "react";
  import fetch from 'isomorphic-unfetch';
 
--const ALL_POKEMONS = `
-+export const ALL_POKEMONS = `
+-const ALL_POKEMON = `
++export const ALL_POKEMON = `
    {
-     pokemons(first: 3) {
+     pokemon(first: 3) {
        id
 diff --git a/src/App/App.test.js b/src/App/App.test.js
 index 6fd98df..5304b3c 100644
@@ -405,27 +410,26 @@ index 6fd98df..5304b3c 100644
  import { render } from "@testing-library/react";
 
 -import { App } from "./";
-+import { App, ALL_POKEMONS } from "./";
++import { App, ALL_POKEMON } from "./";
 
  describe("App", () => {
    it("works", async () => {
      nock("https://graphql-pokemon.now.sh")
        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
 -      .post("/")
-+      .post("/", JSON.stringify({query: ALL_POKEMONS}))
++      .post("/", JSON.stringify({query: ALL_POKEMON}))
        .reply(200, {
          data: {
-           pokemons: [
+           pokemon: [
 ```
 
 I've now added a data constraint to the post method in nock. If I don't pass
 data that matches the constraint, I will not receive the `200` reply and
 data. The [GraphQL
-spec](https://graphql.org/learn/serving-over-http/#post-request) advises that
+spec](https://graphql.org/learn/serving-over-http/#post-request){: rel="nofollow noopener" target="_blank"} advises that
 you pass an object with two specific parameters; `query` and `variables`. In
 this particular case, we're sending just the query. With our request constraint
 added, we're now free to add additional responses.
-
 
 ## Deciding tradeoffs
 
