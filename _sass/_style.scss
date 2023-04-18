@@ -47,6 +47,9 @@
   }
   background-color: $card-bg-color;
   box-shadow: 0 -1px 10px rgba(0,0,0,0.05),0 1px 4px rgba(0,0,0,0.1),0 10px 30px $bg-color;
+  @media print {
+    box-shadow: none;
+  }
   border-radius: 0.5rem;
 }
 
@@ -168,4 +171,5 @@
     padding-top: $line-height-computed;
   }
 }
+
 

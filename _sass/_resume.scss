@@ -1,0 +1,36 @@
+
+.resume h2, h3, h4, h5, h6 {
+  font-size: 2rem;
+}
+
+.resume h2 {
+  text-transform: uppercase;
+}
+
+.resume p {
+  margin-top: 0;
+}
+
+.resume .title {
+  font-size: 4rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.resume .skills {
+  display: block;
+}
+
+.resume .skills-name {
+  display: inline-block;
+}
+
+.resume .skills-list {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+}
+
+.resume .skills-list-skill {
+   display: inline-block; 
+}

@@ -7,22 +7,24 @@ description: Resume of Anthony Gonzales, Software Developer.
 {% assign work = site.data.resume.work %}
 {% assign education = site.data.resume.education %}
 {% assign skills = site.data.resume.skills %}
-<div class="max-width resume page card infinite">
-  <h1>{{ basics.name }}</h1>
-  <p>{{ basics.label}}</p>
-  <p>{{ basics.location.address }}</p>
-  <p>{{ basics.email }}</p>
-  <p>{{ basics.website }}</p>
-  {% for profile in basics.profiles %}
-    <a href={{profile.url}} target="_blank" rel="nofollow noopener">{{profile.network}}</a>
-  {% endfor %}
+<div class="max-width page card infinite">
+  <h1 class="title">{{ basics.name }}</h1>
+  <p class="description">{{ basics.label}}</p>
+  <p class="address">{{ basics.location.address }}</p>
+  <p class="email">{{ basics.email }}</p>
+  <p class="website">{{ basics.website | remove: "https://www."}}</p>
+  <ul class="social-profiles">
+    {% for profile in basics.profiles %}
+      <li>{{profile.network}}: <a href={{profile.url}} target="_blank" rel="nofollow noopener">{{profile.username}}</a></li>
+    {% endfor %}
+  </ul>
 
   <h2>Profile</h2>
   <p>{{ basics.summary }}</p>
 
   <h2>Experience</h2>
   {% for job in work %}
-    <h3>{{job.position}}, {{job.company}} &mdash; {{job.startDate | date: "%Y"}} &ndash; {{job.endDate | date: "%Y"}}</h3>
+    <h3 class="job-title">{{job.position}}, {{job.company}} &mdash; {{job.startDate | date: "%Y"}} &ndash; {{job.endDate | date: "%Y"}}</h3>
     <p>{{ job.summary}}</p>
   {% endfor %}
 
@@ -33,11 +35,13 @@ description: Resume of Anthony Gonzales, Software Developer.
 
   <h2>Skills</h2>
   {% for skill in skills %}
-    <h3>{{ skill.name }}</h3>
-    <ul>
-      {% for keyword in skill.keywords %}
-        <li>{{keyword}}</li>
-      {% endfor %}
-    </ul>
+    <div class="skills">
+      <h3 class="skills-name">{{ skill.name }}:</h3>
+      <ul class="skills-list">
+        {% for keyword in skill.keywords %}
+          <li class="skills-list-skill">{{keyword}}</li>
+        {% endfor %}
+      </ul>
+    </div>
   {% endfor %}
 <div>

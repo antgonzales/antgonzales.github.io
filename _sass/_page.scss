@@ -1,7 +1,11 @@
 .page {
   margin-top: 4.5rem;
+  @media print {
+    margin-top: 0;
+  }
 }
 
 .page-title {
   margin-top: 0;
 }
+

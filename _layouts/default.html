@@ -1,5 +1,7 @@
+{% assign page_class = page.name | remove: ".html" | remove: ".md" %}
+{% unless page_class != "" %}{% assign page_class = page.slug %}{% endunless %}
 <!doctype html>
-<html lang="en">
+<html lang="en" class={{page_class}}>
   {% include head.html %}
   <body itemscope itemtype="http://schema.org/WebPage">
   <!--[if IE]>
