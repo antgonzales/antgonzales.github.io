@@ -903,7 +903,7 @@ $(function() {
     setTimeout(showSkillsChart,graphInitDelay);
   }, {
     triggerOnce: true,
-    offset: "0"
+    offset: "60%"
   });
 
 });
@@ -914,7 +914,7 @@ $('#recent-work').waypoint(function(direction) {
   $("#aat-screenshot").addClass("fadeInLeft");
 }, {
   triggerOnce: true,
-  offset: "0"
+  offset: "60%"
 });
 
 // Typer animation
@@ -928,6 +928,7 @@ $(function () {
   }
   
 });
+
 
 // Sticky Nav animation
 $(function() {  
