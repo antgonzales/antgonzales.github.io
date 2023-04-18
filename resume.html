@@ -30,7 +30,7 @@ description: Resume of Anthony Gonzales, Software Developer.
 
   <h2>Experience</h2>
   {% for job in work %}
-  <h3 class="job-title">{{job.position}}, <a href={{job.website}} target="_blank" rel="nofollow noopener">{{job.company}}</a> &mdash; {{job.startDate | date: "%Y"}} &ndash; {{job.endDate | date: "%Y"}}</h3>
+  <h3 class="job-title">{{job.position}}, <a href={{job.website}} target="_blank" rel="nofollow noopener">{{job.company}}</a> &mdash; {{job.startDate | date: "%Y"}} &ndash; {% if job.endDate != nil %} {{job.endDate | date: "%Y"}} {% else %} Current {% endif %}</h3>
     <p>{{ job.summary}}</p>
   {% endfor %}
 
