@@ -926,6 +926,7 @@ input[type="submit"]:hover{background-color:#efbf22;border:3px solid #efbf22;col
 .no-cssanimations #loading-fallback{display:block;}
 .no-cssanimations #loading-spinner{background-color:none;}
 .cssanimations #loading-spinner{background-color:#fff;-webkit-animation:rotateplane 1.2s infinite ease-in-out;animation:rotateplane 1.2s infinite ease-in-out;}
+.blog-content{padding-top:27px;padding-bottom:27px;}
 html,body{height:100%;}
 body{overflow:hidden;}
 nav{display:block;float:right;font-size:21px;}
