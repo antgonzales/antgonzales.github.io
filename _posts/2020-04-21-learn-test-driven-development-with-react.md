@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Learn Test-Driven Development with React: culture and practice"
+title: "Learn Test-Driven Development with React: culture and practice"
 description: "Test-Driven Development is a cultural hot button issue. Let's
 discuss why you should start TDD, how to begin with a practical example in
 React"
+image: "glass-house-at-night-compressed.jpg"
 date: 2020-04-21
 ---
 
