@@ -1,17 +1,17 @@
 // Syntax highlighting styles
 
-.highlight { 
+.highlight {
   background-color: #eee;
   padding: 7px 7px 7px 10px;
   border-left: 3px solid #ddd;
   margin: 20px 0 20px 0;
   overflow: hidden;
 }
- 
+
 code {
   font-family:'Bitstream Vera Sans Mono','Courier', monospace;
 }
- 
+
 .highlight .c { color: #586E75 } /* Comment */
 .highlight .err { color: #93A1A1 } /* Error */
 .highlight .g { color: #93A1A1 } /* Generic */
