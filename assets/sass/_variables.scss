@@ -1,48 +1,44 @@
 // Colors
 
 //Pallette
-	$gun: #424651;
-	$turquoise: #85BAB0;
-	$yellow: #F4D569;
-	$cherry: #ED1941;
-	$cocoa: #575151;
+$white: #fff;
+$blue: #0000ee;
+$gun: #424651;
+$turquoise: #85BAB0;
+$cherry: #ED1941;
+$cocoa: #575151;
+$eggshell: #f1f1f1;
 
-	$black: #000;
-	$gray-dark: #444;
-	$gray: #777;
-	$gray-light: #DDD;
+$black: #000;
+$gray-dark: #444;
+$gray: #777;
+$gray-light: #DDD;
 
-	$bg-color: #fff;
+$bg-color: $eggshell;
 
-	$link-color: $gun;
+$link-color: $blue;
 
 // Typography
+$mono-font-family: "Inconsolata", monospace;
 
-	$sans-serif-font-family: "Lato", Helvetica, Arial, sans-serif;
-	$serif-font-family: "Georgia", "Times New Roman", serif;
+$base-font-size: 18px;
+$base-line-height: 1.5;
+$line-height-computed: $base-font-size * $base-line-height;
+$line-height-computed-half: ceil($line-height-computed / 2);
 
-	$base-font-size: 18px;
-	$base-line-height: 1.5;
-	$line-height-computed: $base-font-size * $base-line-height;
-	$line-height-computed-half: ceil($line-height-computed / 2);
-
-	$h1-font-size: ceil(2.441 * $base-font-size);
-	$h2-font-size: ceil(1.953 * $base-font-size);
-	$h3-font-size: ceil(1.563 * $base-font-size);
-	$h4-font-size: ceil(1.25 * $base-font-size);
-	$h5-font-size: $base-font-size; 
-	$h6-font-size: ceil(.875 * $base-font-size);
-	$headings-line-height: 1.2;
-	$headings-font-weight: 700;
+$h1-font-size: ceil(2.441 * $base-font-size);
+$h2-font-size: ceil(1.953 * $base-font-size);
+$h3-font-size: ceil(1.563 * $base-font-size);
+$h4-font-size: ceil(1.25 * $base-font-size);
+$h5-font-size: $base-font-size;
+$h6-font-size: ceil(.875 * $base-font-size);
+$headings-line-height: 1.2;
+$headings-font-weight: 700;
 
 // Transitions
-	$ease-in-out: all .25s ease-in-out;
-	$ease: all .5s ease;
+$ease-in-out: all .25s ease-in-out;
+$ease: all .5s ease;
 
 // Animations
-	$animation-duration: 1s;
-	$animation-delay: 2s;
-
-
-		
-
+$animation-duration: 1s;
+$animation-delay: 2s;

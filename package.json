@@ -1,21 +1,31 @@
 {
-  "name": "anthonygonzales.me",
-  "version": "0.1.0",
-  "author": "Anthony Gonzales",
-  "private": true,
+  "name": "antgonzales.github.io",
+  "version": "2.0.0",
+  "description": "The professional portfolio of front-end developer Anthony M. Gonzales.",
+  "dependencies": {},
   "devDependencies": {
-    "css-condense": "0.0.6",
-    "grunt": "~0.4.0",
-    "grunt-contrib-concat": "^0.4.0",
-    "grunt-contrib-cssmin": "^0.10.0",
-    "grunt-contrib-imagemin": "^0.8.1",
-    "grunt-contrib-jshint": "^0.9.2",
-    "grunt-contrib-sass": "^0.8.1",
-    "grunt-contrib-uglify": "^0.4.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-cssc": "^0.2.6",
-    "grunt-htmlhint": "^0.4.1",
-    "grunt-shell": "^0.6.4",
-    "matchdep": "*"
-  }
+    "autoprefixer": "^6.7.7",
+    "concat": "^3.0.0",
+    "node-sass": "^4.5.2",
+    "postcss-cli": "^3.1.1",
+    "uglify-js": "^2.8.21"
+  },
+  "scripts": {
+    "scss": "node_modules/.bin/node-sass --output-style compressed -o build/css assets/sass",
+    "postcss": "node_modules/.bin/postcss build/css/master.css --use autoprefixer -d build/css -x .min.css",
+    "build:css": "npm run scss && npm run postcss",
+    "concat": "node_modules/.bin/concat -o build/js/base.js assets/js/*",
+    "uglify": "node_modules/.bin/uglifyjs build/js/base.js -o build/js/base.min.js",
+    "build:js": "npm run concat && npm run uglify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antgonzales/antgonzales.github.io.git"
+  },
+  "author": "Anthony M. Gonzales",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antgonzales/antgonzales.github.io/issues"
+  },
+  "homepage": "https://github.com/antgonzales/antgonzales.github.io"
 }
