@@ -900,6 +900,7 @@ $(function() {
 
   $('#skills').waypoint(function(direction) {
     $("#skills-chart-container").removeClass("hidden");
+    $(".chart-legend").addClass("animated fadeInUp")
     setTimeout(showSkillsChart,graphInitDelay);
   }, {
     triggerOnce: true,

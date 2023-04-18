@@ -926,17 +926,23 @@ nav{display:block;float:right;}
 .Rails i{color:#ed1941;}
 .jQuery i{color:#575151;}
 #contact{background-color:#eee;}
-footer{padding:10px;background-color:#575151;color:#fff;}
+footer{padding:10px;background-color:#575151;color:#fff;font-size:18px;}
+.footer-inner{padding-top:15px;padding-bottom:15px;}
+.trademark,.hosting-logo{display:inline-block;}
+.hosting-logo{float:right;}
+.hosting-logo img:hover{opacity:0.5;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out;}
 .center{text-align:center;}
 @media (max-width: 577px){header{text-align:center;}
 nav{float:none;}
 .nav-logo{float:none;}
 #sticky-nav{display:none;}
 .main-nav li{margin-left:0;margin-right:10px;}
-.chart-legend li{left:5%;width:50%;}
+.chart-legend li{left:28%;width:50%;float:none;}
 }
 @media (max-width: 767px){.social-icons{padding-top:63px;}
 .top-scroll{padding-top:15px;}
+.hosting-logo{float:none;}
+.trademark,.hosting-logo{display:block;text-align:center;}
 }
 @media (max-width: 991px){.hero{text-align:center;}
 .img-list{margin:0;padding:0;}
