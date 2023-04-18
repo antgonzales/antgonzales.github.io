@@ -1,6 +1,8 @@
 name: AnthonyGonzales.me
 highlighter: pygments
 markdown: kramdown
+gems:
+  - jekyll-sitemap
 
 port: 4000
 url: http://localhost:4000
