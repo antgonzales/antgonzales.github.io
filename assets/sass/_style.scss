@@ -242,6 +242,27 @@ footer {
 
 .sidebar-list li { margin-bottom: $line-height-computed; margin-left: -40px;}
 
+.callout {
+  margin: $line-height-computed 0;
+  padding: $line-height-computed;
+  border-left: 3px solid #ddd;
+}
+
+.warning-callout {
+  border-color: $yellow;
+  p { color: darken($yellow, 15%); }
+}
+
+.danger-callout {
+  border-color: $cherry;
+  p { color: darken($cherry, 15%); }
+}
+
+.info-callout {
+ border-color: $turquoise;
+  p { color: darken($turquoise, 15%); }
+}
+
 
 @media (max-width: 577px ) {
 
