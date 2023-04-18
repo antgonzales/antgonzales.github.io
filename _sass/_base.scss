@@ -24,9 +24,12 @@ hr {
 
 a {
   color: $link-color;
-  &:visited,
+  text-decoration: none;
   &:hover,
   &:focus {
+    text-decoration: underline;
+  }
+  &:visited {
     color: darken($link-color, 15%);
   }
 }
