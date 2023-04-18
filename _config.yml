@@ -1,5 +1,5 @@
 name: AnthonyGonzales.me
-highlighter: pygments
+highlighter: rouge
 markdown: kramdown
 plugins:
   - jekyll-sitemap

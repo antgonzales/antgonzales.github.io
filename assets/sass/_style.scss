@@ -52,25 +52,17 @@ body {
 nav {
 	display: block;
 	float: right;
-	font-size: 21px;
+        font-size: 18px;
 }
 
 .nav-logo {
   display: block;
 	float: left;
-	padding-top: 10px;
+	padding-top: 11px;
 }
 
 .nav-logo a {
-  font-family: $mono-font-family;
-  font-size: 28px;
-  text-decoration: none;
-  color: $blue;
-}
-
-.nav-logo a:hover,
-.nav-logo a:focus {
-  color: darken($blue, 15%);
+  font-size: 18px;
 }
 
 .sticky-nav {
@@ -80,7 +72,7 @@ nav {
   left: 0;
   top: 0;
 	width: 100%;
-  background-color: $eggshell;
+  background-color: $white;
 }
 
 .sticky {
