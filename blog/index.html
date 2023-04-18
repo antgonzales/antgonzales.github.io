@@ -13,11 +13,9 @@ description: A front-end developer blog devoted to application development, user
     </div>
 
     <div class="blog-post-content">
-      {{ post.content | split:'<!--break-->' | first }}
+      {{ post.excerpt }}
 
-      {% if post.content contains '<!--break-->' %}
-        <a href="{{ post.url }}">Read more &#8594;</a>
-      {% endif %}
+      <a href="{{ post.url }}">Read more &#8594;</a>
     </div>
 
   </article>

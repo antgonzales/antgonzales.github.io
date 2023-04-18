@@ -235,28 +235,23 @@ footer {
   border-left: 3px solid #ddd;
 }
 
-.warning-callout {
-  border-color: $blue;
+.callout p {
+  margin: 0;
 }
 
-.warning-callout p {
-  color: darken($blue, 15%);
+.warning-callout {
+  border-color: $banana;
+  color: $banana;
 }
 
 .danger-callout {
   border-color: $cherry;
-}
-
-.danger-callout p {
-  color: darken($cherry, 15%);
+  color: $cherry;
 }
 
 .info-callout {
- border-color: $turquoise;
-}
-
-.info-callout p {
-  color: darken($turquoise, 15%);
+ border-color: $blue;
+ color: $blue;
 }
 
 .headline {
@@ -268,7 +263,7 @@ footer {
 }
 
 .highlight {
-  margin: 0;
+  margin: 0 0 $line-height-computed 0; 
 }
 
 .highlight pre {
