@@ -1,7 +1,8 @@
+{% assign twitter_contact = site.data.contacts | where: "title", "Twitter" | first  %}
 <!-- Twitter cards -->
-<meta name="twitter:card" content="summary_large_image"
-<meta name="twitter:site"    content="{{ site.data.contacts[0].username }}">
-<meta name="twitter:creator" content="{{ site.data.contacts[0].username }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site"    content="{{ twitter_contact.username }}">
+<meta name="twitter:creator" content="{{ twitter_contact.username }}">
 <meta property="og:title"   content="{{ page.title }}">
 
 {% if page.description %}
