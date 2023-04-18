@@ -1,7 +1,6 @@
 // Buttons
-.button {
+.button, .button-blog {
   display: inline-block;
-  padding: 20px 40px;
   border: 3px solid $link-color;
   border-radius: 6px;
   cursor: pointer;
@@ -15,13 +14,20 @@
   -moz-transition: $ease-in-out;
   -o-transition: $ease-in-out;
   transition: $ease-in-out; 
-  
 }
 
-.button:hover {
+.button {
+  padding: 20px 40px;
+}
+
+.button-blog {
+  padding: 10px 20px;
+}
+
+.button:hover, .button-blog:hover {
   background-color: darken($link-color, 15%);
   border: 3px solid darken($link-color, 15%);
-  color: white;
+  color: #fff;
 }
 
 @media (max-width: 577px ) {

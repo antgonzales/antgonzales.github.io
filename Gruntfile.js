@@ -80,6 +80,7 @@ module.exports = function(grunt){
         html: {
           files: [
             "index.html",
+            "blog.html",
             "_includes/*.html",
             "_layouts/*.html",
             "_posts/*.markdown",
@@ -94,10 +95,18 @@ module.exports = function(grunt){
         css: {
           files: "assets/sass/**/*.scss",
           tasks: ["buildcss", "jekyll"],
+          options: {
+            interrupt: true,
+            atBegin: true
+          }
         },
         js: {
           files: ["Gruntfile.js", "assets/js/*.js"],
-          tasks: ["buildjs"]
+          tasks: ["buildjs", "jekyll"],
+          options: {
+            interrupt: true,
+            atBegin: true
+          }
         }
   		}
   
@@ -117,5 +126,3 @@ module.exports = function(grunt){
   grunt.registerTask("jekyll", ["shell:jekyllBuild", "shell:jekyllServe"]);
 
 };
-
-//

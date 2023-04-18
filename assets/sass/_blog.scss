@@ -6,3 +6,7 @@
 }
 
 .blog-content ul { list-style: square outside; }
+
+.meta-content { display: inline-block; margin-right: $line-height-computed; color: $gray; }
+
+.meta-content i { margin-right: 5px; }

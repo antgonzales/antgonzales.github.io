@@ -5,16 +5,19 @@ title: Blog
 
 {% for post in site.posts limit:5 %}
     <article class='blog-post'>
-      <h2 class='headline'><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <h2 class='headline'><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></h2>
 
         <div class="meta-post">
-          <p class="meta"><i class="fa fa-calendar"></i> {{ post.date | date_to_string }}</p>
-          <p class="meta"><i class="fa fa-tags"></i> {{ post.categories }}</p>
+          <span class="meta-content"><i class="fa fa-calendar"></i> {{ post.date | date: "%B %d, %Y" }}</span> 
         </div>
 
       <div class="blog-content">
 
-        {{ post.content }}
+      {{ post.content | split:'<!--break-->' | first }}
+
+      {% if post.content contains '<!--break-->' %}
+        <a class="button-blog" href="{{ post.url }}">Read more <i class="fa fa-long-arrow-right"></i></a>
+      {% endif %}
 
       </div>
 
