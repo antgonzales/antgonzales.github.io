@@ -1,0 +1,141 @@
+---
+basics:
+  name: Anthony Gonzales
+  label: Senior Software Engineer at Compass
+  picture: http://0.gravatar.com/avatar/5fd4080e57721c6e9705b25e1bd48d63
+  email: ozid6i16j@relay.firefox.com
+  phone: ''
+  website: https://www.anthonygonzales.dev/
+  summary: Hands on developer with proven experience in building scalable and performant
+    web interfaces for some of the world’s most recognized brands. I work methodically,
+    craft innovative solutions, and participate in every part of the product life
+    cycle.
+  location:
+    countryCode: US
+    address: Brooklyn, NY
+  profiles:
+  - network: LinkedIn
+    username: ACoAABQJgwgBM1jwZqu5nKjxYiorSwrVYZ9stok
+    url: https://www.linkedin.com/in/ACoAABQJgwgBM1jwZqu5nKjxYiorSwrVYZ9stok/
+  - network: Github
+    username: antgonzales
+    url: https://github.com/antgonzales
+work:
+- company: Compass, Inc.
+  highlights: []
+  position: Senior Software Engineer II
+  startDate: '2020-03-01'
+  summary: Tech lead on an in house search project called Agent Search. I led standards
+    and best practices on the front-end team that launched a redesign and development
+    effort of search for Compass's real estate agents. This project made use of the
+    previous MLS Filters project and integrated with several other teams to create
+    efficient workflows for customers.
+  website: https://www.compass.com/app/agent-search
+- company: Compass, Inc.
+  endDate: '2020-03-01'
+  highlights: []
+  position: Senior Software Engineer I
+  startDate: '2019-09-01'
+  summary: Lead front-end development for Compass's MLS Filters project as Tech Lead.
+    I worked with a team of developers to architect a dynamic React form system to
+    perform MLS specific queries. I mentored junior developers and team members on
+    Test Driven Development best practices and standards. Our team utilized Jest,
+    React Testing Library, and Cypress for testing to maintain code quality and reliability.
+  website: https://www.compass.com/search
+- company: Compass, Inc.
+  endDate: '2019-09-01'
+  highlights: []
+  position: Software Engineer II
+  startDate: '2017-11-30'
+  summary: Lead front-end development for Compass's CRM application Contacts as Tech
+    Lead. I worked with a team of developers to architect a React application with
+    Redux, Redux Sagas, and React Router. I mentored junior developers and team members
+    on Test Driven Development best practices and standards. Our team utilized Jest
+    and Enzyme for unit testing and an in-house end-to-end test framework to maintain
+    code quality and reliability.
+  website: https://www.compass.com/app/contacts
+- company: Glossier
+  endDate: '2017-11-30'
+  highlights: []
+  position: Sr. Front-end Engineer
+  startDate: '2016-02-28'
+  summary: Developed and lead front-end best practices for Glossier.com, an e-commerce
+    beauty website built on Solidus and Ruby on Rails. Added front-end unit testing
+    as part of the development process. Lead migration from Angular monolith to React
+    components.
+  website: https://www.glossier.com/
+- company: Third and Grove
+  endDate: '2016-02-28'
+  highlights: []
+  position: Front-end Architect
+  startDate: '2015-10-31'
+  summary: Managed a team of front-end engineers across all projects. I collaborated
+    cross-functionally with project managers and stakeholders to project estimates
+    and deadlines. I conducted front-end audits and created benchmarks to provide
+    customer insights.
+  website: https://www.thirdandgrove.com/
+- company: Third and Grove
+  endDate: '2015-10-31'
+  highlights: []
+  position: Front-end Engineer
+  startDate: '2014-07-31'
+  summary: Built reproducible best practices for templating, CSS styling, and JS interactions.
+    Led code reviews on Github to ensure proper coding practices were followed.
+  website: https://www.thirdandgrove.com/
+- company: Blast Analytics & Marketing
+  endDate: '2014-07-31'
+  highlights: []
+  position: Digital Marketing Assistant
+  startDate: '2013-01-31'
+  summary: ''
+  website: https://www.blastanalytics.com/
+volunteer: []
+education:
+- institution: Westmont College
+  area: English
+  studyType: Bachelor of Arts (B.A.)
+  courses: []
+awards:
+- title: 'Site of the Year Award 2015: Mint.com'
+  date: '2015-11-30'
+  awarder: Acquia
+  summary: Acquia’s digital agency partners submitted client sites for consideration
+    across various categories. A small committee selected 16 winning projects from
+    48 finalists, evaluating each site’s visual design, functionality, integration
+    and overall customer experience to identify the winners in each category. Third
+    and Grove was selected for an award in the Financial Services category for Mint.com,
+    of which I was a front-end architect and engineer.
+publications: []
+skills:
+- name: HTML
+  level: ''
+  keywords: []
+- name: SEO
+  level: ''
+  keywords: []
+- name: CSS
+  level: ''
+  keywords: []
+- name: Unit Testing
+  level: ''
+  keywords: []
+- name: Git
+  level: ''
+  keywords: []
+- name: Google Analytics
+  level: ''
+  keywords: []
+- name: JavaScript
+  level: ''
+  keywords: []
+- name: SASS
+  level: ''
+  keywords: []
+- name: React
+  level: ''
+  keywords: []
+languages:
+- language: en
+  fluency: Native Speaker
+interests: []
+references: []
