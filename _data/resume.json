@@ -179,5 +179,68 @@
   ],
   "references":[
     
+  ],
+  "projects": [{
+    "name": "Benefit Cosmetics",
+    "description": "Provided on-site training to help Benefit developers theme Drupal and helped architect the admin workflow for their marketing team. Worked with backend developers to create custom modules for products, several marketing panels, page layouts and a custom cart checkout flow. Worked across contractor projects to ensure a seamless integration into the site.",
+    "highlights": [
+    ],
+    "keywords": [
+    ],
+    "startDate": "2015",
+    "endDate": "2015",
+    "url": "https://www.benefitcosmetics.com/",
+    "roles": [
+      "Tech Lead"
+    ],
+    "entity": "Entity",
+    "type": "application"
+  },
+  {
+    "name": "Fastly",
+    "description": "Fastly needed to port over their existing website from Jekyll to Drupal in order to make it easier for their marketing team to write and update content. I oversaw the work of two junior developers and reivewed code through Github’s pull request system.",
+    "highlights": [
+    ],
+    "keywords": [
+    ],
+    "startDate": "2015",
+    "endDate": "2015",
+    "url": "https://www.fastly.com/",
+    "roles": [
+    ],
+    "entity": "Entity",
+    "type": "application"
+  },
+  {
+    "name": "Dwell",
+    "description": " Provided on-site training to help Benefit developers theme Drupal and helped architect the admin workflow for their marketing team. Worked with backend developers to create custom modules for products, several marketing panels, page layouts, and a custom cart checkout flow. Worked across contractor projects to ensure a seamless integration into the site.",
+    "highlights": [
+    ],
+    "keywords": [
+    ],
+    "startDate": "2014",
+    "endDate": "2014",
+    "url": "https://www.dwell.com/",
+    "roles": [
+    ],
+    "entity": "Entity",
+    "type": "application"
+  },
+  {
+    "name": "Mint",
+    "description": "Worked closely with Intuit’s in-house developers to create fresh new marketing websites for marketers. Ensured that front-end load times were minimal due to the high volume of traffic.",
+    "highlights": [
+      "Site of the Year Award 2015: Mint.com"
+    ],
+    "keywords": [
+    ],
+    "startDate": "2014",
+    "endDate": "2014",
+    "url": "https://www.mint.com/",
+    "roles": [
+    ],
+    "entity": "Entity",
+    "type": "application"
+  }
   ]
 }
