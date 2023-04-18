@@ -1,9 +1,9 @@
 {% assign page_class = page.name | remove: ".html" | remove: ".md" %}
 {% unless page_class != "" %}{% assign page_class = page.slug %}{% endunless %}
 <!doctype html>
-<html lang="en" class={{page_class}}>
+<html lang="en">
   {% include head.html %}
-  <body itemscope itemtype="http://schema.org/WebPage">
+  <body itemscope itemtype="http://schema.org/WebPage" class={{page_class}}>
   <!--[if IE]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
