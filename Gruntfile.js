@@ -49,6 +49,22 @@ module.exports = function(grunt){
         }
       },
 
+      imagemin: {
+        dynamic: {
+          options: {
+            optimizationLevel: 7
+          },
+          files: [
+            {
+              expand: true,
+              cwd: 'assets/img/',
+              src: ['*.{png,jpg,gif}'],
+              dest: 'build/img/'
+            }
+          ]
+        }
+      },
+
       concat: {
         options: {
           separator: ";"
@@ -108,9 +124,12 @@ module.exports = function(grunt){
             interrupt: true,
             atBegin: true
           }
+        },
+        images: {
+          files: ["assets/img/*.png"],
+          tasks: ["compressimg"]
         }
   		}
-
   });
 
   grunt.loadNpmTasks("grunt-sass");
@@ -118,12 +137,15 @@ module.exports = function(grunt){
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-contrib-concat");
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-shell");
+  
 
   grunt.registerTask("default",  ["jekyll"]);
   grunt.registerTask("buildcss",  ["sass", "cssc", "cssmin"]);
   grunt.registerTask("buildjs",  ["concat", "uglify"]);
+  grunt.registerTask("compressimg",  ["imagemin"]);
   grunt.registerTask("jekyll", ["shell:jekyllBuild", "shell:jekyllServe"]);
 
 };
