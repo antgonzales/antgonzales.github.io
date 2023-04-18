@@ -3,19 +3,23 @@ layout: post
 title:  "Create a Responsive Form for Static Websites"
 description: "Learn how to create an responsive form for static websites using Simple Forms, jQuery, AJAX"
 date:   2014-04-20 21:25:29
-categories: Tutorial
-tags: [Contact Form, jQuery, Ajax]
+categories: 
+- Tutorial
+tags: 
+- Contact Form
+- jQuery 
+- Ajax
 
 ---
 
-If you’re like me, you like your contact forms to be easy to understand for users. Today we will create a contact form using jQuery Validate for your static website that doesn’t refresh the page, animates a small “Thank You” note, and sends messages to your Simple Form inbox. 
+Contact forms should be readable and easy to understand for users. Today we will create a responsive contact form using jQuery Validate for your static website that doesn’t refresh the page, animates a small “Thank You” note, and sends messages to your Simple Form inbox using AJAX. 
 
-Simple Form is great if you can’t use a server side language like PHP, for instance on Github pages. I’m hosting my website on Github Pages, so this kind of service makes sense for me. There’s a plethora of tutorials covering server side contact forms so feel free to read more elsewhere. 
+Simple Form is great if you can’t use a server side language like PHP, for instance on Github pages. I’m hosting my website on Github Pages, so this kind of service makes sense for me. There’s a plethora of [tutorials covering server side contact forms](http://code.tutsplus.com/tutorials/submit-a-form-without-page-refresh-using-jquery--net-59) so feel free to read more elsewhere. 
 
 <!--break-->
 
 ##Getting Your Simple Form Access Tokens
-In order to start, you need to create an account through Simple Form. Be sure to save any emails they send you, there is no way to login except by your private api token. You will be issued two separate tokens, one to use on your website and one to view your messages. 
+In order to start, you need to create an account through [Simple Form](http://getsimpleform.com/). Be sure to save any emails they send you, there is no way to login except by your private api token. You will be issued two separate tokens, one to use on your website and one to view your messages. 
 
 **Form API Code**
 
@@ -48,7 +52,6 @@ Let’s start by creating our form using HTML. Nothing new here, but let’s ref
   </form>
 </div>
 {% endhighlight %}
-
 
 I’ve created my form, gave the inputs names, added some classes in order to manipulate individual fields with CSS, and added placeholder text. I’ve also placed the form inside a container to add structure. The names and the classes will come in handy with the styles and jQuery Validate.
 
@@ -166,10 +169,10 @@ $(".ajax-form").validate({
 
 This is the basic setup for the way in which Validate will check the form. Each of the names of the rules correspond with the form we created earlier. Each of the options are self-explanatory but feel free to look in the reference docs for more options. 
 
-Although the form validates, it’s automatically adding error messages to the form and doesn’t submit information to our messages inbox. 
+Although the form validates, it’s automatically adding error messages to the HTML and doesn’t submit information to our messages inbox. 
 
 ##Custom Error Styles
-I don’t particularly want the error messages to pop-up. I think my form is straightforward enough for people to know whether or not they are inputting information correctly. Instead of the default messages, I want the form to highlight red on fields that aren’t properly utilized.
+I don’t particularly want the error messages to pop-up. I think my form is straightforward enough for people to know whether or not they are inputting information correctly. Instead of the default messages, I want the form to highlight fields that aren’t properly utilized with red borders.
 
 {% highlight javascript %}
 
