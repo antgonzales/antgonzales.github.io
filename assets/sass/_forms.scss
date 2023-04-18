@@ -4,25 +4,30 @@ form {
 
 input,
 textarea {
+  display: block;
 	padding: 20px;
-  border: 3px solid #ccc;
-  border-radius: 6px;
+  border: 3px solid $gun;
+  border-radius: 0;
 	background: none;
 	margin: 0 0 $line-height-computed 0;
   transition: $ease-in-out;
+  font-family: $mono-font-family;
+  font-size: 16px;
   outline: none;
 }
 
 input:focus,
 textarea:focus {
-	border: 3px solid $red;
+	border: 3px solid $blue;
 	color: $gun;
 }
 
 input[type="submit"] {
-	border: 3px solid $red;
+  width: 100%;
+	border: 3px solid $blue;
 	color: $link-color;
 	background: none;
+  cursor: pointer;
 }
 
 input[type="submit"][disabled],
@@ -33,30 +38,15 @@ input[type="submit"][disabled]:hover {
 }
 
 input[type="submit"]:hover {
-	background-color: darken($red, 15%);
-  border: 3px solid darken($red, 15%);
-  color: #fff;
+	background-color: $blue;
+  border: 3px solid $blue;
+  color: $white;
 }
 
 .name,
-.email {
-  width: 48%;
-}
-
-.name {
-  float: left;
-}
-
-.email {
-  float: right
-}
-
+.email,
 .message {
   width: 100%;
-}
-
-.form-btn {
-  text-align: center;
 }
 
 .error {

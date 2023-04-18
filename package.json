@@ -1,7 +1,7 @@
 {
   "name": "antgonzales.github.io",
   "version": "2.0.0",
-  "description": "The professional portfolio of front-end developer Anthony M. Gonzales. Built with :heart:",
+  "description": "The professional portfolio of front-end developer Anthony M. Gonzales.",
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^6.7.7",

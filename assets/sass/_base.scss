@@ -71,7 +71,7 @@ img {
 }
 
 hr {
-	border: solid $gray-light;
+	border: solid $black;
 	border-width: 1px 0 0;
 	clear: both;
 	margin-top: $line-height-computed;
@@ -88,9 +88,7 @@ a:visited {
 
 a:hover,
 a:focus {
-	color: darken($red, 15%);
-	transition: $ease-in-out;
-  text-decoration: none;
+	color: darken($blue, 15%);
 }
 
 p a,

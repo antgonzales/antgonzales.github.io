@@ -1,3 +1,3 @@
 # antgonzales.github.io
 
-This is the professional portfolio of front-end developer Anthony Gonzales from California. Built with :heart:
+The is the professional portfolio of front-end developer Anthony M. Gonzales.

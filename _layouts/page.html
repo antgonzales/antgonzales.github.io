@@ -2,15 +2,8 @@
 layout: default
 ---
 <div class="buffer-sidebar container-fluid max-width">
+  <div class="blog-content">
     <h1 class="page-title">{{ page.title }}</h1>
-    <div class="blog-content row">
-      <div class="col-md-8">
-
-      {{ content }}
-
-      </div>
-
-      {% include sidebar.html %}
-      
-    </div>
+    {{ content }}
+  </div>
 </div>
