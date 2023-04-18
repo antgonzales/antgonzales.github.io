@@ -57,13 +57,11 @@ nav {
 .hero {
 	height: 100%;
 	width: 100%;
-	background: url(../../assets/img/my-items.JPG) no-repeat center fixed;
-	background-color: $turquoise;
+	background: url(../../assets/img/my-items.JPG) no-repeat center center;
 	-webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  position: relative;
 }
 
 .hero-lead-in {
@@ -155,7 +153,7 @@ nav {
 	position:relative; 
 		li {
 			text-indent:16px;
-			line-height:$base-line-height;
+			line-height: $base-line-height;
 			position:relative;
 			font-weight:200;
 			display:block;
@@ -211,14 +209,21 @@ footer {
 		margin-left: 0;
 		margin-right: 10px;
 	}
+	.hero {
+		height: 500px;
+	}
+	.hero-lead-in {	
+		width: 100%; 
+		top: 150px;
+		left: 0;}
 	.buffer { padding-top: $line-height-computed; padding-bottom: $line-height-computed; }
-
 	.buffer-top { padding-top: $line-height-computed; }
 	.chart-legend li { 
 		left: 28%;
 		width: 50%;
 		float: none;
 	}
+	.social-icons li { padding-right: 10px; padding-left: 10px;}
 }
 
 @media (max-width: 767px) {
@@ -228,8 +233,7 @@ footer {
 	.trademark, .hosting-logo {
 		display: block;
 		text-align: center;
-	}
-
+	} 
 }
 
 @media (max-width: 992px) {
@@ -251,10 +255,6 @@ footer {
 @media (min-width: 992px) and (max-width: 1200px) {
 	#aat-screenshot { padding-top: 50px;}
 
-}
-
-@media (max-width: 1200px) {
-	.hero-lead-in { padding: 25px 0 0 0;}
 }
 
 
