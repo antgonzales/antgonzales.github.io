@@ -106,24 +106,17 @@ module.exports = function(grunt){
           tasks: ["jekyll"],
           options: {
             interrupt: true,
-            atBegin: true
+            atBegin: true,
+            livereload: true
           }
         },
         css: {
           files: "assets/sass/**/*.scss",
-          tasks: ["buildcss", "jekyll"],
-          options: {
-            interrupt: true,
-            atBegin: true
-          }
+          tasks: ["buildcss"]
         },
         js: {
           files: ["Gruntfile.js", "assets/js/*.js"],
-          tasks: ["buildjs", "jekyll"],
-          options: {
-            interrupt: true,
-            atBegin: true
-          }
+          tasks: ["buildjs"]
         },
         images: {
           files: ["assets/img/*.png"],
