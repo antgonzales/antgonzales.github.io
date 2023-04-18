@@ -1,9 +1,11 @@
 <header>
   <div class="fixed-nav">
     <div class="container-fluid max-width">
-      <div class="nav-logo">
-        <a href="/">A</a>
-      </div>
+      {% if page.url != '/' %}
+        <div class="nav-logo">
+          <a href="/">Anthony Gonzales, Web Developer</a>
+        </div>
+      {% endif %}
       <nav role="navigation">
         <ul class="main-nav">
           <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Work');" href="/#recent-work">Work</a></li>
@@ -16,9 +18,11 @@
   </div>
   <div class="sticky-nav">
     <div class="container-fluid max-width">
-      <div class="nav-logo">
-        <a href="/">A</a>
-      </div>
+      {% if page.url != '/' %}
+        <div class="nav-logo">
+          <a href="/">Anthony Gonzales, Web Developer</a>
+        </div>
+      {% endif %}
       <nav role="navigation">
         <ul class="main-nav">
            <li><a onclick="ga('send', 'event', 'Navigation', 'Click', 'Work');" href="/#recent-work">Work</a></li>
