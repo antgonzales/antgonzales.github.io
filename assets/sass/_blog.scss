@@ -45,6 +45,37 @@
   margin-right: 5px;
 }
 
+.blog-post-content {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    position: relative;
+  }
+}
+
+.blog-post-header-link {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.blog-post-header-link:before {
+  position: absolute;
+  left: -30px;
+  content: '#';
+  color: $gray-light;
+}
+
+.blog-post-header-link:hover:before {
+  color: $blue;
+}
+
 @media (max-width: 992px) {
   .blog-content {
     padding-bottom: 0;
