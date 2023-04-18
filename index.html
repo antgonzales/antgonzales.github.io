@@ -25,7 +25,8 @@
 
         <!-- Add your site or application content here -->
         <header>
-            <div id="fixed-nav" class="container-fluid nav-bar">
+            <div id="fixed-nav">
+                <div class="container-fluid max-width">
                     <div class="nav-logo">
                         <a href="#">A.Gonzales</a>
                     </div>
@@ -37,8 +38,10 @@
                             <li><a href="#contact">Contact</a></li>
                         </ul>
                     </nav>
+                </div>
             </div>
-            <div id="sticky-nav" class="container-fluid nav-bar hidden">
+            <div id="sticky-nav" class="hidden">
+                <div class="container-fluid max-width">
                     <div class="nav-logo">
                         <a href="#">A.Gonzales</a>
                     </div>
@@ -50,31 +53,34 @@
                             <li><a href="#contact">Contact</a></li>
                         </ul>
                     </nav>
+                </div>
             </div>
         </header>
 
 
-        <section id="home" class="hero container-fluid">
-            <div class="row">
-                <div class="col-md-6 ">
-                    <div class="hero-lead-in">
-                        <h1><span data-typer-targets="Hello,Hi,Howdy,Hola,Hallo,Haai,Ola,Kaixo,Moni,Aloha,Bonjour,Ciao,Hej">Hello</span>, I'm Anthony.</h1>
-                        <p class="lead">I'm a web developer focused on creating clean and engaging user experiences.</p>
+        <section id="home" class="hero">
+            <div class="container-fluid max-width">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="hero-lead-in">
+                            <h1><span data-typer-targets="Hello,Hi,Howdy,Hola,Hallo,Haai,Ola,Kaixo,Moni,Aloha,Bonjour,Ciao,Hej">Hello</span>, I'm Anthony.</h1>
+                            <p class="lead">I'm a web developer focused on creating clean and engaging user experiences.</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-6 ">
-                    <img class="portrait" src="assets/img/anthony-gonzales-portrait.png" alt="Anthony Gonzales looking real handsome." />
+                    <div class="col-md-6">
+                        <img class="portrait" src="assets/img/anthony-gonzales-portrait.png" alt="Anthony Gonzales looking real handsome." />
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="recent-work" class="buffer container-fluid">
+        <section id="recent-work" class="buffer container-fluid max-width">
             <h2 class="section-title">Recent Work</h2>
                 <div class="row ">
                     <div class="col-md-7">
                         <img id="aat-screenshot" class="invisible" src="assets/img/aat-showcase-flat-presentation.png" alt="Mockup photos of the Apartment Advisory Team website on a laptop, tablet, and mobile phone." />
-                    </div>
+                    </div>   
                     <div class="col-md-5">
                         <h3><a href="http://bit.ly/1pMxmyd" target="_blank">Apartment Advisory Team</a></h3>
                         <ul class="fa-ul">
@@ -84,14 +90,14 @@
                             <li><i class="fa-li fa fa-check-square"></i>Simple interface to input information</li>
                         </ul>
                          <p>Apartment Advisory Team is a local Sacramento commercial real estate firm. Their team needed a website to showcase properties with an image gallery, detailed information, and dynamic Google maps. I created a custom Wordpress interface to allow their marketing team to easily input information from the admin.</p>
-                    </div>
+                    </div>   
                 </div>
         </section>
 
-        <section id="skills" class="buffer container-fluid">
+        <section id="skills" class="buffer container-fluid max-width">
             <h2 class="section-title">Skills</h2>
-            <div class="row">
-                <ul class="skills-list col-md-6">
+            <div class="row buffer">
+                 <ul class="skills-list col-md-6">
                     <li><i class="fa-li fa fa-heart-o fa-2x"></i>I love learning about new technologies and techniques. I take pride in my work and enjoy discovering solutions.</li>
                     <li><i class="fa-li fa fa-search fa-2x"></i>I'm curious by nature and a researcher at heart. I take the time to follow best practices and keep my work tidy.</li> 
                     <li><i class="fa-li fa fa-clock-o fa-2x"></i>Time is valuable; I'll create a tangible timeline that meets your business needs and deadlines.</li>
@@ -113,16 +119,16 @@
             </div>
         </section>
 
-        <section id="about" class="buffer container-fluid">
+        <section id="about" class="buffer container-fluid max-width">
             <h2 class="section-title">About Me</h2>
-            <div class="row">
+            <div class="row buffer">
                 <div class="col-md-5">
                     
                         <p>My name is Anthony Gonzales and I live in Sacramento, California. I have a passion for creating beautiful, simple websites that are easily understood by users and even easier for owners to manage.</p> 
 
-                        <p>I've primarily created Wordpress websites for clients but for the last yeart I've been an attendee of the <a href="http://sacruby.info">Sacramento Ruby Users Group</a>. I'm always learning about new technologies and tinkering with the latest open-source products.</p> 
+                        <p>I've primarily created Wordpress websites for clients but I'm a regular attendee of the <a href="http://sacruby.info">Sacramento Ruby Users Group</a>. I'm always learning about new technologies and tinkering with the latest open-source products.</p> 
 
-                        <p>When I'm not making the web a prettier place, I like to spend time with my Lauren, our cat, or analyzing films. If you feel I'm the right guy for your project, or just want to have a chat, feel free to drop me a line. I love coffee and get excited about new projects.</p> 
+                        <p> If you feel I'm the right guy for your project, or just want to have a chat, feel free to contact me.</p> 
 
                 </div>
                 <div class="col-md-7">
@@ -152,17 +158,19 @@
             </div>
         </section>   
 
-        <section id="contact" class="container-fluid">
-            <h2 class="section-title">Get in touch</h2>
-            <div class="row center buffer">
-                <div class="col-md-6 col-sm-6">
-                    <a class="button" href="mailto:antgonzales@icloud.com" target="_blank">Email</a>
-                </div>
-                <div class="social-icons col-md-6 col-sm-6">
-                    <ul>
-                        <li><a href="https://twitter.com/amgnz"><i class="fa fa-twitter-square fa-4x"></i></a></li>
-                        <li><a href="http://instagram.com/antgnz"><i class="fa fa-instagram fa-4x"></i></a></li>
-                    </ul>
+        <section id="contact">
+            <div class="container-fluid max-width buffer">
+                <h2 class="section-title">Get in touch</h2>
+                <div class="row center buffer">
+                    <div class="col-md-6 col-sm-6">
+                        <a class="button" href="mailto:antgonzales@icloud.com" target="_blank">Email</a>
+                    </div>
+                    <div class="social-icons col-md-6 col-sm-6">
+                        <ul>
+                            <li><a href="https://twitter.com/amgnz"><i class="fa fa-twitter-square fa-4x"></i></a></li>
+                            <li><a href="http://instagram.com/antgnz"><i class="fa fa-instagram fa-4x"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -172,8 +180,8 @@
 
         </section>
 
-        <footer class="container-fluid">
-            <div class="footer-inner">
+        <footer>
+            <div class="footer-inner container-fluid max-width">
                 <span class="trademark">&copy; Anthony Gonzales 2014</span>
                 <span class="hosting-logo">This site is proudly hosted on <a href="https://github.com/antgonzales/antgonzales.github.io"><img src="assets/img/GitHub_Logo.png" width="75" height="50"/></a></span>
             </div>
