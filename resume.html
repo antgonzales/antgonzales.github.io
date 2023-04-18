@@ -31,7 +31,7 @@ description: Resume of Anthony Gonzales, Software Developer.
       {% endif %}
       <div class="position">
         <h4 class="job-title">{{job.position}}, {{job.startDate | date: "%Y"}} &ndash; {% if job.endDate != nil %} {{job.endDate | date: "%Y"}} {% else %} Current {% endif %}</h4>
-        <p>{{ job.summary}}</p>
+        <p>{{ job.summary | newline_to_br}}</p>
       </div>
     {% endfor %}
   </div>
