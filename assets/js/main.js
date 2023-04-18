@@ -18,7 +18,7 @@ $(function() {
 
   var width = $(window).width();
 
-  if (width >= 992) {
+  if (width >= 1200) {
     $('[data-typer-targets]').typer();
     $.typer.options.highlightSpeed = 100;
     $.typer.options.typeSpeed = 200;
