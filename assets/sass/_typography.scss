@@ -9,13 +9,13 @@
 	}
 
 	h1, h2, h3 {
-		margin-top: ceil($line-height-computed);
-		margin-bottom: ceil($line-height-computed / 2);
+		margin-top: 0;
+		margin-bottom: $line-height-computed;
 	}
 
 	h4, h5, h6 {
-		margin-top: ceil($line-height-computed / 2);
-		margin-bottom: ceil($line-height-computed / 2);
+		margin-top: $line-height-computed-half;
+		margin-bottom: $line-height-computed-half;
 	}
 
 	h1 { font-size: $h1-font-size; }
@@ -26,7 +26,7 @@
 	h6 { font-size: $h6-font-size; }
 	.subheader { color: $gray-light; }
 
-	p { margin: 0 0 ceil($line-height-computed / 2) 0; }
+	p { margin: 0 0 $line-height-computed 0; }
 	p img { margin: 0; }
 	p.lead { 
 		font-family: $sans-serif-font-family; 
@@ -51,7 +51,7 @@
 	}
 
 	blockquote { 
-		padding: ($line-height-computed / 2) $line-height-computed 0 $line-height-computed; 
+		padding: $line-height-computed-half $line-height-computed 0 $line-height-computed; 
 		border-left: 1px solid $gray-light; 
 	}
 
@@ -67,7 +67,7 @@
 
 // Lists
 
-	ul, ol { margin: ceil($line-height-computed / 2) 0 ceil($line-height-computed / 2) 0; }
+	ul, ol { margin: $line-height-computed-half 0 $line-height-computed-half 0; }
 	ul { list-style: none outside; }
 	ol { list-style: decimal; }
 	ol.list, ul.list, ul.square, ul.circle, ul.disc { margin-left: 30px; }
@@ -78,6 +78,6 @@
 	ol.list ol, ol.list ul { margin: 4px 0 5px 30px; font-size: 90%;  }
 	ul.list ul li, ul ol li,
 	ol.list ol li, ol.list ul li { margin-bottom: 6px; }
-	.list li { line-height: 1.5; margin-bottom: ($line-height-computed / 2); }
+	.list li { line-height: 1.5; margin-bottom: $line-height-computed-half; }
 	ul.large li { line-height: 21px; }
 	li p { line-height: 21px; }

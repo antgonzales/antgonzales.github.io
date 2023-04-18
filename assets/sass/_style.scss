@@ -40,6 +40,7 @@ nav {
 
 .main-nav {
 	padding: 0;
+	font-weight: bold;
 
 	li {
 		display: inline;
@@ -100,9 +101,14 @@ nav {
 	background: $yellow;
 }
 
-.social-icons {
+.social-icons-container {
 	padding: $line-height-computed 0 0 0;
 	margin: $line-height-computed 0 0 0;
+}
+
+.social-icons {
+	margin: 0;
+	padding: 0;
 		li {
 			display: inline-block;
 			padding-right: $line-height-computed-half;
@@ -122,6 +128,8 @@ nav {
 	margin-bottom: $line-height-computed * 2;
 }
 
+.fa-ul { margin-left: 1.55em; }
+
 .fa-twitter-square:hover { color: #55ACEE; }
 
 .fa-instagram:hover { color: $cocoa; }
@@ -132,11 +140,11 @@ nav {
 
 .fa-linkedin-square:hover { color: #4875B4; }
 
-.skills-list { margin: 0; padding-left: 2.142857142857143em * 2; }
+.skills-list { margin: 0; padding-left: 4em; }
 
 .skills-list > li { position: relative; }
 
-.skills-list li { margin-bottom: 40px; }
+.skills-list li { margin-bottom: 55px; }
 
 .skills-list li i { top: 15px; color: $yellow; }
 
@@ -147,7 +155,6 @@ nav {
 }
 
 .chart-legend {
-	list-style: none;
 	width: 100%;
 	margin: 30px auto 0; 
 	display: block; 
@@ -201,6 +208,38 @@ footer {
 
 .center { text-align: center; }
 
+.sidebar { background: #eee; }
+
+.sidebar-inner { padding: 20px; }
+
+.sidebar-profile-img {
+	background: $turquoise;
+	border-radius: 50%;
+	margin-bottom: $line-height-computed-half;
+}
+
+.sidebar-social-icons {
+	padding: 0;
+	margin-right: $line-height-computed-half;
+	li {
+		display: inline-block;
+		padding-right: $line-height-computed-half;
+		padding-left: 0;
+	}
+	a { color: $gray; }
+	i:hover {
+		-webkit-transition: $ease-in-out;
+		-moz-transition: $ease-in-out;
+		-o-transition: $ease-in-out;
+		transition: $ease-in-out; 
+	}
+}
+
+.sidebar-list { list-style: square outside; }
+
+.sidebar-list li { margin-bottom: $line-height-computed; margin-left: -15px;}
+
+
 @media (max-width: 577px ) {
 
 	header { text-align: center;}
@@ -224,12 +263,14 @@ footer {
 		width: 50%;
 		float: none;
 	}
+	.sidebar-profile-img { float: none !important; }
 	.social-icons li { padding-right: 10px; padding-left: 10px;}
 }
 
 @media (max-width: 767px) {
 	.social-icons { padding-top: $line-height-computed * 2; }
 	.top-scroll { padding-top: $line-height-computed-half; }
+
 	.hosting-logo { float: none; }
 	.trademark, .hosting-logo {
 		display: block;
@@ -250,12 +291,27 @@ footer {
 
 	.section-title { text-align: center;}
 
+	.sidebar-profile-img { 
+		width: 250px; 
+		float: right;
+		margin-left: $line-height-computed;
+	}
+
+	.sidebar-about-me { 
+		margin-top: $line-height-computed; 
+		padding-top: $line-height-computed;
+	}
+
 }
 
+@media (min-width: 992px) {
+	.skills-list li:last-child { margin-bottom: 0; }
+}
 
 @media (min-width: 992px) and (max-width: 1200px) {
 	#aat-screenshot { padding-top: 50px;}
 
+	.skills-list li:last-child { margin-bottom: 0; }
 }
 
 

@@ -2,29 +2,12 @@ module.exports = function(grunt){
 	require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-
-      htmlhint: {
-        build: {
-        options: {
-            'tag-pair': true,
-            'tagname-lowercase': true,
-            'attr-lowercase': true,
-            'attr-value-double-quotes': true,
-            'doctype-first': true,
-            'spec-char-escape': true,
-            'id-unique': true,
-            'head-script-disabled': true,
-            'style-disabled': true
-        },
-        src: ['index.html']
-        }
-			},
+    pkg: grunt.file.readJSON("package.json"),
 
       sass: {
           build: {
             files: {
-              'build/css/master.css': 'assets/sass/master.scss'
+              "build/css/master.css": "assets/sass/master.scss"
             }
           }
       },
@@ -40,7 +23,7 @@ module.exports = function(grunt){
               consolidateMediaQueries:    false
           },
           files: {
-            'build/css/master.css': 'build/css/master.css'
+            "build/css/master.css": "build/css/master.css"
           }
         }
       },
@@ -48,13 +31,13 @@ module.exports = function(grunt){
       cssmin: {
         build: {
           files: {
-            'build/css/master.min.css': 'build/css/master.css'
+            "build/css/master.min.css": "build/css/master.css"
           }
         }
       },
 
       jshint: {
-        files: ['Gruntfile.js', 'assets/js/main.js'],
+        files: ["Gruntfile.js", "assets/js/main.js"],
         options: {
           // options here to override JSHint defaults
           globals: {
@@ -68,49 +51,70 @@ module.exports = function(grunt){
 
       concat: {
         options: {
-          separator: ';'
+          separator: ";"
         },
         dist: {
-          src: 'assets/js/*.js',
-          dest: 'build/js/base.js'
+          src: "assets/js/*.js",
+          dest: "build/js/base.js"
         }
       },
 
       uglify: {
         build: {
           files: {
-            'build/js/base.min.js': '<%= concat.dist.dest %>'
+            "build/js/base.min.js": "<%= concat.dist.dest %>"
           }
+        }
+      },
+
+      shell: {
+        jekyllBuild: {
+            command: "jekyll build"
+        },
+        jekyllServe: {
+            command: "jekyll serve"
         }
       },
 
   		watch: {
         html: {
-          files: 'index.html',
-          tasks: ['htmlhint']
+          files: [
+            "index.html",
+            "_includes/*.html",
+            "_layouts/*.html",
+            "_posts/*.markdown",
+            "_config.yml"
+          ],
+          tasks: ["jekyll"],
+          options: {
+            interrupt: true,
+            atBegin: true
+          }
         },
         css: {
-          files: 'assets/sass/**/*.scss',
-          tasks: ['buildcss']
+          files: "assets/sass/**/*.scss",
+          tasks: ["buildcss", "jekyll"],
         },
         js: {
-          files: ['Gruntfile.js', 'assets/js/*.js'],
-          tasks: ['buildjs']
+          files: ["Gruntfile.js", "assets/js/*.js"],
+          tasks: ["buildjs"]
         }
   		}
   
   });
 
-  grunt.loadNpmTasks('grunt-sass');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks("grunt-sass");
+  grunt.loadNpmTasks("grunt-contrib-cssmin");
+  grunt.loadNpmTasks("grunt-contrib-uglify");
+  grunt.loadNpmTasks("grunt-contrib-jshint");
+  grunt.loadNpmTasks("grunt-contrib-concat");
+  grunt.loadNpmTasks("grunt-contrib-watch");
+  grunt.loadNpmTasks("grunt-shell");
 
-  grunt.task.registerTask('default',  []);
-  grunt.task.registerTask('buildcss',  ['sass', 'cssc', 'cssmin']);
-  grunt.task.registerTask('buildjs',  ['concat', 'uglify']);
+  grunt.registerTask("default",  ["jekyll"]);
+  grunt.registerTask("buildcss",  ["sass", "cssc", "cssmin"]);
+  grunt.registerTask("buildjs",  ["concat", "uglify"]);
+  grunt.registerTask("jekyll", ["shell:jekyllBuild", "shell:jekyllServe"]);
 
 };
 

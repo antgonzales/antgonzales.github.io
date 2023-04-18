@@ -24,7 +24,7 @@
 	$base-font-size: 18px;
 	$base-line-height: 1.5;
 	$line-height-computed: $base-font-size * $base-line-height;
-	$line-height-computed-half: floor($line-height-computed / 2);
+	$line-height-computed-half: ceil($line-height-computed / 2);
 
 	$h1-font-size: ceil(2.441 * $base-font-size);
 	$h2-font-size: ceil(1.953 * $base-font-size);

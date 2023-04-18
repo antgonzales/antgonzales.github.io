@@ -3,7 +3,7 @@ layout: page
 title: Blog
 ---
 
-{% for post in site.posts %}
+{% for post in site.posts limit:5 %}
     <article class='blog-post'>
       <h2 class='headline'><a href="{{ post.url }}">{{ post.title }}</a></h2>
 
@@ -21,3 +21,4 @@ title: Blog
     </article>
   <hr>
 {% endfor %}
+
