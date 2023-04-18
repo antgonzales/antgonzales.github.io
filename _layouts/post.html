@@ -1,21 +1,23 @@
 ---
 layout: default
 ---
-<div class="buffer-sidebar container-fluid max-width" itemscope itemtype="http://schema.org/Blog">
-    <h1 class="page-title">{{ page.title }}</h1>
-    <div class="blog-content row" itemscope itemtype="http://schema.org/BlogPosting">
+<div class="buffer-sidebar container-fluid max-width" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <h1 class="page-title" itemprop="headline">{{ page.title }}</h1>
+
+  <div class="blog-content row">
     <div class="col-md-8">
         
-        <div class="header-meta-info">
-          <span class="meta-content meta-name"><a rel="author" href="https://plus.google.com/+AnthonyGonzaleswow">by Anthony Gonzales</a></span>
-          <span class="meta-content"><i class="fa fa-calendar"></i><time itemprop="datePublished"> {{ page.date | date: "%B %d, %Y" }}</time></span>
-          
-        </div>
+      <div class="header-meta-info">
+        <span class="meta-content meta-name" itemprop="author">by Anthony Gonzales</span>
+        <span class="meta-content"><i class="fa fa-calendar"></i><time itemprop="datePublished"> {{ page.date | date: "%B %d, %Y" }}</time></span>
         
-        <div class="blog-post-content">
+      </div>
+      
+      <div class="blog-post-content" itemprop="articleBody">
 
-          {{ content }}
-          
+        {{ content }}
+        
         <div class="footer-meta-info">
           <span class="meta-content"><i class="fa fa-archive"></i> 
             {% for category in page.categories %}
@@ -30,15 +32,16 @@ layout: default
             {% endfor %}
           </span>
         </div>
-          
-        </div>
-      
-        {% include disqus.html %}
+        
+      </div>
+
+      <div class="blog-post-comments" itemprop="comments">
+       {% include disqus.html %}
+      </div>
 
     </div>
 
     {% include sidebar.html %}
-    
- </div>
-
+  
+  </div> <!-- .blog-content -->
 </div>
