@@ -4,16 +4,17 @@
   "author": "Anthony Gonzales",
   "private": true,
   "devDependencies": {
+    "css-condense": "0.0.6",
     "grunt": "~0.4.0",
     "grunt-contrib-concat": "^0.4.0",
-    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-cssmin": "^0.10.0",
     "grunt-contrib-imagemin": "^0.8.1",
     "grunt-contrib-jshint": "^0.9.2",
-    "grunt-contrib-sass": "*",
+    "grunt-contrib-sass": "^0.8.1",
     "grunt-contrib-uglify": "^0.4.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-cssc": "*",
-    "grunt-htmlhint": "*",
+    "grunt-cssc": "^0.2.6",
+    "grunt-htmlhint": "^0.4.1",
     "grunt-shell": "^0.6.4",
     "matchdep": "*"
   }
