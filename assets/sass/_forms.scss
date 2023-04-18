@@ -1,0 +1,68 @@
+// Forms
+.ajax-form { width: 100%; }
+
+.ajax-form input, 
+.ajax-form textarea {
+	padding: 20px;
+ 	border: 3px solid #ccc;
+ 	border-radius: 6px;
+	margin: 0 0 $line-height-computed 0;
+	background: #eee;
+	-webkit-transition: $ease-in-out;
+  -moz-transition: $ease-in-out;
+  -o-transition: $ease-in-out;
+  transition: $ease-in-out; 
+  outline: none;
+}
+
+.ajax-form input:focus, 
+.ajax-form textarea:focus {
+	border: 3px solid $yellow;
+	color: $gun;
+}
+
+.ajax-form input[type="submit"] {
+	border: 3px solid $yellow;
+	color: $yellow;
+}
+
+.ajax-form input[type="submit"]:hover {
+	background-color: darken($link-color, 15%);
+  border: 3px solid darken($link-color, 15%);
+  color: white;
+}
+
+.name, .email { width: 48%; }
+
+.name { float: left; }
+.email { float: right }
+
+.message { width: 100%; }
+
+.form-btn { text-align: center; }
+
+.error { border: 3px solid $cherry !important; }
+ 
+.form-thank-you {
+	display: none;
+	width: 100%;
+	height: 295px;
+	text-align: center;
+}
+
+.form-thank-you h3 {
+	padding-top: $line-height-computed;
+}
+
+@media (max-width: 577px) {
+  .name, .email { 
+  	width: 100%; 
+  	float: none;
+  }
+
+  .form-thank-you { height: 388px; }
+}
+
+
+
+
