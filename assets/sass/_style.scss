@@ -1,5 +1,9 @@
 // Styles
 
+.max-width {
+  max-width: 960px;
+}
+
 html,
 body {
   height: 100%;
@@ -76,7 +80,6 @@ nav {
 .hero {
 	height: 100%;
 	width: 100%;
-  background-color: $eggshell;
 }
 
 .no-backgroundsize .hero {
@@ -86,10 +89,12 @@ nav {
 .hero-lead-in {
   position: absolute;
 	top: 30%;
-	left: 11%;
-	width: 80%;
+  right: 0;
+	left: 0;
+	max-width: 960px;
 	margin: 0 auto;
-	text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 #hero-title,
