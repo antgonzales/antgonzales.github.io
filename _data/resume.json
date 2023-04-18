@@ -34,7 +34,7 @@
     {
       "company":"Compass",
       "highlights": [
-        "Led a development team of five to create Search for real estate agents. Increased adoption for real estate teams from ~5% to ~60%.",
+        "Led a development team of five to redevelope Search for real estate agents. Increased adoption from ~5% to ~60% of agent teams.",
         "Continued to lead API design on backend-for-frontend Graphql service to generate Typescript types.",
         "Promoted best practices for React, React Query, Redux Toolkit, and testing with React Testing Library.",
         "Worked with PM to track project plan, timeline, and engineering costs.",
@@ -49,7 +49,7 @@
       "company":"Compass",
       "endDate":"2020-03-01",
       "highlights": [
-        "Led a development team of five to implement MLS Search. Increased adoption in DC market for real estate tams from ~10% to ~50%.",
+        "Led a development team of five to implement Search with Multiple Listing Service filters (MLS). Increased adoption in DC market from ~10% to ~50%.",
         "Led API design of a backend-for-frontend Graphql service to generate Typescript types.",
         "Collaborated with contractors to scale the MLS project from DC to all major markets (20).",
         "Promoted Test Driven Development best practices with teams throughout the company, including mentorship, feedback, and learning sessions."
