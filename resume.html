@@ -28,7 +28,7 @@ description: Resume of Anthony Gonzales, Software Developer.
     {% for job in work %}
       {% if company != job.company %}
         {% assign company = job.company %}
-        <h3><a href={{job.website}} target="_blank" rel="nofollow noopener">{{job.company}}</a></h3>
+        <h3><a href="{{job.website}}" target="_blank" rel="nofollow noopener">{{job.company}}</a></h3>
       {% endif %}
       <div class="position">
         <h4 class="job-title">{{job.position}}, {{job.startDate | date: "%Y"}} &ndash; {% if job.endDate != nil %} {{job.endDate | date: "%Y"}} {% else %} Current {% endif %}</h4>
@@ -44,7 +44,7 @@ description: Resume of Anthony Gonzales, Software Developer.
   <div class="resume-section">
     <h2>Projects</h2>
     {% for project in projects %}
-      <h3><a href={{project.website}} target="_blank">{{project.name}}</a></h3>
+      <h3><a href="{{project.website}}" target="_blank">{{project.name}}</a></h3>
       <p>{{ project.description | newline_to_br}}</p>
     {% endfor %}
   </div>
@@ -52,7 +52,7 @@ description: Resume of Anthony Gonzales, Software Developer.
   <div class="resume-section">
     <h2>Education</h2>
     {% for edu in education %}
-    <p><a href={{edu.url}} target="_blank" rel="nofollow noopener">{{edu.institution}}</a> &mdash; {{edu.studyType}}</p>
+    <p><a href="{{edu.url}}" target="_blank" rel="nofollow noopener">{{edu.institution}}</a> &mdash; {{edu.studyType}}</p>
     {% endfor %}
   </div>
 
