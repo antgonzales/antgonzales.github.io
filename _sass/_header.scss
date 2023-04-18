@@ -46,3 +46,12 @@ nav {
   margin-left: $line-height-computed-half;
   margin-right: $line-height-computed-half;
 }
+
+.main-nav a {
+  padding: 0;
+  color: $primary-text-color;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}

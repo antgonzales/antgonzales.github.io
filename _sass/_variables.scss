@@ -11,7 +11,7 @@ $cherry: #ED1941;
 $black: #000;
 $graphite: #333;
 $gray-dark: #444;
-$ink: #4C4D4A;
+$ink: #222;
 $gray: #777;
 $gray-light: #DDD;
 
@@ -24,7 +24,7 @@ $topaz: #7F7E81; // hhkb logo
 $fire-brick: #AA1F11; // ctrl key
 
 $bg-color: $lavender;
-$primary-text-color: $black;
+$primary-text-color: $ink;
 $secondary-text-color: $topaz;
 $link-color: $free-blue;
 $card-bg-color: $white;
@@ -50,4 +50,4 @@ $h4-font-size: 1.25 * $base-font-size;
 $h5-font-size: $base-font-size;
 $h6-font-size: .875 * $base-font-size;
 $headings-line-height: 1.2;
-$headings-font-weight: 400;
+$headings-font-weight: 700;

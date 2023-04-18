@@ -12,13 +12,12 @@ description: I'm a front-end web developer. Take a look at my skills, get to kno
         &bull;
         {% include read_time.html content=post.content %}
       </div>
-      <h2 class="blog-post-title">{{ post.title }}</h2>
+      <h2 class="blog-post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
 
       <div class="blog-post-content">
         {{ post.excerpt }}
       </div>
 
-      <a class="btn" href="{{ post.url }}">Read more &#8594;</a>
     </article>
   {% endfor %}
 <div>
