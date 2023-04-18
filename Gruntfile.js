@@ -81,6 +81,7 @@ module.exports = function(grunt){
           files: [
             "index.html",
             "blog.html",
+						"bubble-sort-application.html",
             "_includes/*.html",
             "_layouts/*.html",
             "_posts/*.markdown",
@@ -109,7 +110,7 @@ module.exports = function(grunt){
           }
         }
   		}
-  
+
   });
 
   grunt.loadNpmTasks("grunt-sass");

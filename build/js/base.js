@@ -36,7 +36,186 @@ h&&(h=a.datasets[f].data[l]);f=Math.floor(g/(0.66*d));d=Math.floor(0.5*(g/d));l=
 Math.floor(r/a.labels.length);s=(m-2*c.scaleGridLineWidth-2*c.barValueSpacing-(c.barDatasetSpacing*a.datasets.length-1)-(c.barStrokeWidth/2*a.datasets.length-1))/a.datasets.length;n=q-t/2-r;p=g+c.scaleFontSize/2;x(c,function(){b.lineWidth=c.scaleLineWidth;b.strokeStyle=c.scaleLineColor;b.beginPath();b.moveTo(q-t/2+5,p);b.lineTo(q-t/2-r-5,p);b.stroke();0<w?(b.save(),b.textAlign="right"):b.textAlign="center";b.fillStyle=c.scaleFontColor;for(var d=0;d<a.labels.length;d++)b.save(),0<w?(b.translate(n+
 d*m,p+c.scaleFontSize),b.rotate(-(w*(Math.PI/180))),b.fillText(a.labels[d],0,0),b.restore()):b.fillText(a.labels[d],n+d*m+m/2,p+c.scaleFontSize+3),b.beginPath(),b.moveTo(n+(d+1)*m,p+3),b.lineWidth=c.scaleGridLineWidth,b.strokeStyle=c.scaleGridLineColor,b.lineTo(n+(d+1)*m,5),b.stroke();b.lineWidth=c.scaleLineWidth;b.strokeStyle=c.scaleLineColor;b.beginPath();b.moveTo(n,p+5);b.lineTo(n,5);b.stroke();b.textAlign="right";b.textBaseline="middle";for(d=0;d<j.steps;d++)b.beginPath(),b.moveTo(n-3,p-(d+1)*
 k),c.scaleShowGridLines?(b.lineWidth=c.scaleGridLineWidth,b.strokeStyle=c.scaleGridLineColor,b.lineTo(n+r+5,p-(d+1)*k)):b.lineTo(n-0.5,p-(d+1)*k),b.stroke(),c.scaleShowLabels&&b.fillText(j.labels[d],n-8,p-(d+1)*k)},function(d){b.lineWidth=c.barStrokeWidth;for(var e=0;e<a.datasets.length;e++){b.fillStyle=a.datasets[e].fillColor;b.strokeStyle=a.datasets[e].strokeColor;for(var f=0;f<a.datasets[e].data.length;f++){var g=n+c.barValueSpacing+m*f+s*e+c.barDatasetSpacing*e+c.barStrokeWidth*e;b.beginPath();
-b.moveTo(g,p);b.lineTo(g,p-d*v(a.datasets[e].data[f],j,k)+c.barStrokeWidth/2);b.lineTo(g+s,p-d*v(a.datasets[e].data[f],j,k)+c.barStrokeWidth/2);b.lineTo(g+s,p);c.barShowStroke&&b.stroke();b.closePath();b.fill()}}},b)},D=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(a){window.setTimeout(a,1E3/60)},F={}};;// FitText.js 1.2
+b.moveTo(g,p);b.lineTo(g,p-d*v(a.datasets[e].data[f],j,k)+c.barStrokeWidth/2);b.lineTo(g+s,p-d*v(a.datasets[e].data[f],j,k)+c.barStrokeWidth/2);b.lineTo(g+s,p);c.barShowStroke&&b.stroke();b.closePath();b.fill()}}},b)},D=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(a){window.setTimeout(a,1E3/60)},F={}};;BubbleSort.UNSORTED_COLOR = "#85BAB0";
+BubbleSort.PROCESSED_COLOR = "#F4D569";
+BubbleSort.SORTED_COLOR = "#ED1941";
+BubbleSort.STROKE_COLOR = "#424651";
+BubbleSort.FRAME_DURATION = 600;
+
+function BubbleSort(width, height, id){
+    this.width = width;
+    this.height = height;
+
+    this.animation = d3.select(id).transition();
+
+    this.svg = d3.select(id).append("svg");
+    this.svg.attr("height", this.height).attr("width", this.width);
+
+    this.currentFrame = 0;
+
+    this.data = [];
+      for(var j = 0; j < 10; j++) {
+          this.data[j] = {};
+          this.data[j].val = j+1;
+          this.data[j].id = "rect" + j;
+      }
+    this._permuteData()
+    this._showData(id);
+
+    this.frames = [];
+    this._addAnimationFrame(function(){
+        return d3.select(id).transition();
+    });
+
+    this.performSort();
+
+    this.running = false;
+}
+
+BubbleSort.prototype.randomNumbers = function(n, min, max) {
+  var values = [], i = max;
+  while(i >= min) values.push(i--);
+    var results = [];
+    var maxIndex = max;
+    for(i = 1; i <= n; i++){
+        maxIndex--;
+        var index = Math.floor(maxIndex * Math.random());
+        results.push(values[index]);
+        values[index] = values[maxIndex];
+      }
+  return results;
+}
+
+BubbleSort.prototype.start = function(){
+  d3.select("#start").attr("disabled", "true");
+  d3.select("#reset").attr("disabled", "true");
+  d3.select("#stop").attr("disabled", null);
+  this.running = true;
+
+  this.frames[this.currentFrame](this.currentFrame);
+}
+
+BubbleSort.prototype.stop = function(){
+  d3.select("#start").attr("disabled", null);
+  d3.select("#stop").attr("disabled", true);
+  d3.select("#reset").attr("disabled", null);
+  this.running = false;
+}
+
+BubbleSort.prototype.reset = function(){
+  if(!this.running){
+      this.currentFrame = 0;
+      this.frames = [];
+      this._permuteData();
+      this._showData();
+      this.performSort()
+  }
+  this.running = false;
+}
+
+BubbleSort.prototype._showData = function() {
+
+  d3.selectAll("rect").remove();
+  for(j = 0; j < this.data.length; j++) {
+    this.data[j].rect = this.svg.append("rect")
+      .attr("id", this.data[j].id)
+      .attr("height", 30)
+      .attr("fill", BubbleSort.UNSORTED_COLOR)
+      .attr("stroke", BubbleSort.STROKE_COLOR)
+      .attr("width", this.data[j].val*23)
+      .attr("x", 0)
+      .attr("y", j*40)
+    }
+}
+
+BubbleSort.prototype._addAnimationFrame = function(frame){
+    var vis = this;
+    this.frames.push(function() {
+        frame().each("end", function(index){
+            if(index != vis.frames.length && vis.running){
+                vis.frames[index](index);
+                return;
+            }
+            vis.stop();
+            return;
+        }.bind(this, ++vis.currentFrame));
+
+    });
+}
+
+BubbleSort.prototype.performSort = function(){
+    for (var i = 0; i < this.data.length - 1; i++) {
+        for (var j = 0; j < this.data.length - i - 1; j++) {
+            if(this.data[j].val < this.data[j+1].val){
+                this._addSwapFrame(j, this.data[j].id, this.data[j + 1].id);
+
+                var tmp = this.data[j];
+                this.data[j] = this.data[j+1];
+                this.data[j+1] = tmp;
+            } else {
+                this._addComparisonFrame(this.data[j].id, this.data[j + 1].id);
+            }
+        }
+
+        this._addSortedFrame(i);
+
+    }
+}
+
+
+BubbleSort.prototype._addSortedFrame = function(i) {
+    this._addAnimationFrame(function(){
+        if(i == (this.data.length - 2)){
+            d3.select("#rect" + (i+1)).attr("fill", BubbleSort.SORTED_COLOR);
+        }
+        d3.select("#rect" + i).attr("fill", BubbleSort.SORTED_COLOR);
+        return d3.select("#rect" + i).transition().duration(0);
+
+    }.bind(this, i));
+}
+
+BubbleSort.prototype._addComparisonFrame = function(id1, id2) {
+    this._addAnimationFrame(function(){
+        d3.select("#" + id1).attr("fill", BubbleSort.PROCESSED_COLOR);
+        d3.select("#" + id2).attr("fill", BubbleSort.PROCESSED_COLOR);
+
+        d3.select("#" + id1).transition().duration(BubbleSort.FRAME_DURATION).each("end", function(){
+            d3.select("#" + id1).attr("fill", BubbleSort.UNSORTED_COLOR);
+            d3.select("#" + id2).attr("fill", BubbleSort.UNSORTED_COLOR);
+        });
+        return d3.select("#" + id2).transition().duration(BubbleSort.FRAME_DURATION);
+
+    });
+}
+
+
+BubbleSort.prototype._addSwapFrame = function(j, id1, id2) {
+    this._addAnimationFrame(function(){
+
+        d3.select("#" + id1).attr("fill", BubbleSort.PROCESSED_COLOR);
+        d3.select("#" + id2).attr("fill", BubbleSort.PROCESSED_COLOR);
+
+        d3.select("#" + id1).transition().duration(BubbleSort.FRAME_DURATION).attr("y", (j+1)*40).each("end", function(){
+            d3.select("#" + id1).attr("fill", BubbleSort.UNSORTED_COLOR);
+            d3.select("#" + id2).attr("fill", BubbleSort.UNSORTED_COLOR);
+        });
+        return d3.select("#" + id2).transition().duration(BubbleSort.FRAME_DURATION).attr("y", j*40);
+
+    });
+}
+
+BubbleSort.prototype._permuteData = function() {
+    for (var i = this.data.length - 1; i > 0; i--) {
+        var index = Math.floor(Math.random() * i);
+        //swap
+        var tmp = this.data[index];
+        this.data[index] = this.data[i];
+        this.data[i] = tmp;
+    }
+}
+
+var vis = new BubbleSort(250, 400, "#canvas");
+;// FitText.js 1.2
 // Copyright 2011, Dave Rupert http://daverupert.com
 // Released under the WTFPL license
 // http://sam.zoy.org/wtfpl/
@@ -108,11 +287,11 @@ $(function () {
   $(window).load(function() {
     // Animate loader off screen
     $("#loading-spinner").fadeOut();
-    $('#loading-screen').delay(350).fadeOut('slow'); 
-    $('body').delay(350).css({'overflow':'visible'}); 
+    $('#loading-screen').delay(350).fadeOut('slow');
+    $('body').delay(350).css({'overflow':'visible'});
   });
 
-// Smoothe scroll 
+// Smoothe scroll
   $('a[href*=#]:not([href=#])').click(function () {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
       var target = $(this.hash);
@@ -235,7 +414,7 @@ if(top.location.pathname == "/") {
     $.ajax({
       dataType: "jsonp",
       url: "http://getsimpleform.com/messages/ajax?form_api_token=f3424adaa86654f85e3c0931cbffc00f",
-      data: $(".ajax-form").serialize() 
+      data: $(".ajax-form").serialize()
     }).done(function() {
       //callback which can be used to show a thank you message
       //and reset the form
@@ -247,12 +426,6 @@ if(top.location.pathname == "/") {
   });
 
 });
-
-
-
-
-
-
 ;// Generated by CoffeeScript 1.6.2
 /*
 jQuery Waypoints - v2.0.4
