@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  Create a Loading Screen Animation with Spinkit
-description: Learn how to create an simple loading screen animation using Spinkit, Modernizr for fallbacks
+title:  Create a CSS Loading Screen Animation with Spinkit
+description: Learn how to create an simple CSS loading screen animation using Spinkit, Modernizr for fallbacks. Create beautiful transitions between your website
 categories: 
 - Tutorial
 tags: 
@@ -11,9 +11,9 @@ tags:
 - Modernizr
 ---
 
-Intro animations and loading screens are controversial among web developers and designers. I personally think transitions visually indicate to users that they have left the current page and are navigating to a new location. I also hate to see my website load some font, a pixelated header image, or clunky animations that look great on my local machine but terrible across the Internet. 
+Intro CSS animations and loading screens are controversial among web developers and designers. I personally think transitions visually indicate to users that they have left the current page and are navigating to a new location. I also hate to see my website load some font, a pixelated header image, or clunky animations that look great on my local machine but terrible across the Internet. 
 
-In this tutorial, we’ll create a loading animation using [Spinkit](http://tobiasahlin.com/spinkit/), a CSS animation plugin that offers various animated icons, and [Modernizr](http://modernizr.com/) to create fallbacks for older web browsers.
+In this tutorial, we’ll create a CSS loading animation using [Spinkit](http://tobiasahlin.com/spinkit/), a CSS animation plugin that offers various animated icons, and [Modernizr](http://modernizr.com/) to create fallbacks for older web browsers.
 
 <!--break-->
 
@@ -28,7 +28,7 @@ In this tutorial, we’ll create a loading animation using [Spinkit](http://tobi
 * Spinkit
 * A loading screen .gif
 
-## Basic structure of the loading screen
+## Basic structure of the CSS loading screen
 
 {% highlight html %}
 <div id="loading-screen">
@@ -63,7 +63,7 @@ Easy peasy chicken breezy. We’ve created a div that will act as the background
 * The position tells the browser that even if the user scrolls, the screen stays in the window
 
 ## Adding the Spinkit styles
-We have a blank screen but no loading animation and the screen doesn’t go away. Let’s add the sweet Spinkit animation first. 
+We have a blank screen but no CSS loading animation and the screen doesn’t go away. Let’s add the sweet Spinkit animation first. 
 
 I’m going to go with the soft, pulsing circle… so calming. Even if my visitors never get to the page, they’ll get really comfortable in their seats and might even forget they are trying to load a website as they fall into a trance.
 
@@ -121,7 +121,7 @@ $(window).load(function() {
 {% endhighlight %}
 
 ## Solving fallback issues 
-Now that we have a kick-ass loading screen with sweet pulsing-circle action, we need to make sure that grandma can see the site on her Commodore 64. I’ll be using Modernizr to detect whether or not the user has specific features available on their machine and create controls based on the features available.
+Now that we have a kick-ass CSS loading screen with sweet pulsing-circle action, we need to make sure that grandma can see the site on her Commodore 64. I’ll be using Modernizr to detect whether or not the user has specific features available on their machine and create controls based on the features available.
 
 First, download Modernizr and add the link to your footer. Unfortunately, Modernizr cannot be used over a CDN. For the sake of this exercise, you only need to download CSS Animations from the Modernizr download package.
 

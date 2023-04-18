@@ -224,9 +224,16 @@ footer {
 
 .center { text-align: center; }
 
-.sidebar { background: #eee; border: 3px solid #ddd;}
+.sidebar { 
+  background: #eee; border: 3px solid #ddd;
+  @extend .clearfix
+}
 
-.sidebar-inner { padding: 30px 15px 0px 15px; }
+.sidebar-inner { 
+  padding: 30px 15px 0px 15px;
+  @extend .clearfix;
+
+}
 
 .sidebar-profile-img {
 	background: $turquoise;
