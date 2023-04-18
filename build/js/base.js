@@ -177,7 +177,6 @@ $(function () {
 
   $('#about').waypoint(function (direction) {
     $(".img-list").removeClass("invisible").addClass("animated fadeInRight");
-  setTimeout(showSkillsChart, graphInitDelay);
   }, {
     triggerOnce: true,
     offset: "60%"
@@ -185,7 +184,6 @@ $(function () {
 
   $('#contact').waypoint(function (direction) {
     $(".contact-inner").removeClass("invisible").addClass("animated fadeInUp");
-  setTimeout(showSkillsChart, graphInitDelay);
   }, {
     triggerOnce: true,
     offset: "60%"
@@ -197,15 +195,14 @@ $(function () {
 if(top.location.pathname == "/") {
 
   var stickyNav = function () {
-    width = $(window).width();
+    var width = $(window).width();
     var top = $(".hero").height();
     var scrollTop = $(window).scrollTop();
 
     if (scrollTop >= top && width >= 577) {
-      $("#sticky-nav").addClass("sticky");
-      $("#sticky-nav").slideDown("fast");
+      $(".sticky-nav").slideDown();
     } else if (scrollTop >= 0) {
-      $("#sticky-nav").slideUp("fast");
+      $(".sticky-nav").slideUp();
     }
   };
 

@@ -22,8 +22,9 @@ In this tutorial, we’ll create a loading animation using [Spinkit](http://tobi
 </div>
 
 **What you need for a loading screen animation**
+
 * jQuery
-* [Modernizr](http://modernizr.com/)
+* Modernizr
 * Spinkit
 * A loading screen .gif
 
@@ -56,6 +57,7 @@ body { height: 100%; overflow: hidden; }
 Easy peasy chicken breezy. We’ve created a div that will act as the background and will contain your loading spinner. When you look at your page, you’ll have just a blank white screen. 
 
 **Here are some key things to know about our styles:**
+
 * The height and width cover the entire page
 * The z-index allows us to tell the browser that our background appears above everything else on the page
 * The position tells the browser that even if the user scrolls, the screen stays in the window
