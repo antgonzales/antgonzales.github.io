@@ -30,6 +30,11 @@
   color: #fff;
 }
 
+.button-space {
+  margin-top: $line-height-computed;
+  margin-bottom: $line-height-computed;
+}
+
 @media (max-width: 577px ) {
   .button, input[type="submit"]   {
     padding: 20px 10px;

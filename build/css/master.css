@@ -923,6 +923,7 @@ input[type="submit"]:hover{background-color:#efbf22;border:3px solid #efbf22;col
 .button{padding:20px 40px;}
 .button-blog{padding:10px 20px;}
 .button:hover,.button-blog:hover{background-color:#efbf22;border:3px solid #efbf22;color:#fff;}
+.button-space{margin-top:27px;margin-bottom:27px;}
 @media (max-width: 577px){.button,input[type="submit"]{padding:20px 10px;width:100%;}
 }
 .animated{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;animation-fill-mode:both;}
