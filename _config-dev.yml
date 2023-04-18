@@ -1,0 +1,6 @@
+name: AnthonyGonzales.me
+pygments: true
+markdown: kramdown
+
+port: 3000
+url: http://localhost:3000
