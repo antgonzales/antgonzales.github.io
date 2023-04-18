@@ -1,34 +1,36 @@
-.portfolio-tile {
-  position: relative;
-  margin-bottom: 15px;
+.about-layout {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
 }
 
-.portfolio-tile:hover .portfolio-project-logo-cover,
-.portfolio-tile:hover .portfolio-project-logo {
-  opacity: 0;
-  transition: opacity .15s ease-out;
+.about-img {
+  width: 40%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.portfolio-project-logo-cover {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  height: 100%;
-  margin: auto;
-  background-color: $graphite;
-  transition: opacity .15s ease-in;
+.about-content {
+  width: 60%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-.portfolio-project-logo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  max-width: 50%;
-  height: auto;
-  transition: opacity .15s ease-in;
+.about-content p {
+  margin-top: 0;
+}
+
+.about-img,
+.about-content {
+  flex: 0 0 auto;
+  @media (max-width: 577px ) {
+    width: 100%
+  }
+}
+
+.about-profile-photo {
+  display: block;
+  margin: 0 auto;
 }

@@ -15,7 +15,7 @@ description: Resume of Anthony Gonzales, Software Developer.
     </div>
     <div class="header-contact-info">
       <p class="address">{{ basics.location.address }}</p>
-      <p class="email">{{ basics.email }}</p>
+      <p class="email">{{ basics.email | replace: ".", "[dot]" }}</p>
       <p class="website">{{ basics.website | remove: "https://www."}}</p>
       <ul class="social-profiles">
         {% for profile in basics.profiles %}
