@@ -2,7 +2,7 @@
 
   "basics":{
     "name":"Anthony Gonzales",
-    "label":"Senior Software Engineer at Compass, Inc.",
+    "label":"Senior Software Engineer at Compass",
     "picture":"http://0.gravatar.com/avatar/5fd4080e57721c6e9705b25e1bd48d63",
     "email":"ozid6i16j@relay.firefox.com",
     "phone":"",
@@ -32,7 +32,7 @@
   },
   "work":[
     {
-      "company":"Compass, Inc.",
+      "company":"Compass",
       "highlights":[
         
       ],
@@ -42,7 +42,7 @@
       "website":"https://www.compass.com"
     },
     {
-      "company":"Compass, Inc.",
+      "company":"Compass",
       "endDate":"2020-03-01",
       "highlights":[
         
@@ -53,7 +53,7 @@
       "website":"https://www.compass.com"
     },
     {
-      "company":"Compass, Inc.",
+      "company":"Compass",
       "endDate":"2019-09-01",
       "highlights":[
         
@@ -69,7 +69,7 @@
       "highlights":[
         
       ],
-      "position":"Sr. Front-end Engineer",
+      "position":"Senior Front-end Engineer",
       "startDate":"2016-02-28",
       "summary":"Developed and lead front-end best practices for Glossier.com, an e-commerce\nbeauty website built on Solidus and Ruby on Rails. Added front-end unit testing\nas part of the development process. Lead migration from Angular monolith to React\ncomponents.",
       "website":"https://www.glossier.com"

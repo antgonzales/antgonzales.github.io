@@ -11,6 +11,7 @@
   text-transform: uppercase;
 }
 
+
 .resume p {
   margin-top: 0;
   margin-bottom: 2rem;
@@ -36,6 +37,10 @@
   @media (max-width: 577px ) {
     width: 100%
   }
+}
+
+.resume .job-title {
+  margin-bottom: 1rem;
 }
 
 .resume .header-contact-info p {
