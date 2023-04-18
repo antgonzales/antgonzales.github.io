@@ -1,9 +1,9 @@
 // Typography
 
 body {
-  background: $white;
+  background: $bg-color;
   font-size: $base-font-size;
-  font-family: $serif-font-family;
+  font-family: $sans-serif-font-family;
   line-height: $base-line-height;
   color: $ink;
 }
@@ -15,7 +15,6 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: $serif-font-family;
   line-height: $headings-line-height;
   font-weight: $headings-font-weight;
 }

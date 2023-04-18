@@ -17,7 +17,7 @@ Previously, I worked as a front-end lead developer for [Glossier](https://www.gl
 ![Anthony Gonzales](/assets/img/me.jpeg)
 
 <section id="recent-work" >
-  <h2 class="section-title">Past Projects</h2>
+  <h2>Past Projects</h2>
   <div class="portfolio-tile">
     <img class="portfolio-project-thumbnail" src="assets/img/benefit-cosmetics-screenshot.jpg" />
     <div class="portfolio-project-logo-cover">
@@ -45,7 +45,7 @@ Previously, I worked as a front-end lead developer for [Glossier](https://www.gl
 </section>
 
 <section id="contact">
-  <h2 class="section-title">Get in touch</h2>
+  <h2>Get in touch</h2>
   <ul class="list">
   {% for contact in site.data.contacts %}
     <li>

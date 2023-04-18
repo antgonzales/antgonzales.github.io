@@ -1,13 +1,14 @@
-<header>
-  <div class="container max-width">
+<header class="container max-width">
+  <div class="header-inner">
     <div class="nav-logo">
-      <a href="/">Anthony Gonzales, Developer</a>
+      <span class="nav-title">Anthony Gonzales</span>
+      <span class="nav-description">Software developer</span>
     </div>
     <nav role="navigation">
       <ul class="main-nav">
         {% for link in site.data.nav %}
           <li>
-            <a onclick="ga('send', 'event', 'Navigation', 'Click', '{{link.title}}');" href="{{link.href}}">{{link.title}}</a>
+            <a onclick="ga('send', 'event', 'Navigation', 'Click', '{{link.title}}');" href="{{link.href}}" class="btn">{{link.title}}</a>
           </li>
         {% endfor %}
       </ul>

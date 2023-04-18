@@ -1,20 +1,20 @@
 ---
 layout: default
 ---
-<div class="container max-width post" itemscope itemtype="http://schema.org/BlogPosting">
+<div class="max-width post card infinite" itemscope itemtype="http://schema.org/BlogPosting">
   <div class="post-meta">
     <span class="hidden" itemprop="author">by Anthony Gonzales</span>
     <time class="post-timestamp" itemprop="datePublished"> {{ page.date | date: "%B %d, %Y" }}</time></span>
   </div>
 
-  <h1 class="post-title italic" itemprop="headline">{{ page.title }}</h1>
+  <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
 
   <div class="post-content" itemprop="articleBody">
     {% include anchor_headings.html html=content
     anchorClass="post-header-link" %}
   </div>
   <div class="post-additional">
-    <a href="https://mobile.twitter.com/search?q={{ site.url | url_encode }}{{ page.url | url_encode }}" target="_blank">Discuss on Twitter</a>
+    <a href="https://mobile.twitter.com/search?q={{ site.url | url_encode }}{{ page.url | url_encode }}" target="_blank" class="btn secondary-btn">Discuss on Twitter</a>
   </div>
   <hr/>
   <div class="post-footer">

@@ -5,7 +5,7 @@
     <ul class="quick-about-contact">
       {% for contact in site.data.contacts %}
         <li>
-          <a href="{{contact.link}}" target="_blank">{{contact.title}}</a>
+          <a href="{{contact.link}}" target="_blank" class="btn primary-btn">{{contact.title}}</a>
         </li>
       {% endfor %}
     </ul>

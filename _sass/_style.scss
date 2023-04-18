@@ -1,16 +1,12 @@
 // Styles
 
 .max-width {
-  max-width: 68rem;
-}
-
-.container {
+  max-width: 95rem;
   margin-right: auto;
   margin-left: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 
+.clearfix,
 .container:before,
 .container:after {
   content: " ";
@@ -21,6 +17,41 @@
 .container-fluid:after,
 .row:after {
   clear: both;
+}
+
+.btn {
+  border-radius: .5rem;
+  padding: 1rem;
+  color: $primary-text-color;
+  background-color: $btn-color;
+  &:visited,
+  &:hover,
+  &:focus {
+    color: $primary-text-color;
+  }
+}
+
+.primary-btn {
+  background-color: $primary-btn-color;
+}
+
+.secondary-btn {
+  background-color: $secondary-btn-color;
+}
+
+.card {
+  padding: 3rem 1.5rem;
+  @media (min-width: 48rem) {
+    padding: 6rem 12rem;
+  }
+  background-color: $card-bg-color;
+  box-shadow: 0 -1px 10px rgba(0,0,0,0.05),0 1px 4px rgba(0,0,0,0.1),0 10px 30px $bg-color;
+  border-radius: 0.5rem;
+}
+
+.card.infinite {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .col-centered {
@@ -63,32 +94,6 @@
   transition: opacity .15s ease-in;
 }
 
-nav {
-  display: block;
-  float: right;
-  font-size: 18px;
-}
-
-.nav-logo {
-  display: block;
-  float: left;
-  padding-top: 11px;
-}
-
-.nav-logo a {
-  font-size: 18px;
-}
-
-.main-nav {
-  padding: 0;
-}
-
-.main-nav li {
-  display: inline;
-  margin-left: $line-height-computed-half;
-  margin-right: $line-height-computed-half;
-}
-
 .buffer {
 	padding-top: $line-height-computed * 2;
 	padding-bottom: $line-height-computed * 2;
@@ -98,21 +103,6 @@ nav {
   padding-top: $line-height-computed * 2;
 }
 
-.section-title {
-	padding-bottom: $line-height-computed;
-  margin-bottom: 0
-}
-
-.section-title:after {
-	display: block;
-	position: relative;
-	bottom: -6px;
-	left: 0;
-	content: ' ';
-	width: 100px;
-	height: 3px;
-  background: $blue;
-}
 
 .center {
   text-align: center;
@@ -152,55 +142,28 @@ nav {
 }
 
 .highlight {
-  margin: 0 0 $line-height-computed 0; 
+  margin: 0 0 $line-height-computed 0;
 }
 
-.highlight pre {
-  padding: 2rem;
+.highlight > pre {
+  padding: 1.5rem;
   border-radius: .5rem;
   overflow: auto;
 }
 
+.highlight pre {
+  margin: 0;
+}
+
 @media (max-width: 577px ) {
 
-	header {
-    text-align: center;
-  }
-
-	nav {
-    float: none;
-  }
-
-	.nav-logo {
-    float: none;
-  }
-
-	.main-nav li {
-		margin-left: 0;
-		margin-right: 10px;
-	}
-
-	.buffer {
+  .buffer {
     padding-top: $line-height-computed;
     padding-bottom: $line-height-computed;
   }
 
-	.buffer-top {
+  .buffer-top {
     padding-top: $line-height-computed;
   }
-}
-
-@media (max-width: 992px) {
-
-	.img-list {
-		margin-top: $line-height-computed;
-		ul { margin: 0; padding: 0;}
-		li { padding-bottom: 15px; }
-	}
-
-	.client-screenshot-container {
-    margin-bottom: 15px;
-  }
-
 }
 
