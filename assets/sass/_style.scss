@@ -12,7 +12,6 @@
 .portfolio-tile {
   position: relative;
   margin-bottom: 15px;
-  border: 3px solid $black;
 }
 
 .portfolio-tile:hover .portfolio-project-logo-cover,
@@ -29,7 +28,7 @@
   bottom: 0;
   height: 100%;
   margin: auto;
-  background-color: #000;
+  background-color: $gun;
   transition: opacity .15s ease-in;
 }
 
@@ -238,49 +237,6 @@ footer {
   text-align: center;
 }
 
-.sidebar {
-  background: #eee; border: 3px solid #ddd;
-  @extend .clearfix;
-}
-
-.sidebar-inner {
-  padding: 30px 15px 0px 15px;
-  @extend .clearfix;
-}
-
-.sidebar-profile-img {
-	background: $turquoise;
-	border-radius: 6px;
-	margin-bottom: $line-height-computed;
-}
-
-.sidebar-social-icons {
-	padding: 0;
-}
-
-.sidebar-social-icons li {
-  display: inline-block;
-  padding-right: 8px;
-  padding-left: 0;
-}
-
-.sidebar-social-icons a {
-  color: $gray;
-}
-
-.sidebar-social-icons i:hover {
-  transition: $ease-in-out;
-}
-
-.sidebar-list {
-  list-style: none outside;
-}
-
-.sidebar-list li {
-  margin-bottom: $line-height-computed;
-  margin-left: -40px;
-}
-
 .callout {
   margin: $line-height-computed 0;
   padding: $line-height-computed;
@@ -289,7 +245,6 @@ footer {
 
 .warning-callout {
   border-color: $blue;
-
 }
 
 .warning-callout p {
@@ -328,7 +283,6 @@ footer {
   padding: 15px;
   overflow: scroll;
 }
-
 
 @media (max-width: 577px ) {
 
