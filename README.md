@@ -1,3 +1,3 @@
 # anthonygonzales.dev ✌️
 
-The is the professional portfolio of front-end developer Anthony M. Gonzales.
+The is the professional portfolio of software developer Anthony M. Gonzales.
