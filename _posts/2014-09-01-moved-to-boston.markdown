@@ -23,7 +23,7 @@ I love doing what I do, I love learning, and I can honestly say that I'm working
 ## Funny things I’ve noticed about New England
 
   1. The Red Sox are Gods.
-  2. Dunkin Donuts is no joke for New Englanders.
+  2. Dunkin Donuts is no joke for New Englanders. Do yah want cream and sugah wit yah cahfee?
   3. New Englanders are infamous for being unfriendly on the surface, but they’re great if you strike up a conversation. They love being tough.
   4. California is seen as a magical, amazing place.
   5. Winter is coming, always.
