@@ -4,9 +4,16 @@ layout: default
 <div class="max-width post card infinite" itemscope itemtype="http://schema.org/BlogPosting">
   <div class="post-meta">
     <span class="hidden" itemprop="author">by Anthony Gonzales</span>
-    <time class="post-timestamp" itemprop="datePublished"> {{ page.date | date: "%B %d, %Y" }}</time></span>
+    <time class="post-timestamp" itemprop="datePublished"> {{ page.date | date: "%B %d, %Y" }}</time>
     &bull;
     {% include read_time.html content=page.content %}
+
+    {%- if page.last_modified_at -%}
+      <div class="post-lastupdated">
+        Updated on 
+        <time itemprop="dateModified">{{ page.last_modified_at | date: "%B %d, %Y" }}</time>
+      </div>
+    {%- endif -%}
   </div>
 
   <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
