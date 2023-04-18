@@ -21,11 +21,6 @@
   flex-wrap: wrap;
 }
 
-.resume .header-title,
-.resume .header-contact-info {
-  flex: 0 0 auto;
-}
-
 .resume .header-title {
   width: 70%;
 }
@@ -33,6 +28,14 @@
 .resume .header-contact-info {
   width: 30%;
   font-size: 1.6rem;
+}
+
+.resume .header-title,
+.resume .header-contact-info {
+  flex: 0 0 auto;
+  @media (max-width: 577px ) {
+    width: 100%
+  }
 }
 
 .resume .header-contact-info p {
