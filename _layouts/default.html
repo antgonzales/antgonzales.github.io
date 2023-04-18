@@ -1,7 +1,19 @@
-{% include head.html %}
+<!doctype html>
+<html lang="en">
+  {% include head.html %}
+  <body itemscope itemtype="http://schema.org/WebPage">
+  <!--[if IE]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
 
-{% include header.html %}
+  {% include header.html %}
 
-{{ content }}
+  {{ content }}
 
-{% include footer.html %}
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-49637905-2', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+  </body>
+</html>

@@ -1,20 +1,23 @@
 ---
 layout: default
 ---
-<div class="buffer-sidebar container-fluid max-width" itemscope itemtype="http://schema.org/BlogPosting">
+<div class="container max-width post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="post-meta">
+    <span class="hidden" itemprop="author">by Anthony Gonzales</span>
+    <time class="post-timestamp" itemprop="datePublished"> {{ page.date | date: "%B %d, %Y" }}</time></span>
+  </div>
 
-  <div class="blog-content">
-    <h1 class="page-title" itemprop="headline">{{ page.title }}</h1>
+  <h1 class="post-title italic" itemprop="headline">{{ page.title }}</h1>
 
-    <div class="header-meta-info">
-      <span class="meta-content meta-name hidden" itemprop="author">by Anthony Gonzales</span>
-      <time itemprop="datePublished"> {{ page.date | date: "%B %d, %Y" }}</time></span>
-    </div>
-
-    <div class="blog-post-content" itemprop="articleBody">
-
-      {% include anchor_headings.html html=content
-      anchorClass="blog-post-header-link" %}
-
+  <div class="post-content" itemprop="articleBody">
+    {% include anchor_headings.html html=content
+    anchorClass="post-header-link" %}
+  </div>
+  <div class="post-additional">
+    <a href="https://mobile.twitter.com/search?q={{ site.url | url_encode }}{{ page.url | url_encode }}" target="_blank">Discuss on Twitter</a>
+  </div>
+  <hr/>
+  <div class="post-footer">
+    {% include quick_about.html %}
   </div>
 </div>

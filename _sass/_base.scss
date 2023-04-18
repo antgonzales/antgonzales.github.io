@@ -1,0 +1,37 @@
+// Base
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+hr {
+  border: solid $graphite;
+  border-width: 1px 0 0;
+  clear: both;
+  margin-top: $line-height-computed;
+  margin-bottom: $line-height-computed;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+  &:visited,
+  &:hover,
+  &:focus {
+    color: darken($link-color, 15%);
+  }
+}
+
