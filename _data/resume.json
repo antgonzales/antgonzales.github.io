@@ -34,7 +34,7 @@
     {
       "company":"Compass",
       "highlights":[
-        
+
       ],
       "position":"Senior Software Engineer II",
       "startDate":"2020-03-01",
@@ -45,7 +45,7 @@
       "company":"Compass",
       "endDate":"2020-03-01",
       "highlights":[
-        
+
       ],
       "position":"Senior Software Engineer I",
       "startDate":"2019-09-01",
@@ -56,7 +56,7 @@
       "company":"Compass",
       "endDate":"2019-09-01",
       "highlights":[
-        
+
       ],
       "position":"Software Engineer II",
       "startDate":"2017-11-30",
@@ -67,7 +67,7 @@
       "company":"Glossier",
       "endDate":"2017-11-30",
       "highlights":[
-        
+
       ],
       "position":"Senior Front-end Engineer",
       "startDate":"2016-02-28",
@@ -78,7 +78,7 @@
       "company":"Third and Grove",
       "endDate":"2016-02-28",
       "highlights":[
-        
+
       ],
       "position":"Front-end Architect",
       "startDate":"2015-10-31",
@@ -89,7 +89,7 @@
       "company":"Third and Grove",
       "endDate":"2015-10-31",
       "highlights":[
-        
+
       ],
       "position":"Front-end Engineer",
       "startDate":"2014-07-31",
@@ -100,7 +100,7 @@
       "company":"Blast Analytics & Marketing",
       "endDate":"2014-07-31",
       "highlights":[
-        
+
       ],
       "position":"Digital Marketing Assistant",
       "startDate":"2013-01-31",
@@ -109,7 +109,7 @@
     }
   ],
   "volunteer":[
-    
+
   ],
   "education":[
     {
@@ -119,7 +119,7 @@
       "startDate": "2006-08-01",
       "endDate": "2010-05-01",
       "courses":[
-        
+
       ],
       "url": "https://www.westmont.edu"
     }
@@ -133,7 +133,7 @@
     }
   ],
   "publications":[
-    
+
   ],
   "skills":[
     {
@@ -151,7 +151,8 @@
         "HTML",
         "CSS",
         "React",
-        "Redux and Redux Toolkit",
+	      "React Query",
+        "Redux Toolkit",
         "Node.js",
         "Git"
       ]
@@ -160,13 +161,12 @@
       "name":"Testing",
       "level":"Master",
       "keywords":[
-        "TDD",
+        "Test Driven Development",
         "Jest",
         "Cypress",
         "Nock",
         "Sinon",
-	"MSW",
-	"React Query"
+	      "Mock Service Worker"
       ]
     }
   ],
@@ -177,10 +177,10 @@
     }
   ],
   "interests":[
-    
+
   ],
   "references":[
-    
+
   ],
   "projects": [{
     "name": "Benefit Cosmetics",
