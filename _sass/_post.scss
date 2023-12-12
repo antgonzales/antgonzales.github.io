@@ -100,3 +100,47 @@
   list-style: decimal;
   display: inline-block;
 }
+
+.headline {
+  margin-bottom: 8px
+}
+
+.callout {
+  margin: $line-height-computed 0;
+  padding: $line-height-computed;
+  border-left: 3px solid #ddd;
+}
+
+.callout p {
+  margin: 0;
+}
+
+.warning-callout {
+  border-color: $banana;
+  color: $banana;
+}
+
+.danger-callout {
+  border-color: $cherry;
+  color: $cherry;
+}
+
+.info-callout {
+ border-color: $blue;
+ color: $blue;
+}
+
+.highlight {
+  margin: 0 0 $line-height-computed 0;
+  border-radius: .5rem;
+}
+
+.highlight > pre {
+  padding: 1.5rem;
+  overflow: auto;
+}
+
+.highlight pre {
+  margin: 0;
+  white-space: pre-wrap;
+}
