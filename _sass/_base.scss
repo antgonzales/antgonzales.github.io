@@ -23,14 +23,8 @@ hr {
 }
 
 a {
-  color: $link-color;
-  text-decoration: none;
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-  }
-  &:visited {
-    color: darken($link-color, 15%);
-  }
+  color: $primary-text-color;
+  text-decoration-color: $link-color;
+  text-underline-offset: .2ex;
 }
 

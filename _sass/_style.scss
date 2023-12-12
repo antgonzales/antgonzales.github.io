@@ -1,7 +1,7 @@
 // Styles
 
 .max-width {
-  max-width: 92.8rem;
+  max-width: 76.8rem;
   margin-right: auto;
   margin-left: auto;
 }
@@ -22,13 +22,13 @@
 .btn {
   border-radius: .5rem;
   padding: 1rem;
-  color: $primary-text-color;
+  color: $secondary-text-color;
   background-color: $btn-color;
   text-decoration: none;
   &:visited,
   &:hover,
   &:focus {
-    color: $primary-text-color;
+    color: $secondary-text-color;
   }
 }
 
@@ -45,17 +45,6 @@
   @media (min-width: 48rem) {
     padding: 6rem 12rem;
   }
-  background-color: $card-bg-color;
-  box-shadow: 0 -1px 10px rgba(0,0,0,0.05),0 1px 4px rgba(0,0,0,0.1),0 10px 30px $bg-color;
-  @media print {
-    box-shadow: none;
-  }
-  border-radius: 0.5rem;
-}
-
-.card.infinite {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
 }
 
 .col-centered {

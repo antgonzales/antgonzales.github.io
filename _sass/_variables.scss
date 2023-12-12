@@ -6,7 +6,8 @@ $blue: #3A5CC5;
 $banana: #ffc30d;
 $gun: #424651;
 $cherry: #ED1941;
-
+$egg-shell: #fefbf1;
+$sky-blue: #76a7d8;
 
 $black: #000;
 $graphite: #333;
@@ -15,25 +16,26 @@ $ink: #222;
 $gray: #777;
 $gray-light: #DDD;
 
-
 // hhkb photo from profile
 $free-blue: #455AC8; // blue esc key
 $link-water: #C5C9D9; // shift key
 $topaz: #7F7E81; // hhkb logo
 $fire-brick: #AA1F11; // ctrl key
 
-$bg-color: #eeeeee;
+$bg-color: $egg-shell;
 $primary-text-color: $ink;
 $secondary-text-color: $topaz;
-$link-color: $free-blue;
+$link-color: $sky-blue;
 $card-bg-color: $white;
 
-$btn-color: $link-water;
-$primary-btn-color: $free-blue;
+$btn-color: $sky-blue;
+$primary-btn-color: $sky-blue;
 $secondary-btn-color: $fire-brick;
 
 // Typography
-$mono-font-family: "Lucida Console", Monaco, monospace;
+$mono-font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono",
+"Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code
+Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 $sans-serif-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $serif-font-family: Georgia, Times, serif;
 

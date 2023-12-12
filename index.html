@@ -5,19 +5,23 @@ description: The personal site, blog, and portfolio of Anthony Gonzales, a devel
 ---
 
 <div class="max-width home blog">
-  {% for post in site.posts%}
-    <article class="blog-post card">
-      <div class="post-meta">
-        <time class="post-timestamp" itemprop="datePublished"> {{ post.date | date: "%B %d, %Y" }}</time>
-        &bull;
-        {% include read_time.html content=post.content %}
-      </div>
-      <h2 class="blog-post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
-
-      <div class="blog-post-content">
-        {{ post.excerpt }}
-      </div>
-
-    </article>
-  {% endfor %}
+  <h1>Hello, I'm Anthony Gonzales.</h1>
+  <p>
+    I’m a software developer based in NYC, working at <a href="www.compass.com" target="_blank" rel="nofollow">Compass</a>.
+  </p>
+  <p>
+    I specialize in front-end technologies like Typescript, Node.js, React, and Redux. I'm also an expert in Test Driven
+    Development methodologies and maintain bettertests.js.org.
+  </p>
+  <p>
+    I'm not currently looking for new opportunities but feel free to email me at
+    <a href="mailto:hello@anthonygonzales.dev">hello@anthonygonzales.dev</a>.
+  <p>
+    
+  <h2>Latest posts</h2>
+  <ul>
+      {% for post in site.posts | limit: 5 %}
+          <li class="blog-post-title"><a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endfor %}
+  </ul>
 <div>

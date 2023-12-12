@@ -1,7 +1,9 @@
 <header class="container max-width">
-  <div class="header-inner">
+  <div class="header-inner clearfix">
     <div class="nav-logo">
-      <a href="/">Anthony Gonzales</a>
+      {% if page.url != "/" %}
+        <a href="/">Anthony Gonzales</a>
+      {% endif %}
     </div>
     <nav role="navigation">
       <ul class="main-nav">
