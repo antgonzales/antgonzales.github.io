@@ -2,6 +2,7 @@
 
 //Pallette
 $white: #fff;
+$off-white: #f9f9f9;
 $blue: #3A5CC5;
 $banana: #ffc30d;
 $gun: #424651;
@@ -22,7 +23,7 @@ $link-water: #C5C9D9; // shift key
 $topaz: #7F7E81; // hhkb logo
 $fire-brick: #AA1F11; // ctrl key
 
-$bg-color: $egg-shell;
+$bg-color: $white;
 $primary-text-color: $ink;
 $secondary-text-color: $topaz;
 $link-color: $sky-blue;
@@ -33,21 +34,20 @@ $primary-btn-color: $sky-blue;
 $secondary-btn-color: $fire-brick;
 
 // Typography
-$mono-font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono",
-"Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code
-Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-$sans-serif-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$serif-font-family: Georgia, Times, serif;
+$mono-font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo,
+Consolas, 'DejaVu Sans Mono', monospace;
+$sans-serif-font-family: system-ui, sans-serif;
+$serif-font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
 
-$base-font-size: 1.8rem;
-$base-line-height: 1.5;
+$base-font-size: 2rem;
+$base-line-height: 1.6;
 $line-height-computed: $base-font-size * $base-line-height;
 $line-height-computed-half: $line-height-computed / 2;
 
-$h1-font-size: 2.25 * $base-font-size;
-$h2-font-size: 1.9 * $base-font-size;
-$h3-font-size: 1.5 * $base-font-size;
-$h4-font-size: 1.25 * $base-font-size;
+$h1-font-size: 2 * $base-font-size;
+$h2-font-size: 1.6 * $base-font-size;
+$h3-font-size: 1.25 * $base-font-size;
+$h4-font-size: $base-font-size;
 $h5-font-size: $base-font-size;
 $h6-font-size: .875 * $base-font-size;
 $headings-line-height: 1.2;

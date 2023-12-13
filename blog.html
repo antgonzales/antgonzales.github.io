@@ -1,3 +1,17 @@
 ---
-layout: default
+layout: page
+title: Blog
 ---
+<ul class="list-naked list-latest-posts" itemscope itemtype="http://schema.org/Blog">
+  {% for post in site.posts %}
+    <li class="blog-roll-title" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+      <a href="{{ post.url }}" itemprop="url">
+        <span itemprop="headline">{{ post.title }}</span>
+      </a>
+      <time class="blog-roll-post-timestamp" itemprop="datePublished" datetime="{{ post.date | date: '%Y-%m-%d' }}">
+        {{ post.date | date: "%b %d, %Y" }}
+      </time>
+    </li>
+  {% endfor %}
+</ul>
+

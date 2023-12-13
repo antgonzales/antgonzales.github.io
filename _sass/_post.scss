@@ -1,9 +1,10 @@
 .post {
-  margin-top: 4.5rem;
+  padding-top: 4.5rem;
 }
 
 .post-title {
   margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .post-meta {
@@ -12,8 +13,13 @@
   font-size: 1.8rem;
 }
 
+.post-meta-separator {
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
 .post-lastupdated {
-  display: block;
+  display: inline-block;
   font-style: italic;
 }
 
