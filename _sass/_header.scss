@@ -1,9 +1,15 @@
 .header {
   margin-top: 4.5rem;
   margin-bottom: 4.5rem;
+  font-family: $sans-serif-font-family;
+  font-size: 1.8rem;
   @media print {
     display: none;
   }
+}
+
+.header a {
+  text-decoration: none;
 }
 
 .header-inner {
@@ -21,5 +27,9 @@
   display: inline;
   margin-left: $line-height-computed-half;
   margin-right: $line-height-computed-half;
+}
+
+.nav-logo a {
+  color: $ox-blood;
 }
 

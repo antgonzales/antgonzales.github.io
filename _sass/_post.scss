@@ -1,5 +1,5 @@
 .post {
-  padding-top: 4.5rem;
+  padding-top: 2.8rem;
 }
 
 .post-title {
@@ -10,7 +10,10 @@
 .post-meta {
   display: inline-block;
   margin-bottom: 1rem;
-  font-size: 1.8rem;
+  font-family: $mono-font-family;
+  font-weight: 300;
+  letter-spacing: .06em;
+  font-size: 1.6rem;
 }
 
 .post-meta-separator {
@@ -41,6 +44,7 @@
   margin: 0;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  font-family: $mono-font-family;
   font-size: 1.3rem;
   font-style: italic;
 }
@@ -95,11 +99,13 @@
 }
 
 #markdown-toc {
-  border: 1px solid #aaa;
+  border: .06rem solid #aaa;
   padding: 2rem 5rem;
   list-style: decimal;
   display: inline-block;
   line-height: 2;
+  border-radius: 4px;
+  background-color: $snow;
 }
 
 .headline {
@@ -109,7 +115,8 @@
 .callout {
   margin: $line-height-computed 0;
   padding: $line-height-computed;
-  border-left: 3px solid #ddd;
+  border: .3rem solid #ddd;
+  border-radius: .4rem;
 }
 
 .callout p {
@@ -118,7 +125,7 @@
 
 .warning-callout {
   border-color: $banana;
-  color: $banana;
+  background-color: $banana;
 }
 
 .danger-callout {
