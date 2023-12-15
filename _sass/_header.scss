@@ -14,8 +14,9 @@
 
 .header-inner {
   display: flex;
-  justify-content: space-between;
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .main-nav {
@@ -29,7 +30,19 @@
   margin-right: $line-height-computed-half;
 }
 
+.nav-logo {
+  width: 11.5rem;
+}
+
+.nav-logo .name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .nav-logo a {
   color: $ox-blood;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 

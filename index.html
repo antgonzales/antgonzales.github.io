@@ -5,19 +5,32 @@ description: The personal site, blog, and portfolio of Anthony Gonzales, a devel
 ---
 <div class="container max-width home page">
   <section class="intro">
-    <h1>Hello, I'm Anthony Gonzales.</h1>
-    <p>
-      I’m a software developer specializing in web technologies and Test Driven Development methodologies.
-    </p>
-    <p>
-      I write code, I solve problems, and I'm always ready for the next challenge.
-    </p>
+    <h2>Latest post</h2>
+    {% for post in site.posts | limit: 1 %}
+      <article class="blog-post card">
+        <h3 class="blog-post-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
+        <div class="post-meta">
+          <time class="post-timestamp" itemprop="datePublished"> {{ post.date | date: "%B %d, %Y" }}</time>
+          {%- if page.last_modified_at -%}
+            <span class="post-meta-separator">&bull;</span>
+            <div class="post-lastupdated">
+              Updated on <time itemprop="dateModified">{{ post.last_modified_at | date: "%B %d, %Y" }}</time>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="blog-post-content">
+          {{ post.excerpt }}
+        </div>
+
+      </article>
+    {% endfor %}
   </section>
 
   <section>
-    <h2>Latest blog posts</h2>
+    <h2>Previous posts</h2>
     <ul class="list-naked list-latest-posts">
-        {% for post in site.posts | limit: 5 %}
+        {% for post in site.posts | offset: 1 | limit: 5 %}
             <li class="blog-roll-title">
                 <a href="{{ post.url }}">{{ post.title }}</a>
                 <time class="blog-roll-post-timestamp">
@@ -27,4 +40,4 @@ description: The personal site, blog, and portfolio of Anthony Gonzales, a devel
         {% endfor %}
     </ul>
   </section>
-<div>
+</div>
