@@ -23,9 +23,9 @@ effectively implement them in your Git workflow.
 
 <div class="callout warning-callout">
   <p>
-    <strong>Warning:</strong> Upgrade Git to 2.42.0+ as index.skipHash causes
-    errors on older Git versions and ensure you are performing the steps in
-    this tutorial the main branch.
+    <strong>Warning:</strong> Upgrade Git to 2.42.0+ and perform the steps in
+    this tutorial on your main branch. `index.skipHash` causes errors on older
+    Git versions.
   </p>
 </div>
 
@@ -123,12 +123,12 @@ Enabling this configuration option enables the following by default:
 **`core.commitgraph`**
 
 Git will use a commit history cache to significantly speed up history
-operations, such as git log with the --graph option.
+operations, such as `git log` with the `--graph` option.
 
 **`fetch.writeCommitGraph`**
 
 Improves performance of commands like `git push -f` and `git log --graph` by
-writing a commit-graph on every git fetch.
+writing a commit-graph on every `git fetch`.
 
 ## How to revert changes
 
