@@ -69,13 +69,13 @@ effectively implement them in your Git workflow.
 Although `feature.manyFiles` sets the default index version, you need to
 manually update indexes on existing repositories.
 
-```bash
+```console
 $ cd ~/example
 $ git update-index --index-version 4
 ```
 ### Start `fsmonitor—daemon` in repo
 
-```bash
+```console
 $ cd ~/example
 $ git fsmonitor--daemon start
 ```
@@ -90,7 +90,7 @@ significantly improved user experience. Additionally, I no longer encounter
 while performing basic Git commands (MacOS Intel Core i9).
 
 **Before**
-```bash
+```console
 $ time git status
 On branch main
 Your branch is up to date with 'origin/main'.
@@ -100,7 +100,7 @@ git status  0.21s user 1.14s system 425% cpu 0.316 total
 ```
 
 **After**
-```bash
+```console
 $ time git status
 On branch main
 Your branch is up to date with 'origin/main'.
