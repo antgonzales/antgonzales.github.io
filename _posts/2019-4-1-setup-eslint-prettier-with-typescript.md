@@ -36,8 +36,7 @@ $ npm install --save-dev eslint prettier @typscript-eslint/parser
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "prettier/@typescript-eslint"
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -94,7 +93,7 @@ team at Prettier has solved this problem. There are a few options, but we'll go
 with my choice; turn off ESLint format rules.
 
 ```bash
-$ npm i --save-dev prettier eslint-config-prettier
+$ npm install --save-dev prettier eslint-config-prettier
 ```
 
 We've now installed Prettier and an ESLint config specifically to integrate
@@ -111,7 +110,6 @@ Our `.eslintrc.json` file should now look like the following:
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
-    "prettier/@typescript-eslint"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -119,6 +117,14 @@ Our `.eslintrc.json` file should now look like the following:
   }
 }
 ```
+
+<div class="callout warning-callout">
+  <p>
+    <strong>Note that the prettier configurations come last in the
+    array</strong>. It's required that you place prettier last to override the
+    other configurations.
+  </p>
+</div>
 
 Here's what our `.prettierrc.json` file will look like:
 ```json
@@ -177,3 +183,10 @@ semicolons, dangling commas, and spacing.
 ## References
 * [Prettier: Integrating with
   Linters](https://prettier.io/docs/en/integrating-with-linters.html)
+* [prettier/eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)
+
+## Update notes
+
+* December 20, 2023: `prettier/@typescript-eslint` has been removed in
+  `eslint-config-prettier`
+  [v8.0.0](https://github.com/prettier/eslint-config-prettier/blob/main/CHANGELOG.md#version-800-2021-02-21)
