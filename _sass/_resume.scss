@@ -6,9 +6,11 @@
   margin-bottom: 3.2rem;
 }
 
-.resume h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  font-size: 2rem;
+.resume {
+  h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    font-size: 2rem;
+  }
 }
 
 .resume h2 {
@@ -85,5 +87,5 @@
 }
 
 .resume .skills-list-skill {
-   display: inline-block; 
+   display: inline-block;
 }
