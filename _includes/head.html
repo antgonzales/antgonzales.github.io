@@ -1,6 +1,10 @@
 <head>
   <meta charset="utf-8">
-  <title>{{ page.title }} | Anthony Gonzales</title>
+  {% if page.title != nil %}
+    <title>{{ page.title }} | Anthony Gonzales</title>
+  {% else %}
+    <title>Anthony Gonzales</title>
+  {% endif %}
   <meta name="description" content="{{ page.description }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% include twitter_card.html %}
