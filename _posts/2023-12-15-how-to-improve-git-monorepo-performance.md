@@ -8,11 +8,12 @@ date: 2023-12-15
 
 Many discussions about Git focus on its basic functions, yet there's less
 attention on optimizing Git for monorepos. With the release of Git v2.37.0, new
-features have been introduced that significantly improve performance for these
-large repositories. This blog post will cover these updates, providing clear,
-step-by-step guidance on how to enhance your Git operations, especially in
-large-scale projects. We'll look into these new features and explain how to
-effectively implement them in your Git workflow.
+features have been introduced that significantly improve performance for
+repositories with a lot of files. This blog post will cover custom git monorepo
+configurations to improve performance and providing step-by-step guidance on
+how to enhance implement the, especially in large-scale projects. We'll look
+into these new features and explain how to effectively implement them in your
+global or local Git config.
 
 * Do not remove this line (it will not be displayed)
 {:toc}
@@ -64,16 +65,16 @@ effectively implement them in your Git workflow.
     default = current
 ```
 
-### Update index version in repo
+### Update Git index to version 4 in repo
 
 Although `feature.manyFiles` sets the default index version, you need to
-manually update indexes on existing repositories.
+manually update indexes on existing repositories in your terminal.
 
 ```console
 $ cd ~/example
 $ git update-index --index-version 4
 ```
-### Start `fsmonitor—daemon` in repo
+### Start `fsmonitor—daemon`
 
 ```console
 $ cd ~/example
@@ -85,9 +86,9 @@ $ git fsmonitor--daemon start
 By using the recommended approach listed above, my command execution time for
 "git status" was reduced from approximately 0.316 seconds to 0.118 seconds,
 accompanied by a decrease in CPU utilization from 425% to 89%, leading to a
-significantly improved user experience. Additionally, I no longer encounter
-`fatal: Unable to create 'project_path/.git/index.lock': File exists.` errors
-while performing basic Git commands (MacOS Intel Core i9).
+significantly improved performance. Additionally, I no longer encounter `fatal:
+Unable to create 'project_path/.git/index.lock': File exists.` errors while
+performing basic Git commands (MacOS Intel Core i9).
 
 **Before**
 ```console
@@ -119,6 +120,20 @@ Enabling this configuration option enables the following by default:
 * `index.skipHash=true`
 * `index.version=4`
 * `core.untrackedCache=true`
+
+Git writes an entirely new index in `index.lock` and then replaces `.git/index`
+when you use basic commands. In a monorepo with a large number of files, this
+index can be quite large and take several seconds to write every time you
+perform a command. Upgrading from the standard version 2 to version 4 reduces
+index size by 30%-50% by compressing the pathnames, which results in faster
+load time on operations. Caching untracked files adds more of a memory load but
+again, reduces the load time.
+
+In my case, I encountered the following error often before I made the update:
+
+```console
+fatal: Unable to create 'project_path/.git/index.lock': File exists.
+```
 
 **`core.commitgraph`**
 
@@ -166,4 +181,6 @@ revert the changes by doing the following:
   monitor](https://github.blog/2022-06-29-improve-git-monorepo-performance-with-a-file-system-monitor/)
 * [git error `invalid data in index` with index.skipHash
   config](https://github.com/rust-lang/cargo/issues/11857)
+* [git 2.40.0 index.skipHash incompatible with
+  libgit2](https://github.com/libgit2/libgit2/issues/6531)
 
