@@ -129,7 +129,7 @@ Our `.eslintrc.json` file should now look like the following:
 Here's what our `.prettierrc.json` file will look like:
 ```json
 {
-   "printWidth": 100,
+   "printWidth": 80,
    "tabWidth": 2,
    "useTabs": false,
    "semi": true,
