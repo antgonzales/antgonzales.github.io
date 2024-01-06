@@ -11,9 +11,9 @@ attention on optimizing Git for monorepos. With the release of Git v2.37.0, new
 features have been introduced that significantly improve performance for
 repositories with a lot of files. This blog post will cover custom git monorepo
 configurations to improve performance and providing step-by-step guidance on
-how to enhance implement the, especially in large-scale projects. We'll look
-into these new features and explain how to effectively implement them in your
-global or local Git config.
+how to enhance your Git operations, especially in large-scale projects. We'll
+look into these new features and explain how to effectively implement them in
+your global or local Git config.
 
 * Do not remove this line (it will not be displayed)
 {:toc}
