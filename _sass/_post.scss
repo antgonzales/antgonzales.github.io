@@ -10,7 +10,7 @@
 .post-meta {
   display: inline-block;
   margin-bottom: 1rem;
-  font-family: $mono-font-family;
+  font-family: var(--mono-font-family);
   font-weight: 300;
   letter-spacing: .06em;
   font-size: 1.6rem;
@@ -44,7 +44,7 @@
   margin: 0;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  font-family: $mono-font-family;
+  font-family: var(--mono-font-family);
   font-size: 1.3rem;
   font-style: italic;
 }
@@ -62,7 +62,7 @@
     position: absolute;
     left: -3rem;
     content: '#';
-    color: $blue;
+    color: var(--blue);
   }
   &:hover:before {
     display: block;
@@ -96,7 +96,7 @@
 
 .quick-about-contact a {
   text-decoration: none;
-  font-family: $sans-serif-font-family;
+  font-family: var(--sans-serif-font-family);
 }
 
 #markdown-toc::before {
@@ -111,7 +111,7 @@
   display: inline-block;
   line-height: 2;
   border-radius: 4px;
-  background-color: $snow;
+  background-color: var(--snow);
 }
 
 .headline {
@@ -119,8 +119,8 @@
 }
 
 .callout {
-  margin: $line-height-computed 0;
-  padding: $line-height-computed;
+  margin: var(--line-height-computed 0);
+  padding: var(--line-height-computed);
   border: .3rem solid #ddd;
   border-radius: .4rem;
 }
@@ -130,22 +130,22 @@
 }
 
 .warning-callout {
-  border-color: $banana;
-  background-color: $banana;
+  border-color: var(--banana);
+  background-color: var(--banana);
 }
 
 .danger-callout {
-  border-color: $cherry;
-  color: $cherry;
+  border-color: var(--cherry);
+  color: var(--cherry);
 }
 
 .info-callout {
- border-color: $blue;
- color: $blue;
+ border-color: var(--blue);
+ color: var(--blue);
 }
 
 .highlight {
-  margin: 0 0 $line-height-computed 0;
+  margin: 0 0 var(--line-height-computed 0);
   border-radius: .5rem;
 }
 
