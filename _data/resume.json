@@ -34,30 +34,6 @@
     {
       "company":"Compass",
       "highlights": [
-      ],
-      "position":"Senior Software Engineer II",
-      "startDate":"2023-07-15",
-      "summary":"",
-      "website":"https://www.compass.com"
-    },
-    {
-      "company":"Alkymi",
-      "highlights": [
-        "Led web development and contributing to customer facing features and documentation.",
-        "Led API design and contracts in Django with Python.",
-        "Promoted best practices for React, Redux Toolkit, and testing with React Testing Library.",
-        "Worked with product stakeholders to track and estimate projects.",
-        "Impacted by July '23 RIF"
-      ],
-      "position":"Senior Software Engineer",
-      "startDate":"2023-03-06",
-      "endDate":"2023-07-15",
-      "summary":"",
-      "website":"https://www.alkymi.io"
-    },
-    {
-      "company":"Compass",
-      "highlights": [
         "Led a development team of five to redevelop Search for real estate agents. Increased adoption from ~5% to ~60% of agent teams.",
         "Continued to lead API design on backend-for-frontend Graphql service to generate Typescript types.",
         "Promoted best practices for React, React Query, Redux Toolkit, and testing with React Testing Library.",
@@ -66,7 +42,6 @@
       ],
       "position":"Senior Software Engineer II",
       "startDate":"2020-03-01",
-      "endDate":"2023-02-27",
       "summary":"I performed as tech lead on an in-house search project called Agent Search. I currently lead standards and best practices on the front-end team that launched a redesign and development effort of Search for Compass's real estate agents. This project used a previous development effort I led called the MLS Filters project and integrated with several other teams to create efficient customer workflows.",
       "website":"https://www.compass.com"
     },

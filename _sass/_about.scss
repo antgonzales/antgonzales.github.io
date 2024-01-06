@@ -1,3 +1,42 @@
 .about-img {
   text-align: center;
 }
+.about-experience {
+  table-layout: fixed;
+  width: 100%;
+  margin: 1rem 0;
+  table-layout: auto;
+  text-align: left;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  line-height: 1.7142857;
+}
+
+.about-experience td {
+   border-bottom-width: 1px;
+   @apply border-skin-line;
+}
+
+.about-experience td:nth-child(1) {
+    width: 30%;
+    font-weight: bold;
+}
+
+.about-experience td:nth-child(2) {
+    width: 40%;
+    text-align: center;
+}
+
+.about-experience td:nth-child(3) {
+    width: 30%;
+    text-align: right;
+}
+
+.about-experience tr:nth-child(1) {
+  border-top-width: 1px;
+  @apply border-skin-line;
+}
+
+table.about-experience tr, td {
+    padding: 1rem 0;
+}
