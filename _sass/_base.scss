@@ -15,15 +15,15 @@ img {
 }
 
 hr {
-  border: solid $graphite;
+  border: solid var(--graphite);
   border-width: 1px 0 0;
   clear: both;
-  margin-top: $line-height-computed;
-  margin-bottom: $line-height-computed;
+  margin-top: var(--line-height-computed);
+  margin-bottom: var(--line-height-computed);
 }
 
 a {
-  color: $primary-text-color;
+  color: var(--primary-text-color);
   text-underline-offset: .3rem;
 }
 

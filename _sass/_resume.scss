@@ -15,7 +15,7 @@
 
 .resume h2 {
   text-transform: uppercase;
-  color: $gray;
+  color: var(--gray);
   font-size: 1.8rem;
   text-transform: uppercase;
   letter-spacing: 1.2px;
@@ -52,7 +52,7 @@
 .resume .job-title {
   margin-bottom: 1rem;
   font-size: 1.6rem;
-  color: $gray;
+  color: var(--gray);
 }
 
 .resume .header-summary,

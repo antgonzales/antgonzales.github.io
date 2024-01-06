@@ -1,6 +1,6 @@
 .section-title {
   font-weight: 500;
-  font-family: $sans-serif-font-family;
+  font-family: var(--sans-serif-font-family);
   font-size: 1.8rem;
 }
 
@@ -12,7 +12,7 @@
   gap: 0.75rem;
   font-size: 1rem;
   line-height: 1;
-  color: $gray;
+  color: var(--gray);
 }
 
 .latest-blog-post-title a {
@@ -23,7 +23,7 @@
   flex: 1;
   height: 1px;
   border: none;
-  background-color: $gray;
+  background-color: var(--gray);
 }
 
 .intro p {

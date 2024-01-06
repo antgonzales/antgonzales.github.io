@@ -27,7 +27,7 @@
       <ul class="main-nav">
         {% for link in site.data.nav %}
           <li>
-            <a onclick="ga('send', 'event', 'Navigation', 'Click', '{{link.title}}');" href="{{link.href}}" class="">{{link.title}}</a>
+            <a href="{{link.href}}">{{link.title}}</a>
           </li>
         {% endfor %}
       </ul>
