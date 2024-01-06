@@ -12,13 +12,6 @@ pivotal projects at companies like
 expert consulting for clients such as [Benefit
 Cosmetics](https://www.benefitcosmetics.com){:target="_blank"} and Mint.com.
 
-Throughout my career, I have successfully managed teams and projects of
-different scales, from building Glossier's e-commerce platform from scratch to
-driving Compass's high-adoption Search and CRM initiatives. This journey has
-given me extensive exposure to a range of project types, team dynamics, and
-business challenges, equipping me with a versatile skill set and a deep
-understanding of both client needs and market trends.
-
 I specialize in web technologies like Typescript, Node.js, React, and Postgres.
 I'm also an expert in Test Driven Development methodologies.
 
