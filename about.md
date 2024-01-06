@@ -19,10 +19,8 @@ given me extensive exposure to a range of project types, team dynamics, and
 business challenges, equipping me with a versatile skill set and a deep
 understanding of both client needs and market trends.
 
-My expertise lies in creating seamless, engaging digital experiences. I excel
-in Agile environments, where I blend my technical knowledge with a strong
-entrepreneurial mindset to deliver solutions that not only meet but exceed
-business objectives.
+I specialize in web technologies like Typescript, Node.js, React, and Postgres.
+I'm also an expert in Test Driven Development methodologies.
 
 For more insights into my work or to discuss potential collaborations, feel
 free to [contact me](/contact).
