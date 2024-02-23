@@ -4,7 +4,7 @@ title: "Don't mock in Jest"
 description: "Discover why avoiding mocks in Jest enhances testing. Learn
 strategies for resilient, standards-based tests that improve code
 maintainability and reliability."
-date: 2024-02-22
+date: 2024-06-01
 ---
 
 Jest revolutionized front-end testing upon its 2014 release by introducing a
