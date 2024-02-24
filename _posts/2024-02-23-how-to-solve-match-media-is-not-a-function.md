@@ -7,7 +7,7 @@ window.matchMedia is not a function error."
 date: 2024-02-23
 ---
 
-Testing responsive designs in environments that don't support the `matchMedia`
+Testing responsive designs in environments that don't support the matchMedia
 API, like Jest and jsdom, can be challenging. This necessitates a custom
 implementation to ensure our tests can accurately simulate different viewport
 sizes. Fortunately, the css-mediaquery library provides an API that closely
@@ -19,12 +19,12 @@ Mobile First development principles.
 
 <!--break-->
 
-## Creating a custim `matchMedia` implementation
+## Creating a custom matchMedia implementation
 
-To address the `window.matchMedia` is not a function error, we'll develop a
-custom `matchMedia` function using the
+To address the `window.matchMedia is not a function` error, we'll develop a
+custom matchMedia function using the
 [css-mediaquery](https://github.com/ericf/css-mediaquery) library in our
-testing tools. This function will not only simulate the `matchMedia` API but
+testing tools. This function will not only simulate the matchMedia API but
 also allow us to dynamically adjust the viewport size for our tests, following
 a Mobile First approach.
 
@@ -36,13 +36,13 @@ Below is the implementation:
 import mediaQuery from 'css-mediaquery';
 
 beforeAll(() => {
-  // Set the initial/default `matchMedia` implementation
+  // Set the initial/default matchMedia implementation
   // for Mobile First development
   window.matchMedia = createMatchMedia('576px');
 });
 
 afterEach(() => {
-  // Reset `matchMedia` after each test
+  // Reset matchMedia after each test
   window.matchMedia = createMatchMedia('576px');
 });
 
