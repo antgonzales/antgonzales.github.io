@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How to solve `window.matchMedia is not a function`"
+title: "How to solve window.matchMedia is not a function in Jest"
 description: "Learn how to emulate matchMedia in Jest for responsive design
 testing, avoiding mocks for a behavior-focused approach. Overcome
 window.matchMedia is not a function error."
@@ -9,10 +9,10 @@ date: 2024-02-23
 
 Testing responsive designs in environments that don't support the matchMedia
 API, like Jest and jsdom, can be challenging. This necessitates a custom
-implementation to ensure our tests can accurately simulate different viewport
-sizes. Fortunately, the css-mediaquery library provides an API that closely
-emulates matchMedia, allowing us to create a tailored solution that adheres to
-Mobile First development principles.
+implementation to ensure our React tests can accurately simulate different
+viewport sizes. Fortunately, the css-mediaquery library provides an API that
+closely emulates matchMedia, allowing us to create a tailored solution that
+adheres to Mobile First development principles.
 
 * Do not remove this line (it will not be displayed)
 {:toc}
@@ -78,7 +78,8 @@ With our custom `matchMedia` implementation in place, we can now write tests
 that simulate different viewport sizes. This enables us to verify the
 responsive behavior of our components under various conditions.
 
-Below is an example test suite starting with the mobile viewport:
+Below is an example test suite that tests React components starting with the
+mobile viewport:
 
 ```javascript
 import { render, screen, createMatchMedia } from '@/testUtils';
