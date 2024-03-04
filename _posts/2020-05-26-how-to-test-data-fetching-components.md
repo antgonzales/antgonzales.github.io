@@ -5,7 +5,7 @@ description: "Learn how to test API calls in components with examples in React
 and Jest. Write tests flexible enough for change"
 image: "post-boxes-on-brick-compressed.jpg"
 date: 2020-05-25
-last_modified_at: 2022-11-06
+last_modified_at: 2024-03-03
 ---
 
 Most examples that discuss [Test-Driven
@@ -23,9 +23,11 @@ that make API calls.
 
 ## Mocks are risky assumptions
 
-I often see examples advising that you mock an entire library. The examples mock
-axios, request, or fetch to test that a specific function is called. Here's an
-example provided by [Testing Library](https://web.archive.org/web/20200512192923/https://testing-library.com/docs/react-testing-library/example-intro/){: rel="nofollow noopener" target="_blank"} using React:
+I often see examples advising that you mock an entire library. The examples
+mock axios, request, or fetch to test that a specific function is called.
+Here's an example provided by [Testing
+Library](https://web.archive.org/web/20200512192923/https://testing-library.com/docs/react-testing-library/example-intro/){:
+rel="nofollow noopener" target="_blank"} using React:
 
 ```jsx
 // fetch/fetch.test.js
@@ -57,7 +59,9 @@ test('loads and displays greeting', async () => {
 ```
 
 <div class="callout warning-callout">
-Update: Testing Library recommends <a href="https://mswjs.io" re="noopener nofollow" target="_blank">Mock Service Worker</a> and no longer maintains the example above.
+Update: Testing Library recommends <a href="https://mswjs.io" re="noopener
+nofollow" target="_blank">Mock Service Worker</a> and no longer maintains the
+example above.
 </div>
 
 This approach tests implementation details in addition to behavior. It binds our
@@ -72,26 +76,9 @@ which means you will need to follow Red, Green, Refactor across all of the tests
 you previously wrote. The process of changing your data fetching library will be
 tedious and prone to errors.
 
-## Stub the environment, not the implementation
 
-jsdom is the backbone of UI testing in Jest. Before Jest and React, most
-front-end developers relied on Angular, Phantom, and Karma. The idea was to spin
-up an instance of Chrome (which every UI developer was using) and run tests with
-a live browser. You get the behavior of a single browser, along with its quirks,
-the effort to ensure the browser can run on a CI pipeline, and the cost of a
-browser turning on/off while you develop code. jsdom is the sweet spot between
-running a live browser and mocking individual browser methods in node. It's
-portable, follows web specs reasonably well, and doesn't have as high a cost as
-a real browser. jsdom stubs the browser environment by implementing everything a
-browser has on node.
 
-What is the extreme opposite of mocking data fetching libraries and their
-methods for each test suite? Running a live server. We don't want to run the
-live server while testing, so what's the sweet spot in between mocking our data
-fetching and running a server? Using a library that follows the HTTP spec, reads
-incoming data, and allows you to stub responses.
-
-## Which API stubbing library should I use?
+## Which API inteceptor library should I use?
 
 There are several libraries available to stub server responses:
 
@@ -100,46 +87,53 @@ There are several libraries available to stub server responses:
 * cypress
 * nock
 
-I recommend [nock](https://github.com/nock/nock){: rel="nofollow noopener" target="_blank"} for several reasons:
+I recommend [msw](https://mswjs.io/){: rel="nofollow noopener" target="_blank"} for
+several compelling reasons:
 
-* Lightweight
-* Portable
-* Well-documented
+* Seamless integration with both browser and Node.js environments
+* Realistic request interception
+* Rich documentation and community support
 
-Clocking in 170kb, it's perfect for usage in isolated unit and integration
-tests. There's no big installation and no major setup. It's a mature,
-well-documented library that gives developers the ability to easily investigate
-and find answers to their problems. These aspects pay off in spades as a project
-grows and ages.
+msw is a powerful tool for mocking API responses in both front-end and back-end
+testing environments, offering seamless integration without the need for
+configuring a separate server or altering your production code's network
+requests. This library stands out because it intercepts requests at the network
+level, allowing for a more realistic simulation of API calls in development and
+testing scenarios.
 
-Let's look at nock using the previous example:
+## Implement a fake server 
+
+Let's look at msw using the previous example and assume we've already done
+the recommended setup.
 
 ```jsx
 // fetch/fetch.test.js
 import React from 'react'
-import nock from 'nock'
+import { rest } from 'msw';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+
+import { server } from '@/mocks/server';
+
 import Fetch from '.'
 
-test('loads and displays greeting', async () => {
-  const url = '/greeting'
+test('override handler in a single test', async () => {
+  // Override the handler for this test
+  server.use(
+    rest.get('https://yoursite.com/greeting', (req, res, ctx) => {
+      return res(ctx.json({ greeting: 'hello there' }));
+    })
+  );
 
-  const scope = nock('https://yoursite.com')
-    .get('/greeting')
-    .once()
-    .reply(200, {
-      data: { greeting: 'hello there' },
-    });
-  render(<Fetch url={url} />)
+  const url = '/greeting';
+  render(<Fetch url={url} />);
+  fireEvent.click(screen.getByText('Load Greeting'));
 
-  fireEvent.click(screen.getByText('Load Greeting'))
+  await waitFor(() => screen.getByRole('heading'));
 
-  await waitFor(() => screen.getByRole('heading'))
-
-  expect(screen.getByRole('heading')).toHaveTextContent('hello there')
-  expect(screen.getByRole('button')).toHaveAttribute('disabled')
-})
+  // Assertions can now expect the overridden behavior
+  expect(screen.getByRole('heading')).toHaveTextContent('hello there');
+  expect(screen.getByRole('button')).toHaveAttribute('disabled');
+});
 ```
 
 In the new and immproved approach, we've done several things:
@@ -196,78 +190,67 @@ For this example, I will use the free [Pokemon
 list](https://graphql-pokemon.now.sh){: rel="nofollow noopener" target="_blank"} server, grab some fake data, and query
 against it.
 
-```diff
-diff --git a/src/App/App.test.js b/src/App/App.test.js
-index e69de29..0d66745 100644
---- a/src/App/App.test.js
-+++ b/src/App/App.test.js
-@@ -0,0 +1,45 @@
-+import React from "react";
-+import { ApolloProvider } from "@apollo/react-hooks";
-+import nock from "nock";
-+import { render } from "@testing-library/react";
-+
-+import { client } from "./client";
-+import { App } from "./";
-+
-+describe("App", () => {
-+  it("works", async () => {
-+    nock("https://graphql-pokemon.now.sh")
-+      .defaultReplyHeaders({ "access-control-allow-origin": "*" })
-+      .post("/")
-+      .reply(200, {
-+        data: {
-+          pokemon: [
-+            {
-+              id: "UG9rZW1vbjowMDE=",
-+              name: "Bulbasaur",
-+              __typename: "Pokemon"
-+            },
-+            {
-+              id: "UG9rZW1vbjowMDI=",
-+              name: "Ivysaur",
-+              __typename: "Pokemon"
-+            },
-+            {
-+              id: "UG9rZW1vbjowMDM=",
-+              name: "Venusaur",
-+              __typename: "Pokemon"
-+            }
-+          ]
-+        }
-+      });
-+
-+    const { findAllByTestId } = render(
-+      <ApolloProvider client={client}>
-+        <App />
-+      </ApolloProvider>
-+    );
-+
-+    const pokemon = await findAllByTestId("pokemon");
-+    expect(pokemon.length).toBe(3);
-+  });
-+});
-diff --git a/src/App/client/client.js b/src/App/client/client.js
-index 8b13789..b586022 100644
---- a/src/App/client/client.js
-+++ b/src/App/client/client.js
-@@ -1 +1,7 @@
-+import ApolloClient from "apollo-boost";
+```jsx
+import React from "react";
+import { ApolloProvider } from "@apollo/react-hooks";
+import { render } from "@testing-library/react";
+import { graphql } from "msw";
 
-+const options = {
-+  uri: "https://graphql-pokemon.now.sh",
-+}
-+
-+export const client = new ApolloClient(options);
+import { client } from "@/api/client";
+import { server } from "@/mocks/server";
+
+import { App } from "./";
+
+describe("App", () => {
+  it("displays all Pokemon", async () => {
+    // Override the default handlers for this test
+    server.use(
+      graphql.post("https://graphql-pokemon.now.sh", (req, res, ctx) => {
+        return res(
+          ctx.json({
+            data: {
+              pokemon: [
+                {
+                  id: "UG9rZW1vbjowMDE=",
+                  name: "Bulbasaur",
+                  __typename: "Pokemon"
+                },
+                {
+                  id: "UG9rZW1vbjowMDI=",
+                  name: "Ivysaur",
+                  __typename: "Pokemon"
+                },
+                {
+                  id: "UG9rZW1vbjowMDM=",
+                  name: "Venusaur",
+                  __typename: "Pokemon"
+                }
+              ]
+            }
+          })
+        );
+      })
+    );
+
+    const { findAllByTestId } = render(
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    );
+
+    const pokemon = await findAllByTestId("pokemon");
+    expect(pokemon.length).toBe(3);
+  });
+});
 ```
 
 You may be thinking, "this looks like a lot of setup in comparison to using
-`MockedProvider` as recommended". You're not wrong. We now know about some of the
-implementation details of how Apollo fetches data from the server (POST).
-However, I would argue that this minor detail is what we need to know to have
-confidence in our tests and the confidence to make changes. The GraphQL server
-expects us to perform a POST operation, and if we decide to no longer use
-Apollo, we have some safety.
+`MockedProvider` as recommended". You're not wrong. We now know about some of
+the implementation details of how Apollo fetches data from the server. However,
+I would argue that this minor detail is what we need to know to have confidence
+in our tests and the confidence to make changes. The GraphQL server expects us
+to perform a POST operation, and if we decide to no longer use Apollo, we have
+some safety.
 
 ## Swapping Apollo Client for Fetch
 
@@ -275,101 +258,71 @@ Here's what it looks like if we no longer want to use Apollo Client and opt for
 a more close to the metal solution using
 [isomorphic-unfetch](https://github.com/developit/unfetch#readme){: rel="nofollow noopener" target="_blank"}:
 
-```diff
-diff --git a/package.json b/package.json
-index 6cbd5e4..00e3a3a 100644
---- a/package.json
-+++ b/package.json
-@@ -12,6 +12,7 @@
-     "@testing-library/react": "^10.0.4",
-     "apollo-boost": "0.4.9",
-     "graphql": "15.0.0",
-+    "isomorphic-unfetch": "^3.0.0",
-     "nock": "12.0.3",
-     "react": "16.12.0",
-     "react-dom": "16.12.0",
-diff --git a/src/App/App.js b/src/App/App.js
-index e9f0350..25a0b4f 100644
---- a/src/App/App.js
-+++ b/src/App/App.js
-@@ -1,8 +1,7 @@
--import React from "react";
--import { gql } from "apollo-boost";
--import { useQuery } from "@apollo/react-hooks";
-+import React, { useEffect, useState } from "react";
-+import fetch from 'isomorphic-unfetch';
+```jsx
+import { useQuery } from "@apollo/react-hooks";
+import React, { useEffect, useState } from "react";
+import fetch from 'isomorphic-unfetch';
 
--const ALL_POKEMON = gql`
-+const ALL_POKEMON = `
-   {
-     pokemon(first: 3) {
-       id
-@@ -16,9 +15,24 @@ function List({ items = []}) {
- }
+// Updated GraphQL query string
+const ALL_POKEMON = `
+{
+  pokemon(first: 3) {
+    id
+    name
+  }
+}
+`;
 
- export function App() {
--  const { data, loading } = useQuery(ALL_POKEMON);
-+  const [isLoading, setIsLoading] = useState(true);
-+  const [data, setData] = useState(undefined);
+// Updated App component
+export function App() {
+  // We'll comment  out useQuery()
+  // const { data, loading } = useQuery(ALL_POKEMON);
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState(undefined);
 
--  if (loading) return <div>Loading...</div>;
-+  useEffect(() => {
-+    const controller = new AbortController();
-+    async function fetchPokemon() {
-+      try {
-+        const result = await fetch('https://graphql-pokemon.now.sh', {
-+          method: 'POST',
-+          headers: {'Content-Type': 'application/json'},
-+          body: JSON.stringify({query: ALL_POKEMON}),
-+          signal: controller.signal,
-+        });
-+        const json = await result.json();
-+        setData(json.data);
-+      } catch(e) {
-+        console.error(e);
-+      }
-+    }
-+    fetchPokemon();
-+    setIsLoading(false);
-+    return () => {
-+      controller.abort();
-+    }
-+  }, []);
-+
-+  if (isLoading) return <div>Loading...</div>;
+  useEffect(() => {
+    const controller = new AbortController();
+    async function fetchPokemon() {
+      try {
+        const result = await fetch('https://graphql-pokemon.now.sh', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({query: ALL_POKEMON}),
+          signal: controller.signal,
+        });
+        const json = await result.json();
+        setData(json.data);
+        setIsLoading(false); // Moved inside try to only set loading false on success
+      } catch(e) {
+        console.error(e);
+        setIsLoading(false); // Consider setting loading to false on error as well
+      }
+    }
+    fetchPokemon();
+    return () => {
+      controller.abort();
+    }
+  }, []);
 
-   return (
-     <ul>
-diff --git a/src/App/App.test.js b/src/App/App.test.js
-index 0d66745..6fd98df 100644
---- a/src/App/App.test.js
-+++ b/src/App/App.test.js
-@@ -1,9 +1,7 @@
- import React from "react";
--import { ApolloProvider } from "@apollo/react-hooks";
- import nock from "nock";
- import { render } from "@testing-library/react";
+  if (isLoading) return <div>Loading...</div>;
 
--import { client } from "./client";
- import { App } from "./";
+  // Assuming you have a component to render this data
+  return <List items={data ? data.pokemon : []} />;
+}
 
- describe("App", () => {
-@@ -33,11 +31,7 @@ describe("App", () => {
-         }
-       });
-
--    const { findAllByTestId } = render(
--      <ApolloProvider client={client}>
--        <App />
--      </ApolloProvider>
--    );
-+    const { findAllByTestId } = render(<App />);
-
-     const pokemon = await findAllByTestId("pokemon");
-     expect(pokemon.length).toBe(3);
+// Updated List component (no changes provided, assuming no change)
+function List({ items = []}) {
+  return (
+    <ul>
+      {items.map(item => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </ul>
+  );
+}
 ```
 
-Notice that my test assertions didn't change. I've hollowed out the innards of
+Notice that I did not change the test suite. I've hollowed out the innards of
 the production code and was able to retain the test suite. The test suite does
 not care about how my app fetches data as long as I follow the server's
 contract.
@@ -379,57 +332,90 @@ confidently and receive feedback if we make changes that might cause problems.
 By removing mocks and stubbing the server, we can create a flexible test suite
 that ensures a server contract is maintained.
 
-## Testing with multiple requests
+## Constraining requests
 
-Using GraphQL means we can't stub a single endpoint and respond with different
-data. With HTTP interceptors like nock, we assign one endpoint to one response.
-We must control the flow of data by checking the incoming query. Without
-checking the incoming data, we'll end up responding incorrectly to the different
-calls.
+Using GraphQL means we can't implement a single endpoint and respond with
+different data. With HTTP interceptors like msw, we assign one endpoint to one
+response. We must control the flow of data by checking the incoming query.
+Without checking the incoming data, we'll end up responding incorrectly to the
+different calls.
 
-```diff
-diff --git a/src/App/App.js b/src/App/App.js
-index 25a0b4f..691c47a 100644
---- a/src/App/App.js
-+++ b/src/App/App.js
-@@ -1,7 +1,7 @@
- import React, { useEffect, useState } from "react";
- import fetch from 'isomorphic-unfetch';
+```jsx
+import React from "react";
+import { ApolloProvider } from "@apollo/react-hooks";
+import { render } from "@testing-library/react";
+import { graphql } from "msw";
 
--const ALL_POKEMON = `
-+export const ALL_POKEMON = `
-   {
-     pokemon(first: 3) {
-       id
-diff --git a/src/App/App.test.js b/src/App/App.test.js
-index 6fd98df..5304b3c 100644
---- a/src/App/App.test.js
-+++ b/src/App/App.test.js
-@@ -2,13 +2,13 @@ import React from "react";
- import nock from "nock";
- import { render } from "@testing-library/react";
+import { client } from "@/api/client";
+import { server } from "@/mocks/server"; 
 
--import { App } from "./";
-+import { App, ALL_POKEMON } from "./";
+import { App } from "./";
 
- describe("App", () => {
-   it("works", async () => {
-     nock("https://graphql-pokemon.now.sh")
-       .defaultReplyHeaders({ "access-control-allow-origin": "*" })
--      .post("/")
-+      .post("/", JSON.stringify({query: ALL_POKEMON}))
-       .reply(200, {
-         data: {
-           pokemon: [
+describe("App", () => {
+  it("requires a querying a specific number of Pokemon", async () => {
+    const ALL_POKEMON_QUERY = `
+    {
+      pokemon(first: 3) {
+        id
+        name
+        __typename
+      }
+    }`;
+
+    // Override the default handlers for this test to check for a specific query
+    server.use(
+      graphql.post("https://graphql-pokemon.now.sh", (req, res, ctx) => {
+        // Check if the incoming query matches the expected query
+        if (req.body.query.includes("pokemon(first: 3)")) {
+          return res(
+            ctx.json({
+              data: {
+                pokemon: [
+                  {
+                    id: "UG9rZW1vbjowMDE=",
+                    name: "Bulbasaur",
+                    __typename: "Pokemon"
+                  },
+                  {
+                    id: "UG9rZW1vbjowMDI=",
+                    name: "Ivysaur",
+                    __typename: "Pokemon"
+                  },
+                  {
+                    id: "UG9rZW1vbjowMDM=",
+                    name: "Venusaur",
+                    __typename: "Pokemon"
+                  }
+                ]
+              }
+            })
+          );
+        } else {
+          // If the query does not match, you could return an error or handle as needed
+          return res(ctx.status(400), ctx.json({ error: "Query not matched" }));
+        }
+      })
+    );
+
+    const { findAllByTestId } = render(
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    );
+
+    const pokemon = await findAllByTestId("pokemon");
+    expect(pokemon.length).toBe(3);
+  });
+});
 ```
 
-I've now added a data constraint to the post method in nock. If I don't pass
-data that matches the constraint, I will not receive the `200` reply and
-data. The [GraphQL
-spec](https://graphql.org/learn/serving-over-http/#post-request){: rel="nofollow noopener" target="_blank"} advises that
-you pass an object with two specific parameters; `query` and `variables`. In
-this particular case, we're sending just the query. With our request constraint
-added, we're now free to add additional responses.
+I've now added a data constraint to the msw graphql handler. If I don't pass
+data that matches the constraint, I will not receive the `200` reply and data.
+The [GraphQL spec](https://graphql.org/learn/serving-over-http/#post-request){:
+rel="nofollow noopener" target="_blank"} advises that you pass an object with
+two specific parameters; `query` and `variables`. In this particular case,
+we're sending just the query. With our request constraint added, we're now free
+to add additional responses.
 
 ## Deciding tradeoffs
 
@@ -438,7 +424,7 @@ changes, you have to decide which parts you are comfortable living with, no
 matter the scale. For some people, the notion of managing a server response
 library is more painful and tedious than just mocking libraries and responses.
 For me, the pain of not having confidence in my test suite far outweighs the
-trivial tedium of using nock.
+trivial tedium of using msw.
 
 I've felt the pain of migrating a codebase from one library to another,
 including libraries that fetch data. I hope this guide helps you evaluate the
