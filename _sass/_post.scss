@@ -105,13 +105,13 @@
 }
 
 #markdown-toc {
-  border: .06rem solid #aaa;
+  width: 100%;
   padding: 2rem 5rem;
   list-style: decimal;
   display: inline-block;
   line-height: 2;
   border-radius: 4px;
-  background-color: var(--snow);
+  background-color: #f6f8fa;
 }
 
 .headline {
