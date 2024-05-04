@@ -4,16 +4,14 @@ title: "How to improve Git monorepo performance"
 description: "Optimize Git in monorepos with an optimized Git config. Follow
 clear steps to boost CPU performance and workflow efficiency"
 date: 2023-12-15
+last_modified_at: 2024-05-04
 ---
-
-Many discussions about Git focus on its basic functions, yet there's less
-attention on optimizing Git for monorepos. With the release of Git v2.37.0, new
-features have been introduced that significantly improve performance for
-repositories with a lot of files. This blog post will cover custom git monorepo
-configurations to improve performance and providing step-by-step guidance on
-how to enhance your Git operations, especially in large-scale projects. We'll
-look into these new features and explain how to effectively implement them in
-your global or local Git config.
+[Git v2.37.0](https://github.blog/2022-06-27-highlights-from-git-2-37/)
+introduced new features that significantly improve performance for repositories
+with large numbers of files. This blog post will cover custom Git monorepo
+configurations to improve local performance and provide step-by-step guidance
+to rollback if anything goes wrong. We’ll look into these new features and
+explain how to implement them effectively in your global or local Git config.
 
 * Do not remove this line (it will not be displayed)
 {:toc}
@@ -68,27 +66,28 @@ your global or local Git config.
 ### Update Git index to version 4 in repo
 
 Although `feature.manyFiles` sets the default index version, you need to
-manually update indexes on existing repositories in your terminal.
+manually update the [index format](https://git-scm.com/docs/index-format) on
+your local repository through your terminal.
 
 ```console
-$ cd ~/example
+$ cd ~/example-monorepo
 $ git update-index --index-version 4
 ```
 ### Start `fsmonitor—daemon`
 
 ```console
-$ cd ~/example
+$ cd ~/example-monorepo
 $ git fsmonitor--daemon start
 ```
 
 ## Results
 
-By using the recommended approach listed above, my command execution time for
-"git status" was reduced from approximately 0.316 seconds to 0.118 seconds,
-accompanied by a decrease in CPU utilization from 425% to 89%, leading to a
-significantly improved performance. Additionally, I no longer encounter `fatal:
-Unable to create 'project_path/.git/index.lock': File exists.` errors while
-performing basic Git commands (MacOS Intel Core i9).
+Using the custom Git configuration and updated index format, my command
+execution time for "git status" was reduced from approximately 0.316 seconds to
+0.118 seconds, and by a decrease in CPU utilization from 425% to 89%,
+leading to a significantly improved performance. Additionally, I no longer
+encounter `fatal: Unable to create 'project_path/.git/index.lock': File
+exists.` errors while performing basic Git commands (MacOS Intel Core i9).
 
 **Before**
 ```console
@@ -122,14 +121,15 @@ Enabling this configuration option enables the following by default:
 * `core.untrackedCache=true`
 
 Git writes an entirely new index in `index.lock` and then replaces `.git/index`
-when you use basic commands. In a monorepo with a large number of files, this
-index can be quite large and take several seconds to write every time you
-perform a command. Upgrading from the standard version 2 to version 4 reduces
-index size by 30%-50% by compressing the pathnames, which results in faster
-load time on operations. Caching untracked files adds more of a memory load but
-again, reduces the load time.
+when you use basic commands. In a monorepo with many files, this index can be
+large and take several seconds to write every time you perform a command.
+Upgrading from the standard version 2 to version 4 reduces index size by 30% to
+50% by compressing the pathnames, which results in faster load time on
+operations. Caching untracked files adds more memory load but again reduces the
+load time.
 
-In my case, I encountered the following error often before I made the update:
+When performing simple Git commands, I would encounter the following errors
+before I made the update:
 
 ```console
 fatal: Unable to create 'project_path/.git/index.lock': File exists.
@@ -147,31 +147,25 @@ writing a commit-graph on every `git fetch`.
 
 ## How to revert changes
 
-In the event that experience an error or issues with your Git operations,
+In the event that you experience an error or issues with your Git operations,
 revert the changes by doing the following:
 
 1. Update global or local Git config:
-    1. Open your global or local Git config file.
-    2. Remove or comment out the include path for the custom configuration:
-
-```ini
-[include]
-    path = ~/.gitconfig.monorepo
-```
-
-1. Revert index version in repo:
-    1. Go to the specific repository (e.g., `cd ~/example`).
-    2. If you want to revert the index version to a previous state (e.g.,
+    * Open your global or local Git config file.
+    * Remove or comment out the include path for the custom configuration.
+2. Revert index version in repo:
+    * Go to the specific repository (e.g., `cd ~/example-monorepo`).
+    * If you want to revert the index version to a previous state (e.g.,
        version 2), run the following command: `git update-index --index-version
        2`
-    3. Note: This step depends on your requirements and the original index
+    * Note: This step depends on your requirements and the original index
        version you were using.
-2. Stop fsmonitor daemon in repo:
-    1. In the repository where you started the `fsmonitor--daemon`, stop it
+3. Stop fsmonitor daemon in repo:
+    * In the repository where you started the `fsmonitor--daemon`, stop it
        using `git fsmonitor--daemon stop`
-    2. This will disable the file system monitor for that repository.
-3. General check and cleanup:
-    1. Run `git status` to ensure that Git is working properly.
+    * This will disable the file system monitor for that repository.
+4. General check and cleanup:
+    * Run `git status` to ensure that Git is working properly.
 
 ## References
 
