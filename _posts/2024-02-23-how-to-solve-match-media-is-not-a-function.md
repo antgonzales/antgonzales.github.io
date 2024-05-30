@@ -3,7 +3,8 @@ layout: post
 title: "Fix TypeError: window.matchMedia is not a function in Jest"
 description: "Learn how to emulate matchMedia in Jest for responsive design
 testing. Create a reusable test helper to check code at different breakpoints."
-date: 2024-05-30
+date: 2024-02-23
+last_modified_at: 2024-05-30
 ---
 
 Testing responsive designs in environments that don't support the matchMedia
