@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "How to solve window.matchMedia is not a function in Jest"
+title: "Fix TypeError: window.matchMedia is not a function in Jest"
 description: "Learn how to emulate matchMedia in Jest for responsive design
-testing. Solve window.matchMedia is not a function error."
+testing. Create a reusable test helper to check code at different breakpoints."
 date: 2024-05-30
 ---
 
@@ -20,12 +20,12 @@ adheres to Mobile First development principles.
 
 ## Creating a custom matchMedia implementation
 
-To address the `window.matchMedia is not a function` error, we'll develop a
-custom matchMedia function using the
+To address the `TypeError: window.matchMedia is not a function` error, we'll
+develop a custom matchMedia function using the
 [css-mediaquery](https://github.com/ericf/css-mediaquery) library in our
-testing tools. This function will not only simulate the matchMedia API but
-also allow us to dynamically adjust the viewport size for our tests, following
-a Mobile First approach.
+testing tools. This function will not only simulate the matchMedia API but also
+allow us to dynamically adjust the viewport size for our tests, following a
+Mobile First approach.
 
 Below is the implementation:
 
