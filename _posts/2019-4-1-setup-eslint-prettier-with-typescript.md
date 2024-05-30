@@ -3,6 +3,7 @@ layout: post
 title:  "Setup Prettier and ESLint with Typescript"
 description: "Learn how to leverage ESLint, Prettier with Typescript to reduce
 bugs and nitpicky reviews. I'll walk you through setup, explain the differences"
+date: 2019-04-01
 last_modified_at: 2023-12-20
 ---
 
