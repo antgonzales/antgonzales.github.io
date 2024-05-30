@@ -2,9 +2,8 @@
 layout: post
 title: "How to solve window.matchMedia is not a function in Jest"
 description: "Learn how to emulate matchMedia in Jest for responsive design
-testing, avoiding mocks for a behavior-focused approach. Overcome
-window.matchMedia is not a function error."
-date: 2024-02-23
+testing. Solve window.matchMedia is not a function error."
+date: 2024-05-30
 ---
 
 Testing responsive designs in environments that don't support the matchMedia
