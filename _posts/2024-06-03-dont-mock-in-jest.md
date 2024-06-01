@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Don't mock in Jest"
+title: "Don't use mocks in Jest"
 description: "Discover why avoiding mocks in Jest enhances testing. Learn
 strategies for resilient, standards-based tests that improve code
 maintainability and reliability."
-date: 2024-06-01
+date: 2024-06-03
 ---
 
 Jest revolutionized front-end testing upon its 2014 release by introducing a
@@ -125,85 +125,12 @@ We've now reduced the brittleness of the test and created more streamlined
 approach to checking the navigation of the component without the custom test
 render.
 
-## Solving `window.matchMedia is not a function` 
-
-jsdom does not yet support
-[`matchMedia`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)
-which means we need to find an implementation ourselves. Luckily,
-[css-mediaquery](https://github.com/ericf/css-mediaquery) emulates the API
-well. Rather than mock the function, we'll create our own implementation.
-
-```javascript
-// src/testUtils/matchMedia.js
-import mediaQuery from 'css-mediaquery';
-
-beforeAll(() => {
-  // Set the initial/default `matchMedia` implementation
-  // for Mobile First development
-  window.matchMedia = createMatchMedia('576px');
-});
-
-afterEach(() => {
-  // Reset `matchMedia` after each test
-  window.matchMedia = createMatchMedia('576px');
-});
-
-export function createMatchMedia(width) {
-  window.matchMedia = (query) => ({
-    matches: mediaQuery.match(query, {
-      width,
-    }),
-    addListener: () => {},
-    removeListener: () => {},
-  });
-}
-```
-
-```javascript
-import { render, screen, createMatchMedia } from '@/testUtils';
-import React from 'react';
-
-import ResponsiveComponent from '.'; 
-
-it('displays details in mobile by default', () => {
-  render(<ResponsiveComponent />);
-
-  // Expectations for mobile layout
-  expect(screen.getByText('Mobile')).toBeInTheDocument();
-});
-
-it('displays progressively more details for tablet', () => {
-  createMatchMedia('768px');
-  render(<ResponsiveComponent />);
-
-  // Expectations for tablet layout
-  expect(screen.getByText('Mobile + Tablet')).toBeInTheDocument();
-});
-
-it('displays progressively more details for desktop', () => {
-  createMatchMedia('992px');
-  render(<ResponsiveComponent />);
-
-  // Expectations for desktop layout
-  expect(screen.getByText('Mobile + Tablet + Desktop')).toBeInTheDocument();
-});
-```
-
-We now have a test environment that allows us to modify the viewport along with
-a safe default that resembles the `matchMedia` API.
-
 ## Conclusion
 
 Effective testing in React applications is not just about covering every line
 of code with tests; it's about writing tests that remain resilient against
 change. The goal of testing is not only to catch errors before they reach
 production but to provide a safety net that allows for confident refactoring
-and upgrading of dependencies. By focusing on the user's perspective and the
-external interface of components, rather than the underlying implementation, we
-ensure that our tests are both meaningful and durable.
-
-As the landscape of web development continues to evolve, so too will the tools
-and practices surrounding testing. Stay curious, keep exploring, and let the
-principles discussed here guide you toward more effective and efficient testing
-strategies. Your future self—and your team—will thank you for the effort.
-
+and upgrades. By focusing on the user's perspective and the external interface
+of components, rather than the underlying implementation, we ensure that our
+tests are both meaningful and durable.
