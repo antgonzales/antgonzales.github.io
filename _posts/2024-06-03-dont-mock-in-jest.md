@@ -34,7 +34,7 @@ review. Our team uses a [custom test
 render](https://testing-library.com/docs/react-testing-library/setup/#custom-render)
 to help with components that utilize React Providers, including `MemoryRouter`.
 
-```javascript
+```jsx
 import { render } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
@@ -65,7 +65,7 @@ export * from '@testing-library/react'
 export { renderWithProviders };
 ```
 
-```javascript
+```jsx
 import { fireEvent, renderWithProviders, screen } from '@/testUtils';
 import React from 'react';
 
@@ -105,7 +105,7 @@ false negatives in our test suite.
 
 A better, and simpler, approach is to check the `<a/>` tag's `href` property.
 
-```javascript
+```jsx
 import { render, screen } from '@/testUtils';
 import React from 'react';
 
