@@ -15,11 +15,9 @@ Karma and Mocha. Embracing Jest's philosophy means more than just adapting new
 tools; it's about adhering to web standards to create more reliable, resilient
 tests. Often, developers resort to mocks for HTTP requests, navigation routing,
 or to fill in missing features, but this strategy can lead to brittle tests
-that are overly dependent on implementation specifics. 
-
-By embracing a testing strategy that aligns with Jest's web-centric approach,
-we can mitigate these issues but also write tests that enhance code quality and
-maintainability.
+that are overly dependent on implementation specifics. By embracing a testing
+strategy that aligns with Jest's web-centric approach, we can mitigate these
+issues but also write tests that enhance code quality and maintainability.
 
 * Do not remove this line (it will not be displayed)
 {:toc}
