@@ -7,17 +7,17 @@ maintainability and reliability."
 date: 2024-06-03
 ---
 
-Jest revolutionized front-end testing upon its 2014 release by introducing a
-comprehensive simulation of the web browser environment within Node.js, powered
-by jsdom. This innovative approach marked a significant shift from the
-traditional reliance on headless or real browsers utilized by predecessors like
-Karma and Mocha. Embracing Jest's philosophy means more than just adapting new
-tools; it's about adhering to web standards to create more reliable, resilient
-tests. Often, developers resort to mocks for HTTP requests, navigation routing,
-or to fill in missing features, but this strategy can lead to brittle tests
-that are overly dependent on implementation specifics. By embracing a testing
-strategy that aligns with Jest's web-centric approach, we can mitigate these
-issues but also write tests that enhance code quality and maintainability.
+Jest revolutionized front-end testing when it was released in 2014 by
+simulating a web browser environment within Node.js using jsdom. This was a big
+change from the traditional methods that relied on headless or real browsers,
+like those used by Karma and Mocha. Using Jest wasn't just about picking up a
+new tool; it wass about following web standards to create more reliable and
+resilient tests at a lower cost than a live web browser. The risk of not using
+a live web browser is that developers are tempted to use mocks for HTTP
+requests, navigation routing, or addressing mismatched features, but this can
+make tests fragile and too dependent on implementation details. By aligning our
+testing strategy with Jest’s web-focused approach, we can avoid these pitfalls
+and write tests that improve code quality and maintainability.
 
 * Do not remove this line (it will not be displayed)
 {:toc}
