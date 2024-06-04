@@ -11,7 +11,7 @@ Jest revolutionized front-end testing when it was released in 2014 by
 simulating a web browser environment within Node.js using jsdom. This was a big
 change from the traditional methods that relied on headless or real browsers,
 like those used by Karma and Mocha. Using Jest wasn't just about picking up a
-new tool; it wass about following web standards to create more reliable and
+new tool; it was about following web standards to create more reliable and
 resilient tests at a lower cost than a live web browser. The risk of not using
 a live web browser is that developers are tempted to use mocks for HTTP
 requests, navigation routing, or addressing mismatched features, but this can
