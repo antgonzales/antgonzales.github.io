@@ -5,6 +5,7 @@ description: "Discover why avoiding mocks in Jest enhances testing. Learn
 strategies for resilient, standards-based tests that improve code
 maintainability and reliability."
 date: 2024-06-03
+last_modified_at: 2024-06-04
 ---
 
 Jest revolutionized front-end testing when it was released in 2014 by
@@ -77,7 +78,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('<ComponentWithNavigation />', () => {
   it('provides a link to return to the dashboard', async () => {
-    render(<ComponentWithNavigation />)
+    renderWithProviders(<ComponentWithNavigation />)
     const link = screen.getByRole(link, {name: 'Go to Home'});
     fireEvent.click(link);
     // ❌ Testing implementation details
@@ -111,7 +112,7 @@ import React from 'react';
 
 describe('<ComponentWithNavigation />', () => {
   it('provides a link to return to the dashboard', async () => {
-    render(<ComponentWithNavigation />)
+    renderWithProviders(<ComponentWithNavigation />)
     const link = screen.getByRole(link, {name: 'Go to Home'});
     // ✅ Checking the link element render
     expect(link.href).toBe('/');
