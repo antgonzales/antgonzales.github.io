@@ -4,7 +4,7 @@ title: "Fix TypeError: window.matchMedia is not a function in Jest"
 description: "Learn how to emulate matchMedia in Jest for responsive design
 testing. Create a reusable test helper to check code at different breakpoints."
 date: 2024-02-23
-last_modified_at: 2024-05-30
+last_modified_at: 2024-07-28
 ---
 
 Testing responsive designs in environments that don't support the matchMedia
@@ -38,12 +38,12 @@ import mediaQuery from 'css-mediaquery';
 beforeAll(() => {
   // Set the initial/default matchMedia implementation
   // for Mobile First development
-  window.matchMedia = createMatchMedia('576px');
+  window.matchMedia = createMatchMedia(576);
 });
 
 afterEach(() => {
   // Reset matchMedia after each test
-  window.matchMedia = createMatchMedia('576px');
+  window.matchMedia = createMatchMedia(576);
 });
 
 export function createMatchMedia(width) {
@@ -95,7 +95,7 @@ it('displays details in mobile by default', () => {
 });
 
 it('displays progressively more details for tablet', () => {
-  createMatchMedia('768px');
+  createMatchMedia(768);
   render(<ResponsiveComponent />);
 
   // Expectations for tablet layout
@@ -103,7 +103,7 @@ it('displays progressively more details for tablet', () => {
 });
 
 it('displays progressively more details for desktop', () => {
-  createMatchMedia('992px');
+  createMatchMedia(992);
   render(<ResponsiveComponent />);
 
   // Expectations for desktop layout
