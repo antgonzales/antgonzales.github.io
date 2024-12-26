@@ -86,20 +86,7 @@
       "position":"Senior Front-end Engineer",
       "startDate":"2016-02-28",
       "summary":"Developed and led front-end best practices for Glossier.com, an e-commerce beauty website built on Solidus and Ruby on Rails. Added front-end unit testing as part of the development process. I led the migration from Angular monolith to React components.",
-      "website":"https://www.glossier.com"
-    },
-    {
-      "company":"Third and Grove",
-      "endDate":"2016-02-28",
-      "highlights":[
-        "Managed a team of front-end engineers across several contract projects.",
-        "Participated in project scoping and architecture discussions to secure contracts.",
-        "Worked on-site at customer headquarters to mentor and train engineers (Benefit Cosmetics)."
-      ],
-      "position":"Front-end Engineer",
-      "startDate":"2014-07-31",
-      "summary":"I managed a team of front-end engineers across several contract projects. I collaborated cross-functionally with project managers and stakeholders to project estimates and deadlines. I conducted front-end audits and created benchmarks to provide customer insights.",
-      "website":"https://www.thirdandgrove.com"
+      "website":"https://www.glossier.com",
     }
   ],
   "volunteer":[
