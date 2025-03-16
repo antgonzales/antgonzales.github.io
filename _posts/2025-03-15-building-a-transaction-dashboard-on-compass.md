@@ -5,8 +5,7 @@ description: "Case study: Leading engineering teams to build Compass One, a real
 date: 2025-03-15
 ---
 
-![Compass One](/assets/img/compass-one/compass-one.webp)
-
+![Compass One dashboard homepage showing the main interface with client transaction overview and navigation elements](/assets/img/compass-one/compass-one.webp)
 <!--break-->
 
 * Do not remove this line (it will not be displayed)
@@ -162,7 +161,9 @@ This "good neighbor" policy fostered both technical resilience and team
 collaboration, allowing us to maintain our ambitious delivery timeline despite
 the complexity of cross-team integration.
 
-![Error Boundary visual debugger](/assets/img/compass-one/compass-one-debugger.webp)
+<a href="/assets/img/compass-one/compass-one-debugger.webp" target="_blank">
+  <img src="/assets/img/compass-one/compass-one-debugger.webp" alt="Interactive Error Boundary visual debugger showing component isolation and error state visualization in Compass One">
+</a>
 
 ## Results
 
@@ -193,8 +194,12 @@ push](https://www.realestatenews.com/2025/02/01/compass-launches-client-portal-a
 
 ### Buyer's Dashboard
 
-![Buyer's Dashboard](/assets/img/compass-one/compass-one-buyer-dashboard.webp)
+<a href="/assets/img/compass-one/compass-one-buyer-dashboard.webp" target="_blank">
+  <img src="/assets/img/compass-one/compass-one-buyer-dashboard.webp" alt="Compass One Buyer's Dashboard showing property listings, transaction timeline, and client communication features">
+</a>
 
 ### Seller's Dashboard
 
-![Seller's Dashboard](/assets/img/compass-one/compass-one-seller-dashboard.webp)
+<a href="/assets/img/compass-one/compass-one-seller-dashboard.webp" target="_blank">
+  <img src="/assets/img/compass-one/compass-one-seller-dashboard.webp" alt="Compass One Seller's Dashboard displaying property marketing status, offer tracking, and transaction progress">
+</a>
