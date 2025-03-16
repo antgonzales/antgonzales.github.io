@@ -2,8 +2,9 @@
 {% unless page_class != "" %}{% assign page_class = page.slug %}{% endunless %}
 <!doctype html>
 <html lang="en">
-  {% include head.html %}
-  <body itemscope itemtype="http://schema.org/WebPage" class={{page_class}}>
+{% include head.html %}
+
+<body itemscope itemtype="http://schema.org/WebPage" class="grid {{page_class}}">
   <!--[if IE]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
@@ -11,25 +12,26 @@
   {% include header.html %}
 
   {{ content }}
-  
+
   {% include footer.html %}
 
   {% if jekyll.environment == "production" %}
-    <script>
-      window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-      ga('create', 'UA-49637905-2', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
-    </script>
-    <script src="https://www.google-analytics.com/analytics.js" async></script>
+  <script>
+    window.ga = function () {ga.q.push(arguments)}; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-49637905-2', 'auto'); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNT798FK2X"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNT798FK2X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-      gtag('config', 'G-JNT798FK2X');
-    </script>
+    gtag('config', 'G-JNT798FK2X');
+  </script>
   {% endif %}
-  </body>
+</body>
+
 </html>

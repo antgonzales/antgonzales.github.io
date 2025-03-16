@@ -1,0 +1,26 @@
+---
+layout: default
+---
+<div class="max-width container post" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
+  <div class="post-meta">
+    <span class="hidden" itemprop="author">by Anthony Gonzales</span>
+    <time class="post-timestamp" itemprop="datePublished"> {{ page.date | date: "%B %d, %Y" }}</time>
+
+    {%- if page.last_modified_at -%}
+    <span class="post-meta-separator">&bull;</span>
+    <div class="post-lastupdated">
+      Updated on <time itemprop="dateModified">{{ page.last_modified_at | date: "%B %d, %Y" }}</time>
+    </div>
+    {%- endif -%}
+  </div>
+
+  <div class="post-content" itemprop="articleBody">
+    {% include anchor_headings.html html=content
+    anchorClass="post-header-link" %}
+  </div>
+  <div class="post-additional">
+    <a href="https://github.com/antgonzales/antgonzales.github.io/edit/master/{{page.path}}" target="_blank">Suggest a
+      correction</a>
+  </div>
+</div>
