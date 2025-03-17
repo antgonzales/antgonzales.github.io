@@ -106,6 +106,45 @@ communicate potential timeline impacts to leadership
 4. Most importantly, it helped us identify and address bottlenecks early,
 enabling us to deliver the entire project on schedule
 
+## Speaking the same language
+
+Compass One's index page needed to aggregate and transform data from multiple
+microservices. Making these calls directly from the client would have created
+performance bottlenecks, complex state management, monitoring headaches, and
+inconsistent type definitions across our frontend applications.
+
+Working in Compass's microservice architecture—which utilizes Apache Thrift for
+shared type definitions and gRPC for communication—we implemented a
+Backend-for-Frontend (BFF) pattern. This approach allowed us to create a
+dedicated orchestration layer specifically designed for our frontend needs.
+
+I collaborated with [Ryan
+Houston](https://github.com/ryanhouston){:target="_blank"} and [Joe
+Schmitt](https://github.com/josephschmitt){:target="_blank} to develop and
+maintain a Node.js service that acted as a stateless translation layer. This
+service:
+
+* Coordinated API calls across Java, Python, Go, and TypeScript services
+* Transformed complex data structures into frontend-optimized formats
+* Provided consistent type information through Thrift definitions
+* Handled error states and fallbacks before they reached the client
+
+Compass already supported TypeScript for backend services (see [TypeScript +
+NodeJS gRPC using
+Thrift](https://medium.com/compass-true-north/typescript-nodejs-grpc-using-thrift-dd28b2eac700)),
+which allowed us to maintain type safety throughout the entire stack.
+
+The BFF pattern delivered multiple benefits:
+
+* **Improved performance**: gRPC connections between services are significantly
+faster than client-side API calls
+* **Better monitoring**: Centralized service calls gave us visibility into
+potential backend issues and allowed quicker diagnosis
+* **Simplified frontend**: Component teams could focus on UI rather than
+complex data transformations
+* **Reduced network traffic**: Clients received precisely the data they needed
+in the exact format required
+
 ## Good fences make good neighbors
 
 Compass One's index page functions as a central hub integrating multiple
