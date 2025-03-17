@@ -5,6 +5,7 @@ permalink: /blog/:title:output_ext
 plugins:
   - jekyll-sitemap
   - jekyll-feed
+  - jekyll-redirect-from
 excerpt_separator: <!--break-->
 sass:
     style: compressed

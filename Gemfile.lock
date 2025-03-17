@@ -283,6 +283,7 @@ DEPENDENCIES
   github-pages
   jekyll
   jekyll-feed
+  jekyll-redirect-from
   jekyll-sitemap
   webrick (~> 1.8)
 
