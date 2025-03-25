@@ -2,7 +2,7 @@
 layout: post
 title: "Building a transaction dashboard on Compass"
 description: "Case study: Leading engineering teams to build Compass One, a real estate transaction dashboard that boosted client engagement by 43% with 4.5/5 satisfaction."
-date: 2025-03-15
+date: 2025-03-25
 ---
 
 ![Compass One dashboard homepage showing the main interface with client transaction overview and navigation elements](/assets/img/compass-one/compass-one.webp)
@@ -57,8 +57,8 @@ practices:
 
 While these practices might seem fundamental, they're often the first
 casualties when teams face tight deadlines or pressure to deliver. With support
-from my manager, [Lucas Reis](https://github.com/lucasmreis){:target="_blank"}, we successfully
-implemented these standards as non-optional protocols for all contributors.
+from my manager, we successfully implemented these standards as non-optional
+protocols for all contributors.
 
 This disciplined approach paid off significantly. We maintained over 90% unit
 test coverage across three frontend applications and a shared component
@@ -118,11 +118,9 @@ shared type definitions and gRPC for communication—we implemented a
 Backend-for-Frontend (BFF) pattern. This approach allowed us to create a
 dedicated orchestration layer specifically designed for our frontend needs.
 
-I collaborated with [Ryan
-Houston](https://github.com/ryanhouston){:target="_blank"} and [Joe
-Schmitt](https://github.com/josephschmitt){:target="_blank} to develop and
-maintain a Node.js service that acted as a stateless translation layer. This
-service:
+I collaborated with a Senior Staff Engineer and a Principal Engineer to develop
+and maintain a Node.js service that acted as a stateless translation layer.
+This service:
 
 * Coordinated API calls across Java, Python, Go, and TypeScript services
 * Transformed complex data structures into frontend-optimized formats
