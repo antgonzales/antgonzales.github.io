@@ -1,14 +1,16 @@
 ---
 layout: post
-title:  The SASS Inception Rule is broken
+title: The SASS Inception Rule is broken
 description: SASS nesting is used to quickly make styles but comes at a cost. Learn how to develop a long term strategy for maintainable style sheets, reduce pain
 date: 2014-09-28
 categories:
-- Best Practices
+  - Best Practices
 tags:
-- SASS
-- Mixins
-- The Inception Rule
+  - SASS
+  - Mixins
+  - The Inception Rule
+
+redirect_to: https://www.anthonygonzales.dev
 ---
 
 As a front-end developer, my job is not only to create usable and beautiful websites, but also to design maintainable and reusable code. If you've ever worked with SASS or a team that uses a preprocessor, you've probably come across nesting in all of it's beautiful, ugly glory. It's a way to quickly scope for page specific styles or grab selectors that may not have classes assigned.
@@ -21,7 +23,6 @@ To help maintain nesting, the [Inception Rule](http://thesassway.com/beginner/th
   <img src="/assets/img/leo-strut.jpeg" alt="Leo after using the SASS Inception Rule" />
 </div>
 
-
 ## Case study example
 
 Here is some real code I found on a recent project with the class names altered. It highlights the kind of problems I want to illustrate and the kind of poor nesting that results from the Inception Rule.
@@ -30,60 +31,60 @@ Here is some real code I found on a recent project with the class names altered.
 
 {% highlight scss %}
 .cat-product {
-  .panel-col-first {
-    .expanded {
-      ul {
-        display: none;
-      }
-    }
-    .active-trail {
-      .menu {
-        display: block;
-      }
-    }
-    li {
-      list-style-type: none;
-      list-style-image: none;
-      padding: 0;
-      margin: 0;
-      border-top: solid 1px $yaso-gray;
-      &.last {
-        border-bottom: solid 1px $yaso-gray;
-      }
-      ul {
-        li {
-          border-top:none;
-          border-bottom:none;
-          a {
-            height: 30px;
-            line-height: 30px;
-            padding: 0 10px 0 30px;
-            text-decoration: none;
-          }
-        }
-        li.active-trail {
-        background: $off-gray;
-        }
-        li.last {
-          border-top:none;
-          border-bottom:none;
-        }
-      }
-      a {
-        display: block;
-        padding: 0 10px;
-        height:50px;
-        line-height:50px;
-        color: $dark-gray;
-      }
-      a:hover {
-        background-color: #ededed;
-      }
-      .active-trail {
-        background: $off-gray;
-      }
-    }
-  }
+.panel-col-first {
+.expanded {
+ul {
+display: none;
+}
+}
+.active-trail {
+.menu {
+display: block;
+}
+}
+li {
+list-style-type: none;
+list-style-image: none;
+padding: 0;
+margin: 0;
+border-top: solid 1px $yaso-gray;
+&.last {
+border-bottom: solid 1px $yaso-gray;
+}
+ul {
+li {
+border-top:none;
+border-bottom:none;
+a {
+height: 30px;
+line-height: 30px;
+padding: 0 10px 0 30px;
+text-decoration: none;
+}
+}
+li.active-trail {
+background: $off-gray;
+}
+li.last {
+border-top:none;
+border-bottom:none;
+}
+}
+a {
+display: block;
+padding: 0 10px;
+height:50px;
+line-height:50px;
+color: $dark-gray;
+}
+a:hover {
+background-color: #ededed;
+}
+.active-trail {
+background: $off-gray;
+}
+}
+}
 }
 {% endhighlight %}
 
@@ -91,54 +92,52 @@ Here is some real code I found on a recent project with the class names altered.
 
 {% highlight css %}
 .cat-product .panel-col-first .expanded ul {
-  display: none;
+display: none;
 }
 .cat-product .panel-col-first .active-trail .menu {
-  display: block;
+display: block;
 }
 .cat-product .panel-col-first li {
-  list-style-type: none;
-  list-style-image: none;
-  padding: 0;
-  margin: 0;
-  border-top: solid 1px #ddd;
+list-style-type: none;
+list-style-image: none;
+padding: 0;
+margin: 0;
+border-top: solid 1px #ddd;
 }
 .cat-product .panel-col-first li.last {
-  border-bottom: solid 1px #ddd;
+border-bottom: solid 1px #ddd;
 }
 .cat-product .panel-col-first li ul li {
-  border-top: none;
-  border-bottom: none;
+border-top: none;
+border-bottom: none;
 }
 .cat-product .panel-col-first li ul li a {
-  height: 30px;
-  line-height: 30px;
-  padding: 0 10px 0 30px;
-  text-decoration: none;
+height: 30px;
+line-height: 30px;
+padding: 0 10px 0 30px;
+text-decoration: none;
 }
 .cat-product .panel-col-first li ul li.active-trail {
-  background: #ddd;
+background: #ddd;
 }
 .cat-product .panel-col-first li ul li.last {
-  border-top: none;
-  border-bottom: none;
+border-top: none;
+border-bottom: none;
 }
 .cat-product .panel-col-first li a {
-  display: block;
-  padding: 0 10px;
-  height: 50px;
-  line-height: 50px;
-  color: #333;
+display: block;
+padding: 0 10px;
+height: 50px;
+line-height: 50px;
+color: #333;
 }
 .cat-product .panel-col-first li a:hover {
-  background-color: #ededed;
+background-color: #ededed;
 }
 .cat-product .panel-col-first li .active-trail {
-  background: #dddy;
+background: #dddy;
 }
 {% endhighlight %}
-
-
 
 ### Communication breakdown
 
@@ -158,7 +157,7 @@ Instead, we should have the "Inception-wasn't-that-clever-of-a-movie-rule". Anyt
 
 ## Me code pretty one day
 
-The second issue is that the code uses almost no classes on the elements. Obviously, this is some kind of menu system but we're left with rules that apply to *all* anchor tags or *all* list items. Say we want to expand on this menu system by creating child elements with their own set of rules. Our code now requires us to nest even deeper to create our styles.
+The second issue is that the code uses almost no classes on the elements. Obviously, this is some kind of menu system but we're left with rules that apply to _all_ anchor tags or _all_ list items. Say we want to expand on this menu system by creating child elements with their own set of rules. Our code now requires us to nest even deeper to create our styles.
 
 <div class="callout warning-callout">
   <p>Warning: Nesting is for rats and birds, not your style sheets</p>
@@ -168,23 +167,23 @@ Let's take our example and clean up some of the rules with new classes and some 
 
 {% highlight scss %}
 .active-trail .menu {
-	display: block;
+display: block;
 }
 
 .cat-menu.expanded {
-	display: none;
+display: none;
 }
 
-.cat-menu__list-item {
-	list-style-type: none;
-  list-style-image: none;
-  padding: 0;
-  margin: 0;
-  border-top: solid 1px $yaso-gray;
+.cat-menu\_\_list-item {
+list-style-type: none;
+list-style-image: none;
+padding: 0;
+margin: 0;
+border-top: solid 1px $yaso-gray;
 }
 
-.cat-menu__list-item.last {
-	border-bottom: solid 1px $yaso-gray;
+.cat-menu\_\_list-item.last {
+border-bottom: solid 1px $yaso-gray;
 }
 {% endhighlight %}
 
@@ -210,24 +209,24 @@ I use these mixins across all projects in addition to the ones provided by Compa
 
 {% highlight scss %}
 @mixin cat-form-mixin() {
-  .form-item {
-    margin-top: 0;
-    overflow: hidden;
-    clear: both;
-    label {
-      float: left;
-      margin-right: 10px;
-      color: #787878;
-    }
-    .form-text {
-      float: right;
-      width: 50%;
-      margin-bottom: 10px;
-    }
-    .description {
-      clear: both;
-    }
-  }
+.form-item {
+margin-top: 0;
+overflow: hidden;
+clear: both;
+label {
+float: left;
+margin-right: 10px;
+color: #787878;
+}
+.form-text {
+float: right;
+width: 50%;
+margin-bottom: 10px;
+}
+.description {
+clear: both;
+}
+}
 }
 {% endhighlight %}
 
@@ -249,90 +248,91 @@ Variables provide an excellent way to reuse even more granular bits of code for 
 A lot of the ways I've structured my variables has been shamelessly stolen from Bootstrap and the Skeleton front-end frameworks, but I think they illustrate the kinds of things you can reuse throughout your style sheets.
 
 {% highlight scss %}
-//  Variables
+// Variables
 
 // Colors
 
-	$black: #000;
-	$grey: #333;
-	$white: #fff;
-	$blue: #379ad3;
-	$dark-blue: #226f9b;
-	$orange: #ff9900;
+    $black: #000;
+    $grey: #333;
+    $white: #fff;
+    $blue: #379ad3;
+    $dark-blue: #226f9b;
+    $orange: #ff9900;
 
-	$link-color: $white;
-	$body-link-color: #0b5c86;
+    $link-color: $white;
+    $body-link-color: #0b5c86;
 
 // Typography
 
-	// Fonts
-	@include font-face("Montserrat", font-files(
-		"Montserrat-Regular-webfont.woff",
-		"Montserrat-Regular-webfont.ttf",
-		"Montserrat-Regular-webfont.svg"), "Montserrat-Regular-webfont.eot", normal, normal);
+    // Fonts
+    @include font-face("Montserrat", font-files(
+     "Montserrat-Regular-webfont.woff",
+     "Montserrat-Regular-webfont.ttf",
+     "Montserrat-Regular-webfont.svg"), "Montserrat-Regular-webfont.eot", normal, normal);
 
-	@include font-face("Montserrat", font-files(
-		"Montserrat-Bold-webfont.woff",
-		"Montserrat-Bold-webfont.ttf",
-		"Montserrat-Bold-webfont.svg"), "Montserrat-Bold-webfont.eot", bold, normal);
+    @include font-face("Montserrat", font-files(
+     "Montserrat-Bold-webfont.woff",
+     "Montserrat-Bold-webfont.ttf",
+     "Montserrat-Bold-webfont.svg"), "Montserrat-Bold-webfont.eot", bold, normal);
 
-	@include font-face("Arvo", font-files(
-		"arvo-regular-webfont.woff",
-		"arvo-regular-webfont.ttf",
-		"arvo-regular-webfont.svg"), "arvo-regular-webfont.eot", normal, normal);
+    @include font-face("Arvo", font-files(
+     "arvo-regular-webfont.woff",
+     "arvo-regular-webfont.ttf",
+     "arvo-regular-webfont.svg"), "arvo-regular-webfont.eot", normal, normal);
 
-	@include font-face("Droid Serif", font-files(
-		"DroidSerif-webfont.woff",
-		"DroidSerif-webfont.ttf",
-		"DroidSerif-webfont.svg"), "DroidSerif-webfont.eot", normal, normal);
+    @include font-face("Droid Serif", font-files(
+     "DroidSerif-webfont.woff",
+     "DroidSerif-webfont.ttf",
+     "DroidSerif-webfont.svg"), "DroidSerif-webfont.eot", normal, normal);
 
-	// Font Families
-	$sans-serif-font-family: "Montserrat", Helvetica, Arial, sans-serif;
-	$serif-font-family: "Droid Serif", "Times New Roman", Times, serif;
-	$slab-serif-font-family: "Arvo", "Courier Bold", Courier, serif;
+    // Font Families
+    $sans-serif-font-family: "Montserrat", Helvetica, Arial, sans-serif;
+    $serif-font-family: "Droid Serif", "Times New Roman", Times, serif;
+    $slab-serif-font-family: "Arvo", "Courier Bold", Courier, serif;
 
-	// Font Sizes
-	$base-font-size: 16px;
-	$xs-font-size: $base-font-size * 0.625;
-	$sm-font-size: $base-font-size * 0.75;
-	$md-font-size: $base-font-size * 0.825;
-	$lg-font-size: $base-font-size * 3.75;
-	$base-font-weight: normal;
-	$base-line-height: 1.5;
-	$line-height-computed: $base-font-size * $base-line-height;
-	$line-height-computed-half: ceil($line-height-computed / 2);
+    // Font Sizes
+    $base-font-size: 16px;
+    $xs-font-size: $base-font-size * 0.625;
+    $sm-font-size: $base-font-size * 0.75;
+    $md-font-size: $base-font-size * 0.825;
+    $lg-font-size: $base-font-size * 3.75;
+    $base-font-weight: normal;
+    $base-line-height: 1.5;
+    $line-height-computed: $base-font-size * $base-line-height;
+    $line-height-computed-half: ceil($line-height-computed / 2);
 
-	// Heading Fonts
-	$h1-font-size: ceil(2.074 * $base-font-size);
-	$h2-font-size: ceil(1.728 * $base-font-size);
-	$h3-font-size: ceil(1.44 * $base-font-size);
-	$h4-font-size: ceil(1.2 * $base-font-size);
-	$h5-font-size: $base-font-size;
-	$h6-font-size: ceil(.833 * $base-font-size);
-	$headings-line-height: 1.45;
-	$headings-font-weight: bold;
+    // Heading Fonts
+    $h1-font-size: ceil(2.074 * $base-font-size);
+    $h2-font-size: ceil(1.728 * $base-font-size);
+    $h3-font-size: ceil(1.44 * $base-font-size);
+    $h4-font-size: ceil(1.2 * $base-font-size);
+    $h5-font-size: $base-font-size;
+    $h6-font-size: ceil(.833 * $base-font-size);
+    $headings-line-height: 1.45;
+    $headings-font-weight: bold;
 
 // Bleed
-	$right-content-bleed: 23px;
-	$right-content-inner-bleed: 49px;
+$right-content-bleed: 23px;
+$right-content-inner-bleed: 49px;
 
 // Box Shadow
-	$inset-shadow: rgba(0,0,0,0.15) 0 -25px 12px -15px inset;
-	$box-shadow: rgba(0,0,0,0.15) 3px 3px 15px 3px;
+$inset-shadow: rgba(0,0,0,0.15) 0 -25px 12px -15px inset;
+$box-shadow: rgba(0,0,0,0.15) 3px 3px 15px 3px;
 
 // Transitions
-	$ease-in-out: all .25s ease-in-out;
-	$ease: all .5s ease;
+$ease-in-out: all .25s ease-in-out;
+$ease: all .5s ease;
 
 // Animations
-	$animation-duration: 1s;
-	$animation-delay: 2s;
+$animation-duration: 1s;
+$animation-delay: 2s;
 
 // Misc
 
-	$border-black: 1px solid $black;
-	$border-grey: 1px solid $grey;
-	$border-white: 1px solid $white;
+    $border-black: 1px solid $black;
+    $border-grey: 1px solid $grey;
+    $border-white: 1px solid $white;
+
 {% endhighlight %}
 
 Front end development has a lot of challenges and working with teams makes the job even more challenging. Why create more problems by nesting? Do your future-self and your teammates a favor by cutting out nesting. Nesting may seem like a way to quickly write some CSS, but quickly adds more time later to your work. Also, I stand by my word that Inception kind of sucked.
