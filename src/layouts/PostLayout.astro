@@ -1,0 +1,54 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  publishedDate: Date;
+  lastModified?: Date;
+  slug: string;
+}
+
+const { title, description, publishedDate, lastModified, slug } = Astro.props;
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+};
+---
+
+<BaseLayout title={title} description={description} pageClass="post">
+  <div class="max-width container post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post-title" itemprop="headline">{title}</h1>
+    <div class="post-meta">
+      <span class="hidden" itemprop="author">by Anthony Gonzales</span>
+      <time class="post-timestamp" itemprop="datePublished" datetime={publishedDate.toISOString()}>
+        {formatDate(publishedDate)}
+      </time>
+
+      {lastModified && (
+        <>
+          <span class="post-meta-separator">&bull;</span>
+          <div class="post-lastupdated">
+            Updated on <time itemprop="dateModified" datetime={lastModified.toISOString()}>
+              {formatDate(lastModified)}
+            </time>
+          </div>
+        </>
+      )}
+    </div>
+
+    <div class="post-content" itemprop="articleBody">
+      <slot />
+    </div>
+    
+    <div class="post-additional">
+      <a href={`https://github.com/antgonzales/antgonzales.github.io/edit/master/src/content/blog/${slug}.md`} target="_blank">
+        Suggest a correction
+      </a>
+    </div>
+  </div>
+</BaseLayout>

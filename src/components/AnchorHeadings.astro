@@ -1,0 +1,13 @@
+---
+export interface Props {
+  html: string;
+  anchorClass?: string;
+}
+
+const { html } = Astro.props;
+
+// TODO: Phase 3 - Replace with rehype-autolink-headings plugin
+// For now, just render the HTML as-is
+---
+
+<Fragment set:html={html} />
