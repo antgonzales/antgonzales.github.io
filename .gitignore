@@ -1,9 +1,25 @@
-node_modules
-node_modules/*
-.sass-cache
+# SpecStory auto-generated files and chat history
+.specstory/
+
+# Jekyll build files
+_site/
+_site/**/*
+.sass-cache/
 .sass-cache/*
+.jekyll-cache/
+.jekyll-metadata
+build/css/master.css.map
+
+# Node modules (for future Astro setup)
+node_modules/
+node_modules/*
+dist/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# OS generated files
 .DS_Store
 /*/.DS_Store
-_site
-_site/**/*
-build/css/master.css.map
