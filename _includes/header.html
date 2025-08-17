@@ -1,7 +1,7 @@
 <header class="header container max-width">
   <div class="header-inner">
     <div class="nav-logo">
-      <a href="/">
+      <a href="{{ site.baseurl }}/"
         <span class="name">
           <span>A</span>
           <span>n</span>
@@ -27,7 +27,7 @@
       <ul class="main-nav">
         {% for link in site.data.nav %}
           <li>
-            <a href="{{link.href}}">{{link.title}}</a>
+            <a href="{{ site.baseurl }}{{link.href}}">{{link.title}}</a>
           </li>
         {% endfor %}
       </ul>
