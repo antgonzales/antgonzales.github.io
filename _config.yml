@@ -10,6 +10,7 @@ excerpt_separator: <!--break-->
 sass:
     style: compressed
 url: 'https://www.anthonygonzales.dev'
+repository: 'antgonzales/antgonzales.github.io'
 exclude:
   - src/
   - public/
