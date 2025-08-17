@@ -1,0 +1,474 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+    <title>Building a transaction dashboard on Compass | Anthony Gonzales</title>
+  
+  <meta name="description" content="Case study: Leading engineering teams to build Compass One, a real estate transaction dashboard that boosted client engagement by 43% with 4.5/5 satisfaction.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site"    content="">
+<meta name="twitter:creator" content="">
+<meta property="og:title"   content="Building a transaction dashboard on Compass">
+
+
+<meta property="og:description" content="Case study: Leading engineering teams to build Compass One, a real estate transaction dashboard that boosted client engagement by 43% with 4.5/5 satisfaction.">
+
+
+<!-- end of Twitter cards -->
+
+
+  
+  <!-- Mastodon verification -->
+  <link rel="me" href="https://mastodon.social/@anthonygonzales" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/vs.css">
+  <link rel="stylesheet" href="/css/master.css">
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" class="grid building-a-transaction-dashboard-on-compass">
+  <!--[if IE]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+  <header class="header container max-width">
+  <div class="header-inner">
+    <div class="nav-logo">
+      <a href="/">
+        <span class="name">
+          <span>A</span>
+          <span>n</span>
+          <span>t</span>
+          <span>h</span>
+          <span>o</span>
+          <span>n</span>
+          <span>y</span>
+        </span>
+        <span class="name">
+          <span>G</span>
+          <span>o</span>
+          <span>n</span>
+          <span>z</span>
+          <span>a</span>
+          <span>l</span>
+          <span>e</span>
+          <span>s</span>
+        </span>
+      </a>
+    </div>
+    <nav role="navigation">
+      <ul class="main-nav">
+        
+          <li>
+            <a href="/about">About</a>
+          </li>
+        
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+  <div class="max-width container post" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="post-title" itemprop="headline">Building a transaction dashboard on Compass</h1>
+  <div class="post-meta">
+    <span class="hidden" itemprop="author">by Anthony Gonzales</span>
+    <time class="post-timestamp" itemprop="datePublished"> March 25, 2025</time></div>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><img src="/assets/img/compass-one/compass-one.webp" alt="Compass One dashboard homepage showing the main interface with client transaction overview and navigation elements" />
+<!--break--></p>
+
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#creating-a-well-oiled-machine" id="markdown-toc-creating-a-well-oiled-machine">Creating a well-oiled machine</a></li>
+  <li><a href="#know-what-you-dont-know" id="markdown-toc-know-what-you-dont-know">Know what you don’t know</a></li>
+  <li><a href="#speaking-the-same-language" id="markdown-toc-speaking-the-same-language">Speaking the same language</a></li>
+  <li><a href="#good-fences-make-good-neighbors" id="markdown-toc-good-fences-make-good-neighbors">Good fences make good neighbors</a></li>
+  <li><a href="#results" id="markdown-toc-results">Results</a></li>
+  <li><a href="#press-coverage" id="markdown-toc-press-coverage">Press Coverage</a></li>
+  <li><a href="#screenshots" id="markdown-toc-screenshots">Screenshots</a>    <ul>
+      <li><a href="#buyers-dashboard" id="markdown-toc-buyers-dashboard">Buyer’s Dashboard</a></li>
+      <li><a href="#sellers-dashboard" id="markdown-toc-sellers-dashboard">Seller’s Dashboard</a></li>
+    </ul>
+  </li>
+</ul>
+      <h2 id="introduction">
+        
+        
+          Introduction <a href="#introduction" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p><a href="https://one.compass.com/" target="_blank">Compass One</a> is the real estate industry’s premier
+client dashboard providing 24/7 transparency into transactions—the #1 requested
+feature since 2021. Launched in beta in October 2024 and nationally on February
+3, 2025, this platform addresses inefficient communication between clients and
+agents, transforming how clients track their real estate journey. After
+pandemic-related delays and market fluctuations, the project finally secured
+funding in early 2024, becoming the most ambitious engineering initiative in
+Compass’s history.</p>
+
+<p>As Frontend Engineering Lead, I orchestrated collaboration across six
+engineering teams to develop this comprehensive platform requiring seamless
+integration with every major system across the company. Over twelve months, I
+implemented rigorous engineering standards, developed an estimation framework,
+and built resilient architecture while coordinating approximately 50 frontend
+engineers who collectively merged 800 pull requests. The following case study
+outlines the key strategies that enabled us to successfully deliver this
+complex, mission-critical feature on time and with exceptional quality metrics.</p>
+    
+      <h2 id="creating-a-well-oiled-machine">
+        
+        
+          Creating a well-oiled machine <a href="#creating-a-well-oiled-machine" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>When I onboarded, I faced two significant challenges: (1) managing the
+abandoned codebase from 2021 that had accumulated technical debt, and (2)
+creating alignment between product, design, and engineering teams on how to
+move forward. The central question became: How could we deliver quickly without
+sacrificing quality or confidence?</p>
+
+<p>Rather than focusing solely on technical implementation details, I drafted a
+proposal that established a clear vision for team operations. My approach
+addressed both immediate code quality concerns and long-term engineering
+practices:</p>
+
+<ol>
+  <li><strong>Cleaned legacy codebase</strong>: Systematically addressed technical debt and
+deprecated outdated patterns that would hinder our progress</li>
+  <li><strong>Established non-negotiable requirements</strong>:
+    <ul>
+      <li>Daily code deployments (except Fridays to reduce weekend support risk)</li>
+      <li>Comprehensive unit and integration test coverage for all new production
+ code</li>
+      <li>Mandatory passing Cypress end-to-end tests as a deployment prerequisite
+ with deployment gates in CI/CD</li>
+      <li>Feature flag implementation for all new functionality to enable
+ controlled rollouts</li>
+    </ul>
+  </li>
+</ol>
+
+<p>While these practices might seem fundamental, they’re often the first
+casualties when teams face tight deadlines or pressure to deliver. With support
+from my manager, we successfully implemented these standards as non-optional
+protocols for all contributors.</p>
+
+<p>This disciplined approach paid off significantly. We maintained over 90% unit
+test coverage across three frontend applications and a shared component
+library. More importantly, these practices enabled us to move quickly while
+maintaining high quality—our deployment pipeline caught potential issues early,
+and feature flags allowed us to safely integrate work from multiple teams
+without risking the overall system stability.</p>
+    
+      <h2 id="know-what-you-dont-know">
+        
+        
+          Know what you don’t know <a href="#know-what-you-dont-know" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>Compass has not historically had a uniform method for estimating projects of
+this size. Teams would typically provide general estimates in developer weeks,
+padding timeframes for areas with knowledge gaps or unknown variables. This
+approach often led to inaccurate timelines and didn’t effectively communicate
+risk to stakeholders.</p>
+
+<p>We updated our estimation process by implementing Jacob Kaplan-Moss’s
+methodology from <a href="https://jacobian.org/series/estimation/" target="_blank">Estimating Software
+Projects</a>, which explicitly accounts
+for both <strong>time and uncertainty</strong>.</p>
+
+<p>As frontend developers, we evaluated each feature against three critical
+dependencies:</p>
+
+<ol>
+  <li>Product requirements</li>
+  <li>Backend API definitions</li>
+  <li>Designs</li>
+</ol>
+
+<p>We then systematically adjusted confidence levels based on the completeness of
+these dependencies. For example:</p>
+
+<ul>
+  <li><strong>High Confidence</strong>: All three dependencies clearly defined</li>
+  <li><strong>Medium Confidence</strong>: Missing product requirements</li>
+  <li><strong>Low Confidence</strong>: Missing both product requirements and designs</li>
+  <li><strong>No Confidence</strong>: Missing all three dependencies</li>
+</ul>
+
+<p>This approach delivered multiple benefits beyond just better time estimates:</p>
+
+<ol>
+  <li>It created a structured review process that provided actionable feedback to
+cross-functional partners</li>
+  <li>It allowed us to prioritize work effectively, focusing on high-confidence
+items while waiting for dependencies on others</li>
+  <li>By quantifying risk through confidence multipliers, we could clearly
+communicate potential timeline impacts to leadership</li>
+  <li>Most importantly, it helped us identify and address bottlenecks early,
+enabling us to deliver the entire project on schedule</li>
+</ol>
+    
+      <h2 id="speaking-the-same-language">
+        
+        
+          Speaking the same language <a href="#speaking-the-same-language" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>Compass One’s index page needed to aggregate and transform data from multiple
+microservices. Making these calls directly from the client would have created
+performance bottlenecks, complex state management, monitoring headaches, and
+inconsistent type definitions across our frontend applications.</p>
+
+<p>Working in Compass’s microservice architecture—which utilizes Apache Thrift for
+shared type definitions and gRPC for communication—we implemented a
+Backend-for-Frontend (BFF) pattern. This approach allowed us to create a
+dedicated orchestration layer specifically designed for our frontend needs.</p>
+
+<p>I collaborated with a Senior Staff Engineer and a Principal Engineer to develop
+and maintain a Node.js service that acted as a stateless translation layer.
+This service:</p>
+
+<ul>
+  <li>Coordinated API calls across Java, Python, Go, and TypeScript services</li>
+  <li>Transformed complex data structures into frontend-optimized formats</li>
+  <li>Provided consistent type information through Thrift definitions</li>
+  <li>Handled error states and fallbacks before they reached the client</li>
+</ul>
+
+<p>Compass already supported TypeScript for backend services (see <a href="https://medium.com/compass-true-north/typescript-nodejs-grpc-using-thrift-dd28b2eac700">TypeScript +
+NodeJS gRPC using
+Thrift</a>),
+which allowed us to maintain type safety throughout the entire stack.</p>
+
+<p>The BFF pattern delivered multiple benefits:</p>
+
+<ul>
+  <li><strong>Improved performance</strong>: gRPC connections between services are significantly
+faster than client-side API calls</li>
+  <li><strong>Better monitoring</strong>: Centralized service calls gave us visibility into
+potential backend issues and allowed quicker diagnosis</li>
+  <li><strong>Simplified frontend</strong>: Component teams could focus on UI rather than
+complex data transformations</li>
+  <li><strong>Reduced network traffic</strong>: Clients received precisely the data they needed
+in the exact format required</li>
+</ul>
+    
+      <h2 id="good-fences-make-good-neighbors">
+        
+        
+          Good fences make good neighbors <a href="#good-fences-make-good-neighbors" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>Compass One’s index page functions as a central hub integrating multiple
+widgets and components from six different engineering teams. Each team
+contributed code connecting to their own systems, including:</p>
+
+<ul>
+  <li>Invited users to the deal</li>
+  <li>A timeline of upcoming tasks and events</li>
+  <li>Market reports for sellers</li>
+  <li>Comments on Collections (listings saved by a buyer)</li>
+  <li>Favorited listings</li>
+  <li>Contact information for agent team members on the transaction</li>
+</ul>
+
+<p>Despite our rigorous testing standards, the integration of so many
+independently developed components created significant risk. A single error in
+any team’s code could potentially crash the entire application, creating a poor
+user experience and making it difficult to identify the source of problems.</p>
+
+<p>We implemented a resilient architecture based on the principle that isolating
+failures is as important as preventing them. By creating custom Error Boundary
+components, we established protective “fences” around each team’s code
+contributions. Drawing inspiration from established patterns in the React
+ecosystem, we adapted:</p>
+
+<ul>
+  <li><a href="https://github.com/DataDog/rum-react-integration-examples/tree/master/src/ErrorBoundary" target="_blank">Datadog’s RUM React
+integration</a></li>
+  <li><a href="https://docs.sentry.io/platforms/javascript/guides/react/features/error-boundary/" target="_blank">Sentry’s React Error
+Boundary</a></li>
+</ul>
+
+<p>Our implementation went beyond simple error catching. We developed:</p>
+
+<ol>
+  <li>Automatic error reporting that routed issues directly to the responsible
+teams</li>
+  <li>Graceful fallback UI components that maintained overall application
+usability</li>
+  <li>A visual debugging interface that allowed teams to isolate and test their
+components</li>
+</ol>
+
+<p>This architectural approach proved invaluable during our integration phases.
+When errors occurred—and they inevitably did—they remained contained to the
+specific widget rather than crashing the entire application.</p>
+
+<p>The error boundaries provided three key benefits:</p>
+
+<ol>
+  <li><strong>Improved user experience</strong> - Clients could still use the rest of the
+application even if one component failed</li>
+  <li><strong>Faster debugging</strong> - Teams could quickly identify their own issues without
+impacting others</li>
+  <li><strong>Increased accountability</strong> - Clear ownership of errors encouraged teams to
+fix issues promptly</li>
+</ol>
+
+<p>This “good neighbor” policy fostered both technical resilience and team
+collaboration, allowing us to maintain our ambitious delivery timeline despite
+the complexity of cross-team integration.</p>
+
+<p><a href="/assets/img/compass-one/compass-one-debugger.webp" target="_blank">
+  <img src="/assets/img/compass-one/compass-one-debugger.webp" alt="Interactive Error Boundary visual debugger showing component isolation and error state visualization in Compass One" />
+</a></p>
+    
+      <h2 id="results">
+        
+        
+          Results <a href="#results" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>In just the first week, agents sent 14,950 client invitations, driving a 43%
+increase in client weekly active users. Despite the surge in traffic during the
+live announcement, the system maintained 100% uptime with no performance
+degradation. Most importantly, both agents and clients embraced the platform
+enthusiastically, awarding it a customer satisfaction score of 4.5 out of 5.
+These early results validate not only the product’s value proposition but also
+the engineering approach that ensured its stability and performance under
+real-world conditions.</p>
+    
+      <h2 id="press-coverage">
+        
+        
+          Press Coverage <a href="#press-coverage" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<ul>
+  <li>Bloomberg - <a href="https://www.bloomberg.com/news/videos/2025-02-05/compass-ceo-on-us-housing-market-video" target="_blank">Compass Launches New Client-Facing Portal</a></li>
+  <li>Inman - <a href="https://www.inman.com/2025/02/28/compass-one-puts-clients-at-true-north-tech-review/" target="_blank">Compass One puts clients at true north: Tech
+Review</a></li>
+  <li>Inman - <a href="https://www.inman.com/2025/02/03/compass-to-launch-compass-one-client-portal-and-dashboard/" target="_blank">Compass launches ‘Compass One’ client portal and
+dashboard</a></li>
+  <li>The Real Deal - <a href="https://therealdeal.com/national/2025/02/06/how-compass-new-consumer-platform-adds-to-inventory-push/" target="_blank">Compass has the listings, now it has the
+platform</a></li>
+  <li>Housing Wire - <a href="https://www.housingwire.com/articles/compass-one-portal-clients-listings/" target="_blank">Compass launches client-facing portal with listings, docs and
+more</a></li>
+  <li>Real Estate News - <a href="https://www.realestatenews.com/2025/02/01/compass-launches-client-portal-amid-private-listings-push" target="_blank">Compass to launch client portal amid private listings
+push</a></li>
+</ul>
+    
+      <h2 id="screenshots">
+        
+        
+          Screenshots <a href="#screenshots" class="post-header-link"></a>
+        
+        
+      </h2>
+    
+      <h3 id="buyers-dashboard">
+        
+        
+          Buyer’s Dashboard <a href="#buyers-dashboard" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p><a href="/assets/img/compass-one/compass-one-buyer-dashboard.webp" target="_blank">
+  <img src="/assets/img/compass-one/compass-one-buyer-dashboard.webp" alt="Compass One Buyer's Dashboard showing property listings, transaction timeline, and client communication features" />
+</a></p>
+    
+      <h3 id="sellers-dashboard">
+        
+        
+          Seller’s Dashboard <a href="#sellers-dashboard" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p><a href="/assets/img/compass-one/compass-one-seller-dashboard.webp" target="_blank">
+  <img src="/assets/img/compass-one/compass-one-seller-dashboard.webp" alt="Compass One Seller's Dashboard displaying property marketing status, offer tracking, and transaction progress" />
+</a></p>
+
+  </div>
+  <div class="post-additional">
+    <a href="https://github.com/antgonzales/antgonzales.github.io/edit/master/_posts/2025-03-25-building-a-transaction-dashboard-on-compass.md" target="_blank" >Suggest a correction</a>
+  </div>
+</div>
+
+
+  <footer class="footer container max-width">
+    <div class="footer-inner">
+        <div class="copyright">
+            <span>&copy; 2025</span>
+            Anthony Gonzales
+        </div>
+        <nav class="footer-nav">
+            <ul class="list-naked">
+                <li>
+                    <a href="https://mastodon.social/@anthonygonzales" target="_blank">
+                        <span class="hidden">Mastodon</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+                          <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:hello@anthonygonzales.dev">
+                        <span class="hidden">Email</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                          <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
+                          <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="/feed.xml">
+                        <span class="hidden">RSS</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-rss-fill" viewBox="0 0 16 16">
+                          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1 0-2m0 4a6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1 0-2m.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+
+  
+</body>
+
+</html>

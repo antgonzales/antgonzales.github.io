@@ -1,0 +1,15 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Anthony Gonzales -- Dev -- @amgnz
+
+# THANKS
+
+    To the great people on Github creating open-source products.
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3, Javascript
+    Normalize.css, SASS, Bootstrap, Grunt, jQuery 

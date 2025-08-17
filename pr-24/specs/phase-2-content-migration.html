@@ -1,0 +1,394 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+    <title>Phase 2: Content Migration | Anthony Gonzales</title>
+  
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site"    content="">
+<meta name="twitter:creator" content="">
+<meta property="og:title"   content="Phase 2: Content Migration">
+
+
+
+<!-- end of Twitter cards -->
+
+
+  
+  <!-- Mastodon verification -->
+  <link rel="me" href="https://mastodon.social/@anthonygonzales" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/vs.css">
+  <link rel="stylesheet" href="/css/master.css">
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" class="grid phase-2-content-migration">
+  <!--[if IE]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+  <header class="header container max-width">
+  <div class="header-inner">
+    <div class="nav-logo">
+      <a href="/">
+        <span class="name">
+          <span>A</span>
+          <span>n</span>
+          <span>t</span>
+          <span>h</span>
+          <span>o</span>
+          <span>n</span>
+          <span>y</span>
+        </span>
+        <span class="name">
+          <span>G</span>
+          <span>o</span>
+          <span>n</span>
+          <span>z</span>
+          <span>a</span>
+          <span>l</span>
+          <span>e</span>
+          <span>s</span>
+        </span>
+      </a>
+    </div>
+    <nav role="navigation">
+      <ul class="main-nav">
+        
+          <li>
+            <a href="/about">About</a>
+          </li>
+        
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+  <div class="max-width container page">
+  <h1 class="page-title">Phase 2: Content Migration</h1>
+  <div class="page-content">
+    <h1 id="phase-2-content-migration">Phase 2: Content Migration</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>Migrate blog posts and content from Jekyll’s <code class="language-plaintext highlighter-rouge">_posts/</code> directory to Astro’s content collections format. This phase focuses on content structure while preserving URLs and SEO.</p>
+
+<h2 id="tasks-and-deliverables">Tasks and Deliverables</h2>
+
+<h3 id="1-create-srccontentblog-directory">1. Create src/content/blog/ directory</h3>
+
+<p><strong>Deliverable:</strong> Content collections directory structure</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/content/
+├── blog/
+│   ├── 2014-04-17-hello-world.md
+│   ├── 2014-04-20-create-a-responsive-form-for-static-websites.md
+│   ├── ...
+│   └── 2025-03-25-building-a-transaction-dashboard-on-compass.md
+└── config.ts
+</code></pre></div></div>
+
+<p><strong>Acceptance Criteria:</strong></p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Content directory structure created</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Follows Astro content collections pattern</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Maintains chronological organization</li>
+</ul>
+
+<h3 id="2-migrate-sample-posts-to-test-content-collections">2. Migrate sample posts to test content collections</h3>
+
+<p><strong>Deliverable:</strong> 3-5 migrated posts for testing</p>
+
+<p><strong>Test posts to migrate:</strong></p>
+
+<ul>
+  <li>Latest post: <code class="language-plaintext highlighter-rouge">2025-03-25-building-a-transaction-dashboard-on-compass.md</code></li>
+  <li>Featured post: <code class="language-plaintext highlighter-rouge">2025-02-10-introducing-compass-one.md</code></li>
+  <li>Technical post: <code class="language-plaintext highlighter-rouge">2024-06-03-how-to-test-react-router-components.md</code></li>
+  <li>Legacy post: <code class="language-plaintext highlighter-rouge">2014-04-17-hello-world.markdown</code></li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Posts copied to src/content/blog/</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />File extensions standardized (.md)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Content intact and readable</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Images and links functional</li>
+</ul>
+
+<h3 id="3-update-frontmatter-format-for-astro-compatibility">3. Update frontmatter format for Astro compatibility</h3>
+
+<p><strong>Deliverable:</strong> Standardized frontmatter schema</p>
+
+<p><strong>Current Jekyll frontmatter:</strong></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">post</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Post</span><span class="nv"> </span><span class="s">Title"</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Post</span><span class="nv"> </span><span class="s">description"</span>
+<span class="na">date</span><span class="pi">:</span> <span class="s">2025-02-10</span>
+<span class="na">redirect_from</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">/old-url</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p><strong>Target Astro frontmatter:</strong></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Post</span><span class="nv"> </span><span class="s">Title"</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Post</span><span class="nv"> </span><span class="s">description"</span>
+<span class="na">publishedDate</span><span class="pi">:</span> <span class="s">2025-02-10</span>
+<span class="na">tags</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">category1"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">category2"</span><span class="pi">]</span>
+<span class="na">draft</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">slug</span><span class="pi">:</span> <span class="s2">"</span><span class="s">post-title"</span>
+<span class="na">redirectFrom</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">/old-url</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p><strong>Acceptance Criteria:</strong></p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All posts use consistent frontmatter</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Date format compatible with Astro</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Redirect information preserved</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Tags/categories added where applicable</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Slug field added for URL control</li>
+</ul>
+
+<h3 id="4-create-content-collection-schema">4. Create content collection schema</h3>
+
+<p><strong>Deliverable:</strong> TypeScript schema for blog posts</p>
+
+<p><strong>File:</strong> <code class="language-plaintext highlighter-rouge">src/content/config.ts</code></p>
+
+<p><strong>Schema requirements:</strong></p>
+
+<ul>
+  <li>Title (required, string)</li>
+  <li>Description (required, string)</li>
+  <li>Published date (required, date)</li>
+  <li>Tags (optional, array of strings)</li>
+  <li>Draft status (optional, boolean)</li>
+  <li>Slug (optional, string)</li>
+  <li>Redirect from (optional, array of strings)</li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Schema validates all existing posts</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Type safety for content queries</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Compatible with Astro’s content collections API</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Supports future content expansion</li>
+</ul>
+
+<h3 id="5-create-dynamic-routing-for-blog-posts">5. Create dynamic routing for blog posts</h3>
+
+<p><strong>Deliverable:</strong> Astro pages for blog content</p>
+
+<p><strong>Files to create:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">src/pages/blog/[slug].astro</code> - Individual post pages</li>
+  <li><code class="language-plaintext highlighter-rouge">src/pages/blog/index.astro</code> - Blog listing page</li>
+  <li><code class="language-plaintext highlighter-rouge">src/pages/index.astro</code> - Homepage with latest posts</li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Dynamic routing matches Jekyll URLs</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Post content renders correctly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Navigation between posts works</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Blog listing shows all posts</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Homepage displays latest post</li>
+</ul>
+
+<h3 id="6-preserve-existing-url-structure">6. Preserve existing URL structure</h3>
+
+<p><strong>Deliverable:</strong> URL compatibility with current Jekyll site</p>
+
+<p><strong>Current Jekyll URLs:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/blog/post-title</code> (from permalink: /blog/:title:output_ext)</li>
+  <li>Homepage latest post display</li>
+  <li>Blog archive page</li>
+</ul>
+
+<p><strong>Target Astro URLs:</strong></p>
+
+<ul>
+  <li>Same URL structure maintained</li>
+  <li>Redirects for any URL changes</li>
+  <li>SEO-friendly slugs</li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />URLs match current structure exactly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No broken internal links</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Redirects configured for any changes</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Canonical URLs preserved</li>
+</ul>
+
+<h3 id="7-migrate-content-assets-and-images">7. Migrate content assets and images</h3>
+
+<p><strong>Deliverable:</strong> Content-related images properly referenced</p>
+
+<p><strong>Current image structure:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>assets/img/
+├── compass-one/
+├── compass-one-launch/
+└── [other post images]
+</code></pre></div></div>
+
+<p><strong>Target structure:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public/img/
+├── compass-one/
+├── compass-one-launch/
+└── [other post images]
+</code></pre></div></div>
+
+<p><strong>Acceptance Criteria:</strong></p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All content images moved to public/</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Markdown image references updated</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Image optimization maintained (.webp files)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Alt text preserved for accessibility</li>
+</ul>
+
+<h2 id="testing-strategy">Testing Strategy</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Content collections API queries work</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All posts render without errors</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Image loading and display correct</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Internal links function properly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />SEO meta tags generated correctly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />RSS feed compatibility maintained</li>
+</ul>
+
+<h2 id="performance-considerations">Performance Considerations</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Image optimization preserved</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Lazy loading for post images</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Content chunking for large archives</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Build time optimization</li>
+</ul>
+
+<h2 id="seo-preservation">SEO Preservation</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Meta descriptions maintained</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Open Graph tags preserved</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Structured data (JSON-LD) intact</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Sitemap generation configured</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />RSS feed maintained</li>
+</ul>
+
+<h2 id="migration-scripts">Migration Scripts</h2>
+
+<p><strong>Deliverable:</strong> Automation for bulk content migration</p>
+
+<p><strong>Script requirements:</strong></p>
+
+<ul>
+  <li>Convert frontmatter format</li>
+  <li>Standardize file extensions</li>
+  <li>Update image paths</li>
+  <li>Validate content integrity</li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Script handles all 15 existing posts</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Error handling for malformed content</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Backup creation before migration</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Rollback capability</li>
+</ul>
+
+<h2 id="success-criteria">Success Criteria</h2>
+
+<ul>
+  <li>All blog posts migrated to Astro content collections</li>
+  <li>URL structure preserved exactly</li>
+  <li>SEO elements maintained</li>
+  <li>Content displays correctly in Astro</li>
+  <li>No functionality regression from Jekyll</li>
+</ul>
+
+
+  </div>
+</div>
+
+
+  <footer class="footer container max-width">
+    <div class="footer-inner">
+        <div class="copyright">
+            <span>&copy; 2025</span>
+            Anthony Gonzales
+        </div>
+        <nav class="footer-nav">
+            <ul class="list-naked">
+                <li>
+                    <a href="https://mastodon.social/@anthonygonzales" target="_blank">
+                        <span class="hidden">Mastodon</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+                          <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:hello@anthonygonzales.dev">
+                        <span class="hidden">Email</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                          <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
+                          <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="/feed.xml">
+                        <span class="hidden">RSS</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-rss-fill" viewBox="0 0 16 16">
+                          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1 0-2m0 4a6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1 0-2m.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+
+  
+</body>
+
+</html>

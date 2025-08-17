@@ -1,0 +1,273 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+    <title>How to test React Router components with Testing Library | Anthony Gonzales</title>
+  
+  <meta name="description" content="Discover why avoiding mocks in Jest enhances testing. Learn strategies for resilient, standards-based tests that improve code maintainability and reliability.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site"    content="">
+<meta name="twitter:creator" content="">
+<meta property="og:title"   content="How to test React Router components with Testing Library">
+
+
+<meta property="og:description" content="Discover why avoiding mocks in Jest enhances testing. Learn strategies for resilient, standards-based tests that improve code maintainability and reliability.">
+
+
+<!-- end of Twitter cards -->
+
+
+  
+  <!-- Mastodon verification -->
+  <link rel="me" href="https://mastodon.social/@anthonygonzales" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/vs.css">
+  <link rel="stylesheet" href="/css/master.css">
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" class="grid how-to-test-react-router-components">
+  <!--[if IE]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+  <header class="header container max-width">
+  <div class="header-inner">
+    <div class="nav-logo">
+      <a href="/">
+        <span class="name">
+          <span>A</span>
+          <span>n</span>
+          <span>t</span>
+          <span>h</span>
+          <span>o</span>
+          <span>n</span>
+          <span>y</span>
+        </span>
+        <span class="name">
+          <span>G</span>
+          <span>o</span>
+          <span>n</span>
+          <span>z</span>
+          <span>a</span>
+          <span>l</span>
+          <span>e</span>
+          <span>s</span>
+        </span>
+      </a>
+    </div>
+    <nav role="navigation">
+      <ul class="main-nav">
+        
+          <li>
+            <a href="/about">About</a>
+          </li>
+        
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+  <div class="max-width container post" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="post-title" itemprop="headline">How to test React Router components with Testing Library</h1>
+  <div class="post-meta">
+    <span class="hidden" itemprop="author">by Anthony Gonzales</span>
+    <time class="post-timestamp" itemprop="datePublished"> June 03, 2024</time><span class="post-meta-separator">&bull;</span>
+      <div class="post-lastupdated">
+        Updated on <time itemprop="dateModified">September 29, 2024</time>
+      </div></div>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Let’s test React Router components with Jest.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#testing-navigation-elements-in-react" id="markdown-toc-testing-navigation-elements-in-react">Testing navigation elements in React</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ul>
+
+<!--break-->
+      <h2 id="testing-navigation-elements-in-react">
+        
+        
+          Testing navigation elements in React <a href="#testing-navigation-elements-in-react" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>React Testing Library’s <a href="https://testing-library.com/docs/example-react-router/">React Router
+example</a> shows how to
+test routing at the root component level, however, it doesn’t provide guidance
+on children components. I came across the example below in a recent code
+review. Our team uses a <a href="https://testing-library.com/docs/react-testing-library/setup/#custom-render">custom test
+render</a>
+to help with components that utilize React Providers, including <code class="language-plaintext highlighter-rouge">MemoryRouter</code>.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">render</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@testing-library/react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MemoryRouter</span><span class="p">,</span> <span class="nx">Route</span><span class="p">,</span> <span class="nx">Routes</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">renderWithProviders</span><span class="p">(</span>
+  <span class="nx">ui</span><span class="p">,</span>
+  <span class="p">{</span>
+    <span class="nx">initialRouterEntries</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">],</span>
+    <span class="nx">route</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">...</span><span class="nx">renderOptions</span>
+  <span class="p">}</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">Wrapper</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">MemoryRouter</span> <span class="na">initialEntries</span><span class="p">=</span><span class="si">{</span><span class="nx">initialRouterEntries</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Routes</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path</span><span class="p">=</span><span class="si">{</span><span class="nx">route</span><span class="si">}</span> <span class="na">element</span><span class="p">=</span><span class="si">{</span><span class="nx">children</span><span class="si">}</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Routes</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">MemoryRouter</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="p">...</span><span class="nx">render</span><span class="p">(</span><span class="nx">ui</span><span class="p">,</span> <span class="p">{</span> <span class="na">wrapper</span><span class="p">:</span> <span class="nx">Wrapper</span><span class="p">,</span> <span class="p">...</span><span class="nx">renderOptions</span> <span class="p">}),</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+ 
+<span class="k">export</span> <span class="o">*</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@testing-library/react</span><span class="dl">'</span>  
+   
+<span class="k">export</span> <span class="p">{</span> <span class="nx">renderWithProviders</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">fireEvent</span><span class="p">,</span> <span class="nx">renderWithProviders</span><span class="p">,</span> <span class="nx">screen</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/testUtils</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">jest</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">({</span>
+  <span class="p">...</span><span class="nx">jest</span><span class="p">.</span><span class="nx">requireActual</span><span class="p">(</span><span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">),</span>
+  <span class="c1">// ❌ Mocking React Router's hook</span>
+  <span class="na">useNavigate</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">mockedUseNavigate</span><span class="p">,</span>
+<span class="p">}));</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;ComponentWithNavigation /&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">provides a link to return to the dashboard</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">renderWithProviders</span><span class="p">(&lt;</span><span class="nc">ComponentWithNavigation</span> <span class="p">/&gt;)</span>
+    <span class="kd">const</span> <span class="nx">link</span> <span class="o">=</span> <span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="nx">link</span><span class="p">,</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Go to Home</span><span class="dl">'</span><span class="p">});</span>
+    <span class="nx">fireEvent</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="nx">link</span><span class="p">);</span>
+    <span class="c1">// ❌ Testing implementation details</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">mockedUseNavigate</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span> <span class="nx">expect</span><span class="p">.</span><span class="nx">anything</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Although this approach tests the behavior of our component, it also checks the
+implementation details of React Router and does not utilize HTML
+specifications. Imagine the following scenario:</p>
+
+<ul>
+  <li>We continue with the test suite checking the  <code class="language-plaintext highlighter-rouge">useNavigation()</code> hook and
+write all of our tests going forward in this way</li>
+  <li>React Router releases a new version that alters the behavior of
+<code class="language-plaintext highlighter-rouge">useNavigation()</code> or deprecates the hook entirely</li>
+  <li>We perform the upgrade without fully understanding the implications</li>
+  <li>The test suite pass on CI/CD</li>
+  <li>Production fails 💥</li>
+</ul>
+
+<p>By binding our test suite to the implementation details of React Router, we’ve
+removed our ability to check that the integration between our code and the
+dependency work correctly.  We’ve opened ourselves up to false positives or
+false negatives in our test suite.</p>
+
+<p>A better, and simpler, approach is to check the <code class="language-plaintext highlighter-rouge">&lt;a/&gt;</code> tag’s <code class="language-plaintext highlighter-rouge">href</code> property.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">render</span><span class="p">,</span> <span class="nx">screen</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/testUtils</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;ComponentWithNavigation /&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">provides a link to return to the dashboard</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">renderWithProviders</span><span class="p">(&lt;</span><span class="nc">ComponentWithNavigation</span> <span class="p">/&gt;)</span>
+    <span class="kd">const</span> <span class="nx">link</span> <span class="o">=</span> <span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="nx">link</span><span class="p">,</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Go to Home</span><span class="dl">'</span><span class="p">});</span>
+    <span class="c1">// ✅ Checking the link element render</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">link</span><span class="p">.</span><span class="nx">href</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>We’ve now reduced the brittleness of the test and created more streamlined
+approach to checking the navigation of the component without the custom test
+render.</p>
+    
+      <h2 id="conclusion">
+        
+        
+          Conclusion <a href="#conclusion" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>Effective testing in React applications is not just about covering every line
+of code with tests; it’s about writing tests that remain resilient against
+change. The goal of testing is not only to catch errors before they reach
+production but to provide a safety net that allows for confident refactoring
+and upgrades. By focusing on the user’s perspective and the external interface
+of components, rather than the underlying implementation, we ensure that our
+tests are both meaningful and durable.</p>
+
+  </div>
+  <div class="post-additional">
+    <a href="https://github.com/antgonzales/antgonzales.github.io/edit/master/_posts/2024-06-03-how-to-test-react-router-components.md" target="_blank" >Suggest a correction</a>
+  </div>
+</div>
+
+
+  <footer class="footer container max-width">
+    <div class="footer-inner">
+        <div class="copyright">
+            <span>&copy; 2025</span>
+            Anthony Gonzales
+        </div>
+        <nav class="footer-nav">
+            <ul class="list-naked">
+                <li>
+                    <a href="https://mastodon.social/@anthonygonzales" target="_blank">
+                        <span class="hidden">Mastodon</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+                          <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:hello@anthonygonzales.dev">
+                        <span class="hidden">Email</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                          <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
+                          <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="/feed.xml">
+                        <span class="hidden">RSS</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-rss-fill" viewBox="0 0 16 16">
+                          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1 0-2m0 4a6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1 0-2m.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+
+  
+</body>
+
+</html>

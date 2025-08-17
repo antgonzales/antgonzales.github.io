@@ -1,0 +1,455 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+    <title>Phase 3: Build System Preparation | Anthony Gonzales</title>
+  
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site"    content="">
+<meta name="twitter:creator" content="">
+<meta property="og:title"   content="Phase 3: Build System Preparation">
+
+
+
+<!-- end of Twitter cards -->
+
+
+  
+  <!-- Mastodon verification -->
+  <link rel="me" href="https://mastodon.social/@anthonygonzales" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/vs.css">
+  <link rel="stylesheet" href="/css/master.css">
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" class="grid phase-3-build-system-preparation">
+  <!--[if IE]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+  <header class="header container max-width">
+  <div class="header-inner">
+    <div class="nav-logo">
+      <a href="/">
+        <span class="name">
+          <span>A</span>
+          <span>n</span>
+          <span>t</span>
+          <span>h</span>
+          <span>o</span>
+          <span>n</span>
+          <span>y</span>
+        </span>
+        <span class="name">
+          <span>G</span>
+          <span>o</span>
+          <span>n</span>
+          <span>z</span>
+          <span>a</span>
+          <span>l</span>
+          <span>e</span>
+          <span>s</span>
+        </span>
+      </a>
+    </div>
+    <nav role="navigation">
+      <ul class="main-nav">
+        
+          <li>
+            <a href="/about">About</a>
+          </li>
+        
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+  <div class="max-width container page">
+  <h1 class="page-title">Phase 3: Build System Preparation</h1>
+  <div class="page-content">
+    <h1 id="phase-3-build-system-preparation">Phase 3: Build System Preparation</h1>
+
+<h2 id="overview">Overview</h2>
+<p>Introduce Node.js and Astro build tooling alongside the existing Jekyll setup. This phase creates a parallel build system for testing and validation before the final migration.</p>
+
+<h2 id="tasks-and-deliverables">Tasks and Deliverables</h2>
+
+<h3 id="1-add-packagejson-with-astro-dependencies">1. Add package.json with Astro dependencies</h3>
+<p><strong>Deliverable:</strong> Node.js project configuration</p>
+
+<p><strong>File:</strong> <code class="language-plaintext highlighter-rouge">package.json</code></p>
+
+<p><strong>Required dependencies:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anthonygonzales-dev"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"module"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"dev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"astro dev"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"astro build"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"preview"</span><span class="p">:</span><span class="w"> </span><span class="s2">"astro preview"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"astro"</span><span class="p">:</span><span class="w"> </span><span class="s2">"astro"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"astro"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@astrojs/sitemap"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@astrojs/rss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.0.0"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"sass"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.69.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"typescript"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^5.0.0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Package.json created with correct dependencies</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />npm/pnpm install completes successfully</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Astro CLI commands available</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Sass compilation supported</li>
+</ul>
+
+<h3 id="2-create-astroconfigmjs-matching-jekyll-behavior">2. Create astro.config.mjs matching Jekyll behavior</h3>
+<p><strong>Deliverable:</strong> Astro configuration file</p>
+
+<p><strong>File:</strong> <code class="language-plaintext highlighter-rouge">astro.config.mjs</code></p>
+
+<p><strong>Configuration requirements:</strong></p>
+<ul>
+  <li>Site URL matching current Jekyll config</li>
+  <li>Sitemap generation</li>
+  <li>RSS feed support</li>
+  <li>Sass preprocessing</li>
+  <li>Content collections setup</li>
+  <li>Build output optimization</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">astro/config</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">sitemap</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@astrojs/sitemap</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+  <span class="na">site</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://www.anthonygonzales.dev</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">integrations</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">sitemap</span><span class="p">()</span>
+  <span class="p">],</span>
+  <span class="na">markdown</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">shikiConfig</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">theme</span><span class="p">:</span> <span class="dl">'</span><span class="s1">rose-pine-dawn</span><span class="dl">'</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">build</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">directory</span><span class="dl">'</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Site URL matches Jekyll _config.yml</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Sitemap generation configured</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Markdown processing setup</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Build output format matches expectations</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Syntax highlighting theme preserved</li>
+</ul>
+
+<h3 id="3-set-up-typescript-configuration">3. Set up TypeScript configuration</h3>
+<p><strong>Deliverable:</strong> TypeScript project setup</p>
+
+<p><strong>File:</strong> <code class="language-plaintext highlighter-rouge">tsconfig.json</code></p>
+
+<p><strong>Configuration:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"extends"</span><span class="p">:</span><span class="w"> </span><span class="s2">"astro/tsconfigs/strict"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paths"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"@/*"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"src/*"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"@/components/*"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"src/components/*"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"@/layouts/*"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"src/layouts/*"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"@/styles/*"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"src/styles/*"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />TypeScript compilation works</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Path aliases configured</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Strict mode enabled</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Content collections type safety</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Component prop validation</li>
+</ul>
+
+<h3 id="4-create-parallel-build-scripts-for-testing">4. Create parallel build scripts for testing</h3>
+<p><strong>Deliverable:</strong> Build automation for both Jekyll and Astro</p>
+
+<p><strong>Scripts to add to package.json:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"dev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"astro dev"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"astro build"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"build:jekyll"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bundle exec jekyll build"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"dev:jekyll"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bundle exec jekyll serve"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"test:builds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npm run build &amp;&amp; npm run build:jekyll"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"compare:builds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node scripts/compare-builds.js"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Build comparison script:</strong></p>
+<ul>
+  <li>Compare generated HTML structure</li>
+  <li>Validate URL consistency</li>
+  <li>Check asset generation</li>
+  <li>Performance metrics comparison</li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Both build systems work independently</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Build comparison script validates output</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Performance benchmarks established</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No conflicts between systems</li>
+</ul>
+
+<h3 id="5-configure-url-preservation-and-redirects">5. Configure URL preservation and redirects</h3>
+<p><strong>Deliverable:</strong> URL routing that matches Jekyll exactly</p>
+
+<p><strong>Current Jekyll URL structure:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/blog/:title</code> for posts</li>
+  <li><code class="language-plaintext highlighter-rouge">/</code> for homepage</li>
+  <li><code class="language-plaintext highlighter-rouge">/about</code> for about page</li>
+  <li>Custom redirects via jekyll-redirect-from</li>
+</ul>
+
+<p><strong>Astro routing setup:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/pages/
+├── index.astro (homepage)
+├── about.astro
+├── blog/
+│   ├── index.astro (blog listing)
+│   └── [slug].astro (individual posts)
+└── [...redirect].astro (catch-all redirects)
+</code></pre></div></div>
+
+<p><strong>Redirect configuration:</strong></p>
+<ul>
+  <li>Parse existing Jekyll redirects</li>
+  <li>Implement in Astro routing</li>
+  <li>Maintain redirect_from frontmatter</li>
+  <li>Add 301 redirects for SEO</li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All current URLs work in Astro</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Redirects function correctly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No broken internal links</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />SEO redirect status codes preserved</li>
+</ul>
+
+<h3 id="6-set-up-content-collections-api">6. Set up content collections API</h3>
+<p><strong>Deliverable:</strong> Data layer for blog content</p>
+
+<p><strong>Content API requirements:</strong></p>
+<ul>
+  <li>Query all blog posts</li>
+  <li>Filter by date/tags</li>
+  <li>Sort chronologically</li>
+  <li>Generate RSS feed data</li>
+  <li>Sitemap integration</li>
+</ul>
+
+<p><strong>API functions:</strong></p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/lib/content.ts</span>
+<span class="k">export</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">getAllPosts</span><span class="p">()</span>
+<span class="k">export</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">getPostBySlug</span><span class="p">(</span><span class="nx">slug</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span>
+<span class="k">export</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">getLatestPost</span><span class="p">()</span>
+<span class="k">export</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">getPostsByTag</span><span class="p">(</span><span class="nx">tag</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Content queries return expected data</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Posts sorted by date correctly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Tag filtering works</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />RSS feed generation functional</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Type safety for all queries</li>
+</ul>
+
+<h3 id="7-environment-and-deployment-preparation">7. Environment and deployment preparation</h3>
+<p><strong>Deliverable:</strong> Cloudflare Pages deployment configuration</p>
+
+<p><strong>Files to create:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">.node-version</code> (Node.js version specification)</li>
+  <li><code class="language-plaintext highlighter-rouge">netlify.toml</code> or <code class="language-plaintext highlighter-rouge">_headers</code> (deployment config)</li>
+  <li><code class="language-plaintext highlighter-rouge">.gitignore</code> updates for Node.js</li>
+</ul>
+
+<p><strong>Build configuration:</strong></p>
+<ul>
+  <li>Node.js version: 18+</li>
+  <li>Build command: <code class="language-plaintext highlighter-rouge">npm run build</code></li>
+  <li>Output directory: <code class="language-plaintext highlighter-rouge">dist/</code></li>
+  <li>Environment variables setup</li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Local development server runs</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Production build completes</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Asset optimization working</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Ready for Cloudflare Pages deployment</li>
+</ul>
+
+<h3 id="8-performance-optimization-setup">8. Performance optimization setup</h3>
+<p><strong>Deliverable:</strong> Build optimization matching Jekyll output</p>
+
+<p><strong>Optimization features:</strong></p>
+<ul>
+  <li>Image optimization (maintain .webp usage)</li>
+  <li>CSS minification</li>
+  <li>JavaScript bundling</li>
+  <li>Font optimization</li>
+  <li>Asset compression</li>
+</ul>
+
+<p><strong>Performance targets:</strong></p>
+<ul>
+  <li>Build time &lt; 30 seconds</li>
+  <li>Bundle size comparable to Jekyll</li>
+  <li>Lighthouse scores maintained</li>
+  <li>Core Web Vitals preserved</li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Build performance meets targets</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Asset sizes optimized</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Loading performance maintained</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />SEO scores preserved</li>
+</ul>
+
+<h2 id="testing-strategy">Testing Strategy</h2>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Local development environment functional</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Build processes complete without errors</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />URL routing matches Jekyll exactly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Content displays correctly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Performance benchmarks met</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Cross-browser compatibility verified</li>
+</ul>
+
+<h2 id="rollback-plan">Rollback Plan</h2>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Git branches for each phase</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Jekyll build remains functional</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Easy switch between systems</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Backup of all configurations</li>
+</ul>
+
+<h2 id="integration-testing">Integration Testing</h2>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Content collections work with layouts</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Styling applies correctly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />JavaScript functionality preserved</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />RSS feed validates</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Sitemap generates correctly</li>
+</ul>
+
+<h2 id="documentation">Documentation</h2>
+<p><strong>Deliverable:</strong> Migration guide and troubleshooting</p>
+
+<p><strong>Documentation to create:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">MIGRATION.md</code> - Step-by-step migration guide</li>
+  <li><code class="language-plaintext highlighter-rouge">DEVELOPMENT.md</code> - Local development setup</li>
+  <li><code class="language-plaintext highlighter-rouge">DEPLOYMENT.md</code> - Cloudflare Pages deployment</li>
+  <li><code class="language-plaintext highlighter-rouge">TROUBLESHOOTING.md</code> - Common issues and solutions</li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Clear migration instructions</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Local setup documented</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Deployment process outlined</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Troubleshooting guide complete</li>
+</ul>
+
+<h2 id="success-criteria">Success Criteria</h2>
+<ul>
+  <li>Astro build system fully functional</li>
+  <li>Perfect URL compatibility with Jekyll</li>
+  <li>Performance equals or exceeds Jekyll</li>
+  <li>Ready for final migration to Cloudflare Pages</li>
+  <li>Development workflow improved with TypeScript and modern tooling</li>
+</ul>
+
+  </div>
+</div>
+
+
+  <footer class="footer container max-width">
+    <div class="footer-inner">
+        <div class="copyright">
+            <span>&copy; 2025</span>
+            Anthony Gonzales
+        </div>
+        <nav class="footer-nav">
+            <ul class="list-naked">
+                <li>
+                    <a href="https://mastodon.social/@anthonygonzales" target="_blank">
+                        <span class="hidden">Mastodon</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+                          <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:hello@anthonygonzales.dev">
+                        <span class="hidden">Email</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                          <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
+                          <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="/feed.xml">
+                        <span class="hidden">RSS</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-rss-fill" viewBox="0 0 16 16">
+                          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1 0-2m0 4a6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1 0-2m.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+
+  
+</body>
+
+</html>

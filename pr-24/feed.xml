@@ -1,0 +1,2379 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://www.anthonygonzales.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.anthonygonzales.dev/" rel="alternate" type="text/html" /><updated>2025-08-17T04:17:50+00:00</updated><id>https://www.anthonygonzales.dev/feed.xml</id><title type="html">AnthonyGonzales.dev</title><subtitle>Personal portfolio website</subtitle><entry><title type="html">Building a transaction dashboard on Compass</title><link href="https://www.anthonygonzales.dev/blog/building-a-transaction-dashboard-on-compass.html" rel="alternate" type="text/html" title="Building a transaction dashboard on Compass" /><published>2025-03-25T00:00:00+00:00</published><updated>2025-03-25T00:00:00+00:00</updated><id>https://www.anthonygonzales.dev/blog/building-a-transaction-dashboard-on-compass</id><content type="html" xml:base="https://www.anthonygonzales.dev/blog/building-a-transaction-dashboard-on-compass.html"><![CDATA[<p><img src="/assets/img/compass-one/compass-one.webp" alt="Compass One dashboard homepage showing the main interface with client transaction overview and navigation elements" />
+<!--break--></p>
+
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#creating-a-well-oiled-machine" id="markdown-toc-creating-a-well-oiled-machine">Creating a well-oiled machine</a></li>
+  <li><a href="#know-what-you-dont-know" id="markdown-toc-know-what-you-dont-know">Know what you don’t know</a></li>
+  <li><a href="#speaking-the-same-language" id="markdown-toc-speaking-the-same-language">Speaking the same language</a></li>
+  <li><a href="#good-fences-make-good-neighbors" id="markdown-toc-good-fences-make-good-neighbors">Good fences make good neighbors</a></li>
+  <li><a href="#results" id="markdown-toc-results">Results</a></li>
+  <li><a href="#press-coverage" id="markdown-toc-press-coverage">Press Coverage</a></li>
+  <li><a href="#screenshots" id="markdown-toc-screenshots">Screenshots</a>    <ul>
+      <li><a href="#buyers-dashboard" id="markdown-toc-buyers-dashboard">Buyer’s Dashboard</a></li>
+      <li><a href="#sellers-dashboard" id="markdown-toc-sellers-dashboard">Seller’s Dashboard</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p><a href="https://one.compass.com/" target="_blank">Compass One</a> is the real estate industry’s premier
+client dashboard providing 24/7 transparency into transactions—the #1 requested
+feature since 2021. Launched in beta in October 2024 and nationally on February
+3, 2025, this platform addresses inefficient communication between clients and
+agents, transforming how clients track their real estate journey. After
+pandemic-related delays and market fluctuations, the project finally secured
+funding in early 2024, becoming the most ambitious engineering initiative in
+Compass’s history.</p>
+
+<p>As Frontend Engineering Lead, I orchestrated collaboration across six
+engineering teams to develop this comprehensive platform requiring seamless
+integration with every major system across the company. Over twelve months, I
+implemented rigorous engineering standards, developed an estimation framework,
+and built resilient architecture while coordinating approximately 50 frontend
+engineers who collectively merged 800 pull requests. The following case study
+outlines the key strategies that enabled us to successfully deliver this
+complex, mission-critical feature on time and with exceptional quality metrics.</p>
+
+<h2 id="creating-a-well-oiled-machine">Creating a well-oiled machine</h2>
+
+<p>When I onboarded, I faced two significant challenges: (1) managing the
+abandoned codebase from 2021 that had accumulated technical debt, and (2)
+creating alignment between product, design, and engineering teams on how to
+move forward. The central question became: How could we deliver quickly without
+sacrificing quality or confidence?</p>
+
+<p>Rather than focusing solely on technical implementation details, I drafted a
+proposal that established a clear vision for team operations. My approach
+addressed both immediate code quality concerns and long-term engineering
+practices:</p>
+
+<ol>
+  <li><strong>Cleaned legacy codebase</strong>: Systematically addressed technical debt and
+deprecated outdated patterns that would hinder our progress</li>
+  <li><strong>Established non-negotiable requirements</strong>:
+    <ul>
+      <li>Daily code deployments (except Fridays to reduce weekend support risk)</li>
+      <li>Comprehensive unit and integration test coverage for all new production
+ code</li>
+      <li>Mandatory passing Cypress end-to-end tests as a deployment prerequisite
+ with deployment gates in CI/CD</li>
+      <li>Feature flag implementation for all new functionality to enable
+ controlled rollouts</li>
+    </ul>
+  </li>
+</ol>
+
+<p>While these practices might seem fundamental, they’re often the first
+casualties when teams face tight deadlines or pressure to deliver. With support
+from my manager, we successfully implemented these standards as non-optional
+protocols for all contributors.</p>
+
+<p>This disciplined approach paid off significantly. We maintained over 90% unit
+test coverage across three frontend applications and a shared component
+library. More importantly, these practices enabled us to move quickly while
+maintaining high quality—our deployment pipeline caught potential issues early,
+and feature flags allowed us to safely integrate work from multiple teams
+without risking the overall system stability.</p>
+
+<h2 id="know-what-you-dont-know">Know what you don’t know</h2>
+
+<p>Compass has not historically had a uniform method for estimating projects of
+this size. Teams would typically provide general estimates in developer weeks,
+padding timeframes for areas with knowledge gaps or unknown variables. This
+approach often led to inaccurate timelines and didn’t effectively communicate
+risk to stakeholders.</p>
+
+<p>We updated our estimation process by implementing Jacob Kaplan-Moss’s
+methodology from <a href="https://jacobian.org/series/estimation/" target="_blank">Estimating Software
+Projects</a>, which explicitly accounts
+for both <strong>time and uncertainty</strong>.</p>
+
+<p>As frontend developers, we evaluated each feature against three critical
+dependencies:</p>
+
+<ol>
+  <li>Product requirements</li>
+  <li>Backend API definitions</li>
+  <li>Designs</li>
+</ol>
+
+<p>We then systematically adjusted confidence levels based on the completeness of
+these dependencies. For example:</p>
+
+<ul>
+  <li><strong>High Confidence</strong>: All three dependencies clearly defined</li>
+  <li><strong>Medium Confidence</strong>: Missing product requirements</li>
+  <li><strong>Low Confidence</strong>: Missing both product requirements and designs</li>
+  <li><strong>No Confidence</strong>: Missing all three dependencies</li>
+</ul>
+
+<p>This approach delivered multiple benefits beyond just better time estimates:</p>
+
+<ol>
+  <li>It created a structured review process that provided actionable feedback to
+cross-functional partners</li>
+  <li>It allowed us to prioritize work effectively, focusing on high-confidence
+items while waiting for dependencies on others</li>
+  <li>By quantifying risk through confidence multipliers, we could clearly
+communicate potential timeline impacts to leadership</li>
+  <li>Most importantly, it helped us identify and address bottlenecks early,
+enabling us to deliver the entire project on schedule</li>
+</ol>
+
+<h2 id="speaking-the-same-language">Speaking the same language</h2>
+
+<p>Compass One’s index page needed to aggregate and transform data from multiple
+microservices. Making these calls directly from the client would have created
+performance bottlenecks, complex state management, monitoring headaches, and
+inconsistent type definitions across our frontend applications.</p>
+
+<p>Working in Compass’s microservice architecture—which utilizes Apache Thrift for
+shared type definitions and gRPC for communication—we implemented a
+Backend-for-Frontend (BFF) pattern. This approach allowed us to create a
+dedicated orchestration layer specifically designed for our frontend needs.</p>
+
+<p>I collaborated with a Senior Staff Engineer and a Principal Engineer to develop
+and maintain a Node.js service that acted as a stateless translation layer.
+This service:</p>
+
+<ul>
+  <li>Coordinated API calls across Java, Python, Go, and TypeScript services</li>
+  <li>Transformed complex data structures into frontend-optimized formats</li>
+  <li>Provided consistent type information through Thrift definitions</li>
+  <li>Handled error states and fallbacks before they reached the client</li>
+</ul>
+
+<p>Compass already supported TypeScript for backend services (see <a href="https://medium.com/compass-true-north/typescript-nodejs-grpc-using-thrift-dd28b2eac700">TypeScript +
+NodeJS gRPC using
+Thrift</a>),
+which allowed us to maintain type safety throughout the entire stack.</p>
+
+<p>The BFF pattern delivered multiple benefits:</p>
+
+<ul>
+  <li><strong>Improved performance</strong>: gRPC connections between services are significantly
+faster than client-side API calls</li>
+  <li><strong>Better monitoring</strong>: Centralized service calls gave us visibility into
+potential backend issues and allowed quicker diagnosis</li>
+  <li><strong>Simplified frontend</strong>: Component teams could focus on UI rather than
+complex data transformations</li>
+  <li><strong>Reduced network traffic</strong>: Clients received precisely the data they needed
+in the exact format required</li>
+</ul>
+
+<h2 id="good-fences-make-good-neighbors">Good fences make good neighbors</h2>
+
+<p>Compass One’s index page functions as a central hub integrating multiple
+widgets and components from six different engineering teams. Each team
+contributed code connecting to their own systems, including:</p>
+
+<ul>
+  <li>Invited users to the deal</li>
+  <li>A timeline of upcoming tasks and events</li>
+  <li>Market reports for sellers</li>
+  <li>Comments on Collections (listings saved by a buyer)</li>
+  <li>Favorited listings</li>
+  <li>Contact information for agent team members on the transaction</li>
+</ul>
+
+<p>Despite our rigorous testing standards, the integration of so many
+independently developed components created significant risk. A single error in
+any team’s code could potentially crash the entire application, creating a poor
+user experience and making it difficult to identify the source of problems.</p>
+
+<p>We implemented a resilient architecture based on the principle that isolating
+failures is as important as preventing them. By creating custom Error Boundary
+components, we established protective “fences” around each team’s code
+contributions. Drawing inspiration from established patterns in the React
+ecosystem, we adapted:</p>
+
+<ul>
+  <li><a href="https://github.com/DataDog/rum-react-integration-examples/tree/master/src/ErrorBoundary" target="_blank">Datadog’s RUM React
+integration</a></li>
+  <li><a href="https://docs.sentry.io/platforms/javascript/guides/react/features/error-boundary/" target="_blank">Sentry’s React Error
+Boundary</a></li>
+</ul>
+
+<p>Our implementation went beyond simple error catching. We developed:</p>
+
+<ol>
+  <li>Automatic error reporting that routed issues directly to the responsible
+teams</li>
+  <li>Graceful fallback UI components that maintained overall application
+usability</li>
+  <li>A visual debugging interface that allowed teams to isolate and test their
+components</li>
+</ol>
+
+<p>This architectural approach proved invaluable during our integration phases.
+When errors occurred—and they inevitably did—they remained contained to the
+specific widget rather than crashing the entire application.</p>
+
+<p>The error boundaries provided three key benefits:</p>
+
+<ol>
+  <li><strong>Improved user experience</strong> - Clients could still use the rest of the
+application even if one component failed</li>
+  <li><strong>Faster debugging</strong> - Teams could quickly identify their own issues without
+impacting others</li>
+  <li><strong>Increased accountability</strong> - Clear ownership of errors encouraged teams to
+fix issues promptly</li>
+</ol>
+
+<p>This “good neighbor” policy fostered both technical resilience and team
+collaboration, allowing us to maintain our ambitious delivery timeline despite
+the complexity of cross-team integration.</p>
+
+<p><a href="/assets/img/compass-one/compass-one-debugger.webp" target="_blank">
+  <img src="/assets/img/compass-one/compass-one-debugger.webp" alt="Interactive Error Boundary visual debugger showing component isolation and error state visualization in Compass One" />
+</a></p>
+
+<h2 id="results">Results</h2>
+
+<p>In just the first week, agents sent 14,950 client invitations, driving a 43%
+increase in client weekly active users. Despite the surge in traffic during the
+live announcement, the system maintained 100% uptime with no performance
+degradation. Most importantly, both agents and clients embraced the platform
+enthusiastically, awarding it a customer satisfaction score of 4.5 out of 5.
+These early results validate not only the product’s value proposition but also
+the engineering approach that ensured its stability and performance under
+real-world conditions.</p>
+
+<h2 id="press-coverage">Press Coverage</h2>
+
+<ul>
+  <li>Bloomberg - <a href="https://www.bloomberg.com/news/videos/2025-02-05/compass-ceo-on-us-housing-market-video" target="_blank">Compass Launches New Client-Facing Portal</a></li>
+  <li>Inman - <a href="https://www.inman.com/2025/02/28/compass-one-puts-clients-at-true-north-tech-review/" target="_blank">Compass One puts clients at true north: Tech
+Review</a></li>
+  <li>Inman - <a href="https://www.inman.com/2025/02/03/compass-to-launch-compass-one-client-portal-and-dashboard/" target="_blank">Compass launches ‘Compass One’ client portal and
+dashboard</a></li>
+  <li>The Real Deal - <a href="https://therealdeal.com/national/2025/02/06/how-compass-new-consumer-platform-adds-to-inventory-push/" target="_blank">Compass has the listings, now it has the
+platform</a></li>
+  <li>Housing Wire - <a href="https://www.housingwire.com/articles/compass-one-portal-clients-listings/" target="_blank">Compass launches client-facing portal with listings, docs and
+more</a></li>
+  <li>Real Estate News - <a href="https://www.realestatenews.com/2025/02/01/compass-launches-client-portal-amid-private-listings-push" target="_blank">Compass to launch client portal amid private listings
+push</a></li>
+</ul>
+
+<h2 id="screenshots">Screenshots</h2>
+
+<h3 id="buyers-dashboard">Buyer’s Dashboard</h3>
+
+<p><a href="/assets/img/compass-one/compass-one-buyer-dashboard.webp" target="_blank">
+  <img src="/assets/img/compass-one/compass-one-buyer-dashboard.webp" alt="Compass One Buyer's Dashboard showing property listings, transaction timeline, and client communication features" />
+</a></p>
+
+<h3 id="sellers-dashboard">Seller’s Dashboard</h3>
+
+<p><a href="/assets/img/compass-one/compass-one-seller-dashboard.webp" target="_blank">
+  <img src="/assets/img/compass-one/compass-one-seller-dashboard.webp" alt="Compass One Seller's Dashboard displaying property marketing status, offer tracking, and transaction progress" />
+</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Case study: Leading engineering teams to build Compass One, a real estate transaction dashboard that boosted client engagement by 43% with 4.5/5 satisfaction.]]></summary></entry><entry><title type="html">Introducing Compass One</title><link href="https://www.anthonygonzales.dev/blog/introducing-compass-one.html" rel="alternate" type="text/html" title="Introducing Compass One" /><published>2025-02-10T00:00:00+00:00</published><updated>2025-02-10T00:00:00+00:00</updated><id>https://www.anthonygonzales.dev/blog/introducing-compass-one</id><content type="html" xml:base="https://www.anthonygonzales.dev/blog/introducing-compass-one.html"><![CDATA[<p><img src="/assets/img/compass-one/compass-one.webp" alt="Compass One dashboard homepage showing the main interface with client transaction overview and navigation elements" /></p>
+
+<!--break-->
+
+<p>I’m proud to have served as the Frontend Engineering Lead for <a href="https://one.compass.com" target="_blank">Compass
+One</a>, the first-ever real estate client dashboard! This
+project has been years in the making and combines some of the largest products
+on the platform into an industry first.</p>
+
+<p>I had the honor of attending the New York Stock Exchange opening bell ceremony
+on February 5, 2025, to celebrate the launch. Standing on the historic NYSE
+trading floor alongside my colleagues as the bell rang was an unforgettable
+culmination of our team’s hard work and success.</p>
+
+<p><img src="/assets/img/compass-one-launch/nyse-entrance.webp" alt="Large digital display wall at the NYSE showing &quot;Ringing the Opening Bell&quot; text alongside the Compass logo and &quot;COMP LISTED NYSE&quot; text in the foyer of the building" /></p>
+
+<p><img src="/assets/img/compass-one-launch/nyse-floor.webp" alt="Interior of the New York Stock Exchange trading floor featuring the central trading post with multiple Compass logos displayed on the digital screens, showcasing the ornate gold ceiling architecture and a person in business attire standing at the trading post" /></p>
+
+<p><img src="/assets/img/compass-one-launch/nyse-cnbc-booth.webp" alt="CNBC broadcast desk at the New York Stock Exchange with television personalities seated at a curved desk with monitors showing market data and the Compass logo visible on screens in the background" /></p>
+
+<p><img src="/assets/img/compass-one-launch/nyse-coin.webp" alt="Close-up of a commemorative New York Stock Exchange silver medallion being held by me, featuring an engraved facade of the NYSE building and &quot;NEW YORK STOCK EXCHANGE&quot; text, with blurred trading floor background" /></p>]]></content><author><name></name></author><summary type="html"><![CDATA[As Frontend Lead for Compass One, I helped build the first real estate client dashboard that combines major platform products into an industry-first solution.]]></summary></entry><entry><title type="html">How to test React Router components with Testing Library</title><link href="https://www.anthonygonzales.dev/blog/how-to-test-react-router-components.html" rel="alternate" type="text/html" title="How to test React Router components with Testing Library" /><published>2024-06-03T00:00:00+00:00</published><updated>2024-09-29T00:00:00+00:00</updated><id>https://www.anthonygonzales.dev/blog/how-to-test-react-router-components</id><content type="html" xml:base="https://www.anthonygonzales.dev/blog/how-to-test-react-router-components.html"><![CDATA[<p>Let’s test React Router components with Jest.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#testing-navigation-elements-in-react" id="markdown-toc-testing-navigation-elements-in-react">Testing navigation elements in React</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ul>
+
+<!--break-->
+
+<h2 id="testing-navigation-elements-in-react">Testing navigation elements in React</h2>
+
+<p>React Testing Library’s <a href="https://testing-library.com/docs/example-react-router/">React Router
+example</a> shows how to
+test routing at the root component level, however, it doesn’t provide guidance
+on children components. I came across the example below in a recent code
+review. Our team uses a <a href="https://testing-library.com/docs/react-testing-library/setup/#custom-render">custom test
+render</a>
+to help with components that utilize React Providers, including <code class="language-plaintext highlighter-rouge">MemoryRouter</code>.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">render</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@testing-library/react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MemoryRouter</span><span class="p">,</span> <span class="nx">Route</span><span class="p">,</span> <span class="nx">Routes</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">renderWithProviders</span><span class="p">(</span>
+  <span class="nx">ui</span><span class="p">,</span>
+  <span class="p">{</span>
+    <span class="nx">initialRouterEntries</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">],</span>
+    <span class="nx">route</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">...</span><span class="nx">renderOptions</span>
+  <span class="p">}</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">Wrapper</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">MemoryRouter</span> <span class="na">initialEntries</span><span class="p">=</span><span class="si">{</span><span class="nx">initialRouterEntries</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Routes</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path</span><span class="p">=</span><span class="si">{</span><span class="nx">route</span><span class="si">}</span> <span class="na">element</span><span class="p">=</span><span class="si">{</span><span class="nx">children</span><span class="si">}</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Routes</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">MemoryRouter</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="p">...</span><span class="nx">render</span><span class="p">(</span><span class="nx">ui</span><span class="p">,</span> <span class="p">{</span> <span class="na">wrapper</span><span class="p">:</span> <span class="nx">Wrapper</span><span class="p">,</span> <span class="p">...</span><span class="nx">renderOptions</span> <span class="p">}),</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+ 
+<span class="k">export</span> <span class="o">*</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@testing-library/react</span><span class="dl">'</span>  
+   
+<span class="k">export</span> <span class="p">{</span> <span class="nx">renderWithProviders</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">fireEvent</span><span class="p">,</span> <span class="nx">renderWithProviders</span><span class="p">,</span> <span class="nx">screen</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/testUtils</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">jest</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">({</span>
+  <span class="p">...</span><span class="nx">jest</span><span class="p">.</span><span class="nx">requireActual</span><span class="p">(</span><span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">),</span>
+  <span class="c1">// ❌ Mocking React Router's hook</span>
+  <span class="na">useNavigate</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">mockedUseNavigate</span><span class="p">,</span>
+<span class="p">}));</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;ComponentWithNavigation /&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">provides a link to return to the dashboard</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">renderWithProviders</span><span class="p">(&lt;</span><span class="nc">ComponentWithNavigation</span> <span class="p">/&gt;)</span>
+    <span class="kd">const</span> <span class="nx">link</span> <span class="o">=</span> <span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="nx">link</span><span class="p">,</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Go to Home</span><span class="dl">'</span><span class="p">});</span>
+    <span class="nx">fireEvent</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="nx">link</span><span class="p">);</span>
+    <span class="c1">// ❌ Testing implementation details</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">mockedUseNavigate</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span> <span class="nx">expect</span><span class="p">.</span><span class="nx">anything</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Although this approach tests the behavior of our component, it also checks the
+implementation details of React Router and does not utilize HTML
+specifications. Imagine the following scenario:</p>
+
+<ul>
+  <li>We continue with the test suite checking the  <code class="language-plaintext highlighter-rouge">useNavigation()</code> hook and
+write all of our tests going forward in this way</li>
+  <li>React Router releases a new version that alters the behavior of
+<code class="language-plaintext highlighter-rouge">useNavigation()</code> or deprecates the hook entirely</li>
+  <li>We perform the upgrade without fully understanding the implications</li>
+  <li>The test suite pass on CI/CD</li>
+  <li>Production fails 💥</li>
+</ul>
+
+<p>By binding our test suite to the implementation details of React Router, we’ve
+removed our ability to check that the integration between our code and the
+dependency work correctly.  We’ve opened ourselves up to false positives or
+false negatives in our test suite.</p>
+
+<p>A better, and simpler, approach is to check the <code class="language-plaintext highlighter-rouge">&lt;a/&gt;</code> tag’s <code class="language-plaintext highlighter-rouge">href</code> property.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">render</span><span class="p">,</span> <span class="nx">screen</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/testUtils</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;ComponentWithNavigation /&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">provides a link to return to the dashboard</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">renderWithProviders</span><span class="p">(&lt;</span><span class="nc">ComponentWithNavigation</span> <span class="p">/&gt;)</span>
+    <span class="kd">const</span> <span class="nx">link</span> <span class="o">=</span> <span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="nx">link</span><span class="p">,</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Go to Home</span><span class="dl">'</span><span class="p">});</span>
+    <span class="c1">// ✅ Checking the link element render</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">link</span><span class="p">.</span><span class="nx">href</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>We’ve now reduced the brittleness of the test and created more streamlined
+approach to checking the navigation of the component without the custom test
+render.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Effective testing in React applications is not just about covering every line
+of code with tests; it’s about writing tests that remain resilient against
+change. The goal of testing is not only to catch errors before they reach
+production but to provide a safety net that allows for confident refactoring
+and upgrades. By focusing on the user’s perspective and the external interface
+of components, rather than the underlying implementation, we ensure that our
+tests are both meaningful and durable.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Discover why avoiding mocks in Jest enhances testing. Learn strategies for resilient, standards-based tests that improve code maintainability and reliability.]]></summary></entry><entry><title type="html">Fix TypeError: window.matchMedia is not a function in Jest</title><link href="https://www.anthonygonzales.dev/blog/how-to-solve-match-media-is-not-a-function.html" rel="alternate" type="text/html" title="Fix TypeError: window.matchMedia is not a function in Jest" /><published>2024-02-23T00:00:00+00:00</published><updated>2024-07-28T00:00:00+00:00</updated><id>https://www.anthonygonzales.dev/blog/how-to-solve-match-media-is-not-a-function</id><content type="html" xml:base="https://www.anthonygonzales.dev/blog/how-to-solve-match-media-is-not-a-function.html"><![CDATA[<p>Testing responsive designs in environments that don’t support the matchMedia
+API, like Jest and jsdom, can be challenging. This necessitates a custom
+implementation to ensure our React tests can accurately simulate different
+viewport sizes. Fortunately, the css-mediaquery library provides an API that
+closely emulates matchMedia, allowing us to create a tailored solution that
+adheres to Mobile First development principles.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#creating-a-custom-matchmedia-implementation" id="markdown-toc-creating-a-custom-matchmedia-implementation">Creating a custom matchMedia implementation</a></li>
+  <li><a href="#utilizing-the-custom-implementation-in-tests" id="markdown-toc-utilizing-the-custom-implementation-in-tests">Utilizing the custom implementation in tests</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ul>
+
+<!--break-->
+
+<h2 id="creating-a-custom-matchmedia-implementation">Creating a custom matchMedia implementation</h2>
+
+<p>To address the <code class="language-plaintext highlighter-rouge">TypeError: window.matchMedia is not a function</code> error, we’ll
+develop a custom matchMedia function using the
+<a href="https://github.com/ericf/css-mediaquery">css-mediaquery</a> library in our
+testing tools. This function will not only simulate the matchMedia API but also
+allow us to dynamically adjust the viewport size for our tests, following a
+Mobile First approach.</p>
+
+<p>Below is the implementation:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/testUtils/matchMedia.js</span>
+<span class="k">import</span> <span class="nx">mediaQuery</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">css-mediaquery</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">beforeAll</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Set the initial/default matchMedia implementation</span>
+  <span class="c1">// for Mobile First development</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span> <span class="o">=</span> <span class="nx">createMatchMedia</span><span class="p">(</span><span class="mi">576</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">afterEach</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Reset matchMedia after each test</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span> <span class="o">=</span> <span class="nx">createMatchMedia</span><span class="p">(</span><span class="mi">576</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">createMatchMedia</span><span class="p">(</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span> <span class="o">=</span> <span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">matches</span><span class="p">:</span> <span class="nx">mediaQuery</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">width</span><span class="p">,</span>
+    <span class="p">}),</span>
+    <span class="na">addListener</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{},</span>
+    <span class="na">removeListener</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{},</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Jest’s <a href="https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom">official
+recommendation</a>
+suggests creating mocks for methods not implemented in jsdom, such as
+matchMedia. However, we’ve chosen a different approach. While mocks are a
+powerful tool, they often lead us to write tests that focus too heavily on
+implementation details rather than on behavior. This can lead to brittle tests
+that fail when implementation details change, even if the behavior remains
+correct.</p>
+
+<p>By avoiding mocks and instead creating a custom matchMedia function using the
+css-mediaquery library, we aim to simulate the matchMedia API more faithfully.
+This approach allows us to write tests that focus on the behavior of our
+components across different viewport sizes, in line with Mobile First
+development principles.</p>
+
+<h2 id="utilizing-the-custom-implementation-in-tests">Utilizing the custom implementation in tests</h2>
+
+<p>With our custom <code class="language-plaintext highlighter-rouge">matchMedia</code> implementation in place, we can now write tests
+that simulate different viewport sizes. This enables us to verify the
+responsive behavior of our components under various conditions.</p>
+
+<p>Below is an example test suite that tests React components starting with the
+mobile viewport:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">render</span><span class="p">,</span> <span class="nx">screen</span><span class="p">,</span> <span class="nx">createMatchMedia</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/testUtils</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="nx">ResponsiveComponent</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">;</span> 
+
+<span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">displays details in mobile by default</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">ResponsiveComponent</span> <span class="o">/&gt;</span><span class="p">);</span>
+
+  <span class="c1">// Expectations for mobile layout</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">Mobile</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeInTheDocument</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">displays progressively more details for tablet</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">createMatchMedia</span><span class="p">(</span><span class="mi">768</span><span class="p">);</span>
+  <span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">ResponsiveComponent</span> <span class="o">/&gt;</span><span class="p">);</span>
+
+  <span class="c1">// Expectations for tablet layout</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">Mobile + Tablet</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeInTheDocument</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">displays progressively more details for desktop</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">createMatchMedia</span><span class="p">(</span><span class="mi">992</span><span class="p">);</span>
+  <span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">ResponsiveComponent</span> <span class="o">/&gt;</span><span class="p">);</span>
+
+  <span class="c1">// Expectations for desktop layout</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">Mobile + Tablet + Desktop</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeInTheDocument</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>By leveraging the css-mediaquery library and implementing a custom <code class="language-plaintext highlighter-rouge">matchMedia</code>
+function, we’ve created a flexible testing environment. This setup allows us to
+simulate various viewport sizes, ensuring our responsive designs behave as
+expected across different devices. This approach offers a practical workaround
+for testing responsive components in jsdom, adhering to the principles of
+Mobile First development.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Learn how to emulate matchMedia in Jest for responsive design testing. Create a reusable test helper to check code at different breakpoints.]]></summary></entry><entry><title type="html">How to improve Git monorepo performance</title><link href="https://www.anthonygonzales.dev/blog/how-to-improve-git-monorepo-performance.html" rel="alternate" type="text/html" title="How to improve Git monorepo performance" /><published>2023-12-15T00:00:00+00:00</published><updated>2024-05-04T00:00:00+00:00</updated><id>https://www.anthonygonzales.dev/blog/how-to-improve-git-monorepo-performance</id><content type="html" xml:base="https://www.anthonygonzales.dev/blog/how-to-improve-git-monorepo-performance.html"><![CDATA[<p><a href="https://github.blog/2022-06-27-highlights-from-git-2-37/">Git v2.37.0</a>
+introduced new features that significantly improve performance for repositories
+with large numbers of files. This blog post will cover custom Git monorepo
+configurations to improve local performance and provide step-by-step guidance
+to rollback if anything goes wrong. We’ll look into these new features and
+explain how to implement them effectively in your global or local Git config.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#quickstart" id="markdown-toc-quickstart">Quickstart</a>    <ul>
+      <li><a href="#create-a-custom-git-config-file-at-gitconfigmonorepo" id="markdown-toc-create-a-custom-git-config-file-at-gitconfigmonorepo">Create a custom Git config file at <code class="language-plaintext highlighter-rouge">~/.gitconfig.monorepo</code></a></li>
+      <li><a href="#include-the-custom-configuration-in-your-global-or-local-git-config" id="markdown-toc-include-the-custom-configuration-in-your-global-or-local-git-config">Include the custom configuration in your global or local Git config</a></li>
+      <li><a href="#update-git-index-to-version-4-in-repo" id="markdown-toc-update-git-index-to-version-4-in-repo">Update Git index to version 4 in repo</a></li>
+      <li><a href="#start-fsmonitordaemon" id="markdown-toc-start-fsmonitordaemon">Start <code class="language-plaintext highlighter-rouge">fsmonitor—daemon</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#results" id="markdown-toc-results">Results</a></li>
+  <li><a href="#explanation-of-configurations" id="markdown-toc-explanation-of-configurations">Explanation of configurations</a></li>
+  <li><a href="#how-to-revert-changes" id="markdown-toc-how-to-revert-changes">How to revert changes</a></li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
+</ul>
+
+<!--break-->
+
+<h2 id="quickstart">Quickstart</h2>
+
+<div class="callout warning-callout">
+  <p>
+    <strong>Warning:</strong> Upgrade Git to 2.42.0+ and perform the steps in
+    this tutorial on your main branch. `index.skipHash` causes errors on older
+    Git versions.
+  </p>
+</div>
+
+<h3 id="create-a-custom-git-config-file-at-gitconfigmonorepo">Create a custom Git config file at <code class="language-plaintext highlighter-rouge">~/.gitconfig.monorepo</code></h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[core]</span>
+    <span class="py">commitgraph</span> <span class="p">=</span> <span class="s">true</span>
+    <span class="py">fsmonitor</span> <span class="p">=</span> <span class="s">true</span>
+    <span class="py">writeCommitGraph</span> <span class="p">=</span> <span class="s">true</span>
+<span class="nn">[feature]</span>
+    <span class="py">manyFiles</span> <span class="p">=</span> <span class="s">true</span>
+</code></pre></div></div>
+
+<h3 id="include-the-custom-configuration-in-your-global-or-local-git-config">Include the custom configuration in your global or local Git config</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[include]</span>
+    <span class="py">path</span> <span class="p">=</span> <span class="s">~/.gitconfig.monorepo</span>
+<span class="nn">[user]</span>
+    <span class="py">email</span> <span class="p">=</span> <span class="s">123345+darth.vader@users.noreply.github.com</span>
+    <span class="py">name</span> <span class="p">=</span> <span class="s">Darth Vader</span>
+<span class="nn">[init]</span>
+    <span class="py">defaultBranch</span> <span class="p">=</span> <span class="s">main</span>
+<span class="nn">[core]</span>
+    <span class="py">editor</span> <span class="p">=</span> <span class="s">nvim</span>
+<span class="nn">[color]</span>
+    <span class="py">ui</span> <span class="p">=</span> <span class="s">auto</span>
+<span class="nn">[branch]</span>
+    <span class="py">autosetuprebase</span> <span class="p">=</span> <span class="s">always</span>
+<span class="nn">[rebase]</span>
+    <span class="py">autoStash</span> <span class="p">=</span> <span class="s">true</span>
+<span class="nn">[pull]</span>
+    <span class="py">rebase</span> <span class="p">=</span> <span class="s">true</span>
+<span class="nn">[push]</span>
+    <span class="py">default</span> <span class="p">=</span> <span class="s">current</span>
+</code></pre></div></div>
+
+<h3 id="update-git-index-to-version-4-in-repo">Update Git index to version 4 in repo</h3>
+
+<p>Although <code class="language-plaintext highlighter-rouge">feature.manyFiles</code> sets the default index version, you need to
+manually update the <a href="https://git-scm.com/docs/index-format">index format</a> on
+your local repository through your terminal.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> ~/example-monorepo
+<span class="gp">$</span><span class="w"> </span>git update-index <span class="nt">--index-version</span> 4
+</code></pre></div></div>
+<h3 id="start-fsmonitordaemon">Start <code class="language-plaintext highlighter-rouge">fsmonitor—daemon</code></h3>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> ~/example-monorepo
+<span class="gp">$</span><span class="w"> </span>git fsmonitor--daemon start
+</code></pre></div></div>
+
+<h2 id="results">Results</h2>
+
+<p>Using the custom Git configuration and updated index format, my command
+execution time for “git status” was reduced from approximately 0.316 seconds to
+0.118 seconds, and by a decrease in CPU utilization from 425% to 89%,
+leading to a significantly improved performance. Additionally, I no longer
+encounter <code class="language-plaintext highlighter-rouge">fatal: Unable to create 'project_path/.git/index.lock': File
+exists.</code> errors while performing basic Git commands (MacOS Intel Core i9).</p>
+
+<p><strong>Before</strong></p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">time </span>git status
+<span class="go">On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+git status  0.21s user 1.14s system 425% cpu 0.316 total
+</span></code></pre></div></div>
+
+<p><strong>After</strong></p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">time </span>git status
+<span class="go">On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+git status  0.08s user 0.02s system 89% cpu 0.118 total
+</span></code></pre></div></div>
+
+<h2 id="explanation-of-configurations">Explanation of configurations</h2>
+
+<p><strong><code class="language-plaintext highlighter-rouge">feature.manyFiles</code></strong></p>
+
+<p>Optimizes repositories with large numbers of files and commit histories.
+Enabling this configuration option enables the following by default:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">index.skipHash=true</code></li>
+  <li><code class="language-plaintext highlighter-rouge">index.version=4</code></li>
+  <li><code class="language-plaintext highlighter-rouge">core.untrackedCache=true</code></li>
+</ul>
+
+<p>Git writes an entirely new index in <code class="language-plaintext highlighter-rouge">index.lock</code> and then replaces <code class="language-plaintext highlighter-rouge">.git/index</code>
+when you use basic commands. In a monorepo with many files, this index can be
+large and take several seconds to write every time you perform a command.
+Upgrading from the standard version 2 to version 4 reduces index size by 30% to
+50% by compressing the pathnames, which results in faster load time on
+operations. Caching untracked files adds more memory load but again reduces the
+load time.</p>
+
+<p>When performing simple Git commands, I would encounter the following errors
+before I made the update:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">fatal: Unable to create 'project_path/.git/index.lock': File exists.
+</span></code></pre></div></div>
+
+<p><strong><code class="language-plaintext highlighter-rouge">core.commitgraph</code></strong></p>
+
+<p>Git will use a commit history cache to significantly speed up history
+operations, such as <code class="language-plaintext highlighter-rouge">git log</code> with the <code class="language-plaintext highlighter-rouge">--graph</code> option.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">fetch.writeCommitGraph</code></strong></p>
+
+<p>Improves performance of commands like <code class="language-plaintext highlighter-rouge">git push -f</code> and <code class="language-plaintext highlighter-rouge">git log --graph</code> by
+writing a commit-graph on every <code class="language-plaintext highlighter-rouge">git fetch</code>.</p>
+
+<h2 id="how-to-revert-changes">How to revert changes</h2>
+
+<p>In the event that you experience an error or issues with your Git operations,
+revert the changes by doing the following:</p>
+
+<ol>
+  <li>Update global or local Git config:
+    <ul>
+      <li>Open your global or local Git config file.</li>
+      <li>Remove or comment out the include path for the custom configuration.</li>
+    </ul>
+  </li>
+  <li>Revert index version in repo:
+    <ul>
+      <li>Go to the specific repository (e.g., <code class="language-plaintext highlighter-rouge">cd ~/example-monorepo</code>).</li>
+      <li>If you want to revert the index version to a previous state (e.g.,
+ version 2), run the following command: <code class="language-plaintext highlighter-rouge">git update-index --index-version
+ 2</code></li>
+      <li>Note: This step depends on your requirements and the original index
+ version you were using.</li>
+    </ul>
+  </li>
+  <li>Stop fsmonitor daemon in repo:
+    <ul>
+      <li>In the repository where you started the <code class="language-plaintext highlighter-rouge">fsmonitor--daemon</code>, stop it
+ using <code class="language-plaintext highlighter-rouge">git fsmonitor--daemon stop</code></li>
+      <li>This will disable the file system monitor for that repository.</li>
+    </ul>
+  </li>
+  <li>General check and cleanup:
+    <ul>
+      <li>Run <code class="language-plaintext highlighter-rouge">git status</code> to ensure that Git is working properly.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://www.git-tower.com/blog/git-performance/">How to Improve Performance in Git: The Complete
+Guide</a></li>
+  <li><a href="https://github.blog/2022-06-29-improve-git-monorepo-performance-with-a-file-system-monitor/">Improve Git monorepo performance with a file system
+monitor</a></li>
+  <li><a href="https://github.com/rust-lang/cargo/issues/11857">git error <code class="language-plaintext highlighter-rouge">invalid data in index</code> with index.skipHash
+config</a></li>
+  <li><a href="https://github.com/libgit2/libgit2/issues/6531">git 2.40.0 index.skipHash incompatible with
+libgit2</a></li>
+</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[Optimize Git in monorepos with an optimized Git config. Follow clear steps to boost CPU performance and workflow efficiency]]></summary></entry><entry><title type="html">Testing components that make API calls</title><link href="https://www.anthonygonzales.dev/blog/how-to-test-data-fetching-components.html" rel="alternate" type="text/html" title="Testing components that make API calls" /><published>2020-05-25T00:00:00+00:00</published><updated>2024-03-03T00:00:00+00:00</updated><id>https://www.anthonygonzales.dev/blog/how-to-test-data-fetching-components</id><content type="html" xml:base="https://www.anthonygonzales.dev/blog/how-to-test-data-fetching-components.html"><![CDATA[<p>Most examples that discuss <a href="https://www.anthonygonzales.dev/blog/why-learn-test-driven-development.html">Test-Driven
+Development</a>
+don’t include information about how to test components that fetch data. With
+Jest, we get an environment in Node.js that mimics the browser because it
+provides jsdom. However, Jest does not describe a “batteries included” vision
+for server responses. Let’s discuss the best way to test front-end components
+that make API calls.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#mocks-are-risky-assumptions" id="markdown-toc-mocks-are-risky-assumptions">Mocks are risky assumptions</a></li>
+  <li><a href="#which-api-inteceptor-library-should-i-use" id="markdown-toc-which-api-inteceptor-library-should-i-use">Which API inteceptor library should I use?</a></li>
+  <li><a href="#implement-a-fake-server" id="markdown-toc-implement-a-fake-server">Implement a fake server</a></li>
+  <li><a href="#how-to-test-components-using-apollo-client-with-graphql" id="markdown-toc-how-to-test-components-using-apollo-client-with-graphql">How to test components using Apollo Client with GraphQL</a></li>
+  <li><a href="#swapping-apollo-client-for-fetch" id="markdown-toc-swapping-apollo-client-for-fetch">Swapping Apollo Client for Fetch</a></li>
+  <li><a href="#constraining-requests" id="markdown-toc-constraining-requests">Constraining requests</a></li>
+  <li><a href="#deciding-tradeoffs" id="markdown-toc-deciding-tradeoffs">Deciding tradeoffs</a></li>
+</ul>
+
+<!--break-->
+
+<h2 id="mocks-are-risky-assumptions">Mocks are risky assumptions</h2>
+
+<p>I often see examples advising that you mock an entire library. The examples
+mock axios, request, or fetch to test that a specific function is called.
+Here’s an example provided by <a href="https://web.archive.org/web/20200512192923/https://testing-library.com/docs/react-testing-library/example-intro/" rel="nofollow noopener" target="_blank">Testing
+Library</a> using React:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// fetch/fetch.test.js</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">render</span><span class="p">,</span> <span class="nx">fireEvent</span><span class="p">,</span> <span class="nx">waitFor</span><span class="p">,</span> <span class="nx">screen</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@testing-library/react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">@testing-library/jest-dom/extend-expect</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">axiosMock</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Fetch</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span>
+
+<span class="nx">jest</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="dl">'</span><span class="s1">loads and displays greeting</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">/greeting</span><span class="dl">'</span>
+  <span class="nx">render</span><span class="p">(&lt;</span><span class="nc">Fetch</span> <span class="na">url</span><span class="p">=</span><span class="si">{</span><span class="nx">url</span><span class="si">}</span> <span class="p">/&gt;)</span>
+
+  <span class="nx">axiosMock</span><span class="p">.</span><span class="kd">get</span><span class="p">.</span><span class="nx">mockResolvedValueOnce</span><span class="p">({</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span> <span class="na">greeting</span><span class="p">:</span> <span class="dl">'</span><span class="s1">hello there</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="p">})</span>
+
+  <span class="nx">fireEvent</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">Load Greeting</span><span class="dl">'</span><span class="p">))</span>
+
+  <span class="k">await</span> <span class="nx">waitFor</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="dl">'</span><span class="s1">heading</span><span class="dl">'</span><span class="p">))</span>
+
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">axiosMock</span><span class="p">.</span><span class="kd">get</span><span class="p">).</span><span class="nx">toHaveBeenCalledTimes</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">axiosMock</span><span class="p">.</span><span class="kd">get</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="dl">'</span><span class="s1">heading</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toHaveTextContent</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello there</span><span class="dl">'</span><span class="p">)</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toHaveAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">disabled</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<div class="callout warning-callout">
+Update: Testing Library recommends <a href="https://mswjs.io" re="noopener
+nofollow" target="_blank">Mock Service Worker</a> and no longer maintains the
+example above.
+</div>
+
+<p>This approach tests implementation details in addition to behavior. It binds our
+test suite to a library and assumes that the library’s API will not change. It
+also assumes that we’re using the library method correctly. In this case, our
+test suite is now bound to axios, and the method <code class="language-plaintext highlighter-rouge">get()</code>. If your team wants to
+switch request libraries from axios to another option such as unfetch, the test
+example above will need to be re-written to account for unfetch’s API. Say you
+have 4k tests on a large project? To properly refactor, you will need to
+re-write all tests that directly mock axios. You will lose your testing baseline
+which means you will need to follow Red, Green, Refactor across all of the tests
+you previously wrote. The process of changing your data fetching library will be
+tedious and prone to errors.</p>
+
+<h2 id="which-api-inteceptor-library-should-i-use">Which API inteceptor library should I use?</h2>
+
+<p>There are several libraries available to stub server responses:</p>
+
+<ul>
+  <li>miragejs</li>
+  <li>msw</li>
+  <li>cypress</li>
+  <li>nock</li>
+</ul>
+
+<p>I recommend <a href="https://mswjs.io/" rel="nofollow noopener" target="_blank">msw</a> for
+several compelling reasons:</p>
+
+<ul>
+  <li>Seamless integration with both browser and Node.js environments</li>
+  <li>Realistic request interception</li>
+  <li>Rich documentation and community support</li>
+</ul>
+
+<p>msw is a powerful tool for mocking API responses in both front-end and back-end
+testing environments, offering seamless integration without the need for
+configuring a separate server or altering your production code’s network
+requests. This library stands out because it intercepts requests at the network
+level, allowing for a more realistic simulation of API calls in development and
+testing scenarios.</p>
+
+<h2 id="implement-a-fake-server">Implement a fake server</h2>
+
+<p>Let’s look at msw using the previous example and assume we’ve already done
+the recommended setup.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// fetch/fetch.test.js</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">rest</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">msw</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">render</span><span class="p">,</span> <span class="nx">fireEvent</span><span class="p">,</span> <span class="nx">waitFor</span><span class="p">,</span> <span class="nx">screen</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@testing-library/react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">server</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/mocks/server</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="nx">Fetch</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="dl">'</span><span class="s1">override handler in a single test</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Override the handler for this test</span>
+  <span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+    <span class="nx">rest</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://yoursite.com/greeting</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">res</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="na">greeting</span><span class="p">:</span> <span class="dl">'</span><span class="s1">hello there</span><span class="dl">'</span> <span class="p">}));</span>
+    <span class="p">})</span>
+  <span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">/greeting</span><span class="dl">'</span><span class="p">;</span>
+  <span class="nx">render</span><span class="p">(&lt;</span><span class="nc">Fetch</span> <span class="na">url</span><span class="p">=</span><span class="si">{</span><span class="nx">url</span><span class="si">}</span> <span class="p">/&gt;);</span>
+  <span class="nx">fireEvent</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">Load Greeting</span><span class="dl">'</span><span class="p">));</span>
+
+  <span class="k">await</span> <span class="nx">waitFor</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="dl">'</span><span class="s1">heading</span><span class="dl">'</span><span class="p">));</span>
+
+  <span class="c1">// Assertions can now expect the overridden behavior</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="dl">'</span><span class="s1">heading</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toHaveTextContent</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello there</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toHaveAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">disabled</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>In the new and immproved approach, we’ve done several things:</p>
+
+<ol>
+  <li>Stopped mocking the axios library and method response</li>
+  <li>Specified a response at a url and a route</li>
+  <li>Removed unnecessary assertions about API calls</li>
+</ol>
+
+<p>Our test suite no longer knows the way our components fetch data. If you switch
+from axios, fetch, or unfetch, the test file will not require changes. More
+importantly, if you upgrade your data fetching library version, your test suite
+will give you meaningful feedback. When we mock a dependency, we begin testing
+with faulty assumptions that the package will not have made breaking changes to
+its internals or its API, leading to false positives in our test suite.</p>
+
+<h2 id="how-to-test-components-using-apollo-client-with-graphql">How to test components using Apollo Client with GraphQL</h2>
+
+<p><img src="/assets/img/post-boxes-on-brick-compressed.jpg" alt="Two red mail boxes against a brick wall in the
+UK" /></p>
+
+<p class="post-img-credit">Photo by <a href="https://unsplash.com/@tinamosquito?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" rel="nofollow noopener" target="_blank">Kristina
+Tripkovic</a> on <a href="https://unsplash.com" rel="nofollow
+noopener" target="_blank">Unsplash</a></p>
+
+<p>With the rise of GraphQL, Apollo has made significant strides in writing server
+and client-side libraries to make managing data easier. The trouble comes with
+their recommended approach to testing UI components that rely on Apollo.</p>
+
+<p>Apollo has created a <code class="language-plaintext highlighter-rouge">MockedProvider</code> <a href="https://www.apollographql.com/docs/react/development-testing/testing/" rel="nofollow noopener" target="_blank">test
+component</a>
+which allows you to test your UI components. They assert that using the live
+Provider would be unpredictable as it runs against an actual backend. That may
+be true, but nothing stops us from hijacking the means of communicating with the
+backend just like we did with the axios example.</p>
+
+<p>Here are the things I know about interfacing with Apollo and GraphQL:</p>
+
+<ol>
+  <li>All requests, queries and mutations, use the HTTP POST method. Because
+GraphQL serves a single resource, the graph, it doesn’t follow the REST
+resources approach in HTTP (GET/PUT/PATCH/DELETE).</li>
+  <li>Apollo requires an instantiated client which is essentially a config class
+for setup.</li>
+  <li>Apollo ensures type names in the resource response.</li>
+</ol>
+
+<p>I now know about a few details in setting up a proper test:</p>
+
+<ol>
+  <li>We need to import the real client to be sure I’m hitting the right endpoint</li>
+  <li>We need to get some stub data from my endpoint</li>
+  <li>We’re going to respond to a post request with the stub data</li>
+</ol>
+
+<p>For this example, I will use the free <a href="https://graphql-pokemon.now.sh" rel="nofollow noopener" target="_blank">Pokemon
+list</a> server, grab some fake data, and query
+against it.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ApolloProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@apollo/react-hooks</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">render</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@testing-library/react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">graphql</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">msw</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">client</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/api/client</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">server</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/mocks/server</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">App</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">"</span><span class="s2">App</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="dl">"</span><span class="s2">displays all Pokemon</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Override the default handlers for this test</span>
+    <span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+      <span class="nx">graphql</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://graphql-pokemon.now.sh</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">(</span>
+          <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+            <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+              <span class="na">pokemon</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                  <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UG9rZW1vbjowMDE=</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bulbasaur</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="na">__typename</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Pokemon</span><span class="dl">"</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                  <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UG9rZW1vbjowMDI=</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ivysaur</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="na">__typename</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Pokemon</span><span class="dl">"</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                  <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UG9rZW1vbjowMDM=</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Venusaur</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="na">__typename</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Pokemon</span><span class="dl">"</span>
+                <span class="p">}</span>
+              <span class="p">]</span>
+            <span class="p">}</span>
+          <span class="p">})</span>
+        <span class="p">);</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">findAllByTestId</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">render</span><span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">ApolloProvider</span> <span class="na">client</span><span class="p">=</span><span class="si">{</span><span class="nx">client</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">App</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">ApolloProvider</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+
+    <span class="kd">const</span> <span class="nx">pokemon</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">findAllByTestId</span><span class="p">(</span><span class="dl">"</span><span class="s2">pokemon</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">pokemon</span><span class="p">.</span><span class="nx">length</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>You may be thinking, “this looks like a lot of setup in comparison to using
+<code class="language-plaintext highlighter-rouge">MockedProvider</code> as recommended”. You’re not wrong. We now know about some of
+the implementation details of how Apollo fetches data from the server. However,
+I would argue that this minor detail is what we need to know to have confidence
+in our tests and the confidence to make changes. The GraphQL server expects us
+to perform a POST operation, and if we decide to no longer use Apollo, we have
+some safety.</p>
+
+<h2 id="swapping-apollo-client-for-fetch">Swapping Apollo Client for Fetch</h2>
+
+<p>Here’s what it looks like if we no longer want to use Apollo Client and opt for
+a more close to the metal solution using
+<a href="https://github.com/developit/unfetch#readme" rel="nofollow noopener" target="_blank">isomorphic-unfetch</a>:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useQuery</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@apollo/react-hooks</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">fetch</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">isomorphic-unfetch</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Updated GraphQL query string</span>
+<span class="kd">const</span> <span class="nx">ALL_POKEMON</span> <span class="o">=</span> <span class="s2">`
+{
+  pokemon(first: 3) {
+    id
+    name
+  }
+}
+`</span><span class="p">;</span>
+
+<span class="c1">// Updated App component</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// We'll comment  out useQuery()</span>
+  <span class="c1">// const { data, loading } = useQuery(ALL_POKEMON);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">isLoading</span><span class="p">,</span> <span class="nx">setIsLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">data</span><span class="p">,</span> <span class="nx">setData</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">undefined</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AbortController</span><span class="p">();</span>
+    <span class="k">async</span> <span class="kd">function</span> <span class="nx">fetchPokemon</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://graphql-pokemon.now.sh</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+          <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">headers</span><span class="p">:</span> <span class="p">{</span><span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">},</span>
+          <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="na">query</span><span class="p">:</span> <span class="nx">ALL_POKEMON</span><span class="p">}),</span>
+          <span class="na">signal</span><span class="p">:</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">signal</span><span class="p">,</span>
+        <span class="p">});</span>
+        <span class="kd">const</span> <span class="nx">json</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">result</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+        <span class="nx">setData</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+        <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span> <span class="c1">// Moved inside try to only set loading false on success</span>
+      <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+        <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span> <span class="c1">// Consider setting loading to false on error as well</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">fetchPokemon</span><span class="p">();</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">controller</span><span class="p">.</span><span class="nx">abort</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isLoading</span><span class="p">)</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Loading...<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+
+  <span class="c1">// Assuming you have a component to render this data</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nc">List</span> <span class="na">items</span><span class="p">=</span><span class="si">{</span><span class="nx">data</span> <span class="p">?</span> <span class="nx">data</span><span class="p">.</span><span class="nx">pokemon</span> <span class="p">:</span> <span class="p">[]</span><span class="si">}</span> <span class="p">/&gt;;</span>
+<span class="p">}</span>
+
+<span class="c1">// Updated List component (no changes provided, assuming no change)</span>
+<span class="kd">function</span> <span class="nx">List</span><span class="p">({</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[]})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">li</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+      <span class="p">))</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Notice that I did not change the test suite. I’ve hollowed out the innards of
+the production code and was able to retain the test suite. The test suite does
+not care about how my app fetches data as long as I follow the server’s
+contract.</p>
+
+<p>The goal of having a robust test suite is the ability to make changes
+confidently and receive feedback if we make changes that might cause problems.
+By removing mocks and stubbing the server, we can create a flexible test suite
+that ensures a server contract is maintained.</p>
+
+<h2 id="constraining-requests">Constraining requests</h2>
+
+<p>Using GraphQL means we can’t implement a single endpoint and respond with
+different data. With HTTP interceptors like msw, we assign one endpoint to one
+response. We must control the flow of data by checking the incoming query.
+Without checking the incoming data, we’ll end up responding incorrectly to the
+different calls.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ApolloProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@apollo/react-hooks</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">render</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@testing-library/react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">graphql</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">msw</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">client</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/api/client</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">server</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/mocks/server</span><span class="dl">"</span><span class="p">;</span> 
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">App</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">"</span><span class="s2">App</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="dl">"</span><span class="s2">requires a querying a specific number of Pokemon</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">ALL_POKEMON_QUERY</span> <span class="o">=</span> <span class="s2">`
+    {
+      pokemon(first: 3) {
+        id
+        name
+        __typename
+      }
+    }`</span><span class="p">;</span>
+
+    <span class="c1">// Override the default handlers for this test to check for a specific query</span>
+    <span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+      <span class="nx">graphql</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://graphql-pokemon.now.sh</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// Check if the incoming query matches the expected query</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">"</span><span class="s2">pokemon(first: 3)</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">res</span><span class="p">(</span>
+            <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+              <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">pokemon</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="p">{</span>
+                    <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UG9rZW1vbjowMDE=</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bulbasaur</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">__typename</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Pokemon</span><span class="dl">"</span>
+                  <span class="p">},</span>
+                  <span class="p">{</span>
+                    <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UG9rZW1vbjowMDI=</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ivysaur</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">__typename</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Pokemon</span><span class="dl">"</span>
+                  <span class="p">},</span>
+                  <span class="p">{</span>
+                    <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UG9rZW1vbjowMDM=</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Venusaur</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">__typename</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Pokemon</span><span class="dl">"</span>
+                  <span class="p">}</span>
+                <span class="p">]</span>
+              <span class="p">}</span>
+            <span class="p">})</span>
+          <span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="c1">// If the query does not match, you could return an error or handle as needed</span>
+          <span class="k">return</span> <span class="nx">res</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">),</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Query not matched</span><span class="dl">"</span> <span class="p">}));</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">findAllByTestId</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">render</span><span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">ApolloProvider</span> <span class="na">client</span><span class="p">=</span><span class="si">{</span><span class="nx">client</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">App</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">ApolloProvider</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+
+    <span class="kd">const</span> <span class="nx">pokemon</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">findAllByTestId</span><span class="p">(</span><span class="dl">"</span><span class="s2">pokemon</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">pokemon</span><span class="p">.</span><span class="nx">length</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>I’ve now added a data constraint to the msw graphql handler. If I don’t pass
+data that matches the constraint, I will not receive the <code class="language-plaintext highlighter-rouge">200</code> reply and data.
+The <a href="https://graphql.org/learn/serving-over-http/#post-request" rel="nofollow noopener" target="_blank">GraphQL spec</a> advises that you pass an object with
+two specific parameters; <code class="language-plaintext highlighter-rouge">query</code> and <code class="language-plaintext highlighter-rouge">variables</code>. In this particular case,
+we’re sending just the query. With our request constraint added, we’re now free
+to add additional responses.</p>
+
+<h2 id="deciding-tradeoffs">Deciding tradeoffs</h2>
+
+<p>The solutions I’ve proposed are ultimately about tradeoffs. As your software
+changes, you have to decide which parts you are comfortable living with, no
+matter the scale. For some people, the notion of managing a server response
+library is more painful and tedious than just mocking libraries and responses.
+For me, the pain of not having confidence in my test suite far outweighs the
+trivial tedium of using msw.</p>
+
+<p>I’ve felt the pain of migrating a codebase from one library to another,
+including libraries that fetch data. I hope this guide helps you evaluate the
+tradeoffs in mocking dependencies versus stubbing environment responses.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Learn how to test API calls in components with examples in React and Jest. Write tests flexible enough for change]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.anthonygonzales.dev/post-boxes-on-brick-compressed.jpg" /><media:content medium="image" url="https://www.anthonygonzales.dev/post-boxes-on-brick-compressed.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Why learn Test-Driven Development?</title><link href="https://www.anthonygonzales.dev/blog/why-learn-test-driven-development.html" rel="alternate" type="text/html" title="Why learn Test-Driven Development?" /><published>2020-04-21T00:00:00+00:00</published><updated>2020-04-21T00:00:00+00:00</updated><id>https://www.anthonygonzales.dev/blog/why-learn-test-driven-development</id><content type="html" xml:base="https://www.anthonygonzales.dev/blog/why-learn-test-driven-development.html"><![CDATA[<p>Across all of my professional software projects, I insist on Test-Driven
+Development (TDD). Not all developers share my enthusiasm and some see testing
+as onerous and costly. There’s so much to learn, you have to maintain a whole
+set of dependencies and libraries, you have to mock dependencies, it takes too
+long, and the list goes on. These concerns are cultural and have less to do with
+proficiency. TDD is another skill to learn and a powerful tool for the long term
+health of a software project. Test-Driven Development creates a safe environment
+for developers to take risks, builds trust between team members and management,
+and provides legibility for other developers to make changes.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#safe-danger" id="markdown-toc-safe-danger">Safe danger</a></li>
+  <li><a href="#confidence-and-trust" id="markdown-toc-confidence-and-trust">Confidence and trust</a></li>
+  <li><a href="#documentation-for-free" id="markdown-toc-documentation-for-free">Documentation for free</a></li>
+  <li><a href="#red-green-refactor" id="markdown-toc-red-green-refactor">Red, green, refactor</a>    <ul>
+      <li><a href="#a-word-on-refactoring" id="markdown-toc-a-word-on-refactoring">A word on “refactoring”</a></li>
+    </ul>
+  </li>
+  <li><a href="#todo-list-example" id="markdown-toc-todo-list-example">Todo list example</a>    <ul>
+      <li><a href="#create-the-folder-and-test-file" id="markdown-toc-create-the-folder-and-test-file">Create the folder and test file</a></li>
+      <li><a href="#giving-the-user-an-input" id="markdown-toc-giving-the-user-an-input">Giving the user an input</a></li>
+      <li><a href="#saving-a-todo" id="markdown-toc-saving-a-todo">Saving a todo</a></li>
+      <li><a href="#refactoring-after-getting-todos-saved" id="markdown-toc-refactoring-after-getting-todos-saved">Refactoring after getting todo’s saved</a></li>
+      <li><a href="#reset-the-user-input-after-adding-a-todo" id="markdown-toc-reset-the-user-input-after-adding-a-todo">Reset the user input after adding a todo</a></li>
+      <li><a href="#ensuring-todo-field-isnt-empty" id="markdown-toc-ensuring-todo-field-isnt-empty">Ensuring todo field isn’t empty</a></li>
+      <li><a href="#delete-todos" id="markdown-toc-delete-todos">Delete todos</a></li>
+      <li><a href="#editing-todo" id="markdown-toc-editing-todo">Editing todo</a></li>
+      <li><a href="#saving-an-edited-todo" id="markdown-toc-saving-an-edited-todo">Saving an edited todo</a></li>
+      <li><a href="#refactoring-the-todo" id="markdown-toc-refactoring-the-todo">Refactoring the Todo</a></li>
+      <li><a href="#refactoring-the-todo-editing-experience" id="markdown-toc-refactoring-the-todo-editing-experience">Refactoring the Todo Editing Experience</a></li>
+      <li><a href="#refactoring-the-removal-of-a-todo" id="markdown-toc-refactoring-the-removal-of-a-todo">Refactoring the removal of a todo</a></li>
+    </ul>
+  </li>
+  <li><a href="#take-home-assignment" id="markdown-toc-take-home-assignment">Take home assignment</a></li>
+</ul>
+
+<!--break-->
+
+<h2 id="safe-danger">Safe danger</h2>
+
+<p><img src="/assets/img/glass-house-at-night-compressed.jpg" alt="Philip Johnson's Glass House at night" /></p>
+
+<p class="post-img-credit">Photo by James Vaughan (CC BY-NC-SA 2.0)</p>
+
+<p>Last fall, my wife took me to visit Philip Johnson’s Glass House in New Caanan,
+CT. Beautiful and simple, the Glass House is an icon of modern architecture. It
+rests on a property filled with Johnson’s experimental creations, including a
+bunker that houses art by Andy Warhol and Jasper Johns. The house itself is four
+walls of glass with 360-degree views of the surrounding woods where coyotes howl
+at night. On the property, there’s a perilously large staircase that extends to
+nowhere, a footbridge that intentionally bounces as you cross a dry creek and a
+highly toxic cactus that rests on his desk. One of Mr. Johnson’s guiding
+principles in architecture is the concept of “safe danger”; the idea that we are
+most engaged when we can take risks in a safe environment.</p>
+
+<p>Testing provides an environment for developers to take risks safely to produce
+their best work. Each commit comes with a set of assertions that proves that the
+newly added code has been thoughtfully examined. It gives team members the
+ability to completely gut the contents of the production code and not lose any
+sleep over it. Anybody can rearrange files, rename functions and variables, and
+break large pieces down into new abstractions. I can add a new feature and not
+worry about a coworker (or myself in most cases) not understanding the behavior
+at a later date. When a new person joins the company, they feel confident that
+they will get early feedback that they broke something. Nobody wants to feel set
+up for failure or responsible for the loss of revenue due to a production bug.
+With a testing library, we can build an environment that encourages people to
+not only take risks but have fun along the way.</p>
+
+<h2 id="confidence-and-trust">Confidence and trust</h2>
+
+<p>At the heart of any team is the ability for members to trust one another to make
+choices. Teams with low levels of trust inevitably create systems to prevent
+people from making choices. Bureaucracy takes hold and the innovative spark is
+lost as team members begin to feel like they’re cogs in a machine. In web
+development, we prize our ability to make choices and we thrive on learning. By
+taking away a developer’s ability to think, you take away their ability to make
+an impact on a technology stack. Your junior developer today could become the
+person that creates software that fundamentally changes the business tomorrow,
+but you need to give that person the room to make mistakes and learn.</p>
+
+<p>You build trust between team members and stakeholders by developing a culture
+that prioritizes testing. Bugs and unintended side effects are minimized. Silly
+mistakes are removed and handled before they reach a staging environment.
+Customers experience less downtime, management doesn’t feel the need to create
+bureaucratic systems, and developers get to try new things.  Nobody loses sleep
+over a deploy, features are shipped, and the team feels confident that they are
+moving fast without causing damage.</p>
+
+<h2 id="documentation-for-free">Documentation for free</h2>
+
+<p>Legibility is a side-effect of encapsulating code into testable pieces with
+clear assertions. Legibility gives not only your team members a chance to read
+and understand your intent, but gives you a better understanding when you return
+to code at a later date. Well-written test assertions are a bit like having
+well-written annotations to a technical blueprint. You get the benefit of
+understanding the intent of the behavior, not just a visual understanding of the
+mechanics.</p>
+
+<p>Writing clear documentation is another difficult challenge when working under
+strict deadlines. Oftentimes, projects are made quickly and documentation is
+made later. Developers have to comb through the codebase to determine how the
+code works and what parts need to be communicated. One of the bonuses of testing
+is that behavior is documented in the test suite. Assertions use plain English
+and describe the expected behavior of a specific piece of code. A
+well-maintained test suite is not a substitute for documentation, but it can
+make the process of writing documentation much faster.</p>
+
+<h2 id="red-green-refactor">Red, green, refactor</h2>
+
+<p>Test Driven Development is a recursive set of steps a software developer follows
+to create new features. You write tests first, then write enough code to satisfy
+the failing test, and lastly, refactor the code you just wrote. Continue that
+process until you’ve completed your work. It’s dead simple and effective.</p>
+
+<p>I adhere to Uncle Bob’s <a href="http://www.butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd" target="_blank">Three Laws of
+TDD</a>:</p>
+
+<ol>
+  <li>You are not allowed to write any production code unless it is to make a
+failing unit test pass.</li>
+  <li>You are not allowed to write any more of a unit test than is sufficient to
+fail; and compilation failures are failures.</li>
+  <li>You are not allowed to write any more production code than is sufficient to
+pass the one failing unit test.</li>
+</ol>
+
+<p>People are usually overwhelmed by this, but it’s like riding a bike. Once you get
+past the initial learning curve it becomes second nature.</p>
+
+<h3 id="a-word-on-refactoring">A word on “refactoring”</h3>
+
+<p>What does refactoring mean? According to <a href="https://refactoring.com/" target="_blank">Martin
+Fowler</a>, “Refactoring is a disciplined technique for
+restructuring an existing body of code, altering its internal structure without
+changing its external behavior.”  The key phrase in this definition is “without
+changing its external behavior.”  Implicit in this definition is confidence and
+certainty. How can you be confident that your changes didn’t change external
+behavior? I posit that the only way you can have certainty is through some form
+of checking, either manually or through automated tests. Changing code without
+meaningful feedback is rewriting, not refactoring.</p>
+
+<h2 id="todo-list-example">Todo list example</h2>
+
+<p>For the remainder of this post, I will create a series of features for a Todo
+List Application in React, following Uncle Bob’s rules, so you can see the
+changes over time. The intention is to show how the code changes, the way I
+think, what I write, and most importantly, what I leave out. I oftentimes see
+developers in interviews add more code than they need upfront to address all
+potential edgecases but those concerns aren’t important until problems arise. We
+don’t want to forecast problems, we want to solve the problems right in front of
+us.</p>
+
+<p>The full code base can be seen on <a href="http://bit.ly/2IW51qj" target="_blank">CodeSandbox</a>.</p>
+
+<h3 id="create-the-folder-and-test-file">Create the folder and test file</h3>
+
+<p>There are different ways to organize your files and folders in a Javascript code
+base. I create folders for new files with an index to export contents in order
+to co-locate important pieces. The folder gives us a space to create
+test files, css, helpers, or child subcomponent folders.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/src
+  /App
+    index.js
+    App.css
+    App.jsx
+    App.test.jsx
+</code></pre></div></div>
+
+<p>Following this pattern, let’s create a <code class="language-plaintext highlighter-rouge">TodoList</code> component folder with a test
+file first.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..1a6e53f
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -0,0 +1,10 @@</span>
+<span class="gi">+import React from "react";
++import { render } from "@testing-library/react";
++
++import { TodoList } from ".";
++
++describe("TodoList", () =&gt; {
++  it("works", () =&gt; {
++    render(&lt;TodoList /&gt;);
++  });
++});
+</span></code></pre></div></div>
+
+<p>That’s it. That’s how you start. Notice that I did not create the <code class="language-plaintext highlighter-rouge">index.js</code> or
+the production code in <code class="language-plaintext highlighter-rouge">TodoList.jsx</code> yet? Run the test suite. This initial test
+should fail (Red). There are a few important reasons why you want to start every
+new component this way.</p>
+
+<ol>
+  <li>It establishes the dependencies needed to start testing. I prefer React
+Testing Library when testing React components to test behavior as a user sees
+it. By attempting a render, I’m attempting to establish the connection
+between test file and production code.</li>
+  <li>It establishes the way I expect to consume the component. By attempting to
+import directly from the folder, I’m testing that there is an established
+contract for consuming the new code.</li>
+  <li>I’m isolating the test suite to just the behavior of the component.</li>
+</ol>
+
+<p>Now let’s make the component and the index file.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..ad0c714
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -0,0 +1,5 @@</span>
+<span class="gi">+import React from "react";
++
++export function TodoList() {
++  return &lt;div /&gt;;
++}
+</span><span class="gh">diff --git a/src/TodoList/index.js b/src/TodoList/index.js
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..f239f43
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/src/TodoList/index.js
+</span><span class="p">@@ -0,0 +1 @@</span>
+<span class="gi">+export * from './TodoList';
+</span></code></pre></div></div>
+
+<p>Again, that’s it. We’ve now fixed the broken test (Green). It’s not much, but
+it’s how I start every new isolated module. This could be a React component, it
+could be a Node module, the pattern is the same.</p>
+
+<p>Now let’s start adding meaningful features.</p>
+
+<h3 id="giving-the-user-an-input">Giving the user an input</h3>
+
+<p>In this initial pass, I’m going to attempt to add an input for the user to add
+todos.  I want to be sure that the input takes and shows the values.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 1a6e53f..9151a6e 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -1,10 +1,13 @@</span>
+ import React from "react";
+<span class="gd">-import { render } from "@testing-library/react";
+</span><span class="gi">+import { render, fireEvent } from "@testing-library/react";
+</span>
+ import { TodoList } from ".";
+
+ describe("TodoList", () =&gt; {
+<span class="gd">-  it("works", () =&gt; {
+-    render(&lt;TodoList /&gt;);
+</span><span class="gi">+  it("receives user input", () =&gt; {
++    const { getByTestId } = render(&lt;TodoList /&gt;);
++    const input = getByTestId("todo-input");
++    fireEvent.change(input, { target: { value: "Take the dinglebop" } });
++    expect(input.value).toBe("Take the dinglebop");
+</span>   });
+ });
+</code></pre></div></div>
+
+<p>I’ll run the test suite to let it fail and begin fixing the code to make it
+pass. After it fails (Red), I’m going to create a simple input that takes user
+values, set it to an internal state, and render the value in the input.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index ad0c714..e9c78bc 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -1,5 +1,15 @@</span>
+<span class="gd">-import React from "react";
+</span><span class="gi">+import React, { useState } from "react";
+</span>
+ export function TodoList() {
+<span class="gd">-  return &lt;div /&gt;;
+</span><span class="gi">+  const [inputState, inputDispatch] = useState("");
++  return (
++    &lt;input
++      data-testid="todo-input"
++      type="text"
++      value={inputState}
++      onChange={e =&gt; {
++        inputDispatch(e.target.value);
++      }}
++    /&gt;
++  );
+</span> }
+</code></pre></div></div>
+
+<p>After I’ve added my new code, I’ll run the test suite to make it pass (Green). I
+think this is simple enough that no further refactoring is needed. I’ll move
+forward with another set of behavior assertions.</p>
+
+<h3 id="saving-a-todo">Saving a todo</h3>
+
+<p>I now want to test the entire user flow of adding text to the input and saving
+it to the list.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 9151a6e..d768b4a 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -10,4 +10,15 @@</span> describe("TodoList", () =&gt; {
+     fireEvent.change(input, { target: { value: "Take the dinglebop" } });
+     expect(input.value).toBe("Take the dinglebop");
+   });
+<span class="gi">+
++  it("adds a todo", () =&gt; {
++    const { getByTestId } = render(&lt;TodoList /&gt;);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, { target: { value: "Smooth it out with a bunch of shleem" } });
++    fireEvent.click(add);
++    const todo = getByTestId("todo");
++    expect(todo.textContent).toBe("Smooth it out with a bunch of shleem");
++  });
+</span> });
+</code></pre></div></div>
+
+<p>You’ll notice that there is some repetition. That’s okay, we want to be sure
+that we’re completely isolating our tests to avoid weird side effects. Do not be
+tempted to stick a huge <code class="language-plaintext highlighter-rouge">beforeEach</code> setup because you want things to be DRY. If
+you start now, you’ll just continue adding things to the block and it will
+become unreadable for yourself and other devs over time. Run the test suite
+again to be sure the test fails (Red).</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index e9c78bc..b75791b 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -1,15 +1,29 @@</span>
+ import React, { useState } from "react";
+
+ export function TodoList() {
+<span class="gi">+  const [todos, updateTodos] = useState([]);
+</span>   const [inputState, inputDispatch] = useState("");
+<span class="gi">+  const addTodo = newTodo =&gt; updateTodos([...todos, newTodo]);
+</span>   return (
+<span class="gd">-    &lt;input
+-      data-testid="todo-input"
+-      type="text"
+-      value={inputState}
+-      onChange={e =&gt; {
+-        inputDispatch(e.target.value);
+-      }}
+-    /&gt;
+</span><span class="gi">+    &lt;div&gt;
++      &lt;input
++        data-testid="todo-input"
++        type="text"
++        value={inputState}
++        onChange={e =&gt; {
++          inputDispatch(e.target.value);
++        }}
++      /&gt;
++      &lt;button data-testid="todo-add" onClick={() =&gt; addTodo(inputState)}&gt;
++        Add
++      &lt;/button&gt;
++      &lt;ul&gt;
++        {todos.map((todo, index) =&gt; (
++          &lt;li key={index} data-testid="todo"&gt;
++            {todo}
++          &lt;/li&gt;
++        ))}
++      &lt;/ul&gt;
++    &lt;/div&gt;
+</span>   );
+ }
+</code></pre></div></div>
+
+<p>I’ve introduced a new piece of state, a button to add a todo directly from the
+input state, and a list of todos. I’ll run the test suite and see that it
+passes (Green). Now that the tests are passing, let’s consider refactoring.</p>
+
+<h3 id="refactoring-after-getting-todos-saved">Refactoring after getting todo’s saved</h3>
+
+<p>Here’s some things I want to consider changing:</p>
+
+<ul>
+  <li>I don’t like the term “inputDispatch” and I actually like the way I named
+  “updateTodos”. It feels more declarative and explicit.</li>
+  <li>I know that I could use a reducer but there really isn’t a need at this moment
+  to use one. I’ll hold off for now.</li>
+</ul>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index b75791b..2483839 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -2,19 +2,19 @@</span> import React, { useState } from "react";
+
+ export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+<span class="gd">-  const [inputState, inputDispatch] = useState("");
+</span><span class="gi">+  const [userInput, updateUserInput] = useState("");
+</span>   const addTodo = newTodo =&gt; updateTodos([...todos, newTodo]);
+   return (
+     &lt;div&gt;
+       &lt;input
+         data-testid="todo-input"
+         type="text"
+<span class="gd">-        value={inputState}
+</span><span class="gi">+        value={userInput}
+</span>         onChange={e =&gt; {
+<span class="gd">-          inputDispatch(e.target.value);
+</span><span class="gi">+          updateUserInput(e.target.value);
+</span>         }}
+       /&gt;
+<span class="gd">-      &lt;button data-testid="todo-add" onClick={() =&gt; addTodo(inputState)}&gt;
+</span><span class="gi">+      &lt;button data-testid="todo-add" onClick={() =&gt; addTodo(userInput)}&gt;
+</span>         Add
+       &lt;/button&gt;
+       &lt;ul&gt;
+</code></pre></div></div>
+
+<p>The changes are minimal but show the process of how we can make changes without
+changing external behavior. Let’s move on to more features.</p>
+
+<h3 id="reset-the-user-input-after-adding-a-todo">Reset the user input after adding a todo</h3>
+
+<p>Now that we’re adding todos and rendering them for the user, we want to reset
+the user input so the user can continue adding more.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index f939631..4908af4 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -20,4 +20,15 @@</span> describe("TodoList", () =&gt; {
+     const todo = getByTestId("todo");
+     expect(todo.textContent).toBe("Smooth it out with a bunch of shleem");
+   });
+<span class="gi">+
++  it("clears the user input after a todo is added", () =&gt; {
++    const { getByTestId } = render(&lt;TodoList /&gt;);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, {
++      target: { value: "Re-purpose shleem for later batches" }
++    });
++    fireEvent.click(add);
++    expect(input.value).toBe("");
++  });
+</span> });
+</code></pre></div></div>
+
+<p>I’ll run the test suite to make it fail (Red).</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index 2483839..4adf6d6 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -14,7 +14,13 @@</span> export function TodoList() {
+           updateUserInput(e.target.value);
+         }}
+       /&gt;
+<span class="gd">-      &lt;button data-testid="todo-add" onClick={() =&gt; addTodo(userInput)}&gt;
+</span><span class="gi">+      &lt;button
++        data-testid="todo-add"
++        onClick={() =&gt; {
++          addTodo(userInput);
++          updateUserInput("");
++        }}
++      &gt;
+</span>         Add
+       &lt;/button&gt;
+       &lt;ul&gt;
+</code></pre></div></div>
+
+<p>I’ve now added a function call for <code class="language-plaintext highlighter-rouge">updateUserInput("")</code> to the button click
+handler to clear the user input state. However, we still have the issue that users
+can add empty todos to the list. Let’s fix that.</p>
+
+<h3 id="ensuring-todo-field-isnt-empty">Ensuring todo field isn’t empty</h3>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 4908af4..04c7a4c 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -31,4 +31,10 @@</span> describe("TodoList", () =&gt; {
+     fireEvent.click(add);
+     expect(input.value).toBe("");
+   });
+<span class="gi">+
++  it('disables the "Add Todo" button when the user input is empty', () =&gt; {
++    const { getByTestId } = render(&lt;TodoList /&gt;);
++    const add = getByTestId("todo-add");
++    expect(add.disabled).toBe(true);
++  });
+</span> });
+</code></pre></div></div>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index 4adf6d6..a643fee 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -16,6 +16,7 @@</span> export function TodoList() {
+       /&gt;
+       &lt;button
+         data-testid="todo-add"
+<span class="gi">+        disabled={userInput === "" ? true : false}
+</span>         onClick={() =&gt; {
+           addTodo(userInput);
+           updateUserInput("");
+<span class="p">@@ -26,7 +27,7 @@</span> export function TodoList() {
+       &lt;ul&gt;
+         {todos.map((todo, index) =&gt; (
+           &lt;li key={index} data-testid="todo"&gt;
+<span class="gd">-            {todo}
+</span><span class="gi">+           {todo}
+</span>           &lt;/li&gt;
+         ))}
+       &lt;/ul&gt;
+</code></pre></div></div>
+
+<p>We now have a comprehensive set of behaviors that we expect from our TodoList
+application. There are still a few crucial pieces that need to be addressed –
+editing and deleting. Let’s add those features now.</p>
+
+<h3 id="delete-todos">Delete todos</h3>
+
+<p>I’m going to have to set up a todo, attempt to remove it with a new button that I
+intend to add next to each element, and then check that the todo on the page
+has been removed. I’ll run the test and it should fail because it won’t find the
+<code class="language-plaintext highlighter-rouge">todo-remove</code> button. After fixing that, I’ll run it again to be sure that the
+todos are rendering and failing the test as expected.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 04c7a4c..20c35b8 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -37,4 +37,17 @@</span> describe("TodoList", () =&gt; {
+     const add = getByTestId("todo-add");
+     expect(add.disabled).toBe(true);
+   });
+<span class="gi">+
++  it("deletes todos", () =&gt; {
++    const { getByTestId, queryAllByTestId } = render(&lt;TodoList /&gt;);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, {
++      target: { value: "Take the dinglebop and push it through the grumbo" }
++    });
++    fireEvent.click(add);
++    const remove = getByTestId("todo-remove");
++    fireEvent.click(remove);
++    expect(queryAllByTestId("todo")).toHaveLength(0);
++  });
+</span> });
+</code></pre></div></div>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index a643fee..20d40f6 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -4,6 +4,8 @@</span> export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+   const [userInput, updateUserInput] = useState("");
+   const addTodo = newTodo =&gt; updateTodos([...todos, newTodo]);
+<span class="gi">+  const removeTodo = index =&gt;
++    updateTodos(todos.filter((todo, i) =&gt; i !== index));
+</span>   return (
+     &lt;div&gt;
+       &lt;input
+<span class="p">@@ -25,9 +27,12 @@</span> export function TodoList() {
+         Add
+       &lt;/button&gt;
+       &lt;ul&gt;
+<span class="gd">-        {todos.map((todo, index) =&gt; (
+-          &lt;li key={index} data-testid="todo"&gt;
+-           {todo}
+</span><span class="gi">+       {todos.map((todo, index) =&gt; (
++          &lt;li key={index}&gt;
++            &lt;span data-testid="todo"&gt;{todo}&lt;/span&gt;
++            &lt;button data-testid="todo-remove" onClick={() =&gt; removeTodo(index)}&gt;
++              x
++            &lt;/button&gt;
+</span>           &lt;/li&gt;
+         ))}
+       &lt;/ul&gt;
+</code></pre></div></div>
+
+<p>We’ve now added a button that will remove the specific todo from state with a
+new function that interacts with the current state. I run the test and it now
+passes (Green).</p>
+
+<p>I will again assess the code to see what I think, does it need to be refactored?</p>
+
+<ul>
+  <li>We’ve added an additional state method but it still doesn’t feel like I need
+  to introduce something as heavy as a reducer yet. It reads well and is
+  simple enough to remain.</li>
+  <li>The render is getting larger but it’s not unreadable.</li>
+</ul>
+
+<p>Nothing is really jumping out at me, it still seems to be pretty reasonable. Let’s move
+forward with maybe our most complicated feature so far – editing.</p>
+
+<h3 id="editing-todo">Editing todo</h3>
+
+<p>I’m going to attempt to create an inline editing experience. I want to be able
+to click a button “Edit” that opens an input with the existing todo text in the
+field. The user will be able to change the text and save it.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 20c35b8..f6a2850 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -50,4 +50,20 @@</span> describe("TodoList", () =&gt; {
+     fireEvent.click(remove);
+     expect(queryAllByTestId("todo")).toHaveLength(0);
+   });
+<span class="gi">+
++  it("opens an editor to receive user input", () =&gt; {
++    const { getByTestId } = render(&lt;TodoList /&gt;);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, {
++      target: { value: "Take the dinglebop and push it through the grumbo" }
++    });
++    fireEvent.click(add);
++    const edit = getByTestId("todo-edit");
++    fireEvent.click(edit);
++    const editorInput = getByTestId("todo-editor");
++    expect(editorInput.value).toBe(
++      "Take the dinglebop and push it through the grumbo"
++    );
++  });
+</span> });
+</code></pre></div></div>
+
+<p>In this test, I’m just checking the behavior of the input and not yet saving the
+text. Let’s add the inline editor experience to the code now that I have a
+test failing the way I expect.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index 20d40f6..b6b3440 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -3,6 +3,7 @@</span> import React, { useState } from "react";
+ export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+   const [userInput, updateUserInput] = useState("");
+<span class="gi">+  const [editTodoIndex, updateEditTodoIndex] = useState();
+</span>   const addTodo = newTodo =&gt; updateTodos([...todos, newTodo]);
+   const removeTodo = index =&gt;
+     updateTodos(todos.filter((todo, i) =&gt; i !== index));
+<span class="p">@@ -27,11 +28,24 @@</span> export function TodoList() {
+         Add
+       &lt;/button&gt;
+       &lt;ul&gt;
+<span class="gd">-       {todos.map((todo, index) =&gt; (
+</span><span class="gi">+        {todos.map((todo, index) =&gt; (
+</span>           &lt;li key={index}&gt;
+             &lt;span data-testid="todo"&gt;{todo}&lt;/span&gt;
+<span class="gi">+            {index === editTodoIndex &amp;&amp; (
++              &lt;input
++                data-testid="todo-editor"
++                value={todo}
++                onChange={() =&gt; null}
++              /&gt;
++            )}
++            &lt;button
++              data-testid="todo-edit"
++              onClick={() =&gt; updateEditTodoIndex(index)}
++            &gt;
++              Edit
++            &lt;/button&gt;
+</span>             &lt;button data-testid="todo-remove" onClick={() =&gt; removeTodo(index)}&gt;
+<span class="gd">-              x
+</span><span class="gi">+              Remove
+</span>             &lt;/button&gt;
+           &lt;/li&gt;
+         ))}
+</code></pre></div></div>
+
+<h3 id="saving-an-edited-todo">Saving an edited todo</h3>
+
+<p>I now want to change the todo and explicitly save it afterward.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index f6a2850..efe93ba 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -66,4 +66,23 @@</span> describe("TodoList", () =&gt; {
+       "Take the dinglebop and push it through the grumbo"
+     );
+   });
+<span class="gi">+
++  it("edits the previously saved todo", () =&gt; {
++    const { getByTestId } = render(&lt;TodoList /&gt;);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, {
++      target: { value: "Take the dinglebop and push it through the grumbo" }
++    });
++    fireEvent.click(add);
++    const edit = getByTestId("todo-edit");
++    fireEvent.click(edit);
++    const editorInput = getByTestId("todo-editor");
++    fireEvent.change(editorInput, {
++      target: { value: "Rub it with fleeb" }
++    });
++    const save = getByTestId("todo-edit-save");
++    fireEvent.click(save);
++    expect(getByTestId("todo").textContent).toBe("Rub it with fleeb");
++  });
+</span> });
+</code></pre></div></div>
+
+<p>At this point, things are now getting tricky. There are so many steps to set up
+our editing test assertions that I’m considering creating a test helper. I’m
+going to hold off temporarily in favor of getting the test assertions passed.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index b6b3440..c68600f 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -3,10 +3,18 @@</span> import React, { useState } from "react";
+ export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+   const [userInput, updateUserInput] = useState("");
+<span class="gi">+
+</span>   const [editTodoIndex, updateEditTodoIndex] = useState();
+<span class="gi">+  const [editTodo, updateEditTodo] = useState("");
++
+</span>   const addTodo = newTodo =&gt; updateTodos([...todos, newTodo]);
+   const removeTodo = index =&gt;
+     updateTodos(todos.filter((todo, i) =&gt; i !== index));
+<span class="gi">+  const saveEditedTodo = (newValue, todoIndex) =&gt; {
++    const todosCopy = todos.slice();
++    todosCopy[todoIndex] = newValue;
++    updateTodos(todosCopy);
++  }
+</span>   return (
+     &lt;div&gt;
+       &lt;input
+<span class="p">@@ -32,15 +40,21 @@</span> export function TodoList() {
+           &lt;li key={index}&gt;
+             &lt;span data-testid="todo"&gt;{todo}&lt;/span&gt;
+             {index === editTodoIndex &amp;&amp; (
+<span class="gd">-              &lt;input
+-                data-testid="todo-editor"
+-                value={todo}
+-                onChange={() =&gt; null}
+-              /&gt;
+</span><span class="gi">+              &lt;&gt;
++                &lt;input
++                  data-testid="todo-editor"
++                  value={editTodo}
++                  onChange={e =&gt; updateEditTodo(e.target.value)}
++                /&gt;
++                &lt;button data-testid="todo-editor-save" onClick={() =&gt; saveEditedTodo(editTodo, index)}&gt;Save&lt;/button&gt;
++              &lt;/&gt;
+</span>             )}
+             &lt;button
+               data-testid="todo-edit"
+<span class="gd">-              onClick={() =&gt; updateEditTodoIndex(index)}
+</span><span class="gi">+              onClick={() =&gt; {
++                updateEditTodoIndex(index);
++                updateEditTodo(todo);
++              }}
+</span>             &gt;
+               Edit
+             &lt;/button&gt;
+</code></pre></div></div>
+
+<p>Boom! We’ve now added editing to the list of behaviors to our Todo Appplication.
+Now that we’ve got our editing experience working, we desperately need to
+refactor our code for legibility. I’m going to be honest, I took a break writing
+this blog post and felt lost in my own code base. That’s fine! It just means I
+need to spend more time making the work clear. Let’s do that now and wrap up.</p>
+
+<h3 id="refactoring-the-todo">Refactoring the Todo</h3>
+
+<p>I’m going to focus on fixing the todo editor code. Our top level component knows
+too much about the internals of a todo. We can break that up but it’s important
+we roll out changes in small incremental steps to be sure that we don’t break
+the test suite. By having that quick feedback, we’ll be able to mold it into
+something more legible.</p>
+
+<p>I’ll start with the render of the todo value in the loop.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index c68600f..8d8e672 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -1,5 +1,10 @@</span>
+ import React, { useState } from "react";
+
++function Todo(props) {
+<span class="gi">+  const {value} = props;
++  return &lt;span data-testid="todo"&gt;{value}&lt;/span&gt;;
++}
++
+</span> export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+   const [userInput, updateUserInput] = useState("");
+<span class="p">@@ -38,7 +43,7 @@</span> export function TodoList() {
+       &lt;ul&gt;
+         {todos.map((todo, index) =&gt; (
+           &lt;li key={index}&gt;
+<span class="gd">-            &lt;span data-testid="todo"&gt;{todo}&lt;/span&gt;
+</span><span class="gi">+            &lt;Todo value={todo}/&gt;
+</span>             {index === editTodoIndex &amp;&amp; (
+               &lt;&gt;
+                 &lt;input
+</code></pre></div></div>
+
+<p>That’s maybe the smallest change I can make looking at the code and it’s a great
+first step in moving the functionality of a todo into its own concerns.</p>
+
+<h3 id="refactoring-the-todo-editing-experience">Refactoring the Todo Editing Experience</h3>
+
+<p>We’re now going to migrate the editing experience to the Todo component since
+that work takes place at a more local level within the loop of the todos.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index f60a2cf..f7a3776 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -1,19 +1,38 @@</span>
+ import React, { useState } from "react";
+
+ function Todo(props) {
+<span class="gd">-  const {value} = props;
+</span><span class="gi">+  const {value, saveEditedTodo} = props;
+</span>   const [isTodoEditorOpen, toggleTodoEditor] = useState(false);
+<span class="gd">-
+-  return &lt;span data-testid="todo"&gt;{value}&lt;/span&gt;;
+</span><span class="gi">+  const [editorInput, updateEditorInput] = useState(value);
++  return (
++    &lt;&gt;
++      &lt;span data-testid="todo"&gt;{value}&lt;/span&gt;
++      {isTodoEditorOpen &amp;&amp; (
++        &lt;&gt;
++          &lt;input
++            data-testid="todo-editor"
++            value={editorInput}
++            onChange={e =&gt; updateEditorInput(e.target.value)}
++          /&gt;
++          &lt;button data-testid="todo-editor-save" onClick={() =&gt; saveEditedTodo(editorInput)}&gt;Save&lt;/button&gt;
++        &lt;/&gt;
++      )}
++      &lt;button
++        data-testid="todo-edit"
++        onClick={() =&gt; {
++          toggleTodoEditor(true);
++        }}
++      &gt;
++        Edit
++      &lt;/button&gt;
++    &lt;/&gt;
++  );
+</span> }
+
+ export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+   const [userInput, updateUserInput] = useState("");
+
+-  const [editTodoIndex, updateEditTodoIndex] = useState();
+<span class="gd">-  const [editTodo, updateEditTodo] = useState("");
+-
+</span>   const addTodo = newTodo =&gt; updateTodos([...todos, newTodo]);
+   const removeTodo = index =&gt;
+     updateTodos(todos.filter((todo, i) =&gt; i !== index));
+<span class="p">@@ -45,26 +64,7 @@</span> export function TodoList() {
+       &lt;ul&gt;
+         {todos.map((todo, index) =&gt; (
+           &lt;li key={index}&gt;
+<span class="gd">-            &lt;Todo value={todo}/&gt;
+-            {index === editTodoIndex &amp;&amp; (
+-              &lt;&gt;
+-                &lt;input
+-                  data-testid="todo-editor"
+-                  value={editTodo}
+-                  onChange={e =&gt; updateEditTodo(e.target.value)}
+-                /&gt;
+-                &lt;button data-testid="todo-editor-save" onClick={() =&gt; saveEditedTodo(editTodo, index)}&gt;Save&lt;/button&gt;
+-              &lt;/&gt;
+-            )}
+-            &lt;button
+-              data-testid="todo-edit"
+-              onClick={() =&gt; {
+-                updateEditTodoIndex(index);
+-                updateEditTodo(todo);
+-              }}
+-            &gt;
+-              Edit
+-            &lt;/button&gt;
+</span><span class="gi">+            &lt;Todo value={todo} saveEditedTodo={(editedTodo) =&gt; saveEditedTodo(editedTodo, index)}/&gt;
+</span>             &lt;button data-testid="todo-remove" onClick={() =&gt; removeTodo(index)}&gt;
+               Remove
+             &lt;/button&gt;
+</code></pre></div></div>
+
+<h3 id="refactoring-the-removal-of-a-todo">Refactoring the removal of a todo</h3>
+
+<p>We’ve moved the editing experience into the <code class="language-plaintext highlighter-rouge">Todo</code> function component but we
+still have to migrate the ‘Remove’ button.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index f7a3776..9b40665 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -1,7 +1,7 @@</span>
+ import React, { useState } from "react";
+
+ function Todo(props) {
+<span class="gd">-  const {value, saveEditedTodo} = props;
+</span><span class="gi">+  const {value, saveEditedTodo, removeTodo} = props;
+</span>   const [isTodoEditorOpen, toggleTodoEditor] = useState(false);
+   const [editorInput, updateEditorInput] = useState(value);
+   return (
+<span class="p">@@ -25,6 +25,9 @@</span> function Todo(props) {
+       &gt;
+         Edit
+       &lt;/button&gt;
+<span class="gi">+      &lt;button data-testid="todo-remove" onClick={() =&gt; removeTodo()}&gt;
++        Remove
++      &lt;/button&gt;
+</span>     &lt;/&gt;
+   );
+ }
+<span class="p">@@ -64,10 +67,7 @@</span> export function TodoList() {
+       &lt;ul&gt;
+         {todos.map((todo, index) =&gt; (
+           &lt;li key={index}&gt;
+<span class="gd">-            &lt;Todo value={todo} saveEditedTodo={(editedTodo) =&gt; saveEditedTodo(editedTodo, index)}/&gt;
+-            &lt;button data-testid="todo-remove" onClick={() =&gt; removeTodo(index)}&gt;
+-              Remove
+-            &lt;/button&gt;
+</span><span class="gi">+            &lt;Todo value={todo} saveEditedTodo={(editedTodo) =&gt; saveEditedTodo(editedTodo, index)} removeTodo={() =&gt; removeTodo(index)}/&gt;
+</span>           &lt;/li&gt;
+         ))}
+       &lt;/ul&gt;
+</code></pre></div></div>
+
+<p>I’ve now migrated the todo removal behavior into the <code class="language-plaintext highlighter-rouge">Todo</code> component with the
+other controls. There’s still more behavior to address and I want to give you
+the opportunity to practice.</p>
+
+<h2 id="take-home-assignment">Take home assignment</h2>
+
+<p>If you visit the Code Sandbox link, you can download the repo and begin testing
+using the Create React App scripts in the <code class="language-plaintext highlighter-rouge">package.json</code> file. You’ll be able to
+pick up right where I left off and begin adding some new features. Here are a few
+things you could implement:</p>
+
+<ul>
+  <li>Hiding the ‘Edit’ and ‘Remove’ controls when the user opens the inline editing experience</li>
+  <li>Turning off the editing experience when the user saves a new input</li>
+  <li>Adding a ‘Cancel’ button to turn off the editing experience</li>
+</ul>
+
+<p>I would focus on thinking through how you would set up a new test and making
+sure that you have the right failing test. TDD is a skill that you will
+continually need to practice, learn, and improve. I’ve benefited greatly in my
+professional development by having this tool available in my toolbox. I hope
+this long form post will serve as a reference for how to start your journey on
+testing.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Create a safe environment to take risks, build confidence, and write legible code. Learn how to start with Javascript, React]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.anthonygonzales.dev/glass-house-at-night-compressed.jpg" /><media:content medium="image" url="https://www.anthonygonzales.dev/glass-house-at-night-compressed.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The joy of tidying npm scripts with nps</title><link href="https://www.anthonygonzales.dev/blog/joy-of-tidying-with-nps.html" rel="alternate" type="text/html" title="The joy of tidying npm scripts with nps" /><published>2019-04-15T00:00:00+00:00</published><updated>2019-04-15T00:00:00+00:00</updated><id>https://www.anthonygonzales.dev/blog/joy-of-tidying-with-nps</id><content type="html" xml:base="https://www.anthonygonzales.dev/blog/joy-of-tidying-with-nps.html"><![CDATA[<p>npm scripts have never sparked joy for me. The package.json file is meant to be
+a configuration file and manifest of everything necessary to run a node module
+or application. Lately, my package file was feeling a little bloated, unsightly,
+and unruly. I also work in a lot of packages at my current job which means
+quickly parsing the scripts from other people’s work. When a project has a lot
+of dependencies, <code class="language-plaintext highlighter-rouge">cat</code>ing a file to read the scripts can feel frustrating and
+overwhelming. Luckily, we can leverage nps to put scripts in their place and
+make package scripting maintainable.</p>
+
+<!--break-->
+
+<h2 id="getting-started-with-nps">Getting started with nps</h2>
+
+<p>Let’s start by installing nps as a development dependency:
+<code class="language-plaintext highlighter-rouge">npm i nps --save-dev</code></p>
+
+<p>We can initialize by using the locally installed script to init a file for us:
+<code class="language-plaintext highlighter-rouge">./node_modules/.bin/nps init</code></p>
+
+<p>Voila!</p>
+
+<p>Check your <code class="language-plaintext highlighter-rouge">git status</code> and you’ll find a newly created package-scripts.json
+file with your previously implemented package scripts. This is the file you’ll
+be using to create tasks moving forward. Not a big fan of json? nps also
+provides initialization in yaml with the flag  <code class="language-plaintext highlighter-rouge">--type yml</code>.</p>
+
+<h2 id="show-me-the-magic-">Show me the magic 🔮</h2>
+
+<p>You’re now wondering “Do I now need to install nps globally on my machine to run
+these scripts?”. This is where the joy ✨ comes in.  Usually, when you run npm
+scripts, you must use the command <code class="language-plaintext highlighter-rouge">npm run</code>. There are some specific cases that
+npm does not require the use of <code class="language-plaintext highlighter-rouge">run</code>. These include:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">test</code></li>
+  <li><code class="language-plaintext highlighter-rouge">restart</code></li>
+  <li><code class="language-plaintext highlighter-rouge">stop</code></li>
+  <li><code class="language-plaintext highlighter-rouge">start</code></li>
+</ul>
+
+<p>nps allows you to take advantage of <code class="language-plaintext highlighter-rouge">npm start</code> by acting as a pass-through.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nps"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We can now run all of our script commands as <code class="language-plaintext highlighter-rouge">npm start
+${script_name_in_package-scripts.json}</code>.  For instance, if I have a task in
+<code class="language-plaintext highlighter-rouge">package-scripts.json</code> called <code class="language-plaintext highlighter-rouge">dev</code> that starts a dev environment, I would run
+<code class="language-plaintext highlighter-rouge">npm start dev</code> rather than the usual <code class="language-plaintext highlighter-rouge">npm run dev</code>.</p>
+
+<p>If you are working on a node application, you will generally make use of the
+start script for running the server. In that case, you can create a default
+script in package-scripts.json to start your node application.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">scripts</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">default</span><span class="p">:</span> <span class="dl">'</span><span class="s1">node index.js</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// My default node server</span>
+    <span class="na">lint</span><span class="p">:</span> <span class="dl">'</span><span class="s1">eslint .</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">test</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">default</span><span class="p">:</span> <span class="dl">'</span><span class="s1">jest</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">watch</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">script</span><span class="p">:</span> <span class="dl">'</span><span class="s1">jest --watch</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">run in the amazingly intelligent Jest watch mode</span><span class="dl">'</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">build</span><span class="p">:</span> <span class="p">{</span>
+      <span class="c1">// learn more about Webpack here: https://webpack.js.org/</span>
+      <span class="na">default</span><span class="p">:</span> <span class="dl">'</span><span class="s1">webpack</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">prod</span><span class="p">:</span> <span class="dl">'</span><span class="s1">webpack -p</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="give-your-teammates-documentation">Give your teammates documentation</h2>
+
+<p>One of the more useful features is the ability to give documentation. You’ll
+notice in the example above, there’s a <code class="language-plaintext highlighter-rouge">description</code> field. This field allows
+your team to quickly learn about what a particular script entails. For the
+example above, it might seem like overkill. If you have some complication
+scripts, you may want to provide some quick documentation. By using <code class="language-plaintext highlighter-rouge">npm start
+help</code>, other developers can quickly output documentation without needing
+additional explanation.</p>
+
+<p>If you need more information than what I’ve outlined, the documentation on the
+<a href="https://www.npmjs.com/package/nps">README</a> is far more detailed. Happy tidying!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[npm scripts can become unruly quickly, especially when working with an evolving code base. Learn the joy of tidying with nps ✨]]></summary></entry><entry><title type="html">Setup Prettier and ESLint with Typescript</title><link href="https://www.anthonygonzales.dev/blog/setup-eslint-prettier-with-typescript.html" rel="alternate" type="text/html" title="Setup Prettier and ESLint with Typescript" /><published>2019-04-01T00:00:00+00:00</published><updated>2023-12-20T00:00:00+00:00</updated><id>https://www.anthonygonzales.dev/blog/setup-eslint-prettier-with-typescript</id><content type="html" xml:base="https://www.anthonygonzales.dev/blog/setup-eslint-prettier-with-typescript.html"><![CDATA[<p>Learn how to setup ESLint and Prettier with Typescript to free your team from
+standards, formatting, and type checking discussions. Each of these tools
+aren’t hard to configure independently, but getting the type checker, linter,
+and style formatter to work together is tricky. Let’s go through each of the
+tools I personally use, how I set them up, and how they work. Use the
+quickstart to get going if you don’t have time for the longer explanation.</p>
+
+<!--break-->
+
+<ul id="markdown-toc">
+  <li><a href="#quickstart" id="markdown-toc-quickstart">Quickstart</a>    <ul>
+      <li><a href="#install-dependencies" id="markdown-toc-install-dependencies">Install dependencies</a></li>
+      <li><a href="#create-an-eslintrcjson-configuration-file" id="markdown-toc-create-an-eslintrcjson-configuration-file">Create an <code class="language-plaintext highlighter-rouge">.eslintrc.json</code> configuration file</a></li>
+    </ul>
+  </li>
+  <li><a href="#explanation" id="markdown-toc-explanation">Explanation</a>    <ul>
+      <li><a href="#enforce-code-quality-with-eslint" id="markdown-toc-enforce-code-quality-with-eslint">Enforce code quality with ESLint</a></li>
+      <li><a href="#formatting-with-prettier-" id="markdown-toc-formatting-with-prettier-">Formatting with Prettier 💅</a></li>
+    </ul>
+  </li>
+  <li><a href="#faqs" id="markdown-toc-faqs">FAQs</a>    <ul>
+      <li><a href="#isnt-type-checking-enough" id="markdown-toc-isnt-type-checking-enough">Isn’t type checking enough?</a></li>
+      <li><a href="#whats-the-difference-between-code-quality-and-formatting" id="markdown-toc-whats-the-difference-between-code-quality-and-formatting">What’s the difference between code quality and formatting?</a></li>
+    </ul>
+  </li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
+  <li><a href="#update-notes" id="markdown-toc-update-notes">Update notes</a></li>
+</ul>
+
+<h2 id="quickstart">Quickstart</h2>
+
+<p>Install the depdencies listed below and add the configuration file at the root
+of your project.</p>
+
+<h3 id="install-dependencies">Install dependencies</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">--save-dev</span> eslint prettier @typscript-eslint/parser
+@typscript-eslint/plugin eslint-config-prettier
+</code></pre></div></div>
+
+<h3 id="create-an-eslintrcjson-configuration-file">Create an <code class="language-plaintext highlighter-rouge">.eslintrc.json</code> configuration file</h3>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"extends"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"eslint:recommended"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"plugin:@typescript-eslint/recommended"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"prettier"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"parser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@typescript-eslint/parser"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"parserOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./tsconfig.json"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="explanation">Explanation</h2>
+
+<h3 id="enforce-code-quality-with-eslint">Enforce code quality with ESLint</h3>
+<p>The TSLint project recently announced that they would migrate the project to
+ESLint to streamline the Javascript and Typescript development experience. I
+generally use the recommended ESLint and TS rules, some of these
+recommendations come with formatting (less so in eslint, more so in
+typescript-eslint rules).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">--save-dev</span> eslint @typscript-eslint/parser
+@typescript-eslint/plugin
+</code></pre></div></div>
+
+<p>The interesting part of this installation is the namespaced parser. Why do we
+need to install a parser? The Typescript ESLint parser is the engine that
+creates the Abstract Syntax Tree (AST) to recursively analyze your code base
+and provide feedback based on the rules provided by our plugin. It’s important
+to note that you cannot use the plugin without the parser. With our Typescript
+specific parser, we can leverage our tsconfig.json file in <code class="language-plaintext highlighter-rouge">parserOptions</code> to
+check rules by type information.</p>
+
+<p>Your <code class="language-plaintext highlighter-rouge">.eslintrc</code> file should look like the following</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"extends"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"eslint:recommended"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"plugin:@typescript-eslint/recommended"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"parser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@typescript-eslint/parser"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"parserOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./tsconfig.json"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="formatting-with-prettier-">Formatting with Prettier 💅</h3>
+<p>Now that we have ESLint checking for code quality, how do we make sure that the
+number of line breaks or use of semicolons doesn’t come up in code reviews?
+With Prettier, we can format code through the CLI or we can integrate it with
+our favorite code editor to format on save! There’s one small issue. Some of
+the rules in your ESLint configuration may conflict with the rules you set in
+Prettier. The result is one tool overriding the other in a loop. Luckily the
+team at Prettier has solved this problem. There are a few options, but we’ll go
+with my choice; turn off ESLint format rules.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">--save-dev</span> prettier eslint-config-prettier
+</code></pre></div></div>
+
+<p>We’ve now installed Prettier and an ESLint config specifically to integrate
+with Prettier. This config has a set list of rules to turn off on the ESLint
+side of things to allow Prettier to do its thing. In contrast to the endless
+amount of rules you can enforce in ESLint, Prettier has a very specific list of
+formatting options. Let’s get it working.</p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">.eslintrc.json</code> file should now look like the following:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"extends"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"eslint:recommended"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"plugin:@typescript-eslint/recommended"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"prettier"</span><span class="p">,</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"parser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@typescript-eslint/parser"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"parserOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./tsconfig.json"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="callout warning-callout">
+  <p>
+    <strong>Note that the prettier configurations come last in the
+    array</strong>. It's required that you place prettier last to override the
+    other configurations.
+  </p>
+</div>
+
+<p>Here’s what our <code class="language-plaintext highlighter-rouge">.prettierrc.json</code> file will look like:</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nl">"printWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"tabWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"useTabs"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"semi"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"singleQuote"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"trailingComma"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es5"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"bracketSpacing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"arrowParens"</span><span class="p">:</span><span class="w"> </span><span class="s2">"always"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>I’m opting to keep the two separate, there’s a way to instruct ESLint to run
+Prettier but I ended up dealing with serious performance issues. To test it
+out, let’s try giving it a run.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./node_modules/.bin/eslint <span class="nb">.</span> <span class="nt">--ext</span> .ts
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./node_modules/prettier/bin-prettier.js <span class="nt">-c</span> <span class="s2">"src/**/*.ts
+</span></code></pre></div></div>
+
+<p>That’s it! You should now see output from both linters to let you know if your
+code does not meet standards. In your package.json, you can put it together
+with the Typescript compiler to also check for any type errors.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"lint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npm run lint.eslint &amp;&amp; npm run lint.prettier &amp;&amp; npm run lint.types"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lint.eslint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eslint . --ext ts"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lint.prettier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prettier -c src/**/*.ts"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lint.types"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tsc --noEmit"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="faqs">FAQs</h2>
+<h3 id="isnt-type-checking-enough">Isn’t type checking enough?</h3>
+<p>Yes! You don’t need these additional tools. However, these tools offer some
+additional linting and fixing that Typescript doesn’t provide. ESLint and
+Prettier offer support for code quality and formatting respectively.</p>
+
+<h3 id="whats-the-difference-between-code-quality-and-formatting">What’s the difference between code quality and formatting?</h3>
+<p>Code quality ensures that your code won’t fail on minor errors and bugs.
+Accidentally misspelling a variable, letting case/switch statements fall
+through, or other silly mistakes that will potentially break your application.
+In contrast, Prettier is concerned with <strong><em>a e s t h e t i c s</em></strong> ✨; things like
+semicolons, dangling commas, and spacing.</p>
+
+<h2 id="references">References</h2>
+<ul>
+  <li><a href="https://prettier.io/docs/en/integrating-with-linters.html">Prettier: Integrating with
+Linters</a></li>
+  <li><a href="https://github.com/prettier/eslint-config-prettier">prettier/eslint-config-prettier</a></li>
+</ul>
+
+<h2 id="update-notes">Update notes</h2>
+
+<ul>
+  <li>December 20, 2023: <code class="language-plaintext highlighter-rouge">prettier/@typescript-eslint</code> has been removed in
+<code class="language-plaintext highlighter-rouge">eslint-config-prettier</code>
+<a href="https://github.com/prettier/eslint-config-prettier/blob/main/CHANGELOG.md#version-800-2021-02-21">v8.0.0</a></li>
+</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[Learn how to leverage ESLint, Prettier with Typescript to reduce bugs and nitpicky reviews. I'll walk you through setup, explain the differences]]></summary></entry><entry><title type="html">Is this simple or easy?</title><link href="https://www.anthonygonzales.dev/blog/simple-or-easy.html" rel="alternate" type="text/html" title="Is this simple or easy?" /><published>2018-01-04T00:00:00+00:00</published><updated>2018-01-04T00:00:00+00:00</updated><id>https://www.anthonygonzales.dev/blog/simple-or-easy</id><content type="html" xml:base="https://www.anthonygonzales.dev/blog/simple-or-easy.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[I moved to New York, I bought a HHKB Pro2, and I now do everything from the command line. I've picked up some new habits, but I want to take the time to reflect how I can refine my skills in 2018.]]></summary></entry></feed>

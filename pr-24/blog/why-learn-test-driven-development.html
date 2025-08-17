@@ -1,0 +1,1219 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+    <title>Why learn Test-Driven Development? | Anthony Gonzales</title>
+  
+  <meta name="description" content="Create a safe environment to take risks, build confidence, and write legible code. Learn how to start with Javascript, React">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site"    content="">
+<meta name="twitter:creator" content="">
+<meta property="og:title"   content="Why learn Test-Driven Development?">
+
+
+<meta property="og:description" content="Create a safe environment to take risks, build confidence, and write legible code. Learn how to start with Javascript, React">
+
+
+<meta property="og:image" content="https://www.anthonygonzales.dev/assets/img/glass-house-at-night-compressed.jpg">
+
+<!-- end of Twitter cards -->
+
+
+  
+  <!-- Mastodon verification -->
+  <link rel="me" href="https://mastodon.social/@anthonygonzales" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/vs.css">
+  <link rel="stylesheet" href="/css/master.css">
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" class="grid why-learn-test-driven-development">
+  <!--[if IE]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+  <header class="header container max-width">
+  <div class="header-inner">
+    <div class="nav-logo">
+      <a href="/">
+        <span class="name">
+          <span>A</span>
+          <span>n</span>
+          <span>t</span>
+          <span>h</span>
+          <span>o</span>
+          <span>n</span>
+          <span>y</span>
+        </span>
+        <span class="name">
+          <span>G</span>
+          <span>o</span>
+          <span>n</span>
+          <span>z</span>
+          <span>a</span>
+          <span>l</span>
+          <span>e</span>
+          <span>s</span>
+        </span>
+      </a>
+    </div>
+    <nav role="navigation">
+      <ul class="main-nav">
+        
+          <li>
+            <a href="/about">About</a>
+          </li>
+        
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+  <div class="max-width container post" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="post-title" itemprop="headline">Why learn Test-Driven Development?</h1>
+  <div class="post-meta">
+    <span class="hidden" itemprop="author">by Anthony Gonzales</span>
+    <time class="post-timestamp" itemprop="datePublished"> April 21, 2020</time></div>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Across all of my professional software projects, I insist on Test-Driven
+Development (TDD). Not all developers share my enthusiasm and some see testing
+as onerous and costly. There’s so much to learn, you have to maintain a whole
+set of dependencies and libraries, you have to mock dependencies, it takes too
+long, and the list goes on. These concerns are cultural and have less to do with
+proficiency. TDD is another skill to learn and a powerful tool for the long term
+health of a software project. Test-Driven Development creates a safe environment
+for developers to take risks, builds trust between team members and management,
+and provides legibility for other developers to make changes.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#safe-danger" id="markdown-toc-safe-danger">Safe danger</a></li>
+  <li><a href="#confidence-and-trust" id="markdown-toc-confidence-and-trust">Confidence and trust</a></li>
+  <li><a href="#documentation-for-free" id="markdown-toc-documentation-for-free">Documentation for free</a></li>
+  <li><a href="#red-green-refactor" id="markdown-toc-red-green-refactor">Red, green, refactor</a>    <ul>
+      <li><a href="#a-word-on-refactoring" id="markdown-toc-a-word-on-refactoring">A word on “refactoring”</a></li>
+    </ul>
+  </li>
+  <li><a href="#todo-list-example" id="markdown-toc-todo-list-example">Todo list example</a>    <ul>
+      <li><a href="#create-the-folder-and-test-file" id="markdown-toc-create-the-folder-and-test-file">Create the folder and test file</a></li>
+      <li><a href="#giving-the-user-an-input" id="markdown-toc-giving-the-user-an-input">Giving the user an input</a></li>
+      <li><a href="#saving-a-todo" id="markdown-toc-saving-a-todo">Saving a todo</a></li>
+      <li><a href="#refactoring-after-getting-todos-saved" id="markdown-toc-refactoring-after-getting-todos-saved">Refactoring after getting todo’s saved</a></li>
+      <li><a href="#reset-the-user-input-after-adding-a-todo" id="markdown-toc-reset-the-user-input-after-adding-a-todo">Reset the user input after adding a todo</a></li>
+      <li><a href="#ensuring-todo-field-isnt-empty" id="markdown-toc-ensuring-todo-field-isnt-empty">Ensuring todo field isn’t empty</a></li>
+      <li><a href="#delete-todos" id="markdown-toc-delete-todos">Delete todos</a></li>
+      <li><a href="#editing-todo" id="markdown-toc-editing-todo">Editing todo</a></li>
+      <li><a href="#saving-an-edited-todo" id="markdown-toc-saving-an-edited-todo">Saving an edited todo</a></li>
+      <li><a href="#refactoring-the-todo" id="markdown-toc-refactoring-the-todo">Refactoring the Todo</a></li>
+      <li><a href="#refactoring-the-todo-editing-experience" id="markdown-toc-refactoring-the-todo-editing-experience">Refactoring the Todo Editing Experience</a></li>
+      <li><a href="#refactoring-the-removal-of-a-todo" id="markdown-toc-refactoring-the-removal-of-a-todo">Refactoring the removal of a todo</a></li>
+    </ul>
+  </li>
+  <li><a href="#take-home-assignment" id="markdown-toc-take-home-assignment">Take home assignment</a></li>
+</ul>
+
+<!--break-->
+      <h2 id="safe-danger">
+        
+        
+          Safe danger <a href="#safe-danger" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p><img src="/assets/img/glass-house-at-night-compressed.jpg" alt="Philip Johnson's Glass House at night" /></p>
+
+<p class="post-img-credit">Photo by James Vaughan (CC BY-NC-SA 2.0)</p>
+
+<p>Last fall, my wife took me to visit Philip Johnson’s Glass House in New Caanan,
+CT. Beautiful and simple, the Glass House is an icon of modern architecture. It
+rests on a property filled with Johnson’s experimental creations, including a
+bunker that houses art by Andy Warhol and Jasper Johns. The house itself is four
+walls of glass with 360-degree views of the surrounding woods where coyotes howl
+at night. On the property, there’s a perilously large staircase that extends to
+nowhere, a footbridge that intentionally bounces as you cross a dry creek and a
+highly toxic cactus that rests on his desk. One of Mr. Johnson’s guiding
+principles in architecture is the concept of “safe danger”; the idea that we are
+most engaged when we can take risks in a safe environment.</p>
+
+<p>Testing provides an environment for developers to take risks safely to produce
+their best work. Each commit comes with a set of assertions that proves that the
+newly added code has been thoughtfully examined. It gives team members the
+ability to completely gut the contents of the production code and not lose any
+sleep over it. Anybody can rearrange files, rename functions and variables, and
+break large pieces down into new abstractions. I can add a new feature and not
+worry about a coworker (or myself in most cases) not understanding the behavior
+at a later date. When a new person joins the company, they feel confident that
+they will get early feedback that they broke something. Nobody wants to feel set
+up for failure or responsible for the loss of revenue due to a production bug.
+With a testing library, we can build an environment that encourages people to
+not only take risks but have fun along the way.</p>
+    
+      <h2 id="confidence-and-trust">
+        
+        
+          Confidence and trust <a href="#confidence-and-trust" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>At the heart of any team is the ability for members to trust one another to make
+choices. Teams with low levels of trust inevitably create systems to prevent
+people from making choices. Bureaucracy takes hold and the innovative spark is
+lost as team members begin to feel like they’re cogs in a machine. In web
+development, we prize our ability to make choices and we thrive on learning. By
+taking away a developer’s ability to think, you take away their ability to make
+an impact on a technology stack. Your junior developer today could become the
+person that creates software that fundamentally changes the business tomorrow,
+but you need to give that person the room to make mistakes and learn.</p>
+
+<p>You build trust between team members and stakeholders by developing a culture
+that prioritizes testing. Bugs and unintended side effects are minimized. Silly
+mistakes are removed and handled before they reach a staging environment.
+Customers experience less downtime, management doesn’t feel the need to create
+bureaucratic systems, and developers get to try new things.  Nobody loses sleep
+over a deploy, features are shipped, and the team feels confident that they are
+moving fast without causing damage.</p>
+    
+      <h2 id="documentation-for-free">
+        
+        
+          Documentation for free <a href="#documentation-for-free" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>Legibility is a side-effect of encapsulating code into testable pieces with
+clear assertions. Legibility gives not only your team members a chance to read
+and understand your intent, but gives you a better understanding when you return
+to code at a later date. Well-written test assertions are a bit like having
+well-written annotations to a technical blueprint. You get the benefit of
+understanding the intent of the behavior, not just a visual understanding of the
+mechanics.</p>
+
+<p>Writing clear documentation is another difficult challenge when working under
+strict deadlines. Oftentimes, projects are made quickly and documentation is
+made later. Developers have to comb through the codebase to determine how the
+code works and what parts need to be communicated. One of the bonuses of testing
+is that behavior is documented in the test suite. Assertions use plain English
+and describe the expected behavior of a specific piece of code. A
+well-maintained test suite is not a substitute for documentation, but it can
+make the process of writing documentation much faster.</p>
+    
+      <h2 id="red-green-refactor">
+        
+        
+          Red, green, refactor <a href="#red-green-refactor" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>Test Driven Development is a recursive set of steps a software developer follows
+to create new features. You write tests first, then write enough code to satisfy
+the failing test, and lastly, refactor the code you just wrote. Continue that
+process until you’ve completed your work. It’s dead simple and effective.</p>
+
+<p>I adhere to Uncle Bob’s <a href="http://www.butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd" target="_blank">Three Laws of
+TDD</a>:</p>
+
+<ol>
+  <li>You are not allowed to write any production code unless it is to make a
+failing unit test pass.</li>
+  <li>You are not allowed to write any more of a unit test than is sufficient to
+fail; and compilation failures are failures.</li>
+  <li>You are not allowed to write any more production code than is sufficient to
+pass the one failing unit test.</li>
+</ol>
+
+<p>People are usually overwhelmed by this, but it’s like riding a bike. Once you get
+past the initial learning curve it becomes second nature.</p>
+    
+      <h3 id="a-word-on-refactoring">
+        
+        
+          A word on “refactoring” <a href="#a-word-on-refactoring" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>What does refactoring mean? According to <a href="https://refactoring.com/" target="_blank">Martin
+Fowler</a>, “Refactoring is a disciplined technique for
+restructuring an existing body of code, altering its internal structure without
+changing its external behavior.”  The key phrase in this definition is “without
+changing its external behavior.”  Implicit in this definition is confidence and
+certainty. How can you be confident that your changes didn’t change external
+behavior? I posit that the only way you can have certainty is through some form
+of checking, either manually or through automated tests. Changing code without
+meaningful feedback is rewriting, not refactoring.</p>
+    
+      <h2 id="todo-list-example">
+        
+        
+          Todo list example <a href="#todo-list-example" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>For the remainder of this post, I will create a series of features for a Todo
+List Application in React, following Uncle Bob’s rules, so you can see the
+changes over time. The intention is to show how the code changes, the way I
+think, what I write, and most importantly, what I leave out. I oftentimes see
+developers in interviews add more code than they need upfront to address all
+potential edgecases but those concerns aren’t important until problems arise. We
+don’t want to forecast problems, we want to solve the problems right in front of
+us.</p>
+
+<p>The full code base can be seen on <a href="http://bit.ly/2IW51qj" target="_blank">CodeSandbox</a>.</p>
+    
+      <h3 id="create-the-folder-and-test-file">
+        
+        
+          Create the folder and test file <a href="#create-the-folder-and-test-file" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>There are different ways to organize your files and folders in a Javascript code
+base. I create folders for new files with an index to export contents in order
+to co-locate important pieces. The folder gives us a space to create
+test files, css, helpers, or child subcomponent folders.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/src
+  /App
+    index.js
+    App.css
+    App.jsx
+    App.test.jsx
+</code></pre></div></div>
+
+<p>Following this pattern, let’s create a <code class="language-plaintext highlighter-rouge">TodoList</code> component folder with a test
+file first.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..1a6e53f
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -0,0 +1,10 @@</span>
+<span class="gi">+import React from "react";
++import { render } from "@testing-library/react";
++
++import { TodoList } from ".";
++
++describe("TodoList", () =&gt; {
++  it("works", () =&gt; {
++    render(&lt;TodoList /&gt;);
++  });
++});
+</span></code></pre></div></div>
+
+<p>That’s it. That’s how you start. Notice that I did not create the <code class="language-plaintext highlighter-rouge">index.js</code> or
+the production code in <code class="language-plaintext highlighter-rouge">TodoList.jsx</code> yet? Run the test suite. This initial test
+should fail (Red). There are a few important reasons why you want to start every
+new component this way.</p>
+
+<ol>
+  <li>It establishes the dependencies needed to start testing. I prefer React
+Testing Library when testing React components to test behavior as a user sees
+it. By attempting a render, I’m attempting to establish the connection
+between test file and production code.</li>
+  <li>It establishes the way I expect to consume the component. By attempting to
+import directly from the folder, I’m testing that there is an established
+contract for consuming the new code.</li>
+  <li>I’m isolating the test suite to just the behavior of the component.</li>
+</ol>
+
+<p>Now let’s make the component and the index file.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..ad0c714
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -0,0 +1,5 @@</span>
+<span class="gi">+import React from "react";
++
++export function TodoList() {
++  return &lt;div /&gt;;
++}
+</span><span class="gh">diff --git a/src/TodoList/index.js b/src/TodoList/index.js
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..f239f43
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/src/TodoList/index.js
+</span><span class="p">@@ -0,0 +1 @@</span>
+<span class="gi">+export * from './TodoList';
+</span></code></pre></div></div>
+
+<p>Again, that’s it. We’ve now fixed the broken test (Green). It’s not much, but
+it’s how I start every new isolated module. This could be a React component, it
+could be a Node module, the pattern is the same.</p>
+
+<p>Now let’s start adding meaningful features.</p>
+    
+      <h3 id="giving-the-user-an-input">
+        
+        
+          Giving the user an input <a href="#giving-the-user-an-input" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>In this initial pass, I’m going to attempt to add an input for the user to add
+todos.  I want to be sure that the input takes and shows the values.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 1a6e53f..9151a6e 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -1,10 +1,13 @@</span>
+ import React from "react";
+<span class="gd">-import { render } from "@testing-library/react";
+</span><span class="gi">+import { render, fireEvent } from "@testing-library/react";
+</span>
+ import { TodoList } from ".";
+
+ describe("TodoList", () =&gt; {
+<span class="gd">-  it("works", () =&gt; {
+-    render(&lt;TodoList /&gt;);
+</span><span class="gi">+  it("receives user input", () =&gt; {
++    const { getByTestId } = render(&lt;TodoList /&gt;);
++    const input = getByTestId("todo-input");
++    fireEvent.change(input, { target: { value: "Take the dinglebop" } });
++    expect(input.value).toBe("Take the dinglebop");
+</span>   });
+ });
+</code></pre></div></div>
+
+<p>I’ll run the test suite to let it fail and begin fixing the code to make it
+pass. After it fails (Red), I’m going to create a simple input that takes user
+values, set it to an internal state, and render the value in the input.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index ad0c714..e9c78bc 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -1,5 +1,15 @@</span>
+<span class="gd">-import React from "react";
+</span><span class="gi">+import React, { useState } from "react";
+</span>
+ export function TodoList() {
+<span class="gd">-  return &lt;div /&gt;;
+</span><span class="gi">+  const [inputState, inputDispatch] = useState("");
++  return (
++    &lt;input
++      data-testid="todo-input"
++      type="text"
++      value={inputState}
++      onChange={e =&gt; {
++        inputDispatch(e.target.value);
++      }}
++    /&gt;
++  );
+</span> }
+</code></pre></div></div>
+
+<p>After I’ve added my new code, I’ll run the test suite to make it pass (Green). I
+think this is simple enough that no further refactoring is needed. I’ll move
+forward with another set of behavior assertions.</p>
+    
+      <h3 id="saving-a-todo">
+        
+        
+          Saving a todo <a href="#saving-a-todo" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>I now want to test the entire user flow of adding text to the input and saving
+it to the list.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 9151a6e..d768b4a 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -10,4 +10,15 @@</span> describe("TodoList", () =&gt; {
+     fireEvent.change(input, { target: { value: "Take the dinglebop" } });
+     expect(input.value).toBe("Take the dinglebop");
+   });
+<span class="gi">+
++  it("adds a todo", () =&gt; {
++    const { getByTestId } = render(&lt;TodoList /&gt;);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, { target: { value: "Smooth it out with a bunch of shleem" } });
++    fireEvent.click(add);
++    const todo = getByTestId("todo");
++    expect(todo.textContent).toBe("Smooth it out with a bunch of shleem");
++  });
+</span> });
+</code></pre></div></div>
+
+<p>You’ll notice that there is some repetition. That’s okay, we want to be sure
+that we’re completely isolating our tests to avoid weird side effects. Do not be
+tempted to stick a huge <code class="language-plaintext highlighter-rouge">beforeEach</code> setup because you want things to be DRY. If
+you start now, you’ll just continue adding things to the block and it will
+become unreadable for yourself and other devs over time. Run the test suite
+again to be sure the test fails (Red).</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index e9c78bc..b75791b 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -1,15 +1,29 @@</span>
+ import React, { useState } from "react";
+
+ export function TodoList() {
+<span class="gi">+  const [todos, updateTodos] = useState([]);
+</span>   const [inputState, inputDispatch] = useState("");
+<span class="gi">+  const addTodo = newTodo =&gt; updateTodos([...todos, newTodo]);
+</span>   return (
+<span class="gd">-    &lt;input
+-      data-testid="todo-input"
+-      type="text"
+-      value={inputState}
+-      onChange={e =&gt; {
+-        inputDispatch(e.target.value);
+-      }}
+-    /&gt;
+</span><span class="gi">+    &lt;div&gt;
++      &lt;input
++        data-testid="todo-input"
++        type="text"
++        value={inputState}
++        onChange={e =&gt; {
++          inputDispatch(e.target.value);
++        }}
++      /&gt;
++      &lt;button data-testid="todo-add" onClick={() =&gt; addTodo(inputState)}&gt;
++        Add
++      &lt;/button&gt;
++      &lt;ul&gt;
++        {todos.map((todo, index) =&gt; (
++          &lt;li key={index} data-testid="todo"&gt;
++            {todo}
++          &lt;/li&gt;
++        ))}
++      &lt;/ul&gt;
++    &lt;/div&gt;
+</span>   );
+ }
+</code></pre></div></div>
+
+<p>I’ve introduced a new piece of state, a button to add a todo directly from the
+input state, and a list of todos. I’ll run the test suite and see that it
+passes (Green). Now that the tests are passing, let’s consider refactoring.</p>
+    
+      <h3 id="refactoring-after-getting-todos-saved">
+        
+        
+          Refactoring after getting todo’s saved <a href="#refactoring-after-getting-todos-saved" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>Here’s some things I want to consider changing:</p>
+
+<ul>
+  <li>I don’t like the term “inputDispatch” and I actually like the way I named
+  “updateTodos”. It feels more declarative and explicit.</li>
+  <li>I know that I could use a reducer but there really isn’t a need at this moment
+  to use one. I’ll hold off for now.</li>
+</ul>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index b75791b..2483839 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -2,19 +2,19 @@</span> import React, { useState } from "react";
+
+ export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+<span class="gd">-  const [inputState, inputDispatch] = useState("");
+</span><span class="gi">+  const [userInput, updateUserInput] = useState("");
+</span>   const addTodo = newTodo =&gt; updateTodos([...todos, newTodo]);
+   return (
+     &lt;div&gt;
+       &lt;input
+         data-testid="todo-input"
+         type="text"
+<span class="gd">-        value={inputState}
+</span><span class="gi">+        value={userInput}
+</span>         onChange={e =&gt; {
+<span class="gd">-          inputDispatch(e.target.value);
+</span><span class="gi">+          updateUserInput(e.target.value);
+</span>         }}
+       /&gt;
+<span class="gd">-      &lt;button data-testid="todo-add" onClick={() =&gt; addTodo(inputState)}&gt;
+</span><span class="gi">+      &lt;button data-testid="todo-add" onClick={() =&gt; addTodo(userInput)}&gt;
+</span>         Add
+       &lt;/button&gt;
+       &lt;ul&gt;
+</code></pre></div></div>
+
+<p>The changes are minimal but show the process of how we can make changes without
+changing external behavior. Let’s move on to more features.</p>
+    
+      <h3 id="reset-the-user-input-after-adding-a-todo">
+        
+        
+          Reset the user input after adding a todo <a href="#reset-the-user-input-after-adding-a-todo" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>Now that we’re adding todos and rendering them for the user, we want to reset
+the user input so the user can continue adding more.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index f939631..4908af4 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -20,4 +20,15 @@</span> describe("TodoList", () =&gt; {
+     const todo = getByTestId("todo");
+     expect(todo.textContent).toBe("Smooth it out with a bunch of shleem");
+   });
+<span class="gi">+
++  it("clears the user input after a todo is added", () =&gt; {
++    const { getByTestId } = render(&lt;TodoList /&gt;);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, {
++      target: { value: "Re-purpose shleem for later batches" }
++    });
++    fireEvent.click(add);
++    expect(input.value).toBe("");
++  });
+</span> });
+</code></pre></div></div>
+
+<p>I’ll run the test suite to make it fail (Red).</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index 2483839..4adf6d6 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -14,7 +14,13 @@</span> export function TodoList() {
+           updateUserInput(e.target.value);
+         }}
+       /&gt;
+<span class="gd">-      &lt;button data-testid="todo-add" onClick={() =&gt; addTodo(userInput)}&gt;
+</span><span class="gi">+      &lt;button
++        data-testid="todo-add"
++        onClick={() =&gt; {
++          addTodo(userInput);
++          updateUserInput("");
++        }}
++      &gt;
+</span>         Add
+       &lt;/button&gt;
+       &lt;ul&gt;
+</code></pre></div></div>
+
+<p>I’ve now added a function call for <code class="language-plaintext highlighter-rouge">updateUserInput("")</code> to the button click
+handler to clear the user input state. However, we still have the issue that users
+can add empty todos to the list. Let’s fix that.</p>
+    
+      <h3 id="ensuring-todo-field-isnt-empty">
+        
+        
+          Ensuring todo field isn’t empty <a href="#ensuring-todo-field-isnt-empty" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 4908af4..04c7a4c 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -31,4 +31,10 @@</span> describe("TodoList", () =&gt; {
+     fireEvent.click(add);
+     expect(input.value).toBe("");
+   });
+<span class="gi">+
++  it('disables the "Add Todo" button when the user input is empty', () =&gt; {
++    const { getByTestId } = render(&lt;TodoList /&gt;);
++    const add = getByTestId("todo-add");
++    expect(add.disabled).toBe(true);
++  });
+</span> });
+</code></pre></div></div>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index 4adf6d6..a643fee 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -16,6 +16,7 @@</span> export function TodoList() {
+       /&gt;
+       &lt;button
+         data-testid="todo-add"
+<span class="gi">+        disabled={userInput === "" ? true : false}
+</span>         onClick={() =&gt; {
+           addTodo(userInput);
+           updateUserInput("");
+<span class="p">@@ -26,7 +27,7 @@</span> export function TodoList() {
+       &lt;ul&gt;
+         {todos.map((todo, index) =&gt; (
+           &lt;li key={index} data-testid="todo"&gt;
+<span class="gd">-            {todo}
+</span><span class="gi">+           {todo}
+</span>           &lt;/li&gt;
+         ))}
+       &lt;/ul&gt;
+</code></pre></div></div>
+
+<p>We now have a comprehensive set of behaviors that we expect from our TodoList
+application. There are still a few crucial pieces that need to be addressed –
+editing and deleting. Let’s add those features now.</p>
+    
+      <h3 id="delete-todos">
+        
+        
+          Delete todos <a href="#delete-todos" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>I’m going to have to set up a todo, attempt to remove it with a new button that I
+intend to add next to each element, and then check that the todo on the page
+has been removed. I’ll run the test and it should fail because it won’t find the
+<code class="language-plaintext highlighter-rouge">todo-remove</code> button. After fixing that, I’ll run it again to be sure that the
+todos are rendering and failing the test as expected.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 04c7a4c..20c35b8 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -37,4 +37,17 @@</span> describe("TodoList", () =&gt; {
+     const add = getByTestId("todo-add");
+     expect(add.disabled).toBe(true);
+   });
+<span class="gi">+
++  it("deletes todos", () =&gt; {
++    const { getByTestId, queryAllByTestId } = render(&lt;TodoList /&gt;);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, {
++      target: { value: "Take the dinglebop and push it through the grumbo" }
++    });
++    fireEvent.click(add);
++    const remove = getByTestId("todo-remove");
++    fireEvent.click(remove);
++    expect(queryAllByTestId("todo")).toHaveLength(0);
++  });
+</span> });
+</code></pre></div></div>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index a643fee..20d40f6 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -4,6 +4,8 @@</span> export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+   const [userInput, updateUserInput] = useState("");
+   const addTodo = newTodo =&gt; updateTodos([...todos, newTodo]);
+<span class="gi">+  const removeTodo = index =&gt;
++    updateTodos(todos.filter((todo, i) =&gt; i !== index));
+</span>   return (
+     &lt;div&gt;
+       &lt;input
+<span class="p">@@ -25,9 +27,12 @@</span> export function TodoList() {
+         Add
+       &lt;/button&gt;
+       &lt;ul&gt;
+<span class="gd">-        {todos.map((todo, index) =&gt; (
+-          &lt;li key={index} data-testid="todo"&gt;
+-           {todo}
+</span><span class="gi">+       {todos.map((todo, index) =&gt; (
++          &lt;li key={index}&gt;
++            &lt;span data-testid="todo"&gt;{todo}&lt;/span&gt;
++            &lt;button data-testid="todo-remove" onClick={() =&gt; removeTodo(index)}&gt;
++              x
++            &lt;/button&gt;
+</span>           &lt;/li&gt;
+         ))}
+       &lt;/ul&gt;
+</code></pre></div></div>
+
+<p>We’ve now added a button that will remove the specific todo from state with a
+new function that interacts with the current state. I run the test and it now
+passes (Green).</p>
+
+<p>I will again assess the code to see what I think, does it need to be refactored?</p>
+
+<ul>
+  <li>We’ve added an additional state method but it still doesn’t feel like I need
+  to introduce something as heavy as a reducer yet. It reads well and is
+  simple enough to remain.</li>
+  <li>The render is getting larger but it’s not unreadable.</li>
+</ul>
+
+<p>Nothing is really jumping out at me, it still seems to be pretty reasonable. Let’s move
+forward with maybe our most complicated feature so far – editing.</p>
+    
+      <h3 id="editing-todo">
+        
+        
+          Editing todo <a href="#editing-todo" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>I’m going to attempt to create an inline editing experience. I want to be able
+to click a button “Edit” that opens an input with the existing todo text in the
+field. The user will be able to change the text and save it.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index 20c35b8..f6a2850 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -50,4 +50,20 @@</span> describe("TodoList", () =&gt; {
+     fireEvent.click(remove);
+     expect(queryAllByTestId("todo")).toHaveLength(0);
+   });
+<span class="gi">+
++  it("opens an editor to receive user input", () =&gt; {
++    const { getByTestId } = render(&lt;TodoList /&gt;);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, {
++      target: { value: "Take the dinglebop and push it through the grumbo" }
++    });
++    fireEvent.click(add);
++    const edit = getByTestId("todo-edit");
++    fireEvent.click(edit);
++    const editorInput = getByTestId("todo-editor");
++    expect(editorInput.value).toBe(
++      "Take the dinglebop and push it through the grumbo"
++    );
++  });
+</span> });
+</code></pre></div></div>
+
+<p>In this test, I’m just checking the behavior of the input and not yet saving the
+text. Let’s add the inline editor experience to the code now that I have a
+test failing the way I expect.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index 20d40f6..b6b3440 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -3,6 +3,7 @@</span> import React, { useState } from "react";
+ export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+   const [userInput, updateUserInput] = useState("");
+<span class="gi">+  const [editTodoIndex, updateEditTodoIndex] = useState();
+</span>   const addTodo = newTodo =&gt; updateTodos([...todos, newTodo]);
+   const removeTodo = index =&gt;
+     updateTodos(todos.filter((todo, i) =&gt; i !== index));
+<span class="p">@@ -27,11 +28,24 @@</span> export function TodoList() {
+         Add
+       &lt;/button&gt;
+       &lt;ul&gt;
+<span class="gd">-       {todos.map((todo, index) =&gt; (
+</span><span class="gi">+        {todos.map((todo, index) =&gt; (
+</span>           &lt;li key={index}&gt;
+             &lt;span data-testid="todo"&gt;{todo}&lt;/span&gt;
+<span class="gi">+            {index === editTodoIndex &amp;&amp; (
++              &lt;input
++                data-testid="todo-editor"
++                value={todo}
++                onChange={() =&gt; null}
++              /&gt;
++            )}
++            &lt;button
++              data-testid="todo-edit"
++              onClick={() =&gt; updateEditTodoIndex(index)}
++            &gt;
++              Edit
++            &lt;/button&gt;
+</span>             &lt;button data-testid="todo-remove" onClick={() =&gt; removeTodo(index)}&gt;
+<span class="gd">-              x
+</span><span class="gi">+              Remove
+</span>             &lt;/button&gt;
+           &lt;/li&gt;
+         ))}
+</code></pre></div></div>
+    
+      <h3 id="saving-an-edited-todo">
+        
+        
+          Saving an edited todo <a href="#saving-an-edited-todo" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>I now want to change the todo and explicitly save it afterward.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.test.jsx b/src/TodoList/TodoList.test.jsx
+index f6a2850..efe93ba 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.test.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.test.jsx
+</span><span class="p">@@ -66,4 +66,23 @@</span> describe("TodoList", () =&gt; {
+       "Take the dinglebop and push it through the grumbo"
+     );
+   });
+<span class="gi">+
++  it("edits the previously saved todo", () =&gt; {
++    const { getByTestId } = render(&lt;TodoList /&gt;);
++    const input = getByTestId("todo-input");
++    const add = getByTestId("todo-add");
++    fireEvent.change(input, {
++      target: { value: "Take the dinglebop and push it through the grumbo" }
++    });
++    fireEvent.click(add);
++    const edit = getByTestId("todo-edit");
++    fireEvent.click(edit);
++    const editorInput = getByTestId("todo-editor");
++    fireEvent.change(editorInput, {
++      target: { value: "Rub it with fleeb" }
++    });
++    const save = getByTestId("todo-edit-save");
++    fireEvent.click(save);
++    expect(getByTestId("todo").textContent).toBe("Rub it with fleeb");
++  });
+</span> });
+</code></pre></div></div>
+
+<p>At this point, things are now getting tricky. There are so many steps to set up
+our editing test assertions that I’m considering creating a test helper. I’m
+going to hold off temporarily in favor of getting the test assertions passed.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index b6b3440..c68600f 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -3,10 +3,18 @@</span> import React, { useState } from "react";
+ export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+   const [userInput, updateUserInput] = useState("");
+<span class="gi">+
+</span>   const [editTodoIndex, updateEditTodoIndex] = useState();
+<span class="gi">+  const [editTodo, updateEditTodo] = useState("");
++
+</span>   const addTodo = newTodo =&gt; updateTodos([...todos, newTodo]);
+   const removeTodo = index =&gt;
+     updateTodos(todos.filter((todo, i) =&gt; i !== index));
+<span class="gi">+  const saveEditedTodo = (newValue, todoIndex) =&gt; {
++    const todosCopy = todos.slice();
++    todosCopy[todoIndex] = newValue;
++    updateTodos(todosCopy);
++  }
+</span>   return (
+     &lt;div&gt;
+       &lt;input
+<span class="p">@@ -32,15 +40,21 @@</span> export function TodoList() {
+           &lt;li key={index}&gt;
+             &lt;span data-testid="todo"&gt;{todo}&lt;/span&gt;
+             {index === editTodoIndex &amp;&amp; (
+<span class="gd">-              &lt;input
+-                data-testid="todo-editor"
+-                value={todo}
+-                onChange={() =&gt; null}
+-              /&gt;
+</span><span class="gi">+              &lt;&gt;
++                &lt;input
++                  data-testid="todo-editor"
++                  value={editTodo}
++                  onChange={e =&gt; updateEditTodo(e.target.value)}
++                /&gt;
++                &lt;button data-testid="todo-editor-save" onClick={() =&gt; saveEditedTodo(editTodo, index)}&gt;Save&lt;/button&gt;
++              &lt;/&gt;
+</span>             )}
+             &lt;button
+               data-testid="todo-edit"
+<span class="gd">-              onClick={() =&gt; updateEditTodoIndex(index)}
+</span><span class="gi">+              onClick={() =&gt; {
++                updateEditTodoIndex(index);
++                updateEditTodo(todo);
++              }}
+</span>             &gt;
+               Edit
+             &lt;/button&gt;
+</code></pre></div></div>
+
+<p>Boom! We’ve now added editing to the list of behaviors to our Todo Appplication.
+Now that we’ve got our editing experience working, we desperately need to
+refactor our code for legibility. I’m going to be honest, I took a break writing
+this blog post and felt lost in my own code base. That’s fine! It just means I
+need to spend more time making the work clear. Let’s do that now and wrap up.</p>
+    
+      <h3 id="refactoring-the-todo">
+        
+        
+          Refactoring the Todo <a href="#refactoring-the-todo" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>I’m going to focus on fixing the todo editor code. Our top level component knows
+too much about the internals of a todo. We can break that up but it’s important
+we roll out changes in small incremental steps to be sure that we don’t break
+the test suite. By having that quick feedback, we’ll be able to mold it into
+something more legible.</p>
+
+<p>I’ll start with the render of the todo value in the loop.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index c68600f..8d8e672 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -1,5 +1,10 @@</span>
+ import React, { useState } from "react";
+
++function Todo(props) {
+<span class="gi">+  const {value} = props;
++  return &lt;span data-testid="todo"&gt;{value}&lt;/span&gt;;
++}
++
+</span> export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+   const [userInput, updateUserInput] = useState("");
+<span class="p">@@ -38,7 +43,7 @@</span> export function TodoList() {
+       &lt;ul&gt;
+         {todos.map((todo, index) =&gt; (
+           &lt;li key={index}&gt;
+<span class="gd">-            &lt;span data-testid="todo"&gt;{todo}&lt;/span&gt;
+</span><span class="gi">+            &lt;Todo value={todo}/&gt;
+</span>             {index === editTodoIndex &amp;&amp; (
+               &lt;&gt;
+                 &lt;input
+</code></pre></div></div>
+
+<p>That’s maybe the smallest change I can make looking at the code and it’s a great
+first step in moving the functionality of a todo into its own concerns.</p>
+    
+      <h3 id="refactoring-the-todo-editing-experience">
+        
+        
+          Refactoring the Todo Editing Experience <a href="#refactoring-the-todo-editing-experience" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>We’re now going to migrate the editing experience to the Todo component since
+that work takes place at a more local level within the loop of the todos.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index f60a2cf..f7a3776 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -1,19 +1,38 @@</span>
+ import React, { useState } from "react";
+
+ function Todo(props) {
+<span class="gd">-  const {value} = props;
+</span><span class="gi">+  const {value, saveEditedTodo} = props;
+</span>   const [isTodoEditorOpen, toggleTodoEditor] = useState(false);
+<span class="gd">-
+-  return &lt;span data-testid="todo"&gt;{value}&lt;/span&gt;;
+</span><span class="gi">+  const [editorInput, updateEditorInput] = useState(value);
++  return (
++    &lt;&gt;
++      &lt;span data-testid="todo"&gt;{value}&lt;/span&gt;
++      {isTodoEditorOpen &amp;&amp; (
++        &lt;&gt;
++          &lt;input
++            data-testid="todo-editor"
++            value={editorInput}
++            onChange={e =&gt; updateEditorInput(e.target.value)}
++          /&gt;
++          &lt;button data-testid="todo-editor-save" onClick={() =&gt; saveEditedTodo(editorInput)}&gt;Save&lt;/button&gt;
++        &lt;/&gt;
++      )}
++      &lt;button
++        data-testid="todo-edit"
++        onClick={() =&gt; {
++          toggleTodoEditor(true);
++        }}
++      &gt;
++        Edit
++      &lt;/button&gt;
++    &lt;/&gt;
++  );
+</span> }
+
+ export function TodoList() {
+   const [todos, updateTodos] = useState([]);
+   const [userInput, updateUserInput] = useState("");
+
+-  const [editTodoIndex, updateEditTodoIndex] = useState();
+<span class="gd">-  const [editTodo, updateEditTodo] = useState("");
+-
+</span>   const addTodo = newTodo =&gt; updateTodos([...todos, newTodo]);
+   const removeTodo = index =&gt;
+     updateTodos(todos.filter((todo, i) =&gt; i !== index));
+<span class="p">@@ -45,26 +64,7 @@</span> export function TodoList() {
+       &lt;ul&gt;
+         {todos.map((todo, index) =&gt; (
+           &lt;li key={index}&gt;
+<span class="gd">-            &lt;Todo value={todo}/&gt;
+-            {index === editTodoIndex &amp;&amp; (
+-              &lt;&gt;
+-                &lt;input
+-                  data-testid="todo-editor"
+-                  value={editTodo}
+-                  onChange={e =&gt; updateEditTodo(e.target.value)}
+-                /&gt;
+-                &lt;button data-testid="todo-editor-save" onClick={() =&gt; saveEditedTodo(editTodo, index)}&gt;Save&lt;/button&gt;
+-              &lt;/&gt;
+-            )}
+-            &lt;button
+-              data-testid="todo-edit"
+-              onClick={() =&gt; {
+-                updateEditTodoIndex(index);
+-                updateEditTodo(todo);
+-              }}
+-            &gt;
+-              Edit
+-            &lt;/button&gt;
+</span><span class="gi">+            &lt;Todo value={todo} saveEditedTodo={(editedTodo) =&gt; saveEditedTodo(editedTodo, index)}/&gt;
+</span>             &lt;button data-testid="todo-remove" onClick={() =&gt; removeTodo(index)}&gt;
+               Remove
+             &lt;/button&gt;
+</code></pre></div></div>
+    
+      <h3 id="refactoring-the-removal-of-a-todo">
+        
+        
+          Refactoring the removal of a todo <a href="#refactoring-the-removal-of-a-todo" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>We’ve moved the editing experience into the <code class="language-plaintext highlighter-rouge">Todo</code> function component but we
+still have to migrate the ‘Remove’ button.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/src/TodoList/TodoList.jsx b/src/TodoList/TodoList.jsx
+index f7a3776..9b40665 100644
+</span><span class="gd">--- a/src/TodoList/TodoList.jsx
+</span><span class="gi">+++ b/src/TodoList/TodoList.jsx
+</span><span class="p">@@ -1,7 +1,7 @@</span>
+ import React, { useState } from "react";
+
+ function Todo(props) {
+<span class="gd">-  const {value, saveEditedTodo} = props;
+</span><span class="gi">+  const {value, saveEditedTodo, removeTodo} = props;
+</span>   const [isTodoEditorOpen, toggleTodoEditor] = useState(false);
+   const [editorInput, updateEditorInput] = useState(value);
+   return (
+<span class="p">@@ -25,6 +25,9 @@</span> function Todo(props) {
+       &gt;
+         Edit
+       &lt;/button&gt;
+<span class="gi">+      &lt;button data-testid="todo-remove" onClick={() =&gt; removeTodo()}&gt;
++        Remove
++      &lt;/button&gt;
+</span>     &lt;/&gt;
+   );
+ }
+<span class="p">@@ -64,10 +67,7 @@</span> export function TodoList() {
+       &lt;ul&gt;
+         {todos.map((todo, index) =&gt; (
+           &lt;li key={index}&gt;
+<span class="gd">-            &lt;Todo value={todo} saveEditedTodo={(editedTodo) =&gt; saveEditedTodo(editedTodo, index)}/&gt;
+-            &lt;button data-testid="todo-remove" onClick={() =&gt; removeTodo(index)}&gt;
+-              Remove
+-            &lt;/button&gt;
+</span><span class="gi">+            &lt;Todo value={todo} saveEditedTodo={(editedTodo) =&gt; saveEditedTodo(editedTodo, index)} removeTodo={() =&gt; removeTodo(index)}/&gt;
+</span>           &lt;/li&gt;
+         ))}
+       &lt;/ul&gt;
+</code></pre></div></div>
+
+<p>I’ve now migrated the todo removal behavior into the <code class="language-plaintext highlighter-rouge">Todo</code> component with the
+other controls. There’s still more behavior to address and I want to give you
+the opportunity to practice.</p>
+    
+      <h2 id="take-home-assignment">
+        
+        
+          Take home assignment <a href="#take-home-assignment" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>If you visit the Code Sandbox link, you can download the repo and begin testing
+using the Create React App scripts in the <code class="language-plaintext highlighter-rouge">package.json</code> file. You’ll be able to
+pick up right where I left off and begin adding some new features. Here are a few
+things you could implement:</p>
+
+<ul>
+  <li>Hiding the ‘Edit’ and ‘Remove’ controls when the user opens the inline editing experience</li>
+  <li>Turning off the editing experience when the user saves a new input</li>
+  <li>Adding a ‘Cancel’ button to turn off the editing experience</li>
+</ul>
+
+<p>I would focus on thinking through how you would set up a new test and making
+sure that you have the right failing test. TDD is a skill that you will
+continually need to practice, learn, and improve. I’ve benefited greatly in my
+professional development by having this tool available in my toolbox. I hope
+this long form post will serve as a reference for how to start your journey on
+testing.</p>
+
+  </div>
+  <div class="post-additional">
+    <a href="https://github.com/antgonzales/antgonzales.github.io/edit/master/_posts/2020-04-21-why-learn-test-driven-development.md" target="_blank" >Suggest a correction</a>
+  </div>
+</div>
+
+
+  <footer class="footer container max-width">
+    <div class="footer-inner">
+        <div class="copyright">
+            <span>&copy; 2025</span>
+            Anthony Gonzales
+        </div>
+        <nav class="footer-nav">
+            <ul class="list-naked">
+                <li>
+                    <a href="https://mastodon.social/@anthonygonzales" target="_blank">
+                        <span class="hidden">Mastodon</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+                          <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:hello@anthonygonzales.dev">
+                        <span class="hidden">Email</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                          <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
+                          <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="/feed.xml">
+                        <span class="hidden">RSS</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-rss-fill" viewBox="0 0 16 16">
+                          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1 0-2m0 4a6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1 0-2m.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+
+  
+</body>
+
+</html>

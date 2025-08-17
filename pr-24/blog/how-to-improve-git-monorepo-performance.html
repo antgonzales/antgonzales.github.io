@@ -1,0 +1,393 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+    <title>How to improve Git monorepo performance | Anthony Gonzales</title>
+  
+  <meta name="description" content="Optimize Git in monorepos with an optimized Git config. Follow clear steps to boost CPU performance and workflow efficiency">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site"    content="">
+<meta name="twitter:creator" content="">
+<meta property="og:title"   content="How to improve Git monorepo performance">
+
+
+<meta property="og:description" content="Optimize Git in monorepos with an optimized Git config. Follow clear steps to boost CPU performance and workflow efficiency">
+
+
+<!-- end of Twitter cards -->
+
+
+  
+  <!-- Mastodon verification -->
+  <link rel="me" href="https://mastodon.social/@anthonygonzales" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/vs.css">
+  <link rel="stylesheet" href="/css/master.css">
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" class="grid how-to-improve-git-monorepo-performance">
+  <!--[if IE]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+  <header class="header container max-width">
+  <div class="header-inner">
+    <div class="nav-logo">
+      <a href="/">
+        <span class="name">
+          <span>A</span>
+          <span>n</span>
+          <span>t</span>
+          <span>h</span>
+          <span>o</span>
+          <span>n</span>
+          <span>y</span>
+        </span>
+        <span class="name">
+          <span>G</span>
+          <span>o</span>
+          <span>n</span>
+          <span>z</span>
+          <span>a</span>
+          <span>l</span>
+          <span>e</span>
+          <span>s</span>
+        </span>
+      </a>
+    </div>
+    <nav role="navigation">
+      <ul class="main-nav">
+        
+          <li>
+            <a href="/about">About</a>
+          </li>
+        
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+  <div class="max-width container post" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="post-title" itemprop="headline">How to improve Git monorepo performance</h1>
+  <div class="post-meta">
+    <span class="hidden" itemprop="author">by Anthony Gonzales</span>
+    <time class="post-timestamp" itemprop="datePublished"> December 15, 2023</time><span class="post-meta-separator">&bull;</span>
+      <div class="post-lastupdated">
+        Updated on <time itemprop="dateModified">May 04, 2024</time>
+      </div></div>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><a href="https://github.blog/2022-06-27-highlights-from-git-2-37/">Git v2.37.0</a>
+introduced new features that significantly improve performance for repositories
+with large numbers of files. This blog post will cover custom Git monorepo
+configurations to improve local performance and provide step-by-step guidance
+to rollback if anything goes wrong. We’ll look into these new features and
+explain how to implement them effectively in your global or local Git config.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#quickstart" id="markdown-toc-quickstart">Quickstart</a>    <ul>
+      <li><a href="#create-a-custom-git-config-file-at-gitconfigmonorepo" id="markdown-toc-create-a-custom-git-config-file-at-gitconfigmonorepo">Create a custom Git config file at <code class="language-plaintext highlighter-rouge">~/.gitconfig.monorepo</code></a></li>
+      <li><a href="#include-the-custom-configuration-in-your-global-or-local-git-config" id="markdown-toc-include-the-custom-configuration-in-your-global-or-local-git-config">Include the custom configuration in your global or local Git config</a></li>
+      <li><a href="#update-git-index-to-version-4-in-repo" id="markdown-toc-update-git-index-to-version-4-in-repo">Update Git index to version 4 in repo</a></li>
+      <li><a href="#start-fsmonitordaemon" id="markdown-toc-start-fsmonitordaemon">Start <code class="language-plaintext highlighter-rouge">fsmonitor—daemon</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#results" id="markdown-toc-results">Results</a></li>
+  <li><a href="#explanation-of-configurations" id="markdown-toc-explanation-of-configurations">Explanation of configurations</a></li>
+  <li><a href="#how-to-revert-changes" id="markdown-toc-how-to-revert-changes">How to revert changes</a></li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
+</ul>
+
+<!--break-->
+      <h2 id="quickstart">
+        
+        
+          Quickstart <a href="#quickstart" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<div class="callout warning-callout">
+  <p>
+    <strong>Warning:</strong> Upgrade Git to 2.42.0+ and perform the steps in
+    this tutorial on your main branch. `index.skipHash` causes errors on older
+    Git versions.
+  </p>
+</div>
+    
+      <h3 id="create-a-custom-git-config-file-at-gitconfigmonorepo">
+        
+        
+          Create a custom Git config file at <code class="language-plaintext highlighter-rouge">~/.gitconfig.monorepo</code> <a href="#create-a-custom-git-config-file-at-gitconfigmonorepo" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[core]</span>
+    <span class="py">commitgraph</span> <span class="p">=</span> <span class="s">true</span>
+    <span class="py">fsmonitor</span> <span class="p">=</span> <span class="s">true</span>
+    <span class="py">writeCommitGraph</span> <span class="p">=</span> <span class="s">true</span>
+<span class="nn">[feature]</span>
+    <span class="py">manyFiles</span> <span class="p">=</span> <span class="s">true</span>
+</code></pre></div></div>
+    
+      <h3 id="include-the-custom-configuration-in-your-global-or-local-git-config">
+        
+        
+          Include the custom configuration in your global or local Git config <a href="#include-the-custom-configuration-in-your-global-or-local-git-config" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[include]</span>
+    <span class="py">path</span> <span class="p">=</span> <span class="s">~/.gitconfig.monorepo</span>
+<span class="nn">[user]</span>
+    <span class="py">email</span> <span class="p">=</span> <span class="s">123345+darth.vader@users.noreply.github.com</span>
+    <span class="py">name</span> <span class="p">=</span> <span class="s">Darth Vader</span>
+<span class="nn">[init]</span>
+    <span class="py">defaultBranch</span> <span class="p">=</span> <span class="s">main</span>
+<span class="nn">[core]</span>
+    <span class="py">editor</span> <span class="p">=</span> <span class="s">nvim</span>
+<span class="nn">[color]</span>
+    <span class="py">ui</span> <span class="p">=</span> <span class="s">auto</span>
+<span class="nn">[branch]</span>
+    <span class="py">autosetuprebase</span> <span class="p">=</span> <span class="s">always</span>
+<span class="nn">[rebase]</span>
+    <span class="py">autoStash</span> <span class="p">=</span> <span class="s">true</span>
+<span class="nn">[pull]</span>
+    <span class="py">rebase</span> <span class="p">=</span> <span class="s">true</span>
+<span class="nn">[push]</span>
+    <span class="py">default</span> <span class="p">=</span> <span class="s">current</span>
+</code></pre></div></div>
+    
+      <h3 id="update-git-index-to-version-4-in-repo">
+        
+        
+          Update Git index to version 4 in repo <a href="#update-git-index-to-version-4-in-repo" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<p>Although <code class="language-plaintext highlighter-rouge">feature.manyFiles</code> sets the default index version, you need to
+manually update the <a href="https://git-scm.com/docs/index-format">index format</a> on
+your local repository through your terminal.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> ~/example-monorepo
+<span class="gp">$</span><span class="w"> </span>git update-index <span class="nt">--index-version</span> 4
+</code></pre></div></div>
+    
+      <h3 id="start-fsmonitordaemon">
+        
+        
+          Start <code class="language-plaintext highlighter-rouge">fsmonitor—daemon</code> <a href="#start-fsmonitordaemon" class="post-header-link"></a>
+        
+        
+      </h3>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> ~/example-monorepo
+<span class="gp">$</span><span class="w"> </span>git fsmonitor--daemon start
+</code></pre></div></div>
+    
+      <h2 id="results">
+        
+        
+          Results <a href="#results" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>Using the custom Git configuration and updated index format, my command
+execution time for “git status” was reduced from approximately 0.316 seconds to
+0.118 seconds, and by a decrease in CPU utilization from 425% to 89%,
+leading to a significantly improved performance. Additionally, I no longer
+encounter <code class="language-plaintext highlighter-rouge">fatal: Unable to create 'project_path/.git/index.lock': File
+exists.</code> errors while performing basic Git commands (MacOS Intel Core i9).</p>
+
+<p><strong>Before</strong></p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">time </span>git status
+<span class="go">On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+git status  0.21s user 1.14s system 425% cpu 0.316 total
+</span></code></pre></div></div>
+
+<p><strong>After</strong></p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">time </span>git status
+<span class="go">On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+git status  0.08s user 0.02s system 89% cpu 0.118 total
+</span></code></pre></div></div>
+    
+      <h2 id="explanation-of-configurations">
+        
+        
+          Explanation of configurations <a href="#explanation-of-configurations" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p><strong><code class="language-plaintext highlighter-rouge">feature.manyFiles</code></strong></p>
+
+<p>Optimizes repositories with large numbers of files and commit histories.
+Enabling this configuration option enables the following by default:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">index.skipHash=true</code></li>
+  <li><code class="language-plaintext highlighter-rouge">index.version=4</code></li>
+  <li><code class="language-plaintext highlighter-rouge">core.untrackedCache=true</code></li>
+</ul>
+
+<p>Git writes an entirely new index in <code class="language-plaintext highlighter-rouge">index.lock</code> and then replaces <code class="language-plaintext highlighter-rouge">.git/index</code>
+when you use basic commands. In a monorepo with many files, this index can be
+large and take several seconds to write every time you perform a command.
+Upgrading from the standard version 2 to version 4 reduces index size by 30% to
+50% by compressing the pathnames, which results in faster load time on
+operations. Caching untracked files adds more memory load but again reduces the
+load time.</p>
+
+<p>When performing simple Git commands, I would encounter the following errors
+before I made the update:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">fatal: Unable to create 'project_path/.git/index.lock': File exists.
+</span></code></pre></div></div>
+
+<p><strong><code class="language-plaintext highlighter-rouge">core.commitgraph</code></strong></p>
+
+<p>Git will use a commit history cache to significantly speed up history
+operations, such as <code class="language-plaintext highlighter-rouge">git log</code> with the <code class="language-plaintext highlighter-rouge">--graph</code> option.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">fetch.writeCommitGraph</code></strong></p>
+
+<p>Improves performance of commands like <code class="language-plaintext highlighter-rouge">git push -f</code> and <code class="language-plaintext highlighter-rouge">git log --graph</code> by
+writing a commit-graph on every <code class="language-plaintext highlighter-rouge">git fetch</code>.</p>
+    
+      <h2 id="how-to-revert-changes">
+        
+        
+          How to revert changes <a href="#how-to-revert-changes" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>In the event that you experience an error or issues with your Git operations,
+revert the changes by doing the following:</p>
+
+<ol>
+  <li>Update global or local Git config:
+    <ul>
+      <li>Open your global or local Git config file.</li>
+      <li>Remove or comment out the include path for the custom configuration.</li>
+    </ul>
+  </li>
+  <li>Revert index version in repo:
+    <ul>
+      <li>Go to the specific repository (e.g., <code class="language-plaintext highlighter-rouge">cd ~/example-monorepo</code>).</li>
+      <li>If you want to revert the index version to a previous state (e.g.,
+ version 2), run the following command: <code class="language-plaintext highlighter-rouge">git update-index --index-version
+ 2</code></li>
+      <li>Note: This step depends on your requirements and the original index
+ version you were using.</li>
+    </ul>
+  </li>
+  <li>Stop fsmonitor daemon in repo:
+    <ul>
+      <li>In the repository where you started the <code class="language-plaintext highlighter-rouge">fsmonitor--daemon</code>, stop it
+ using <code class="language-plaintext highlighter-rouge">git fsmonitor--daemon stop</code></li>
+      <li>This will disable the file system monitor for that repository.</li>
+    </ul>
+  </li>
+  <li>General check and cleanup:
+    <ul>
+      <li>Run <code class="language-plaintext highlighter-rouge">git status</code> to ensure that Git is working properly.</li>
+    </ul>
+  </li>
+</ol>
+    
+      <h2 id="references">
+        
+        
+          References <a href="#references" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<ul>
+  <li><a href="https://www.git-tower.com/blog/git-performance/">How to Improve Performance in Git: The Complete
+Guide</a></li>
+  <li><a href="https://github.blog/2022-06-29-improve-git-monorepo-performance-with-a-file-system-monitor/">Improve Git monorepo performance with a file system
+monitor</a></li>
+  <li><a href="https://github.com/rust-lang/cargo/issues/11857">git error <code class="language-plaintext highlighter-rouge">invalid data in index</code> with index.skipHash
+config</a></li>
+  <li><a href="https://github.com/libgit2/libgit2/issues/6531">git 2.40.0 index.skipHash incompatible with
+libgit2</a></li>
+</ul>
+
+  </div>
+  <div class="post-additional">
+    <a href="https://github.com/antgonzales/antgonzales.github.io/edit/master/_posts/2023-12-15-how-to-improve-git-monorepo-performance.md" target="_blank" >Suggest a correction</a>
+  </div>
+</div>
+
+
+  <footer class="footer container max-width">
+    <div class="footer-inner">
+        <div class="copyright">
+            <span>&copy; 2025</span>
+            Anthony Gonzales
+        </div>
+        <nav class="footer-nav">
+            <ul class="list-naked">
+                <li>
+                    <a href="https://mastodon.social/@anthonygonzales" target="_blank">
+                        <span class="hidden">Mastodon</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+                          <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:hello@anthonygonzales.dev">
+                        <span class="hidden">Email</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                          <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
+                          <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="/feed.xml">
+                        <span class="hidden">RSS</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-rss-fill" viewBox="0 0 16 16">
+                          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1 0-2m0 4a6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1 0-2m.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+
+  
+</body>
+
+</html>

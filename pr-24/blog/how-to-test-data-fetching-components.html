@@ -1,0 +1,616 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+    <title>Testing components that make API calls | Anthony Gonzales</title>
+  
+  <meta name="description" content="Learn how to test API calls in components with examples in React and Jest. Write tests flexible enough for change">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site"    content="">
+<meta name="twitter:creator" content="">
+<meta property="og:title"   content="Testing components that make API calls">
+
+
+<meta property="og:description" content="Learn how to test API calls in components with examples in React and Jest. Write tests flexible enough for change">
+
+
+<meta property="og:image" content="https://www.anthonygonzales.dev/assets/img/post-boxes-on-brick-compressed.jpg">
+
+<!-- end of Twitter cards -->
+
+
+  
+  <!-- Mastodon verification -->
+  <link rel="me" href="https://mastodon.social/@anthonygonzales" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/vs.css">
+  <link rel="stylesheet" href="/css/master.css">
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" class="grid how-to-test-data-fetching-components">
+  <!--[if IE]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+  <header class="header container max-width">
+  <div class="header-inner">
+    <div class="nav-logo">
+      <a href="/">
+        <span class="name">
+          <span>A</span>
+          <span>n</span>
+          <span>t</span>
+          <span>h</span>
+          <span>o</span>
+          <span>n</span>
+          <span>y</span>
+        </span>
+        <span class="name">
+          <span>G</span>
+          <span>o</span>
+          <span>n</span>
+          <span>z</span>
+          <span>a</span>
+          <span>l</span>
+          <span>e</span>
+          <span>s</span>
+        </span>
+      </a>
+    </div>
+    <nav role="navigation">
+      <ul class="main-nav">
+        
+          <li>
+            <a href="/about">About</a>
+          </li>
+        
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+  <div class="max-width container post" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="post-title" itemprop="headline">Testing components that make API calls</h1>
+  <div class="post-meta">
+    <span class="hidden" itemprop="author">by Anthony Gonzales</span>
+    <time class="post-timestamp" itemprop="datePublished"> May 25, 2020</time><span class="post-meta-separator">&bull;</span>
+      <div class="post-lastupdated">
+        Updated on <time itemprop="dateModified">March 03, 2024</time>
+      </div></div>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Most examples that discuss <a href="https://www.anthonygonzales.dev/blog/why-learn-test-driven-development.html">Test-Driven
+Development</a>
+don’t include information about how to test components that fetch data. With
+Jest, we get an environment in Node.js that mimics the browser because it
+provides jsdom. However, Jest does not describe a “batteries included” vision
+for server responses. Let’s discuss the best way to test front-end components
+that make API calls.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#mocks-are-risky-assumptions" id="markdown-toc-mocks-are-risky-assumptions">Mocks are risky assumptions</a></li>
+  <li><a href="#which-api-inteceptor-library-should-i-use" id="markdown-toc-which-api-inteceptor-library-should-i-use">Which API inteceptor library should I use?</a></li>
+  <li><a href="#implement-a-fake-server" id="markdown-toc-implement-a-fake-server">Implement a fake server</a></li>
+  <li><a href="#how-to-test-components-using-apollo-client-with-graphql" id="markdown-toc-how-to-test-components-using-apollo-client-with-graphql">How to test components using Apollo Client with GraphQL</a></li>
+  <li><a href="#swapping-apollo-client-for-fetch" id="markdown-toc-swapping-apollo-client-for-fetch">Swapping Apollo Client for Fetch</a></li>
+  <li><a href="#constraining-requests" id="markdown-toc-constraining-requests">Constraining requests</a></li>
+  <li><a href="#deciding-tradeoffs" id="markdown-toc-deciding-tradeoffs">Deciding tradeoffs</a></li>
+</ul>
+
+<!--break-->
+      <h2 id="mocks-are-risky-assumptions">
+        
+        
+          Mocks are risky assumptions <a href="#mocks-are-risky-assumptions" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>I often see examples advising that you mock an entire library. The examples
+mock axios, request, or fetch to test that a specific function is called.
+Here’s an example provided by <a href="https://web.archive.org/web/20200512192923/https://testing-library.com/docs/react-testing-library/example-intro/" rel="nofollow noopener" target="_blank">Testing
+Library</a> using React:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// fetch/fetch.test.js</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">render</span><span class="p">,</span> <span class="nx">fireEvent</span><span class="p">,</span> <span class="nx">waitFor</span><span class="p">,</span> <span class="nx">screen</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@testing-library/react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">@testing-library/jest-dom/extend-expect</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">axiosMock</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Fetch</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span>
+
+<span class="nx">jest</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="dl">'</span><span class="s1">loads and displays greeting</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">/greeting</span><span class="dl">'</span>
+  <span class="nx">render</span><span class="p">(&lt;</span><span class="nc">Fetch</span> <span class="na">url</span><span class="p">=</span><span class="si">{</span><span class="nx">url</span><span class="si">}</span> <span class="p">/&gt;)</span>
+
+  <span class="nx">axiosMock</span><span class="p">.</span><span class="kd">get</span><span class="p">.</span><span class="nx">mockResolvedValueOnce</span><span class="p">({</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span> <span class="na">greeting</span><span class="p">:</span> <span class="dl">'</span><span class="s1">hello there</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="p">})</span>
+
+  <span class="nx">fireEvent</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">Load Greeting</span><span class="dl">'</span><span class="p">))</span>
+
+  <span class="k">await</span> <span class="nx">waitFor</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="dl">'</span><span class="s1">heading</span><span class="dl">'</span><span class="p">))</span>
+
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">axiosMock</span><span class="p">.</span><span class="kd">get</span><span class="p">).</span><span class="nx">toHaveBeenCalledTimes</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">axiosMock</span><span class="p">.</span><span class="kd">get</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="dl">'</span><span class="s1">heading</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toHaveTextContent</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello there</span><span class="dl">'</span><span class="p">)</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toHaveAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">disabled</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<div class="callout warning-callout">
+Update: Testing Library recommends <a href="https://mswjs.io" re="noopener
+nofollow" target="_blank">Mock Service Worker</a> and no longer maintains the
+example above.
+</div>
+
+<p>This approach tests implementation details in addition to behavior. It binds our
+test suite to a library and assumes that the library’s API will not change. It
+also assumes that we’re using the library method correctly. In this case, our
+test suite is now bound to axios, and the method <code class="language-plaintext highlighter-rouge">get()</code>. If your team wants to
+switch request libraries from axios to another option such as unfetch, the test
+example above will need to be re-written to account for unfetch’s API. Say you
+have 4k tests on a large project? To properly refactor, you will need to
+re-write all tests that directly mock axios. You will lose your testing baseline
+which means you will need to follow Red, Green, Refactor across all of the tests
+you previously wrote. The process of changing your data fetching library will be
+tedious and prone to errors.</p>
+    
+      <h2 id="which-api-inteceptor-library-should-i-use">
+        
+        
+          Which API inteceptor library should I use? <a href="#which-api-inteceptor-library-should-i-use" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>There are several libraries available to stub server responses:</p>
+
+<ul>
+  <li>miragejs</li>
+  <li>msw</li>
+  <li>cypress</li>
+  <li>nock</li>
+</ul>
+
+<p>I recommend <a href="https://mswjs.io/" rel="nofollow noopener" target="_blank">msw</a> for
+several compelling reasons:</p>
+
+<ul>
+  <li>Seamless integration with both browser and Node.js environments</li>
+  <li>Realistic request interception</li>
+  <li>Rich documentation and community support</li>
+</ul>
+
+<p>msw is a powerful tool for mocking API responses in both front-end and back-end
+testing environments, offering seamless integration without the need for
+configuring a separate server or altering your production code’s network
+requests. This library stands out because it intercepts requests at the network
+level, allowing for a more realistic simulation of API calls in development and
+testing scenarios.</p>
+    
+      <h2 id="implement-a-fake-server">
+        
+        
+          Implement a fake server <a href="#implement-a-fake-server" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>Let’s look at msw using the previous example and assume we’ve already done
+the recommended setup.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// fetch/fetch.test.js</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">rest</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">msw</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">render</span><span class="p">,</span> <span class="nx">fireEvent</span><span class="p">,</span> <span class="nx">waitFor</span><span class="p">,</span> <span class="nx">screen</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@testing-library/react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">server</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/mocks/server</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="nx">Fetch</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="dl">'</span><span class="s1">override handler in a single test</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Override the handler for this test</span>
+  <span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+    <span class="nx">rest</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://yoursite.com/greeting</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">res</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="na">greeting</span><span class="p">:</span> <span class="dl">'</span><span class="s1">hello there</span><span class="dl">'</span> <span class="p">}));</span>
+    <span class="p">})</span>
+  <span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">/greeting</span><span class="dl">'</span><span class="p">;</span>
+  <span class="nx">render</span><span class="p">(&lt;</span><span class="nc">Fetch</span> <span class="na">url</span><span class="p">=</span><span class="si">{</span><span class="nx">url</span><span class="si">}</span> <span class="p">/&gt;);</span>
+  <span class="nx">fireEvent</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">Load Greeting</span><span class="dl">'</span><span class="p">));</span>
+
+  <span class="k">await</span> <span class="nx">waitFor</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="dl">'</span><span class="s1">heading</span><span class="dl">'</span><span class="p">));</span>
+
+  <span class="c1">// Assertions can now expect the overridden behavior</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="dl">'</span><span class="s1">heading</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toHaveTextContent</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello there</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByRole</span><span class="p">(</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toHaveAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">disabled</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>In the new and immproved approach, we’ve done several things:</p>
+
+<ol>
+  <li>Stopped mocking the axios library and method response</li>
+  <li>Specified a response at a url and a route</li>
+  <li>Removed unnecessary assertions about API calls</li>
+</ol>
+
+<p>Our test suite no longer knows the way our components fetch data. If you switch
+from axios, fetch, or unfetch, the test file will not require changes. More
+importantly, if you upgrade your data fetching library version, your test suite
+will give you meaningful feedback. When we mock a dependency, we begin testing
+with faulty assumptions that the package will not have made breaking changes to
+its internals or its API, leading to false positives in our test suite.</p>
+    
+      <h2 id="how-to-test-components-using-apollo-client-with-graphql">
+        
+        
+          How to test components using Apollo Client with GraphQL <a href="#how-to-test-components-using-apollo-client-with-graphql" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p><img src="/assets/img/post-boxes-on-brick-compressed.jpg" alt="Two red mail boxes against a brick wall in the
+UK" /></p>
+
+<p class="post-img-credit">Photo by <a href="https://unsplash.com/@tinamosquito?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" rel="nofollow noopener" target="_blank">Kristina
+Tripkovic</a> on <a href="https://unsplash.com" rel="nofollow
+noopener" target="_blank">Unsplash</a></p>
+
+<p>With the rise of GraphQL, Apollo has made significant strides in writing server
+and client-side libraries to make managing data easier. The trouble comes with
+their recommended approach to testing UI components that rely on Apollo.</p>
+
+<p>Apollo has created a <code class="language-plaintext highlighter-rouge">MockedProvider</code> <a href="https://www.apollographql.com/docs/react/development-testing/testing/" rel="nofollow noopener" target="_blank">test
+component</a>
+which allows you to test your UI components. They assert that using the live
+Provider would be unpredictable as it runs against an actual backend. That may
+be true, but nothing stops us from hijacking the means of communicating with the
+backend just like we did with the axios example.</p>
+
+<p>Here are the things I know about interfacing with Apollo and GraphQL:</p>
+
+<ol>
+  <li>All requests, queries and mutations, use the HTTP POST method. Because
+GraphQL serves a single resource, the graph, it doesn’t follow the REST
+resources approach in HTTP (GET/PUT/PATCH/DELETE).</li>
+  <li>Apollo requires an instantiated client which is essentially a config class
+for setup.</li>
+  <li>Apollo ensures type names in the resource response.</li>
+</ol>
+
+<p>I now know about a few details in setting up a proper test:</p>
+
+<ol>
+  <li>We need to import the real client to be sure I’m hitting the right endpoint</li>
+  <li>We need to get some stub data from my endpoint</li>
+  <li>We’re going to respond to a post request with the stub data</li>
+</ol>
+
+<p>For this example, I will use the free <a href="https://graphql-pokemon.now.sh" rel="nofollow noopener" target="_blank">Pokemon
+list</a> server, grab some fake data, and query
+against it.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ApolloProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@apollo/react-hooks</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">render</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@testing-library/react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">graphql</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">msw</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">client</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/api/client</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">server</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/mocks/server</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">App</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">"</span><span class="s2">App</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="dl">"</span><span class="s2">displays all Pokemon</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Override the default handlers for this test</span>
+    <span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+      <span class="nx">graphql</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://graphql-pokemon.now.sh</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">(</span>
+          <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+            <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+              <span class="na">pokemon</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                  <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UG9rZW1vbjowMDE=</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bulbasaur</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="na">__typename</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Pokemon</span><span class="dl">"</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                  <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UG9rZW1vbjowMDI=</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ivysaur</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="na">__typename</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Pokemon</span><span class="dl">"</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                  <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UG9rZW1vbjowMDM=</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Venusaur</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="na">__typename</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Pokemon</span><span class="dl">"</span>
+                <span class="p">}</span>
+              <span class="p">]</span>
+            <span class="p">}</span>
+          <span class="p">})</span>
+        <span class="p">);</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">findAllByTestId</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">render</span><span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">ApolloProvider</span> <span class="na">client</span><span class="p">=</span><span class="si">{</span><span class="nx">client</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">App</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">ApolloProvider</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+
+    <span class="kd">const</span> <span class="nx">pokemon</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">findAllByTestId</span><span class="p">(</span><span class="dl">"</span><span class="s2">pokemon</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">pokemon</span><span class="p">.</span><span class="nx">length</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>You may be thinking, “this looks like a lot of setup in comparison to using
+<code class="language-plaintext highlighter-rouge">MockedProvider</code> as recommended”. You’re not wrong. We now know about some of
+the implementation details of how Apollo fetches data from the server. However,
+I would argue that this minor detail is what we need to know to have confidence
+in our tests and the confidence to make changes. The GraphQL server expects us
+to perform a POST operation, and if we decide to no longer use Apollo, we have
+some safety.</p>
+    
+      <h2 id="swapping-apollo-client-for-fetch">
+        
+        
+          Swapping Apollo Client for Fetch <a href="#swapping-apollo-client-for-fetch" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>Here’s what it looks like if we no longer want to use Apollo Client and opt for
+a more close to the metal solution using
+<a href="https://github.com/developit/unfetch#readme" rel="nofollow noopener" target="_blank">isomorphic-unfetch</a>:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useQuery</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@apollo/react-hooks</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">fetch</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">isomorphic-unfetch</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Updated GraphQL query string</span>
+<span class="kd">const</span> <span class="nx">ALL_POKEMON</span> <span class="o">=</span> <span class="s2">`
+{
+  pokemon(first: 3) {
+    id
+    name
+  }
+}
+`</span><span class="p">;</span>
+
+<span class="c1">// Updated App component</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// We'll comment  out useQuery()</span>
+  <span class="c1">// const { data, loading } = useQuery(ALL_POKEMON);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">isLoading</span><span class="p">,</span> <span class="nx">setIsLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">data</span><span class="p">,</span> <span class="nx">setData</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">undefined</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AbortController</span><span class="p">();</span>
+    <span class="k">async</span> <span class="kd">function</span> <span class="nx">fetchPokemon</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://graphql-pokemon.now.sh</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+          <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">headers</span><span class="p">:</span> <span class="p">{</span><span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">},</span>
+          <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="na">query</span><span class="p">:</span> <span class="nx">ALL_POKEMON</span><span class="p">}),</span>
+          <span class="na">signal</span><span class="p">:</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">signal</span><span class="p">,</span>
+        <span class="p">});</span>
+        <span class="kd">const</span> <span class="nx">json</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">result</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+        <span class="nx">setData</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+        <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span> <span class="c1">// Moved inside try to only set loading false on success</span>
+      <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+        <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span> <span class="c1">// Consider setting loading to false on error as well</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">fetchPokemon</span><span class="p">();</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">controller</span><span class="p">.</span><span class="nx">abort</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isLoading</span><span class="p">)</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Loading...<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+
+  <span class="c1">// Assuming you have a component to render this data</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nc">List</span> <span class="na">items</span><span class="p">=</span><span class="si">{</span><span class="nx">data</span> <span class="p">?</span> <span class="nx">data</span><span class="p">.</span><span class="nx">pokemon</span> <span class="p">:</span> <span class="p">[]</span><span class="si">}</span> <span class="p">/&gt;;</span>
+<span class="p">}</span>
+
+<span class="c1">// Updated List component (no changes provided, assuming no change)</span>
+<span class="kd">function</span> <span class="nx">List</span><span class="p">({</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[]})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">li</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+      <span class="p">))</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Notice that I did not change the test suite. I’ve hollowed out the innards of
+the production code and was able to retain the test suite. The test suite does
+not care about how my app fetches data as long as I follow the server’s
+contract.</p>
+
+<p>The goal of having a robust test suite is the ability to make changes
+confidently and receive feedback if we make changes that might cause problems.
+By removing mocks and stubbing the server, we can create a flexible test suite
+that ensures a server contract is maintained.</p>
+    
+      <h2 id="constraining-requests">
+        
+        
+          Constraining requests <a href="#constraining-requests" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>Using GraphQL means we can’t implement a single endpoint and respond with
+different data. With HTTP interceptors like msw, we assign one endpoint to one
+response. We must control the flow of data by checking the incoming query.
+Without checking the incoming data, we’ll end up responding incorrectly to the
+different calls.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ApolloProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@apollo/react-hooks</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">render</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@testing-library/react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">graphql</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">msw</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">client</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/api/client</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">server</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/mocks/server</span><span class="dl">"</span><span class="p">;</span> 
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">App</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">"</span><span class="s2">App</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="dl">"</span><span class="s2">requires a querying a specific number of Pokemon</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">ALL_POKEMON_QUERY</span> <span class="o">=</span> <span class="s2">`
+    {
+      pokemon(first: 3) {
+        id
+        name
+        __typename
+      }
+    }`</span><span class="p">;</span>
+
+    <span class="c1">// Override the default handlers for this test to check for a specific query</span>
+    <span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+      <span class="nx">graphql</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://graphql-pokemon.now.sh</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// Check if the incoming query matches the expected query</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">"</span><span class="s2">pokemon(first: 3)</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">res</span><span class="p">(</span>
+            <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+              <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">pokemon</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="p">{</span>
+                    <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UG9rZW1vbjowMDE=</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bulbasaur</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">__typename</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Pokemon</span><span class="dl">"</span>
+                  <span class="p">},</span>
+                  <span class="p">{</span>
+                    <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UG9rZW1vbjowMDI=</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ivysaur</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">__typename</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Pokemon</span><span class="dl">"</span>
+                  <span class="p">},</span>
+                  <span class="p">{</span>
+                    <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UG9rZW1vbjowMDM=</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Venusaur</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">__typename</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Pokemon</span><span class="dl">"</span>
+                  <span class="p">}</span>
+                <span class="p">]</span>
+              <span class="p">}</span>
+            <span class="p">})</span>
+          <span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="c1">// If the query does not match, you could return an error or handle as needed</span>
+          <span class="k">return</span> <span class="nx">res</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">),</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Query not matched</span><span class="dl">"</span> <span class="p">}));</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">findAllByTestId</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">render</span><span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">ApolloProvider</span> <span class="na">client</span><span class="p">=</span><span class="si">{</span><span class="nx">client</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">App</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">ApolloProvider</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+
+    <span class="kd">const</span> <span class="nx">pokemon</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">findAllByTestId</span><span class="p">(</span><span class="dl">"</span><span class="s2">pokemon</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">pokemon</span><span class="p">.</span><span class="nx">length</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>I’ve now added a data constraint to the msw graphql handler. If I don’t pass
+data that matches the constraint, I will not receive the <code class="language-plaintext highlighter-rouge">200</code> reply and data.
+The <a href="https://graphql.org/learn/serving-over-http/#post-request" rel="nofollow noopener" target="_blank">GraphQL spec</a> advises that you pass an object with
+two specific parameters; <code class="language-plaintext highlighter-rouge">query</code> and <code class="language-plaintext highlighter-rouge">variables</code>. In this particular case,
+we’re sending just the query. With our request constraint added, we’re now free
+to add additional responses.</p>
+    
+      <h2 id="deciding-tradeoffs">
+        
+        
+          Deciding tradeoffs <a href="#deciding-tradeoffs" class="post-header-link"></a>
+        
+        
+      </h2>
+
+<p>The solutions I’ve proposed are ultimately about tradeoffs. As your software
+changes, you have to decide which parts you are comfortable living with, no
+matter the scale. For some people, the notion of managing a server response
+library is more painful and tedious than just mocking libraries and responses.
+For me, the pain of not having confidence in my test suite far outweighs the
+trivial tedium of using msw.</p>
+
+<p>I’ve felt the pain of migrating a codebase from one library to another,
+including libraries that fetch data. I hope this guide helps you evaluate the
+tradeoffs in mocking dependencies versus stubbing environment responses.</p>
+
+  </div>
+  <div class="post-additional">
+    <a href="https://github.com/antgonzales/antgonzales.github.io/edit/master/_posts/2020-05-26-how-to-test-data-fetching-components.md" target="_blank" >Suggest a correction</a>
+  </div>
+</div>
+
+
+  <footer class="footer container max-width">
+    <div class="footer-inner">
+        <div class="copyright">
+            <span>&copy; 2025</span>
+            Anthony Gonzales
+        </div>
+        <nav class="footer-nav">
+            <ul class="list-naked">
+                <li>
+                    <a href="https://mastodon.social/@anthonygonzales" target="_blank">
+                        <span class="hidden">Mastodon</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+                          <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:hello@anthonygonzales.dev">
+                        <span class="hidden">Email</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                          <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
+                          <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="/feed.xml">
+                        <span class="hidden">RSS</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-rss-fill" viewBox="0 0 16 16">
+                          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1 0-2m0 4a6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1 0-2m.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+
+  
+</body>
+
+</html>

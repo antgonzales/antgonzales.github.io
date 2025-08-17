@@ -1,0 +1,355 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+    <title>GitHub PR Preview Setup Roadmap | Anthony Gonzales</title>
+  
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site"    content="">
+<meta name="twitter:creator" content="">
+<meta property="og:title"   content="GitHub PR Preview Setup Roadmap">
+
+
+
+<!-- end of Twitter cards -->
+
+
+  
+  <!-- Mastodon verification -->
+  <link rel="me" href="https://mastodon.social/@anthonygonzales" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/vs.css">
+  <link rel="stylesheet" href="/css/master.css">
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" class="grid github-pr-preview-setup-roadmap">
+  <!--[if IE]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+  <header class="header container max-width">
+  <div class="header-inner">
+    <div class="nav-logo">
+      <a href="/">
+        <span class="name">
+          <span>A</span>
+          <span>n</span>
+          <span>t</span>
+          <span>h</span>
+          <span>o</span>
+          <span>n</span>
+          <span>y</span>
+        </span>
+        <span class="name">
+          <span>G</span>
+          <span>o</span>
+          <span>n</span>
+          <span>z</span>
+          <span>a</span>
+          <span>l</span>
+          <span>e</span>
+          <span>s</span>
+        </span>
+      </a>
+    </div>
+    <nav role="navigation">
+      <ul class="main-nav">
+        
+          <li>
+            <a href="/about">About</a>
+          </li>
+        
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+  <div class="max-width container page">
+  <h1 class="page-title">GitHub PR Preview Setup Roadmap</h1>
+  <div class="page-content">
+    <h1 id="github-pr-preview-setup-roadmap">GitHub PR Preview Setup Roadmap</h1>
+
+<h2 id="overview">Overview</h2>
+<p>Set up automated PR preview deployments to safely test migration changes before merging. This enables testing Phase 1, 2, and 3 changes in production-like environments without affecting the live site.</p>
+
+<h2 id="problem-statement">Problem Statement</h2>
+<ul>
+  <li>Need to verify Phase 1 changes work correctly in production environment</li>
+  <li>Want to test future phases (2 and 3) safely before going live</li>
+  <li>Current workflow requires manual GitHub Pages source switching</li>
+  <li>Risk of breaking live site during testing</li>
+</ul>
+
+<h2 id="solution-deploy-pr-preview-action">Solution: Deploy PR Preview Action</h2>
+<p>Use GitHub Actions to automatically deploy each PR to a unique preview URL, enabling safe testing of all migration phases.</p>
+
+<h2 id="implementation-roadmap">Implementation Roadmap</h2>
+
+<h3 id="step-1-create-github-workflow-file">Step 1: Create GitHub Workflow File</h3>
+<p><strong>Deliverable:</strong> <code class="language-plaintext highlighter-rouge">.github/workflows/pr-preview.yml</code></p>
+
+<p><strong>Workflow Configuration:</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Deploy PR Preview</span>
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">pull_request</span><span class="pi">:</span>
+    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">opened</span><span class="pi">,</span> <span class="nv">synchronize</span><span class="pi">,</span> <span class="nv">reopened</span><span class="pi">]</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">master</span><span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">deploy-preview</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
+      
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Setup Ruby</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">ruby/setup-ruby@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">ruby-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.0'</span>
+          <span class="na">bundler-cache</span><span class="pi">:</span> <span class="no">true</span>
+          
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build Jekyll site</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">bundle exec jekyll build --destination _site</span>
+        
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy to preview</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">peaceiris/actions-gh-pages@v3</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">github_token</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">publish_dir</span><span class="pi">:</span> <span class="s">./_site</span>
+          <span class="na">destination_dir</span><span class="pi">:</span> <span class="s">pr-$</span>
+          
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Comment PR</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">thollander/actions-comment-pull-request@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">message</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="s">## 🚀 Preview Deployed</span>
+            
+            <span class="s">**Preview URL:** https://$.github.io/$/pr-$/</span>
+            
+            <span class="s">This preview will be automatically updated when you push new commits.</span>
+</code></pre></div></div>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Workflow file created and committed</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Triggers on PR creation/updates to master</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Builds Jekyll site successfully</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Deploys to unique preview path</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Comments preview URL on PR</li>
+</ul>
+
+<h3 id="step-2-configure-repository-settings">Step 2: Configure Repository Settings</h3>
+<p><strong>Deliverable:</strong> Repository configuration for GitHub Pages</p>
+
+<p><strong>Settings Required:</strong></p>
+<ul>
+  <li>Enable GitHub Actions in repository settings</li>
+  <li>Ensure GitHub Pages is enabled</li>
+  <li>Verify <code class="language-plaintext highlighter-rouge">gh-pages</code> branch permissions</li>
+  <li>Configure Actions permissions for GITHUB_TOKEN</li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />GitHub Actions enabled and functioning</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Workflow has necessary permissions</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Preview deployments accessible</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No security or permission issues</li>
+</ul>
+
+<h3 id="step-3-test-workflow-with-phase-1-changes">Step 3: Test Workflow with Phase 1 Changes</h3>
+<p><strong>Deliverable:</strong> Working PR preview for Phase 1</p>
+
+<p><strong>Test Process:</strong></p>
+<ol>
+  <li>Create PR from <code class="language-plaintext highlighter-rouge">blog-migration</code> to <code class="language-plaintext highlighter-rouge">master</code></li>
+  <li>Verify workflow triggers automatically</li>
+  <li>Check that Jekyll build succeeds</li>
+  <li>Confirm preview URL is accessible</li>
+  <li>Test that site functions identically to live version</li>
+</ol>
+
+<p><strong>Validation Steps:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Homepage loads correctly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Blog posts display properly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Images load from correct paths</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Navigation works</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Styles apply correctly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All existing functionality preserved</li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />PR created successfully</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Workflow runs without errors</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Preview URL accessible and functional</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Site behavior identical to live version</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No broken links or missing assets</li>
+</ul>
+
+<h3 id="step-4-document-preview-workflow">Step 4: Document Preview Workflow</h3>
+<p><strong>Deliverable:</strong> Documentation for team usage</p>
+
+<p><strong>Documentation Requirements:</strong></p>
+<ul>
+  <li>How to create PRs for testing</li>
+  <li>How to access preview URLs</li>
+  <li>How to interpret workflow results</li>
+  <li>Troubleshooting common issues</li>
+</ul>
+
+<p><strong>File:</strong> <code class="language-plaintext highlighter-rouge">PREVIEW-WORKFLOW.md</code></p>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Clear instructions for creating test PRs</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Preview URL format documented</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Workflow status interpretation guide</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Common troubleshooting steps included</li>
+</ul>
+
+<h3 id="step-5-establish-migration-testing-protocol">Step 5: Establish Migration Testing Protocol</h3>
+<p><strong>Deliverable:</strong> Testing protocol for remaining phases</p>
+
+<p><strong>Protocol Elements:</strong></p>
+<ul>
+  <li>Phase-specific testing checklists</li>
+  <li>Preview URL validation steps</li>
+  <li>Performance comparison guidelines</li>
+  <li>Rollback procedures if issues found</li>
+</ul>
+
+<p><strong>Testing Framework:</strong></p>
+<ul>
+  <li><strong>Phase 1:</strong> Directory structure and Jekyll compatibility</li>
+  <li><strong>Phase 2:</strong> Content migration and URL preservation</li>
+  <li><strong>Phase 3:</strong> Astro build system and final migration</li>
+</ul>
+
+<p><strong>Acceptance Criteria:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Testing checklist for each phase</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Clear pass/fail criteria</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Performance benchmarks defined</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Rollback procedures documented</li>
+</ul>
+
+<h2 id="benefits-of-this-approach">Benefits of This Approach</h2>
+
+<h3 id="risk-mitigation">Risk Mitigation</h3>
+<ul>
+  <li>Test changes in production-like environment</li>
+  <li>No impact on live site during testing</li>
+  <li>Easy rollback if issues discovered</li>
+  <li>Confidence before merging changes</li>
+</ul>
+
+<h3 id="improved-workflow">Improved Workflow</h3>
+<ul>
+  <li>Automatic preview deployments</li>
+  <li>No manual GitHub Pages switching</li>
+  <li>Easy sharing of preview links</li>
+  <li>Streamlined review process</li>
+</ul>
+
+<h3 id="migration-safety">Migration Safety</h3>
+<ul>
+  <li>Test each phase independently</li>
+  <li>Validate functionality before going live</li>
+  <li>Catch issues early in development</li>
+  <li>Maintain site reliability throughout migration</li>
+</ul>
+
+<h2 id="timeline">Timeline</h2>
+<ul>
+  <li><strong>Step 1:</strong> Create workflow file (30 minutes)</li>
+  <li><strong>Step 2:</strong> Configure repository (15 minutes)</li>
+  <li><strong>Step 3:</strong> Test with Phase 1 (45 minutes)</li>
+  <li><strong>Step 4:</strong> Document workflow (30 minutes)</li>
+  <li><strong>Step 5:</strong> Establish protocol (30 minutes)</li>
+</ul>
+
+<p><strong>Total Estimated Time:</strong> 2.5 hours</p>
+
+<h2 id="success-criteria">Success Criteria</h2>
+<ul>
+  <li>PR preview workflow functional and reliable</li>
+  <li>Phase 1 changes successfully tested via preview</li>
+  <li>Team confident in migration approach</li>
+  <li>Foundation established for testing Phases 2 and 3</li>
+  <li>Zero impact on live site during testing process</li>
+</ul>
+
+<h2 id="next-steps-after-setup">Next Steps After Setup</h2>
+<ol>
+  <li>Use preview to validate Phase 1 changes</li>
+  <li>Merge Phase 1 when confident</li>
+  <li>Continue with Phase 2 development using same preview workflow</li>
+  <li>Iterate through all phases safely</li>
+  <li>Final migration to Cloudflare Pages when complete</li>
+</ol>
+
+  </div>
+</div>
+
+
+  <footer class="footer container max-width">
+    <div class="footer-inner">
+        <div class="copyright">
+            <span>&copy; 2025</span>
+            Anthony Gonzales
+        </div>
+        <nav class="footer-nav">
+            <ul class="list-naked">
+                <li>
+                    <a href="https://mastodon.social/@anthonygonzales" target="_blank">
+                        <span class="hidden">Mastodon</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+                          <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:hello@anthonygonzales.dev">
+                        <span class="hidden">Email</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                          <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
+                          <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="/feed.xml">
+                        <span class="hidden">RSS</span>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-rss-fill" viewBox="0 0 16 16">
+                          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1 0-2m0 4a6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1 0-2m.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+
+  
+</body>
+
+</html>
