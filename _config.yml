@@ -18,3 +18,4 @@ exclude:
   - .bundle/
   - Gemfile
   - Gemfile.lock
+  - Gemfile.cloudflare
