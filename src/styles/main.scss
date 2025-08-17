@@ -1,0 +1,20 @@
+// Astro main stylesheet
+// Import order: abstracts -> base -> components
+
+// Abstracts (variables, mixins)
+@import "abstracts/variables";
+
+// Base styles (reset, typography, utilities)
+@import "base/base";
+@import "base/typography";
+@import "base/utilities";
+
+// Component styles
+@import "components/header";
+@import "components/footer";
+@import "components/home";
+@import "components/blog";
+@import "components/post";
+@import "components/page";
+@import "components/about";
+@import "components/resume";

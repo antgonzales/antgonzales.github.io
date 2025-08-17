@@ -1,0 +1,53 @@
+// Utilities
+.center {
+  text-align: center;
+}
+
+.block {
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.list-naked {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.list-spread {
+  line-height: 2;
+}
+
+// Layout utilities
+.max-width {
+  max-width: 76.8rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+      "nav"
+      "main"
+      "footer";
+  min-height: 100vh;
+}
+
+.container {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  width: 100%;
+}
+
+// Print styles
+@media print {
+  @page {
+    size: auto;
+    margin: 5mm;
+  }
+}

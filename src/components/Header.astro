@@ -1,7 +1,11 @@
+---
+// Site header with navigation
+---
+
 <header class="header container max-width">
   <div class="header-inner">
     <div class="nav-logo">
-      <a href="{{ site.baseurl }}/"
+      <a href="/">
         <span class="name">
           <span>A</span>
           <span>n</span>
@@ -25,11 +29,12 @@
     </div>
     <nav role="navigation">
       <ul class="main-nav">
-        {% for link in site.data.nav %}
-          <li>
-            <a href="{{ site.baseurl }}{{link.href}}">{{link.title}}</a>
-          </li>
-        {% endfor %}
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+        <li>
+          <a href="/about">About</a>
+        </li>
       </ul>
     </nav>
   </div>

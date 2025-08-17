@@ -1,0 +1,44 @@
+:root {
+  /* Colors */
+  --white: #fff;
+  --snow: #fbfafa;
+  --blue: #3A5CC5;
+  --banana: #f0ce47;
+  --cherry: #ED1941;
+  --sky-blue: #76a7d8;
+  --ox-blood: #A52A2A;
+
+  --black: #000;
+  --graphite: #333;
+  --gray-dark: #444;
+  --ink: #222;
+  --gray: #777;
+  --gray-light: #DDD;
+
+  --bg-color: var(--white);
+  --primary-text-color: var(--ink);
+  --link-color: var(--sky-blue);
+
+  --btn-color: var(--sky-blue);
+  --primary-btn-color: var(--sky-blue);
+  --secondary-btn-color: var(--ox-blood);
+
+  /* Typography */
+  --mono-font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  --sans-serif-font-family: system-ui, sans-serif;
+  --serif-font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+
+  --base-font-size: 2rem;
+  --base-line-height: 1.6;
+  --line-height-computed: calc(var(--base-font-size) * var(--base-line-height));
+  --line-height-computed-half: calc(var(--line-height-computed) / 2);
+
+  --h1-font-size: calc(2 * var(--base-font-size));
+  --h2-font-size: calc(1.6 * var(--base-font-size));
+  --h3-font-size: calc(1.25 * var(--base-font-size));
+  --h4-font-size: var(--base-font-size);
+  --h5-font-size: var(--base-font-size);
+  --h6-font-size: calc(0.875 * var(--base-font-size));
+  --headings-line-height: 1.2;
+  --headings-font-weight: 400;
+}
