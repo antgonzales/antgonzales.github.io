@@ -10,3 +10,13 @@ excerpt_separator: <!--break-->
 sass:
     style: compressed
 url: 'https://www.anthonygonzales.dev'
+<<<<<<< Updated upstream
+=======
+exclude:
+  - src/
+  - public/
+  - vendor/
+  - .bundle/
+  - Gemfile
+  - Gemfile.lock
+>>>>>>> Stashed changes
