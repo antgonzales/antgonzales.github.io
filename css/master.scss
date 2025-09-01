@@ -1,16 +1,16 @@
 ---
 # SASS Master List
 ---
-@import "variables";
-@import "base";
-@import "utilities";
-@import "typography";
-@import "style";
-@import "header";
-@import "footer";
-@import "home";
-@import "blog";
-@import "post";
-@import "page";
-@import "resume";
-@import "about";
+@use "variables";
+@use "base";
+@use "utilities";
+@use "typography";
+@use "style";
+@use "header";
+@use "footer";
+@use "home";
+@use "blog";
+@use "post";
+@use "page";
+@use "resume";
+@use "about";
