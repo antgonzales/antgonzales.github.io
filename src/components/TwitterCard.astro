@@ -1,0 +1,25 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  siteUrl?: string;
+}
+
+const { 
+  title, 
+  description, 
+  image,
+  siteUrl = 'https://www.anthonygonzales.dev'
+} = Astro.props;
+---
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthonygonzales">
+<meta name="twitter:creator" content="@anthonygonzales">
+
+{title && <meta property="og:title" content={title}>}
+{description && <meta property="og:description" content={description}>}
+{image && <meta property="og:image" content={`${siteUrl}/img/${image}`}>}
+<!-- end of Twitter cards -->

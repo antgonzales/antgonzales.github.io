@@ -1,0 +1,28 @@
+// Base
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+hr {
+  border: solid var(--graphite);
+  border-width: 1px 0 0;
+  clear: both;
+  margin-top: var(--line-height-computed);
+  margin-bottom: var(--line-height-computed);
+}
+
+a {
+  color: var(--primary-text-color);
+  text-underline-offset: .3rem;
+}
