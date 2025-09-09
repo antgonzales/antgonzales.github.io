@@ -1,18 +1,14 @@
-- link: 'https://www.linkedin.com/in/anthonymgonzales/'
-  username: 'anthonymgonzales'
-  title: 'LinkedIn'
+- link: "https://www.linkedin.com/in/anthonymgonzales/"
+  username: "anthonymgonzales"
+  title: "LinkedIn"
 
-- link: 'https://github.com/antgonzales'
-  username: 'antgonzales'
-  title: 'Github'
+- link: "https://github.com/antgonzales"
+  username: "antgonzales"
+  title: "Github"
 
-- link: 'https://stackoverflow.com/users/4500640'
-  username: 'tony g'
-  title: 'Stack Overflow'
+- link: "https://stackoverflow.com/users/4500640"
+  username: "tony g"
+  title: "Stack Overflow"
 
-- link: 'https://mastodon.social/@anthonygonzales'
-  username: 'anthonygonzales'
-  title: 'Mastodon'
-
-- link: 'mailto:hello@anthonygonzales.dev'
-  title: 'hello@anthonygonzales.dev'
+- link: "mailto:hello@anthonygonzales.dev"
+  title: "hello@anthonygonzales.dev"
