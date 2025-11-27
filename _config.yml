@@ -9,7 +9,7 @@ plugins:
 excerpt_separator: <!--break-->
 sass:
     style: compressed
-url: 'https://www.anthonygonzales.dev'
+url: 'https://anthonygonzal.es'
 repository: 'antgonzales/antgonzales.github.io'
 exclude:
   - src/
