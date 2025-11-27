@@ -10,7 +10,8 @@ tags:
   - jQuery
   - Ajax
 
-redirect_to: https://www.anthonygonzales.dev
+
+redirect_to: https://anthonygonzal.es
 ---
 
 Contact forms should be readable and easy to understand for users. Today we will create a responsive contact form using jQuery Validate for your static website that doesn’t refresh the page, animates a small “Thank You” note, and sends messages to your Simple Form inbox using AJAX.

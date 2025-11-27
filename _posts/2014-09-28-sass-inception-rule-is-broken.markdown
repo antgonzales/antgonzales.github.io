@@ -10,7 +10,8 @@ tags:
   - Mixins
   - The Inception Rule
 
-redirect_to: https://www.anthonygonzales.dev
+
+redirect_to: https://anthonygonzal.es
 ---
 
 As a front-end developer, my job is not only to create usable and beautiful websites, but also to design maintainable and reusable code. If you've ever worked with SASS or a team that uses a preprocessor, you've probably come across nesting in all of it's beautiful, ugly glory. It's a way to quickly scope for page specific styles or grab selectors that may not have classes assigned.

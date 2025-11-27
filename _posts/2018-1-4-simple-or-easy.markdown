@@ -4,7 +4,7 @@ title: Is this simple or easy?
 description: I moved to New York, I bought a HHKB Pro2, and I now do everything from the command line. I've picked up some new habits, but I want to take the time to reflect how I can refine my skills in 2018.
 date: 2018-1-4
 
-redirect_to: https://www.anthonygonzales.dev
+redirect_to: https://anthonygonzal.es
 ---
 
 It's been a long time since I last wrote a technical post and a long time since

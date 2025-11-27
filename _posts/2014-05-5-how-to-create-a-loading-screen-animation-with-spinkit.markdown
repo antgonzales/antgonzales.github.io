@@ -10,7 +10,8 @@ tags:
   - jQuery
   - Modernizr
 
-redirect_to: https://www.anthonygonzales.dev
+
+redirect_to: https://anthonygonzal.es
 ---
 
 Intro CSS animations and loading screens are controversial among web developers and designers. I personally think transitions visually indicate to users that they have left the current page and are navigating to a new location. I also hate to see my website load some font, a pixelated header image, or clunky animations that look great on my local machine but terrible across the Internet.

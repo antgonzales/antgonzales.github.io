@@ -9,7 +9,7 @@ tags:
   - Animations
   - jQuery
 
-redirect_to: https://www.anthonygonzales.dev
+redirect_to: https://anthonygonzal.es
 ---
 
 Say you have an awesome website structure in place but it's feeling a little bland. All of your assets, content, and design is looking great but it's missing something... a little flare, pizazz, oomph. A great option is utilizing jQuery to add some custom animations to visually guide the user and smooth out the rough edges of your website.
