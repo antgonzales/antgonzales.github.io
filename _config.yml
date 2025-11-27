@@ -19,3 +19,4 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - Gemfile.cloudflare
+  - _archived_posts/
