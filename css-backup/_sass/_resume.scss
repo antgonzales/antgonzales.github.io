@@ -1,0 +1,91 @@
+.resume {
+  font-size: 1.6rem;
+}
+
+.resume-section {
+  margin-bottom: 3.2rem;
+}
+
+.resume {
+  h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    font-size: 2rem;
+  }
+}
+
+.resume h2 {
+  text-transform: uppercase;
+  color: var(--gray);
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-size: 1.2rem;
+}
+
+
+.resume p {
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.resume .header {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.resume .header-title {
+  width: 70%;
+}
+
+.resume .header-contact-info {
+  width: 30%;
+}
+
+.resume .header-title,
+.resume .header-contact-info {
+  flex: 0 0 auto;
+  @media (max-width: 577px ) {
+    width: 100%
+  }
+}
+
+.resume .job-title {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  color: var(--gray);
+}
+
+.resume .header-summary,
+.resume .header-contact-info p {
+  margin-bottom: 0;
+}
+
+.resume .title {
+  font-size: 4rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.resume .skills {
+  display: block;
+}
+
+.resume .skills-name,
+.resume .skills-list {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.resume .skills-name {
+  display: inline-block;
+}
+
+.resume .skills-list {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+}
+
+.resume .skills-list-skill {
+   display: inline-block;
+}

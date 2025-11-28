@@ -29,7 +29,9 @@
 .post-content {
   h1,
   h2,
-  h3 {
+  h3,
+  h4,
+  h5 {
     position: relative;
   }
 }
@@ -67,6 +69,11 @@
   }
 }
 
+.post-footer {
+  margin-top: 4rem;
+  margin-bottom: 6rem;
+}
+
 .quick-about-content {
   font-size: 1.8rem;
 }
@@ -74,6 +81,22 @@
 .quick-about-content p {
   margin-top: 0;
   margin-bottom: 1rem;
+}
+
+.quick-about-contact {
+  margin: 0;
+  padding: 0;
+}
+
+.quick-about-contact li {
+  display: inline-block;
+  list-style: none;
+  margin-right: .5rem;
+}
+
+.quick-about-contact a {
+  text-decoration: none;
+  font-family: var(--sans-serif-font-family);
 }
 
 #markdown-toc::before {
@@ -111,7 +134,15 @@
   background-color: var(--banana);
 }
 
+.danger-callout {
+  border-color: var(--cherry);
+  color: var(--cherry);
+}
 
+.info-callout {
+ border-color: var(--blue);
+ color: var(--blue);
+}
 
 .highlight {
   margin: 0 0 var(--line-height-computed) 0;

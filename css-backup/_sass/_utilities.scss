@@ -1,4 +1,8 @@
 // Utilities
+.center {
+  text-align: center;
+}
+
 .block {
   display: block;
 }
@@ -11,4 +15,8 @@
 .list-naked {
   padding-left: 0;
   list-style-type: none;
+}
+
+.list-spread {
+  line-height: 2;
 }

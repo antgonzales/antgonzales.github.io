@@ -1,0 +1,24 @@
+{
+  "name": "antgonzales.github.io",
+  "version": "1.0.0",
+  "description": "The is the professional portfolio of software developer Anthony M. Gonzales.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antgonzales/antgonzales.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/antgonzales/antgonzales.github.io/issues"
+  },
+  "homepage": "https://github.com/antgonzales/antgonzales.github.io#readme",
+  "devDependencies": {
+    "purgecss": "^7.0.2"
+  }
+}

@@ -14,7 +14,7 @@ body {
   color: var(--white);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
   line-height: var(--headings-line-height);
   font-weight: var(--headings-font-weight);
 }
@@ -22,48 +22,17 @@ h1, h2, h3, h4, h5, h6 {
 h1 { font-size: var(--h1-font-size); }
 h2 { font-size: var(--h2-font-size); }
 h3 { font-size: var(--h3-font-size); }
-h4 { font-size: var(--h4-font-size); }
-h5 { font-size: var(--h5-font-size); }
-h6 { font-size: var(--h6-font-size); }
-.subheader { color: var(--gray-light); }
 
 p.lead {
   font-size: calc(1.5238095 * var(--base-font-size));
   color: var(--gray-light);
 }
 
-em, .italic { font-style: italic; }
-strong, .bold { font-weight: bold;}
+em { font-style: italic; }
+strong { font-weight: bold;}
 small, .small { font-size: 80%; }
 
-blockquote, blockquote p {
-  font-size: calc(1.3125 * var(--base-font-size));
-  line-height: var(--base-line-height);
-  color: var(--gray-light);
-  font-family: var(--mono-font-family);
-  font-style: italic;
-}
-
-blockquote {
-  padding: var(--line-height-computed-half) var(--line-height-computed) 0 var(--line-height-computed);
-  border-left: 1px solid var(--gray-light);
-}
-
-blockquote cite {
-  display: block;
-  font-size: 80%;
-  color: var(--gray-light);
-}
-
-blockquote cite:before { content: "\2014 \0020"; }
-
-blockquote cite a,
-blockquote cite a:visited,
-blockquote cite a:visited { 
-    color: var(--gray-light); 
-}
-
-code, kbd, pre, samp { font-size: 16px; }
+code, pre { font-size: 16px; }
 
 :not(pre) > code {
   padding: 0.2em 0.4em;
@@ -78,6 +47,4 @@ code, kbd, pre, samp { font-size: 16px; }
   background: #f6f8fa;
 }
 
-.italic {
-  font-style: italic;
-}
+
